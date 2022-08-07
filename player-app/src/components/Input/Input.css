@@ -1,0 +1,21 @@
+.Input {
+  width: 100%;
+
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: -0.05px;
+
+  color: #000000;
+
+  padding: 8px 0;
+
+  border: none;
+  border-bottom: 1px solid #d0cece;
+}
+
+.Input:focus {
+  outline: none;
+}

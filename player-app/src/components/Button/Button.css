@@ -1,0 +1,52 @@
+.Button {
+  /* Desktop / Text M, 18 • 24 */
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+
+  /* identical to box height, or 133% */
+  letter-spacing: -0.05px;
+
+  width: 278px;
+  height: 52px;
+  padding: 14px;
+  margin-bottom: 20px;
+
+  border-radius: 6px;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.Button_type_filled {
+  color: #ffffff;
+  background-color: #580ea2;
+
+  border: none;
+}
+
+.Button_type_filled:hover {
+  background-color: #3f007d;
+}
+
+.Button_type_filled:active {
+  background-color: #271a58;
+}
+
+.Button_type_outlined {
+  color: #000000;
+  background-color: #ffffff;
+
+  border: 1px solid #d0cece;
+  border-radius: 6px;
+}
+
+.Button_type_outlined:hover {
+  background-color: #f4f5f6;
+}
+
+.Button_type_outlined:active {
+  background-color: #d9d9d9;
+}
