@@ -1,11 +1,8 @@
 .Button {
-  /* Desktop / Text M, 18 • 24 */
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 24px;
-
-  /* identical to box height, or 133% */
   letter-spacing: -0.05px;
 
   width: 278px;

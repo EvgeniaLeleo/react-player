@@ -1,0 +1,29 @@
+.FilterButton {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+
+  height: 39px;
+  padding: 0 20px;
+
+  background-color: transparent;
+
+  border: 1px solid #ffffff;
+  border-radius: 60px;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.FilterButton:hover {
+  color: #d9b6ff;
+  border-color: #d9b6ff;
+}
+
+.FilterButton:active {
+  color: #ad61ff;
+  border-color: #ad61ff;
+}
