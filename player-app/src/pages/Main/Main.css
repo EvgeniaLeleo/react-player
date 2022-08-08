@@ -1,19 +1,28 @@
 .Main {
   display: flex;
   flex: 1 1 auto;
+  justify-content: space-between;
 
   width: 100%;
+  max-width: 1920px;
   min-height: 100vh;
 }
 
 .NavMenu {
   display: flex;
   flex-direction: column;
-  padding: 36px;
+
+  width: 244px;
+  padding: 30px 0 20px 36px;
+
+  background-color: #1c1c1c;
 }
 
 .NavMenu-Logo {
-  margin-bottom: 46px;
+  margin-top: 8px;
+  margin-bottom: 40px;
+
+  width: 113px;
 }
 
 .NavMenu-Burger {
@@ -25,7 +34,20 @@
 
   width: 20px;
 
-  margin-bottom: 36px;
+  margin-bottom: 28px;
+}
+
+.NavMenu-Burger-Icon {
+  color: #d3d3d3;
+  transition: all 0.2s ease;
+}
+
+.NavMenu-Burger-Icon:hover {
+  color: #acacac;
+}
+
+.NavMenu-Burger-Icon:active {
+  color: #ffffff;
 }
 
 .NavMenu-List {
@@ -40,6 +62,7 @@
   line-height: 24px;
   color: #ffffff;
 
+  width: 100%;
   height: 24px;
   padding: 0;
   margin-bottom: 26px;
@@ -55,11 +78,88 @@
   color: #696969;
 }
 
+/* Centerblock */
+
+.Main-Centerblock {
+  width: auto;
+  -webkit-box-flex: 3;
+  -ms-flex-positive: 3;
+  flex-grow: 3;
+  padding: 30px 40px 20px 111px;
+}
+
+.Centerblock-Input {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+
+  width: 100%;
+  padding: 7px 10px 7px;
+  margin-bottom: 50px;
+
+  background-color: transparent;
+
+  border: none;
+  border-bottom: 1px solid #4e4e4e;
+}
+
+.Centerblock-Title {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 64px;
+  line-height: 72px;
+  letter-spacing: -0.8px;
+
+  margin-bottom: 45px;
+}
+
+.Centerblock-Filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+
+  margin-bottom: 51px;
+}
+
+.Centerblock-Filters-Text {
+  margin-right: 15px;
+}
+
+.Content-Header {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 2px;
+  color: #696969;
+
+  display: flex;
+}
+
+.Content-Track {
+  flex-grow: 20;
+}
+
+.Content-Singer {
+  flex-grow: 10;
+}
+
+.Content-Album {
+  flex-grow: 10;
+}
+
+.Content-Time {
+  flex-grow: 2;
+}
+
 /* Sidebar */
 
 .Main-Sidebar {
-  padding-top: 36px;
-  padding-right: 90px;
+  max-width: 418px;
+  padding: 20px 90px 20px 78px;
 }
 
 .Sidebar-List {
@@ -67,7 +167,7 @@
   flex-direction: column;
   gap: 30px;
 
-  padding-top: 260px;
+  padding-top: 290px;
 }
 
 .Sidebar-Button {
@@ -80,4 +180,9 @@
 
 .Sidebar-Button:active {
   filter: brightness(1.7);
+}
+
+/* Player */
+
+.Main-Player {
 }
