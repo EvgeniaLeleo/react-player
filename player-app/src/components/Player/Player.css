@@ -1,0 +1,82 @@
+.Player {
+  position: fixed;
+  z-index: 1;
+  bottom: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  width: 100%;
+  height: 78px;
+
+  background-color: #18181881;
+}
+
+.Player-Track {
+  width: 100%;
+  height: 5px;
+
+  background-color: #2e2e2e;
+}
+
+.Player-Track_type_done {
+  background-color: #acacac;
+}
+
+.Player-Bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+  padding-left: 34px;
+  padding-right: 65px;
+}
+
+.Player-Controls {
+  display: flex;
+  align-items: center;
+  gap: 33px;
+}
+
+.Player-Control {
+  color: #696969;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.Player-Control_type_arrow,
+.Player-Control_type_volume {
+  color: #d9d9d9;
+}
+
+.Player-Control_type_volume {
+  margin-right: 17px;
+}
+
+.Player-Control:hover {
+  color: #acacac;
+}
+
+.Player-Control:active {
+  color: #ffffff;
+}
+
+.Player-TrackInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.Player-TrackInfo p {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 24px;
+}
+
+.Player-Volume-Range {
+  cursor: pointer;
+}

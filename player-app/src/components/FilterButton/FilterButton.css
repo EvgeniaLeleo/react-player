@@ -1,4 +1,14 @@
+.FilterButton-Wrapper {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
 .FilterButton {
+  position: relative;
+
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -7,6 +17,7 @@
 
   height: 39px;
   padding: 0 20px;
+  margin-bottom: 14px;
 
   background-color: transparent;
 
@@ -26,4 +37,22 @@
 .FilterButton:active {
   color: #ad61ff;
   border-color: #ad61ff;
+}
+
+.FilterButton-NumberOfCheckedItems {
+  position: absolute;
+  top: -7px;
+  left: -7px;
+
+  width: 26px;
+  height: 26px;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 26px;
+  color: #ffffff;
+
+  background: #ad61ff;
+  border-radius: 50%;
 }

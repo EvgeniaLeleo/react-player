@@ -1,0 +1,44 @@
+.Sidebar {
+  max-width: 418px;
+  width: 35%;
+  padding: 30px 90px 85px 78px;
+}
+
+.Sidebar-User {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.Sidebar-User-Name {
+  margin: 0 0 0 auto;
+}
+
+.Sidebar-User-Avatar {
+  width: 43px;
+  height: 43px;
+  margin: 0 0 0 20px;
+
+  background-color: #313131;
+  border-radius: 50%;
+}
+
+.Sidebar-List {
+  display: flex;
+  flex-direction: column;
+
+  padding-top: 260px;
+}
+
+.Sidebar-Button {
+  margin-bottom: 25px;
+  transition: all 0.2s ease;
+}
+
+.Sidebar-Button:hover {
+  filter: brightness(1.4);
+}
+
+.Sidebar-Button:active {
+  filter: brightness(1.7);
+}

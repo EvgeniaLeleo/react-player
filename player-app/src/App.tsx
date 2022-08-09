@@ -1,40 +1,31 @@
 import React from 'react';
-import './App.css';
+import { Routes } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+
 import { Login } from './pages/Login/Login';
 import { Register } from './pages/Register/Register';
 import { Main } from './pages/Main/Main';
-import { Popup } from './components/Popup/Popup';
+
+import './App.css';
 
 function App() {
-  // const items = ['2022', '2021', '2020', '2019', '2018'];
-  // const items2 = [
-  //   'Раз',
-  //   'Два',
-  //   'Три',
-  //   'Четыре',
-  //   '2022',
-  //   '2021',
-  //   '2020',
-  //   '2019',
-  //   '2018',
-  //   'raegargts',
-  //   'aergerstg',
-  //   'qweqe',
-  //   'wefawgr',
-  //   'EFAWFWR',
-  //   'Пять',
-  //   'Раз',
-  //   'Два',
-  //   'Три',
-  //   'Четыре',
-  //   'Пять',
-  // ];
   return (
     <>
-      <Login></Login>
-      <Register></Register>
-      <Main></Main>
-      {/* <Popup items={items2} rows={1}></Popup> */}
+      <Routes>
+        <Route path="/" element={<Login />}></Route>
+        <Route path="/register" element={<Register />}></Route>
+        <Route path="/main" element={<Main header={'Треки'} />}></Route>
+        <Route
+          path="/hits"
+          element={<Main header={'100 танцевальных хитов'} />}
+        ></Route>
+        <Route path="/indie" element={<Main header={'Инди заряд'} />}></Route>
+        <Route path="/mytracks" element={<Main header={'Мои треки'} />}></Route>
+        <Route
+          path="/dayplaylist"
+          element={<Main header={'Плейлист дня'} />}
+        ></Route>
+      </Routes>
     </>
   );
 }

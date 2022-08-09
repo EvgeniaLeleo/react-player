@@ -6,12 +6,9 @@ import { Input } from '../Input/Input';
 import { Button } from '../Button/Button';
 
 import './LoginWindow.css';
+import { NavLink } from 'react-router-dom';
 
 const cnLoginWindow = cn('LoginWindow');
-
-// export type LoginWindowProps = {
-//   inputPlaceholder: 'Логин' | 'Пароль' | 'Повторите пароль';
-// };
 
 export const LoginWindow: FC<{}> = () => {
   return (
@@ -20,11 +17,16 @@ export const LoginWindow: FC<{}> = () => {
         className={cnLoginWindow('Img')}
         src="./skypro-logo.svg"
         alt="skypro-logo"
+        height="21px"
       ></img>
       <Input inputPlaceholder="Логин" marginBottom="32px"></Input>
       <Input inputPlaceholder="Пароль" marginBottom="56px"></Input>
-      <Button type="filled" buttonText="Войти"></Button>
-      <Button type="outlined" buttonText="Зарегистрироваться"></Button>
+      <NavLink to={'/main'}>
+        <Button type="filled" buttonText="Войти"></Button>
+      </NavLink>
+      <NavLink to={'/register'}>
+        <Button type="outlined" buttonText="Зарегистрироваться"></Button>
+      </NavLink>
     </div>
   );
 };

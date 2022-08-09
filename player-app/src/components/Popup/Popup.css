@@ -1,8 +1,11 @@
 .Popup {
+  position: absolute;
+  top: 54px;
+  z-index: 1;
+
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  /* row-gap: 34px; */
 
   font-size: 20px;
   font-weight: 400;

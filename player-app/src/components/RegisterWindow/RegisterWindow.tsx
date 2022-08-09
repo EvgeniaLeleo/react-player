@@ -6,6 +6,7 @@ import { Input } from '../Input/Input';
 import { Button } from '../Button/Button';
 
 import './RegisterWindow.css';
+import { NavLink } from 'react-router-dom';
 
 const cnRegisterWindow = cn('RegisterWindow');
 
@@ -16,11 +17,14 @@ export const RegisterWindow: FC<{}> = () => {
         className={cnRegisterWindow('Img')}
         src="./skypro-logo.svg"
         alt="skypro-logo"
+        height="21px"
       ></img>
       <Input inputPlaceholder="Логин" marginBottom="32px"></Input>
       <Input inputPlaceholder="Пароль" marginBottom="32px"></Input>
       <Input inputPlaceholder="Повторите пароль" marginBottom="56px"></Input>
-      <Button type="filled" buttonText="Зарегистрироваться"></Button>
+      <NavLink to={'/main'}>
+        <Button type="filled" buttonText="Зарегистрироваться"></Button>
+      </NavLink>
     </div>
   );
 };
