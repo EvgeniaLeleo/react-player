@@ -1,0 +1,45 @@
+.Profile {
+  width: auto;
+  -webkit-box-flex: 3;
+  -ms-flex-positive: 3;
+  flex-grow: 3;
+  padding: 23px 40px 85px 111px;
+}
+
+.Profile-Data {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.Profile-UserData {
+  font-size: 20px;
+}
+
+.Profile-Header {
+  margin-top: 30px;
+}
+
+.Profile-Custom {
+  display: flex;
+  gap: 30px;
+}
+
+.Profile-CustomBgColor,
+.Profile-CustomTextColor,
+.Profile-CustomDecorativeColor {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.Profile-InputBgColor,
+.Profile-InputTextColor,
+.Profile-InputDecorativeColor {
+  width: 50px;
+  height: 50px;
+
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}

@@ -1,0 +1,123 @@
+.Centerblock {
+  width: auto;
+  -webkit-box-flex: 3;
+  -ms-flex-positive: 3;
+  flex-grow: 3;
+  padding: 23px 40px 85px 111px;
+}
+
+.Centerblock-Input-Wrapper {
+  position: relative;
+
+  width: 100%;
+  margin-bottom: 55px;
+
+  background-color: transparent;
+}
+
+.css-1wgtpfo-MuiInputBase-root-MuiInput-root:before {
+  border-bottom: 1px solid rgba(160, 160, 160, 0.42) !important;
+}
+
+.css-1wgtpfo-MuiInputBase-root-MuiInput-root:hover:not(.Mui-disabled):before {
+  border-bottom: 1px solid rgb(255 255 255 / 42%) !important;
+}
+
+.Centerblock-Input-Icon {
+  position: absolute;
+  left: 5px;
+  top: 6px;
+}
+
+.Centerblock-Filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+
+  margin-bottom: 51px;
+}
+
+.Centerblock-Filters-Text {
+  margin-right: 15px;
+}
+
+.Content-Header {
+  display: flex;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 2px;
+  color: #696969;
+
+  margin-bottom: 24px;
+}
+
+.Content-Track {
+  width: 35%;
+}
+
+.Content-Singer {
+  width: 25%;
+}
+
+.Content-Album {
+  width: 30%;
+}
+
+.Content-Track-Info {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+
+  width: 100%;
+  margin-bottom: 6px;
+}
+
+.Content-Track-Icon {
+  width: 5%;
+
+  cursor: pointer;
+}
+
+.Content-Track-Name {
+  width: 30%;
+  padding-left: 2%;
+
+  cursor: pointer;
+}
+
+.Content-Track-Author {
+  width: 25%;
+
+  cursor: pointer;
+}
+
+.Content-Track-Album {
+  color: #696969;
+
+  width: 30%;
+
+  cursor: pointer;
+}
+
+.Content-Track-Like {
+  width: 5%;
+}
+
+.Content-Track-Like-Icon {
+  color: #696969;
+}
+
+.Content-Track-Duration {
+  color: #696969;
+  width: 5%;
+  text-align: right;
+}

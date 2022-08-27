@@ -1,0 +1,8 @@
+.Icon {
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.Icon:hover {
+}
