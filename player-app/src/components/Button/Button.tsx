@@ -5,12 +5,25 @@ import { Button as MUIButton } from '@mui/material';
 export type ButtonProps = {
   buttonVariant: 'contained' | 'outlined';
   buttonText: string;
+  buttonColor?:
+    | 'inherit'
+    | 'error'
+    | 'primary'
+    | 'secondary'
+    | 'info'
+    | 'success'
+    | 'warning'
+    | undefined;
 };
 
-export const Button: FC<ButtonProps> = ({ buttonText, buttonVariant }) => {
+export const Button: FC<ButtonProps> = ({
+  buttonText,
+  buttonVariant,
+  buttonColor = 'secondary',
+}) => {
   return (
     <MUIButton
-      color="secondary"
+      color={buttonColor}
       variant={buttonVariant}
       sx={{
         width: '278px',

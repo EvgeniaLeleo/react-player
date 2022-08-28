@@ -59,6 +59,7 @@ export const text = {
     bgcolor: { ru: 'Цвет фона:', en: 'Background:' },
     textColor: { ru: 'Цвет текста:', en: 'Text color:' },
     designColor: { ru: 'Цветовое оформление:', en: 'Color design:' },
+    buttonText: { ru: 'Сброс настроек', en: 'Reset settings' },
     language: { ru: 'Язык', en: 'Language' },
   },
 };

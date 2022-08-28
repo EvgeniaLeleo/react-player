@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { FC } from 'react';
 import { cn } from '@bem-react/classname';
 import AudioPlayer, { RHAP_UI } from 'react-h5-audio-player';
@@ -31,19 +31,11 @@ const PlayerControlsWrapper = styled('div')`
 `;
 
 export const Player: FC<PlayerProps> = ({ track }) => {
-  // const ref = useRef(null);
-
-  // useEffect(() => {
-  //   animation(ref.current);
-  // }, []);
-
   return (
     <Box className={cnPlayer()}>
       <AudioPlayer
-        // ref={ref}
         src={
-          'https://docs.google.com/uc?export=open&id=1r4N5SBd-6C-zECrMge8UKlknBh9p1d4g'
-          // 'http://51.250.72.80:8090/django_media/music_files/Alexander_Nakarada_-_Carol_Of_The_Bells.mp3'
+          "https://docs.google.com/uc?export=open&id=1r4N5SBd-6C-zECrMge8UKlknBh9p1d4g"
         }
         defaultDuration={false}
         defaultCurrentTime={false}
@@ -76,7 +68,7 @@ export const Player: FC<PlayerProps> = ({ track }) => {
         ]}
         customAdditionalControls={[
           RHAP_UI.LOOP,
-          <IconButton sx={{ svg: { fontSize: '26px' }, padding: 0 }}>
+          <IconButton sx={{ svg: { fontSize: "26px" }, padding: 0 }}>
             <Shuffle className={cnPlayer('ControlsIcon')} />
           </IconButton>,
         ]}

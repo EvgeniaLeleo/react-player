@@ -47,3 +47,19 @@ export function lightenDarkenColor(colorCode: string, amount: number) {
   }
   return (usePound ? '#' : '') + color;
 }
+
+export const bgColorToBgColorLight = (color: string) => {
+  return lightenDarkenColor(color, 10);
+};
+
+export const extradarkToDark = (color: string) => {
+  return lightenDarkenColor(color, 60);
+};
+
+export const extradarkToHover = (color: string) => {
+  return lightenDarkenColor(color, 120);
+};
+
+export const colorToSecondary = (color: string) => {
+  return lightenDarkenColor(color, -120);
+};

@@ -43,3 +43,9 @@
   border: none;
   cursor: pointer;
 }
+
+.Profile-Button {
+  font-family: inherit;
+  text-transform: uppercase;
+  padding: 10px 15px;
+}

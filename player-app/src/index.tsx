@@ -8,20 +8,30 @@ import App from './App';
 
 import { BrowserRouter } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material';
-import { COLOR_DARK } from './constants';
+import { COLOR_DARK, COLOR_EXTRADARK } from './constants';
 import store from './store';
+import { extradarkToDark } from './utils/utils';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 
+declare module '@mui/material/styles' {
+  interface PaletteOptions {
+    neutral?: PaletteOptions['primary'];
+  }
+}
+
+const decorativeColor = localStorage.getItem('decorativeColor') || COLOR_DARK;
+const decorativeColorDark = extradarkToDark(decorativeColor);
+
 const theme = createTheme({
   palette: {
     primary: {
-      main: COLOR_DARK,
+      main: decorativeColorDark,
     },
     secondary: {
-      main: '#580ea2',
+      main: COLOR_EXTRADARK,
     },
   },
 });

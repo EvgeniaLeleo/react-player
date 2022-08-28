@@ -8,28 +8,28 @@ type TColorState = {
 };
 
 const initialState: TColorState = {
-  textColor: COLOR,
-  bgColor: BGCOLOR,
-  decorativeColor: COLOR_EXTRADARK,
+  textColor: localStorage.getItem('textColor') || COLOR,
+  bgColor: localStorage.getItem('bgColor') || BGCOLOR,
+  decorativeColor: localStorage.getItem('decorativeColor') || COLOR_EXTRADARK,
 };
 
-const todoSlice = createSlice({
+const colorThemeSlice = createSlice({
   name: 'colorTheme',
   initialState,
   reducers: {
-    changeTextColor(state, action) {
+    changeTextColor(state, action: PayloadAction<string>) {
       state.textColor = action.payload;
     },
-    changeBgColor(state, action) {
+    changeBgColor(state, action: PayloadAction<string>) {
       state.bgColor = action.payload;
     },
-    changeDecorativeColor(state, action) {
+    changeDecorativeColor(state, action: PayloadAction<string>) {
       state.decorativeColor = action.payload;
     },
   },
 });
 
 export const { changeTextColor, changeBgColor, changeDecorativeColor } =
-  todoSlice.actions;
+  colorThemeSlice.actions;
 
-export default todoSlice.reducer;
+export default colorThemeSlice.reducer;
