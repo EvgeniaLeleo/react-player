@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FC } from 'react';
 import { cn } from '@bem-react/classname';
 
@@ -7,13 +7,16 @@ import { NavLink } from 'react-router-dom';
 import { IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import Logo from '../../../components/Logo/Logo';
-import { text, lang } from '../../../constants';
+import { text } from '../../../constants';
 import { SpanChangeColor } from '../../../components/SpanChangeColor/SpanChangeColor';
 import { useAppSelector } from '../../../hook';
 import { lightenDarkenColor } from '../../../utils/utils';
+import { TLanguages } from '../../../types';
 const cnNavMenu = cn('NavMenu');
 
 export const NavMenu: FC<{}> = () => {
+  const lang = useAppSelector((state) => state.language.lang);
+
   const textColor = useAppSelector((state) => state.colorTheme.textColor);
   const bgColor = useAppSelector((state) => state.colorTheme.bgColor);
   const bgColorLight = lightenDarkenColor(bgColor, 10);

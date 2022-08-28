@@ -4,8 +4,8 @@ import { cn } from '@bem-react/classname';
 
 import './Centerblock.css';
 import { FilterButton } from '../../../components/FilterButton/FilterButton';
-import { TTrack } from '../../../types';
-import { secondsToHms } from '../../../utils/utils';
+import { TLanguages, TTrack } from '../../../types';
+import { lightenDarkenColor, secondsToHms } from '../../../utils/utils';
 import {
   Box,
   IconButton,
@@ -15,7 +15,7 @@ import {
   Typography,
 } from '@mui/material';
 import { Search, AccessTime, FavoriteBorder } from '@mui/icons-material';
-import { COLOR_SECONDARY, text, lang } from '../../../constants';
+import { text } from '../../../constants';
 import { Profile } from '../Profile/Profile';
 import { useAppSelector } from '../../../hook';
 
@@ -28,7 +28,10 @@ export type PlayerProps = {
 };
 
 export const Centerblock: FC<PlayerProps> = ({ header, tracks }) => {
+  const lang = useAppSelector((state) => state.language.lang);
+
   const textColor = useAppSelector((state) => state.colorTheme.textColor);
+  const textColorSecondary = lightenDarkenColor(textColor, -120);
 
   if (header === text.menu.profile[lang]) {
     return <Profile />;
@@ -77,19 +80,19 @@ export const Centerblock: FC<PlayerProps> = ({ header, tracks }) => {
           <div className={cnContent('Header')}>
             <span
               className={cnContent('Track')}
-              style={{ color: COLOR_SECONDARY }}
+              style={{ color: textColorSecondary }}
             >
               {text.listHeader.track[lang]}
             </span>
             <span
               className={cnContent('Singer')}
-              style={{ color: COLOR_SECONDARY }}
+              style={{ color: textColorSecondary }}
             >
               {text.listHeader.artist[lang]}
             </span>
             <span
               className={cnContent('Album')}
-              style={{ color: COLOR_SECONDARY }}
+              style={{ color: textColorSecondary }}
             >
               {text.listHeader.album[lang]}
             </span>
@@ -106,7 +109,7 @@ export const Centerblock: FC<PlayerProps> = ({ header, tracks }) => {
             >
               <img
                 className={cnContent('Track-Icon')}
-                style={{ color: COLOR_SECONDARY }}
+                style={{ color: textColorSecondary }}
                 src="./icons/note.svg"
                 alt="note"
               ></img>
@@ -114,19 +117,19 @@ export const Centerblock: FC<PlayerProps> = ({ header, tracks }) => {
               <span className={cnContent('Track-Author')}>{track.author}</span>
               <span
                 className={cnContent('Track-Album')}
-                style={{ color: COLOR_SECONDARY }}
+                style={{ color: textColorSecondary }}
               >
                 {track.album}
               </span>
               <IconButton
                 sx={{ width: '5%' }}
-                style={{ color: COLOR_SECONDARY }}
+                style={{ color: textColorSecondary }}
               >
                 <FavoriteBorder fontSize="small" />
               </IconButton>
               <span
                 className={cnContent('Track-Duration')}
-                style={{ color: COLOR_SECONDARY }}
+                style={{ color: textColorSecondary }}
               >
                 {secondsToHms(track.duration_in_seconds)}
               </span>

@@ -1,6 +1,8 @@
 import { Typography } from '@mui/material';
 import React, { FC } from 'react';
-import { COLOR, COLOR_DARK, COLOR_DARK_DEFAULT } from '../../constants';
+import { COLOR_DARK_DEFAULT } from '../../constants';
+import { useAppSelector } from '../../hook';
+import { lightenDarkenColor } from '../../utils/utils';
 import { SpanChangeColor } from '../SpanChangeColor/SpanChangeColor';
 
 type typeLogoProps = {
@@ -8,6 +10,13 @@ type typeLogoProps = {
 };
 
 const Logo: FC<typeLogoProps> = ({ textColor }) => {
+  const textColorStore = useAppSelector((state) => state.colorTheme.textColor);
+  const decorativeColor = useAppSelector(
+    (state) => state.colorTheme.decorativeColor,
+  );
+
+  const decorativeColorDark = lightenDarkenColor(decorativeColor, 60);
+
   if (textColor === 'default') {
     return (
       <Typography
@@ -39,12 +48,17 @@ const Logo: FC<typeLogoProps> = ({ textColor }) => {
     );
   } else {
     return (
-      <Typography fontSize={22} fontWeight={600} marginBottom={5} color={COLOR}>
+      <Typography
+        fontSize={22}
+        fontWeight={600}
+        marginBottom={5}
+        color={textColorStore}
+      >
         <span
           style={{
             display: 'inline-block',
             marginLeft: '-7px',
-            color: COLOR_DARK,
+            color: decorativeColorDark,
           }}
         >
           ▶
@@ -53,7 +67,7 @@ const Logo: FC<typeLogoProps> = ({ textColor }) => {
           style={{
             display: 'inline-block',
             marginLeft: '-7px',
-            color: COLOR_DARK,
+            color: decorativeColorDark,
           }}
         >
           ▶

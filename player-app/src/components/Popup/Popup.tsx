@@ -3,7 +3,8 @@ import { FC } from 'react';
 import { cn } from '@bem-react/classname';
 
 import './Popup.css';
-import { BGCOLOR_LIGHT } from '../../constants';
+import { useAppSelector } from '../../hook';
+import { lightenDarkenColor } from '../../utils/utils';
 
 const cnPopup = cn('Popup');
 
@@ -14,6 +15,9 @@ export type PopupProps = {
 };
 
 export const Popup: FC<PopupProps> = ({ items, rows, isVisible }) => {
+  const bgColor = useAppSelector((state) => state.colorTheme.bgColor);
+  const bgColorLight = lightenDarkenColor(bgColor, 10);
+
   let display;
   let height;
   isVisible ? (display = 'block') : (display = 'none');
@@ -25,7 +29,7 @@ export const Popup: FC<PopupProps> = ({ items, rows, isVisible }) => {
       style={{
         height: height,
         display: display,
-        backgroundColor: BGCOLOR_LIGHT,
+        backgroundColor: bgColorLight,
       }}
     >
       <div className={cnPopup('Content-Wrapper')}>

@@ -4,13 +4,13 @@ import { BGCOLOR, COLOR, COLOR_EXTRADARK } from '../constants';
 type TColorState = {
   textColor: string;
   bgColor: string;
-  decorationColor: string;
+  decorativeColor: string;
 };
 
 const initialState: TColorState = {
   textColor: COLOR,
   bgColor: BGCOLOR,
-  decorationColor: COLOR_EXTRADARK,
+  decorativeColor: COLOR_EXTRADARK,
 };
 
 const todoSlice = createSlice({
@@ -23,13 +23,13 @@ const todoSlice = createSlice({
     changeBgColor(state, action) {
       state.bgColor = action.payload;
     },
-    changeDecorationColor(state, action) {
-      state.decorationColor = action.payload;
+    changeDecorativeColor(state, action) {
+      state.decorativeColor = action.payload;
     },
   },
 });
 
-export const { changeTextColor, changeBgColor, changeDecorationColor } =
+export const { changeTextColor, changeBgColor, changeDecorativeColor } =
   todoSlice.actions;
 
 export default todoSlice.reducer;

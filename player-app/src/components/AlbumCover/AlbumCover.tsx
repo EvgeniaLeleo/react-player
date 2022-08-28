@@ -3,7 +3,8 @@ import { FC } from 'react';
 import { cn } from '@bem-react/classname';
 
 import './AlbumCover.css';
-import { COLOR, COLOR_DARK, COLOR_EXTRADARK } from '../../constants';
+import { useAppSelector } from '../../hook';
+import { lightenDarkenColor } from '../../utils/utils';
 
 const cnAlbumCover = cn('AlbumCover');
 
@@ -12,12 +13,19 @@ export type AlbumCoverProps = {
 };
 
 export const AlbumCover: FC<AlbumCoverProps> = ({ text }) => {
+  const textColor = useAppSelector((state) => state.colorTheme.textColor);
+  const decorativeColor = useAppSelector(
+    (state) => state.colorTheme.decorativeColor,
+  );
+
+  const decorativeColorDark = lightenDarkenColor(decorativeColor, 60);
+
   return (
     <div
       className={cnAlbumCover()}
       style={{
-        color: COLOR,
-        background: `linear-gradient(${COLOR_EXTRADARK}, ${COLOR_DARK})`,
+        color: textColor,
+        background: `linear-gradient(${decorativeColor}, ${decorativeColorDark})`,
       }}
     >
       {text}

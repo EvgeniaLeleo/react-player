@@ -8,9 +8,10 @@ import { Centerblock } from './Centerblock/Centerblock';
 
 import './Main.css';
 import { Player } from '../../components/Player/Player';
-import { text, TRACK, TRACKS, lang } from '../../constants';
+import { text, TRACK, TRACKS } from '../../constants';
 import { Box, styled } from '@mui/material';
 import { useAppSelector } from '../../hook';
+import { TLanguages } from '../../types';
 
 const cnMain = cn('Main');
 
@@ -23,6 +24,7 @@ const Wrapper = styled(Box)`
 `;
 
 export const Main: FC<MainProps> = ({ header }) => {
+  const lang = useAppSelector((state) => state.language.lang);
   const bgColor = useAppSelector((state) => state.colorTheme.bgColor);
 
   return (

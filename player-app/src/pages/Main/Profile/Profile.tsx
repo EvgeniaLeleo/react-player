@@ -9,25 +9,49 @@ import { useAppDispatch, useAppSelector } from '../../../hook';
 
 import './Profile.css';
 import { Typography } from '@mui/material';
-import { COLOR_EXTRADARK, lang, text, USER } from '../../../constants';
-import { changeBgColor, changeTextColor } from '../../../store/colorThemeSlice';
+import { COLOR, text, USER } from '../../../constants';
+import {
+  changeBgColor,
+  changeDecorativeColor,
+  changeTextColor,
+} from '../../../store/colorThemeSlice';
 import { lightenDarkenColor } from '../../../utils/utils';
+import { changeLanguage } from '../../../store/languageSlice';
+import { TLanguages } from '../../../types';
 
 const cnProfile = cn('Profile');
 
 export const Profile: FC = () => {
   const dispatch = useAppDispatch();
-  const textColor = useAppSelector((state) => state.colorTheme.textColor);
+
+  const lang = useAppSelector((state) => state.language.lang);
+  // const textColor = useAppSelector((state) => state.colorTheme.textColor);
+  const textColor = localStorage.getItem('textColor') || COLOR;
   const bgColor = useAppSelector((state) => state.colorTheme.bgColor);
+  const decorativeColor = useAppSelector(
+    (state) => state.colorTheme.decorativeColor,
+  );
+
   const textColorSecondary = lightenDarkenColor(textColor, -120);
+  const decorativeColorDark = lightenDarkenColor(decorativeColor, 60);
+
+  // localStorage.setItem('textColor', textColor);
+  // localStorage.setItem('bgColor', bgColor);
+  // localStorage.setItem('decorativeColor', decorativeColor);
+  // localStorage.setItem('textColorSecondary', textColorSecondary);
+  // localStorage.setItem('decorativeColorDark', decorativeColorDark);
 
   const [language, setLanguage] = React.useState(lang);
   const [bgColorInput, setBgColorInput] = React.useState(bgColor);
   const [textColorInput, setTextColorInput] = React.useState(textColor);
-  const [decorativeColor, setDecorativeColor] = React.useState(COLOR_EXTRADARK);
+  const [decorativeColorInput, setDecorativeColorInput] =
+    React.useState(decorativeColor);
 
   const handleChange = (event: SelectChangeEvent) => {
-    setLanguage(event.target.value);
+    const newLanguage = event.target.value as TLanguages;
+    setLanguage(newLanguage);
+    dispatch(changeLanguage(newLanguage));
+    localStorage.setItem('language', newLanguage);
   };
 
   const handleChangeBgColor = (event: {
@@ -41,13 +65,16 @@ export const Profile: FC = () => {
     target: { value: React.SetStateAction<string> };
   }) => {
     setTextColorInput(event.target.value);
-    dispatch(changeTextColor(event.target.value));
+    const newcolor = event.target.value.toString();
+    // dispatch(changeTextColor(event.target.value));
+    localStorage.setItem('textColor', newcolor);
   };
 
   const handleChangeDecorativeColor = (event: {
     target: { value: React.SetStateAction<string> };
   }) => {
-    setDecorativeColor(event.target.value);
+    setDecorativeColorInput(event.target.value);
+    dispatch(changeDecorativeColor(event.target.value));
   };
 
   return (

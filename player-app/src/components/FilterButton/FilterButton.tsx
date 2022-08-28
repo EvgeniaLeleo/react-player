@@ -12,6 +12,8 @@ import {
 } from '../../constants';
 import { Popup } from '../Popup/Popup';
 import { styled } from '@mui/material';
+import { useAppSelector } from '../../hook';
+import { lightenDarkenColor } from '../../utils/utils';
 
 const cnFilterButton = cn('FilterButton');
 
@@ -35,12 +37,19 @@ border-color: ${COLOR};
 `;
 
 export const FilterButton: FC<FilterButtonProps> = ({ buttonText }) => {
+  const textColor = useAppSelector((state) => state.colorTheme.textColor);
+  const decorativeColor = useAppSelector(
+    (state) => state.colorTheme.decorativeColor,
+  );
+
+  const decorativeColorDark = lightenDarkenColor(decorativeColor, 60);
+
   const [clicked, setClicked] = useState(false);
-  const [color, setColor] = useState(COLOR);
+  const [color, setColor] = useState(textColor);
 
   const handleClick = () => {
     setClicked(!clicked);
-    setColor(!clicked ? COLOR_DARK : COLOR);
+    setColor(!clicked ? decorativeColorDark : textColor);
     console.log(color);
   };
 

@@ -7,9 +7,12 @@ import { Register } from './pages/Register/Register';
 import { Main } from './pages/Main/Main';
 
 import './App.css';
-import { lang, text } from './constants';
+import { text } from './constants';
+import { useAppSelector } from './hook';
 
 function App() {
+  const lang = useAppSelector((state) => state.language.lang);
+
   return (
     <>
       <Routes>
