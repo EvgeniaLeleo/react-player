@@ -1,5 +1,10 @@
 import { TData } from './types';
-import { lightenDarkenColor } from './utils/utils';
+import {
+  bgColorToBgColorLight,
+  colorToSecondary,
+  extradarkToDark,
+  extradarkToHover,
+} from './utils/utils';
 
 import { createTheme } from '@mui/material';
 
@@ -9,13 +14,13 @@ export const BGCOLOR = '#181818';
 export const COLOR = '#ffffff';
 export const COLOR_EXTRADARK = '#580ea2';
 
-export const BGCOLOR_LIGHT = lightenDarkenColor(BGCOLOR, 10); //'#1c1c1c';
+export const BGCOLOR_LIGHT = bgColorToBgColorLight(BGCOLOR); //'#1c1c1c';
 
-export const COLOR_DARK = lightenDarkenColor(COLOR_EXTRADARK, 60); //'#ad61ff';
+export const COLOR_DARK = extradarkToDark(COLOR_EXTRADARK); //'#ad61ff';
 
-export const COLOR_HOVER = lightenDarkenColor(COLOR_EXTRADARK, 120); //`#D9B6FF`;
+export const COLOR_HOVER = extradarkToHover(COLOR_EXTRADARK); //`#D9B6FF`;
 
-export const COLOR_SECONDARY = lightenDarkenColor(COLOR, -120); //'#696969';
+export const COLOR_SECONDARY = colorToSecondary(COLOR); //'#696969';
 
 export const theme = createTheme({
   palette: {
@@ -29,38 +34,62 @@ export const lang = 'ru';
 
 export const text = {
   menu: {
-    homepage: { ru: 'Главная', en: 'Homepage' },
-    mytracks: { ru: 'Мои треки', en: 'My tracks' },
-    profile: { ru: 'Личный кабинет', en: 'Profile' },
-    logout: { ru: 'Выйти', en: 'Logout' },
+    homepage: { ru: 'Главная', en: 'Homepage', bel: 'Галоўны' },
+    mytracks: { ru: 'Мои треки', en: 'My tracks', bel: 'Мае трэкі' },
+    profile: { ru: 'Личный кабинет', en: 'Profile', bel: 'Асабісты кабінет' },
+    logout: { ru: 'Выйти', en: 'Logout', bel: 'Выйсці' },
   },
-  searchInput: { ru: 'Поиск', en: 'Search' },
-  header: { tracks: { ru: 'Треки', en: 'Tracks' } },
+  searchInput: { ru: 'Поиск', en: 'Search', bel: 'Пошук' },
+  header: { tracks: { ru: 'Треки', en: 'Tracks', bel: 'Трэк' } },
   albums: {
-    dayplaylist: { ru: 'Плейлист дня', en: 'Playlist of the day' },
-    hits: { ru: '100 танцевальных хитов', en: '100 dance hits' },
+    dayplaylist: {
+      ru: 'Плейлист дня',
+      en: 'Playlist of the day',
+      bel: 'Плэйліст дня',
+    },
+    hits: {
+      ru: '100 танцевальных хитов',
+      en: '100 dance hits',
+      bel: '100 танцавальных хітоў',
+    },
   },
   search: {
-    searchBy: { ru: 'Искать по:', en: 'Search by' },
-    artist: { ru: 'исполнителю', en: 'artist' },
-    release: { ru: 'году выпуска', en: 'release date' },
-    genre: { ru: 'жанру', en: 'genre' },
+    searchBy: { ru: 'Искать по:', en: 'Search by', bel: 'Шукаць па:' },
+    artist: { ru: 'исполнителю', en: 'artist', bel: 'выканаўца' },
+    release: { ru: 'году выпуска', en: 'release date', bel: 'годзе выпуску' },
+    genre: { ru: 'жанру', en: 'genre', bel: 'жанр' },
   },
   listHeader: {
-    track: { ru: 'ТРЕК', en: 'TRACK' },
-    artist: { ru: 'ИСПОЛНИТЕЛЬ', en: 'ARTIST' },
-    album: { ru: 'АЛЬБОМ', en: 'ALBUM' },
+    track: { ru: 'ТРЕК', en: 'TRACK', bel: 'ТРЭК' },
+    artist: { ru: 'ИСПОЛНИТЕЛЬ', en: 'ARTIST', bel: 'ВЫКАНАЎЦА' },
+    album: { ru: 'АЛЬБОМ', en: 'ALBUM', bel: 'АЛЬБОМ' },
   },
   profile: {
-    userData: { ru: 'Данные пользователя', en: 'User data' },
-    userName: { ru: 'Имя:', en: 'User name:' },
-    login: { ru: 'Логин:', en: 'Login:' },
-    custom: { ru: 'Кастомизация плеера', en: 'Customization of the player' },
-    bgcolor: { ru: 'Цвет фона:', en: 'Background:' },
-    textColor: { ru: 'Цвет текста:', en: 'Text color:' },
-    designColor: { ru: 'Цветовое оформление:', en: 'Color design:' },
-    buttonText: { ru: 'Сброс настроек', en: 'Reset settings' },
-    language: { ru: 'Язык', en: 'Language' },
+    userData: {
+      ru: 'Данные пользователя',
+      en: 'User data',
+      bel: 'Дадзеныя карыстальніка',
+    },
+    userName: { ru: 'Имя:', en: 'User name:', bel: 'Імя:' },
+    login: { ru: 'Логин:', en: 'Login:', bel: 'Лагін:' },
+    custom: {
+      ru: 'Кастомизация плеера',
+      en: 'Customization of the player',
+      bel: 'Кастомизация плэера',
+    },
+    bgcolor: { ru: 'Цвет фона:', en: 'Background:', bel: 'Колер фону:' },
+    textColor: { ru: 'Цвет текста:', en: 'Text color:', bel: 'Колер тэксту:' },
+    designColor: {
+      ru: 'Цветовое оформление:',
+      en: 'Color design:',
+      bel: 'Каляровае афармленне:',
+    },
+    buttonText: {
+      ru: 'Сброс настроек',
+      en: 'Reset settings',
+      bel: 'Скід налад',
+    },
+    language: { ru: 'Язык', en: 'Language', bel: 'Мова' },
   },
 };
 
@@ -70,14 +99,15 @@ export const USER = { name: 'Evgenia Leleo', login: 'Leleo', avatar: '' };
 
 export const NumberOfCheckedItems = 3;
 
-export const checkedItems = ['2022', '2021', '2020', '2019', '2018'];
-export const checkedItems2 = [
+export const filterItems1 = ['2022', '2021', '2020', '2019', '2018'];
+export const filterItems2 = [
   'Alexander Nakarada',
   'Tim Kulig',
   'Kevin Macleodburn',
   'Winniethemoog',
   'Mixkit',
 ];
+export const filterItems3 = ['Rock', 'Indie', 'Country'];
 
 export const DATA: TData = {
   count: 29,

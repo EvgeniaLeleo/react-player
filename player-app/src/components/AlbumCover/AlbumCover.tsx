@@ -2,9 +2,10 @@ import React from 'react';
 import { FC } from 'react';
 import { cn } from '@bem-react/classname';
 
-import './AlbumCover.css';
 import { useAppSelector } from '../../hook';
-import { lightenDarkenColor } from '../../utils/utils';
+
+import './AlbumCover.css';
+import { extradarkToDark } from '../../utils/utils';
 
 const cnAlbumCover = cn('AlbumCover');
 
@@ -18,7 +19,7 @@ export const AlbumCover: FC<AlbumCoverProps> = ({ text }) => {
     (state) => state.colorTheme.decorativeColor,
   );
 
-  const decorativeColorDark = lightenDarkenColor(decorativeColor, 60);
+  const decorativeColorDark = extradarkToDark(decorativeColor);
 
   return (
     <div

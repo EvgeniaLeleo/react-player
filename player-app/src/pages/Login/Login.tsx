@@ -2,8 +2,9 @@ import React from 'react';
 import { FC } from 'react';
 import { cn } from '@bem-react/classname';
 
-import './Login.css';
 import { LoginWindow } from '../../components/LoginWindow/LoginWindow';
+
+import './Login.css';
 
 const cnLogin = cn('Login');
 

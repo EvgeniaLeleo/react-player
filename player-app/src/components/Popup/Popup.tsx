@@ -2,9 +2,10 @@ import React from 'react';
 import { FC } from 'react';
 import { cn } from '@bem-react/classname';
 
-import './Popup.css';
 import { useAppSelector } from '../../hook';
-import { lightenDarkenColor } from '../../utils/utils';
+
+import './Popup.css';
+import { bgColorToBgColorLight } from '../../utils/utils';
 
 const cnPopup = cn('Popup');
 
@@ -16,7 +17,7 @@ export type PopupProps = {
 
 export const Popup: FC<PopupProps> = ({ items, rows, isVisible }) => {
   const bgColor = useAppSelector((state) => state.colorTheme.bgColor);
-  const bgColorLight = lightenDarkenColor(bgColor, 10);
+  const bgColorLight = bgColorToBgColorLight(bgColor);
 
   let display;
   let height;

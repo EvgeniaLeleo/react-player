@@ -1,5 +1,6 @@
 .Centerblock {
-  width: auto;
+  /* width: auto; */
+  width: 53%;
   -webkit-box-flex: 3;
   -ms-flex-positive: 3;
   flex-grow: 3;
@@ -65,59 +66,4 @@
 
 .Content-Album {
   width: 30%;
-}
-
-.Content-Track-Info {
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-
-  width: 100%;
-  margin-bottom: 6px;
-}
-
-.Content-Track-Icon {
-  width: 5%;
-
-  cursor: pointer;
-}
-
-.Content-Track-Name {
-  width: 30%;
-  padding-left: 2%;
-
-  cursor: pointer;
-}
-
-.Content-Track-Author {
-  width: 25%;
-
-  cursor: pointer;
-}
-
-.Content-Track-Album {
-  color: #696969;
-
-  width: 30%;
-
-  cursor: pointer;
-}
-
-.Content-Track-Like {
-  width: 5%;
-}
-
-.Content-Track-Like-Icon {
-  color: #696969;
-}
-
-.Content-Track-Duration {
-  color: #696969;
-  width: 5%;
-  text-align: right;
 }

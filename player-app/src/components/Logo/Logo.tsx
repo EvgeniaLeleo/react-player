@@ -2,8 +2,8 @@ import { Typography } from '@mui/material';
 import React, { FC } from 'react';
 import { COLOR_DARK_DEFAULT } from '../../constants';
 import { useAppSelector } from '../../hook';
-import { lightenDarkenColor } from '../../utils/utils';
-import { SpanChangeColor } from '../SpanChangeColor/SpanChangeColor';
+import { extradarkToDark, extradarkToHover } from '../../utils/utils';
+import { SpanChangeColor } from '../changeColor/SpanChangeColor/SpanChangeColor';
 
 type typeLogoProps = {
   textColor: string;
@@ -15,7 +15,8 @@ const Logo: FC<typeLogoProps> = ({ textColor }) => {
     (state) => state.colorTheme.decorativeColor,
   );
 
-  const decorativeColorDark = lightenDarkenColor(decorativeColor, 60);
+  const colorDark = extradarkToDark(decorativeColor);
+  const colorHover = extradarkToHover(decorativeColor);
 
   if (textColor === 'default') {
     return (
@@ -58,7 +59,7 @@ const Logo: FC<typeLogoProps> = ({ textColor }) => {
           style={{
             display: 'inline-block',
             marginLeft: '-7px',
-            color: decorativeColorDark,
+            color: colorDark,
           }}
         >
           ▶
@@ -67,12 +68,14 @@ const Logo: FC<typeLogoProps> = ({ textColor }) => {
           style={{
             display: 'inline-block',
             marginLeft: '-7px',
-            color: decorativeColorDark,
+            color: colorDark,
           }}
         >
           ▶
         </span>{' '}
-        <SpanChangeColor>LePLAYER</SpanChangeColor>
+        <SpanChangeColor colorHover={colorHover} colorActive={colorDark}>
+          LePLAYER
+        </SpanChangeColor>
       </Typography>
     );
   }

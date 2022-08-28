@@ -2,55 +2,39 @@ import React, { useState } from 'react';
 import { FC } from 'react';
 import { cn } from '@bem-react/classname';
 
-import './FilterButton.css';
-import {
-  checkedItems,
-  COLOR,
-  COLOR_DARK,
-  COLOR_HOVER,
-  NumberOfCheckedItems,
-} from '../../constants';
+import { NumberOfCheckedItems } from '../../constants';
 import { Popup } from '../Popup/Popup';
-import { styled } from '@mui/material';
 import { useAppSelector } from '../../hook';
-import { lightenDarkenColor } from '../../utils/utils';
+import { extradarkToDark, extradarkToHover } from '../../utils/utils';
+
+import './FilterButton.css';
+import { ButtonChangeColor } from '../changeColor/ButtonChangeColor/ButtonChangeColor';
 
 const cnFilterButton = cn('FilterButton');
 
 export type FilterButtonProps = {
   buttonText: string;
+  checkItems: string[];
 };
 
-const CustomButton = styled('button')`
-color: ${COLOR}
-border-color: ${COLOR};
-
-  &:hover {
-    border-color: ${COLOR_HOVER} !important;
-    color: ${COLOR_HOVER} !important; 
-  }
-
-  &:active {
-    border-color: ${COLOR_DARK} !important;
-    color: ${COLOR_DARK} !important; 
-  }
-`;
-
-export const FilterButton: FC<FilterButtonProps> = ({ buttonText }) => {
+export const FilterButton: FC<FilterButtonProps> = ({
+  buttonText,
+  checkItems,
+}) => {
   const textColor = useAppSelector((state) => state.colorTheme.textColor);
   const decorativeColor = useAppSelector(
     (state) => state.colorTheme.decorativeColor,
   );
 
-  const decorativeColorDark = lightenDarkenColor(decorativeColor, 60);
+  const colorHover = extradarkToHover(decorativeColor);
+  const colorDark = extradarkToDark(decorativeColor);
 
   const [clicked, setClicked] = useState(false);
   const [color, setColor] = useState(textColor);
 
   const handleClick = () => {
     setClicked(!clicked);
-    setColor(!clicked ? decorativeColorDark : textColor);
-    console.log(color);
+    setColor(!clicked ? colorDark : textColor);
   };
 
   let display;
@@ -58,20 +42,23 @@ export const FilterButton: FC<FilterButtonProps> = ({ buttonText }) => {
 
   return (
     <div className={cnFilterButton('Wrapper')}>
-      <CustomButton
+      <ButtonChangeColor
         className={cnFilterButton()}
-        style={{ borderColor: color, color: color }}
+        color={color}
+        colorHover={colorHover}
+        colorActive={colorDark}
+        borderColor={color}
         onClick={handleClick}
       >
         {buttonText.toLowerCase()}
         <div
           className={cnFilterButton('NumberOfCheckedItems')}
-          style={{ display: display }}
+          style={{ display: display, backgroundColor: decorativeColor }}
         >
           {NumberOfCheckedItems}
         </div>
-      </CustomButton>
-      <Popup items={checkedItems} rows={2} isVisible={clicked}></Popup>
+      </ButtonChangeColor>
+      <Popup items={checkItems} rows={2} isVisible={clicked}></Popup>
     </div>
   );
 };

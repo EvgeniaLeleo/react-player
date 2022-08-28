@@ -49,7 +49,7 @@ export function lightenDarkenColor(colorCode: string, amount: number) {
 }
 
 export const bgColorToBgColorLight = (color: string) => {
-  return lightenDarkenColor(color, 10);
+  return lightenDarkenColor(color, 30);
 };
 
 export const extradarkToDark = (color: string) => {

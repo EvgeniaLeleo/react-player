@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FC } from 'react';
 import { cn } from '@bem-react/classname';
 import AudioPlayer, { RHAP_UI } from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import './Player.css';
-import { TTrack } from '../../types';
+import { SongType, TTrack } from '../../types';
 import {
   PlayArrow,
   Pause,
@@ -15,10 +15,11 @@ import {
 } from '@mui/icons-material';
 import { styled } from '@mui/system';
 import { Box, IconButton } from '@mui/material';
+import { useAppSelector } from '../../hook';
 const cnPlayer = cn('Player');
 
 export type PlayerProps = {
-  track: TTrack;
+  track: SongType;
 };
 
 const PlayerControlsWrapper = styled('div')`
@@ -31,12 +32,19 @@ const PlayerControlsWrapper = styled('div')`
 `;
 
 export const Player: FC<PlayerProps> = ({ track }) => {
+  const [audio, setAudio] = useState(
+    JSON.parse(localStorage.getItem("currentTrack")!)?.url || ""
+  );
+  const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
+
+  useEffect(() => {
+    setAudio(currentTrack.urlPlay);
+  }, [currentTrack.urlPlay]);
+
   return (
     <Box className={cnPlayer()}>
       <AudioPlayer
-        src={
-          "https://docs.google.com/uc?export=open&id=1r4N5SBd-6C-zECrMge8UKlknBh9p1d4g"
-        }
+        src={audio}
         defaultDuration={false}
         defaultCurrentTime={false}
         customIcons={{
@@ -56,8 +64,8 @@ export const Player: FC<PlayerProps> = ({ track }) => {
             <div className={cnPlayer('TrackInfo')}>
               <img src="./icons/note.svg" alt="note"></img>
               <div>
-                <p>{track.name}</p>
-                <p>{track.author}</p>
+                <p>{track.title}</p>
+                <p>{track.artist}</p>
               </div>
             </div>
             <IconButton>
@@ -68,7 +76,7 @@ export const Player: FC<PlayerProps> = ({ track }) => {
         ]}
         customAdditionalControls={[
           RHAP_UI.LOOP,
-          <IconButton sx={{ svg: { fontSize: "26px" }, padding: 0 }}>
+          <IconButton sx={{ svg: { fontSize: '26px' }, padding: 0 }}>
             <Shuffle className={cnPlayer('ControlsIcon')} />
           </IconButton>,
         ]}

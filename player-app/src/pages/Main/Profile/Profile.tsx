@@ -23,11 +23,7 @@ import {
   changeDecorativeColor,
   changeTextColor,
 } from '../../../store/colorThemeSlice';
-import {
-  colorToSecondary,
-  extradarkToDark,
-  lightenDarkenColor,
-} from '../../../utils/utils';
+import { colorToSecondary } from '../../../utils/utils';
 import { changeLanguage } from '../../../store/languageSlice';
 import { TLanguages } from '../../../types';
 
@@ -45,11 +41,10 @@ export const Profile: FC = () => {
 
   const textColorSecondary = colorToSecondary(textColor);
 
-  const [language, setLanguage] = React.useState(lang);
-  const [bgColorInput, setBgColorInput] = React.useState(bgColor);
-  const [textColorInput, setTextColorInput] = React.useState(textColor);
-  const [decorativeColorInput, setDecorativeColorInput] =
-    React.useState(decorativeColor);
+  const [_, setLanguage] = React.useState(lang);
+  const [__, setBgColorInput] = React.useState(bgColor);
+  const [___, setTextColorInput] = React.useState(textColor);
+  const [____, setDecorativeColorInput] = React.useState(decorativeColor);
 
   const handleChange = (event: SelectChangeEvent) => {
     const newLanguage = event.target.value as TLanguages;
@@ -199,7 +194,7 @@ export const Profile: FC = () => {
             <Select
               labelId="demo-simple-select-standard-label"
               id="demo-simple-select-standard"
-              value={language}
+              value={lang}
               onChange={handleChange}
               label="Language"
               style={{ color: textColor }}
@@ -208,7 +203,7 @@ export const Profile: FC = () => {
               <MenuItem value={'en'}>English</MenuItem>
               <MenuItem value={'bel'}>Беларускі</MenuItem>
             </Select>
-          </FormControl>{' '}
+          </FormControl>
         </ThemeProvider>
       </div>
     </div>

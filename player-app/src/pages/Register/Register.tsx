@@ -2,8 +2,9 @@ import React from 'react';
 import { FC } from 'react';
 import { cn } from '@bem-react/classname';
 
-import './Register.css';
 import { RegisterWindow } from '../../components/RegisterWindow/RegisterWindow';
+
+import './Register.css';
 
 const cnRegister = cn('Register');
 

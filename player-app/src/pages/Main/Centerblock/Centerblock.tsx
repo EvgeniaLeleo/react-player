@@ -1,37 +1,43 @@
 import React from 'react';
 import { FC } from 'react';
 import { cn } from '@bem-react/classname';
-
-import './Centerblock.css';
-import { FilterButton } from '../../../components/FilterButton/FilterButton';
-import { TLanguages, TTrack } from '../../../types';
-import { lightenDarkenColor, secondsToHms } from '../../../utils/utils';
 import {
   Box,
-  IconButton,
   InputAdornment,
   SvgIcon,
   TextField,
   Typography,
 } from '@mui/material';
-import { Search, AccessTime, FavoriteBorder } from '@mui/icons-material';
-import { text } from '../../../constants';
+import { Search, AccessTime } from '@mui/icons-material';
+
+import { FilterButton } from '../../../components/FilterButton/FilterButton';
+import { colorToSecondary } from '../../../utils/utils';
+import { SongType } from '../../../types';
+import {
+  filterItems1,
+  filterItems2,
+  filterItems3,
+  text,
+} from '../../../constants';
 import { Profile } from '../Profile/Profile';
 import { useAppSelector } from '../../../hook';
+import { TrackList } from '../TrackList/TrackList';
+
+import './Centerblock.css';
 
 const cnCenterblock = cn('Centerblock');
 const cnContent = cn('Content');
 
-export type PlayerProps = {
-  tracks: TTrack[];
+type PlayerProps = {
+  tracks: SongType[];
   header: string;
 };
 
 export const Centerblock: FC<PlayerProps> = ({ header, tracks }) => {
   const lang = useAppSelector((state) => state.language.lang);
-
   const textColor = useAppSelector((state) => state.colorTheme.textColor);
-  const textColorSecondary = lightenDarkenColor(textColor, -120);
+
+  const textColorSecondary = colorToSecondary(textColor);
 
   if (header === text.menu.profile[lang]) {
     return <Profile />;
@@ -71,9 +77,18 @@ export const Centerblock: FC<PlayerProps> = ({ header, tracks }) => {
             <span className={cnCenterblock('Filters-Text')}>
               {text.search.searchBy[lang]}
             </span>
-            <FilterButton buttonText={text.search.artist[lang]}></FilterButton>
-            <FilterButton buttonText={text.search.release[lang]}></FilterButton>
-            <FilterButton buttonText={text.search.genre[lang]}></FilterButton>
+            <FilterButton
+              buttonText={text.search.artist[lang]}
+              checkItems={filterItems1}
+            ></FilterButton>
+            <FilterButton
+              buttonText={text.search.release[lang]}
+              checkItems={filterItems2}
+            ></FilterButton>
+            <FilterButton
+              buttonText={text.search.genre[lang]}
+              checkItems={filterItems3}
+            ></FilterButton>
           </Box>
         )}
         <Box className={cnCenterblock('Content')}>
@@ -100,41 +115,7 @@ export const Centerblock: FC<PlayerProps> = ({ header, tracks }) => {
               <AccessTime />
             </SvgIcon>
           </div>
-
-          {tracks.map((track) => (
-            <div
-              className={cnContent('Track-Info')}
-              style={{ color: textColor }}
-              key={track.name + track.author + track.album}
-            >
-              <img
-                className={cnContent('Track-Icon')}
-                style={{ color: textColorSecondary }}
-                src="./icons/note.svg"
-                alt="note"
-              ></img>
-              <span className={cnContent('Track-Name')}>{track.name}</span>
-              <span className={cnContent('Track-Author')}>{track.author}</span>
-              <span
-                className={cnContent('Track-Album')}
-                style={{ color: textColorSecondary }}
-              >
-                {track.album}
-              </span>
-              <IconButton
-                sx={{ width: '5%' }}
-                style={{ color: textColorSecondary }}
-              >
-                <FavoriteBorder fontSize="small" />
-              </IconButton>
-              <span
-                className={cnContent('Track-Duration')}
-                style={{ color: textColorSecondary }}
-              >
-                {secondsToHms(track.duration_in_seconds)}
-              </span>
-            </div>
-          ))}
+          <TrackList tracks={tracks}></TrackList>
         </Box>
       </div>
     );

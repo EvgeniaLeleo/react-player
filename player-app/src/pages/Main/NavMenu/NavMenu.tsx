@@ -1,17 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { FC } from 'react';
 import { cn } from '@bem-react/classname';
 
-import './NavMenu.css';
 import { NavLink } from 'react-router-dom';
 import { IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import Logo from '../../../components/Logo/Logo';
 import { text } from '../../../constants';
-import { SpanChangeColor } from '../../../components/SpanChangeColor/SpanChangeColor';
+import { SpanChangeColor } from '../../../components/changeColor/SpanChangeColor/SpanChangeColor';
 import { useAppSelector } from '../../../hook';
-import { lightenDarkenColor } from '../../../utils/utils';
-import { TLanguages } from '../../../types';
+import {
+  bgColorToBgColorLight,
+  extradarkToDark,
+  extradarkToHover,
+} from '../../../utils/utils';
+
+import './NavMenu.css';
+
 const cnNavMenu = cn('NavMenu');
 
 export const NavMenu: FC<{}> = () => {
@@ -19,7 +24,14 @@ export const NavMenu: FC<{}> = () => {
 
   const textColor = useAppSelector((state) => state.colorTheme.textColor);
   const bgColor = useAppSelector((state) => state.colorTheme.bgColor);
-  const bgColorLight = lightenDarkenColor(bgColor, 10);
+  const bgColorLight = bgColorToBgColorLight(bgColor);
+
+  const decorativeColor = useAppSelector(
+    (state) => state.colorTheme.decorativeColor,
+  );
+
+  const colorHover = extradarkToHover(decorativeColor);
+  const colorDark = extradarkToDark(decorativeColor);
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -54,7 +66,9 @@ export const NavMenu: FC<{}> = () => {
               style={{ color: textColor }}
               to="/main"
             >
-              <SpanChangeColor>{text.menu.homepage[lang]}</SpanChangeColor>
+              <SpanChangeColor colorHover={colorHover} colorActive={colorDark}>
+                {text.menu.homepage[lang]}
+              </SpanChangeColor>
             </NavLink>
           </li>
           <li>
@@ -63,7 +77,9 @@ export const NavMenu: FC<{}> = () => {
               style={{ color: textColor }}
               to="/mytracks"
             >
-              <SpanChangeColor>{text.menu.mytracks[lang]}</SpanChangeColor>
+              <SpanChangeColor colorHover={colorHover} colorActive={colorDark}>
+                {text.menu.mytracks[lang]}
+              </SpanChangeColor>
             </NavLink>
           </li>
           <li>
@@ -72,7 +88,9 @@ export const NavMenu: FC<{}> = () => {
               style={{ color: textColor }}
               to={'/profile'}
             >
-              <SpanChangeColor>{text.menu.profile[lang]}</SpanChangeColor>
+              <SpanChangeColor colorHover={colorHover} colorActive={colorDark}>
+                {text.menu.profile[lang]}
+              </SpanChangeColor>
             </NavLink>
           </li>
           <li>
@@ -81,7 +99,9 @@ export const NavMenu: FC<{}> = () => {
               style={{ color: textColor }}
               to={'/'}
             >
-              <SpanChangeColor>{text.menu.logout[lang]}</SpanChangeColor>
+              <SpanChangeColor colorHover={colorHover} colorActive={colorDark}>
+                {text.menu.logout[lang]}
+              </SpanChangeColor>
             </NavLink>
           </li>
         </ul>

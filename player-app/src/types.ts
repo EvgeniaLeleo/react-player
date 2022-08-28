@@ -18,6 +18,19 @@ export type TData = {
   results: TTrack[];
 };
 
+export type SongType = {
+  _id?: number;
+  album?: string;
+  artist?: string;
+  img?: string;
+  rank?: number;
+  title?: string;
+  url?: string;
+  urlPlay?: string;
+  year?: string;
+  duration?: string;
+};
+
 // export type THeader =
 //   | 'Треки'
 //   | 'Плейлист дня'
@@ -30,4 +43,4 @@ export type USER = { name: string; login: string; avatar: string };
 
 // export type TDictionary = { ru: string; en: string };
 
-export type TLanguages = 'ru' | 'en';
+export type TLanguages = 'ru' | 'en' | 'bel';
