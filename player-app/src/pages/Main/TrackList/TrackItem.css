@@ -1,4 +1,4 @@
-.TrackList-Info {
+.TrackItem-Info {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
@@ -13,26 +13,26 @@
   margin-bottom: 6px;
 }
 
-.TrackList-Icon {
+.TrackItem-Icon {
   width: 5%;
 
   cursor: pointer;
 }
 
-.TrackList-Name {
+.TrackItem-Name {
   width: 30%;
   padding-left: 2%;
 
   cursor: pointer;
 }
 
-.TrackList-Author {
+.TrackItem-Author {
   width: 25%;
 
   cursor: pointer;
 }
 
-.TrackList-Album {
+.TrackItem-Album {
   color: #696969;
 
   width: 30%;
@@ -40,15 +40,15 @@
   cursor: pointer;
 }
 
-.TrackList-Like {
+.TrackItem-Like {
   width: 5%;
 }
 
-.TrackList-Like-Icon {
+.TrackItem-Like-Icon {
   color: #696969;
 }
 
-.TrackList-Duration {
+.TrackItem-Duration {
   color: #696969;
   width: 5%;
   text-align: right;

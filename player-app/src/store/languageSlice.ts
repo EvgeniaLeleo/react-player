@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { DEFAULT_LANG } from '../constants';
 import { TLanguages } from '../types';
 
 type TLanguageState = {
@@ -6,7 +7,7 @@ type TLanguageState = {
 };
 
 const initialState: TLanguageState = {
-  lang: (localStorage.getItem('language') as TLanguages) || 'ru',
+  lang: (localStorage.getItem('language') as TLanguages) || DEFAULT_LANG,
 };
 
 const languageSlice = createSlice({

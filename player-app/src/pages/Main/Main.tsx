@@ -8,9 +8,10 @@ import { Sidebar } from './SIdebar/Sidebar';
 import { Centerblock } from './Centerblock/Centerblock';
 import { Player } from '../../components/Player/Player';
 import { text } from '../../constants';
-import { useAppSelector } from '../../hook';
+import { useAppDispatch, useAppSelector } from '../../hook';
 import { SongType } from '../../types';
 import { fetchTracks } from '../../fetchers/fetchTracks';
+import { uploadAllTracks } from '../../store/trackSlice';
 
 const cnMain = cn('Main');
 
@@ -23,16 +24,19 @@ const Wrapper = styled(Box)`
 `;
 
 export const Main: FC<MainProps> = ({ header }) => {
+  const dispatch = useAppDispatch();
   const [tracks, setTracks] = useState<SongType[]>();
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
   const lang = useAppSelector((state) => state.language.lang);
   const bgColor = useAppSelector((state) => state.colorTheme.bgColor);
+  const initTracks = tracks?.length ? tracks : [];
 
   useEffect(() => {
     fetchTracks().then((data) => {
       setTracks(data);
+      dispatch(uploadAllTracks(data));
     });
-  }, []);
+  }, [dispatch]);
 
   return (
     <Wrapper style={{ backgroundColor: bgColor }}>
@@ -47,7 +51,7 @@ export const Main: FC<MainProps> = ({ header }) => {
       >
         <NavMenu />
         <Centerblock
-          tracks={tracks as SongType[]}
+          tracks={initTracks as SongType[]}
           header={header}
         ></Centerblock>
         <Sidebar

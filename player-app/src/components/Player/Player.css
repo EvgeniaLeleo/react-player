@@ -43,17 +43,10 @@
   width: 0;
 }
 
-.rhap_progress-filled {
-  background-color: rgb(88 14 162 / 55%);
-}
 
 .rhap_progress-container {
   height: 5px;
   margin: 0;
-}
-
-.rhap_progress-bar-show-download {
-  background-color: #2e2e2e;
 }
 
 .rhap_stacked .rhap_controls-section {
@@ -86,6 +79,10 @@
   font-size: 25px;
 }
 
+.rhap_button-clear:hover {
+  opacity: 0.6;
+}
+
 .rhap_repeat-button {
   color: #fff;
 }
@@ -114,4 +111,9 @@
 
 .Player-ControlsIcon {
   color: #fff;
+}
+
+.Player-ControlsIcon:hover {
+  color: #acacac;
+  transition: all 0.2s;
 }

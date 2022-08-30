@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FC } from 'react';
 import { cn } from '@bem-react/classname';
 import AudioPlayer, { RHAP_UI } from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import './Player.css';
-import { SongType, TTrack } from '../../types';
+import { SongType } from '../../types';
 import {
   PlayArrow,
   Pause,
@@ -13,37 +13,59 @@ import {
   FavoriteBorder,
   Shuffle,
 } from '@mui/icons-material';
-import { styled } from '@mui/system';
-import { Box, IconButton } from '@mui/material';
-import { useAppSelector } from '../../hook';
+import { IconButton } from '@mui/material';
+import { useAppDispatch, useAppSelector } from '../../hook';
+import { shuffleTracks, switchToNextTrack, switchToPreviousTrack } from '../../store/trackSlice';
+import { extradarkToHover } from '../../utils/utils';
+import { PlayerControlsWrapper, PlayerWrapper } from '../changeColor/PlayerChangeColor/PlayerChangeColor';
 const cnPlayer = cn('Player');
 
 export type PlayerProps = {
   track: SongType;
 };
 
-const PlayerControlsWrapper = styled('div')`
-  display: flex;
-  align-items: center;
-  gap: 25px;
-  .css-78trlr-MuiButtonBase-root-MuiIconButton-root {
-    color: rgb(255 2 2 / 55%);
-  }
-`;
-
 export const Player: FC<PlayerProps> = ({ track }) => {
+  const dispatch = useAppDispatch();
   const [audio, setAudio] = useState(
     JSON.parse(localStorage.getItem("currentTrack")!)?.url || ""
   );
+  const [isActive, setIsActive] = useState(false);
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
+  const alltracks = useAppSelector((state) => state.tracks.allTracks);
+  const decorativeColor = useAppSelector(
+    (state) => state.colorTheme.decorativeColor,
+  );
+  const progressColor = extradarkToHover(decorativeColor);
 
   useEffect(() => {
     setAudio(currentTrack.urlPlay);
   }, [currentTrack.urlPlay]);
 
+  const handleClickNext = useCallback(() => {
+    dispatch(switchToNextTrack(alltracks))
+  }, [dispatch, alltracks]);
+
+  const handleClickPrevious = useCallback(() => {
+    dispatch(switchToPreviousTrack(alltracks))
+  }, [dispatch, alltracks]);
+
+  const handleAudioEnded = useCallback(() => {
+    dispatch(shuffleTracks(isActive));
+    dispatch(switchToNextTrack(alltracks));
+  }, [dispatch, alltracks, isActive]);
+
+  const handleClickShuffle = useCallback(() => {
+    setIsActive(!isActive);
+  },[isActive]);
+
+
+
   return (
-    <Box className={cnPlayer()}>
+    <PlayerWrapper progressсolor={progressColor} className={cnPlayer()}>
       <AudioPlayer
+        onClickNext={handleClickNext}
+        onClickPrevious={handleClickPrevious}
+        onEnded={handleAudioEnded}
         src={audio}
         defaultDuration={false}
         defaultCurrentTime={false}
@@ -62,7 +84,7 @@ export const Player: FC<PlayerProps> = ({ track }) => {
           RHAP_UI.ADDITIONAL_CONTROLS,
           <PlayerControlsWrapper>
             <div className={cnPlayer('TrackInfo')}>
-              <img src="./icons/note.svg" alt="note"></img>
+              <img src={track.img ? track.img : "./icons/note.svg"} alt="note" width={'52px'}></img>
               <div>
                 <p>{track.title}</p>
                 <p>{track.artist}</p>
@@ -76,13 +98,13 @@ export const Player: FC<PlayerProps> = ({ track }) => {
         ]}
         customAdditionalControls={[
           RHAP_UI.LOOP,
-          <IconButton sx={{ svg: { fontSize: '26px' }, padding: 0 }}>
-            <Shuffle className={cnPlayer('ControlsIcon')} />
+          <IconButton onClick={handleClickShuffle} color='secondary' sx={{ svg: { fontSize: '26px' }, padding: 0 }}>
+            <Shuffle sx={{color: isActive ? "white" : "#acacac"}} className={cnPlayer('ControlsIcon')} />
           </IconButton>,
         ]}
         showSkipControls={true}
         showJumpControls={false}
       />
-    </Box>
+    </PlayerWrapper>
   );
 };
