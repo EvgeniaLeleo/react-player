@@ -25,8 +25,11 @@ const Wrapper = styled(Box)`
 
 export const Main: FC<MainProps> = ({ header }) => {
   const dispatch = useAppDispatch();
-  const [tracks, setTracks] = useState<SongType[]>();
+
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
+  const allTracks = useAppSelector((state) => state.tracks.allTracks);
+  const [tracks, setTracks] = useState<SongType[]>(allTracks);
+
   const lang = useAppSelector((state) => state.language.lang);
   const bgColor = useAppSelector((state) => state.colorTheme.bgColor);
   const initTracks = tracks?.length ? tracks : [];

@@ -2,6 +2,8 @@
 import update from 'immutability-helper';
 import type { FC } from 'react';
 import { useCallback, useState } from 'react';
+// import { useAppDispatch } from '../../../hook';
+// import { uploadAllTracks } from '../../../store/trackSlice';
 import { SongType } from '../../../types';
 import { TrackItem } from './TrackItem';
 
@@ -10,7 +12,10 @@ type ContainerProps = {
 };
 
 export const TrackList: FC<ContainerProps> = ({ allTracks }) => {
-  const [tracks, setTrackItems] = useState(allTracks);
+  // const dispatch = useAppDispatch();
+  const [trackItems, setTrackItems] = useState(allTracks);
+  // dispatch(uploadAllTracks(trackItems));
+  localStorage.setItem('allTracks', JSON.stringify(trackItems));
 
   const moveTrackItem = useCallback((dragIndex: number, hoverIndex: number) => {
     setTrackItems((prevTrackItems: SongType[]) =>
@@ -38,7 +43,9 @@ export const TrackList: FC<ContainerProps> = ({ allTracks }) => {
   return (
     <>
       <div>
-        {tracks.map((track: SongType, i: number) => renderTrackItem(track, i))}
+        {trackItems.map((track: SongType, i: number) =>
+          renderTrackItem(track, i),
+        )}
       </div>
     </>
   );
