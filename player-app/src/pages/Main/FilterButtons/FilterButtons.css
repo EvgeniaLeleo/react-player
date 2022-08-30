@@ -1,0 +1,12 @@
+.FilterButtons-Filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+
+  margin-bottom: 51px;
+}
+
+.FilterButtons-Filters-Text {
+  margin-right: 15px;
+}

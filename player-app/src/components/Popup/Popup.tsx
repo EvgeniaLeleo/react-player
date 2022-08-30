@@ -12,16 +12,15 @@ const cnPopup = cn('Popup');
 export type PopupProps = {
   items: string[];
   rows: 1 | 2;
-  isVisible: boolean;
 };
 
-export const Popup: FC<PopupProps> = ({ items, rows, isVisible }) => {
+export const Popup: FC<PopupProps> = ({ items, rows }) => {
   const bgColor = useAppSelector((state) => state.colorTheme.bgColor);
   const bgColorLight = bgColorToBgColorLight(bgColor);
 
   let display;
   let height;
-  isVisible ? (display = 'block') : (display = 'none');
+  // isVisible ? (display = 'block') : (display = 'none');
   rows === 1 ? (height = '92px') : (height = '138px');
 
   return (

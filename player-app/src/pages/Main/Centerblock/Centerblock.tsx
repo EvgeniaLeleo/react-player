@@ -28,6 +28,7 @@ import './Centerblock.css';
 
 import { TrackList } from '../TrackList/TrackList';
 import { SkeletonRect } from '../../../components/Skeleton/Skeleton';
+import { FilterButtons } from '../FilterButtons/FilterButtons';
 
 const cnCenterblock = cn('Centerblock');
 const cnContent = cn('Content');
@@ -81,26 +82,7 @@ export const Centerblock: FC<PlayerProps> = ({ header, tracks }) => {
             {header}
           </Typography>
           {header === text.header.tracks[lang] && (
-            <Box
-              className={cnCenterblock('Filters')}
-              style={{ color: textColor }}
-            >
-              <span className={cnCenterblock('Filters-Text')}>
-                {text.search.searchBy[lang]}
-              </span>
-              <FilterButton
-                buttonText={text.search.artist[lang]}
-                checkItems={filterItems1}
-              ></FilterButton>
-              <FilterButton
-                buttonText={text.search.release[lang]}
-                checkItems={filterItems2}
-              ></FilterButton>
-              <FilterButton
-                buttonText={text.search.genre[lang]}
-                checkItems={filterItems3}
-              ></FilterButton>
-            </Box>
+            <FilterButtons lang={lang} textColor={textColor}></FilterButtons>
           )}
           <Box className={cnCenterblock('Content')}>
             <div className={cnContent('Header')}>

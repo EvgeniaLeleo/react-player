@@ -44,7 +44,7 @@
 
 /* для Chrome/Edge/Safari */
 .Popup-Content-Wrapper::-webkit-scrollbar {
-  width: 0;
+  width: 7px;
 }
 
 .Popup-Content-Wrapper::-webkit-scrollbar-track {

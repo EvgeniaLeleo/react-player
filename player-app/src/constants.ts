@@ -36,7 +36,11 @@ export const text = {
   menu: {
     homepage: { ru: 'Главная', en: 'Homepage', bel: 'Галоўны' },
     mytracks: { ru: 'Мои треки', en: 'My tracks', bel: 'Мае трэкі' },
-    profile: { ru: 'Личный кабинет', en: 'Profile', bel: 'Асабісты кабінет' },
+    profile: {
+      ru: 'Личный кабинет',
+      en: 'Profile',
+      bel: 'Профіль карыстальніка',
+    }, //Асабісты кабінет
     logout: { ru: 'Выйти', en: 'Logout', bel: 'Выйсці' },
   },
   searchInput: { ru: 'Поиск', en: 'Search', bel: 'Пошук' },
@@ -168,8 +172,8 @@ export const USER = { name: 'Evgenia Leleo', login: 'Leleo', avatar: '' };
 
 export const NumberOfCheckedItems = 3;
 
-export const filterItems1 = ['2022', '2021', '2020', '2019', '2018'];
-export const filterItems2 = [
+export const filterItems2 = ['2022', '2021', '2020', '2019', '2018'];
+export const filterItems1 = [
   'Alexander Nakarada',
   'Tim Kulig',
   'Kevin Macleodburn',
