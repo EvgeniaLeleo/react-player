@@ -10,7 +10,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { COLOR_DARK, COLOR_EXTRADARK } from './constants';
 import store from './store';
-import { extradarkToDark } from './utils/utils';
+import { extradarkToDark } from './utils/colorUtils';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -37,13 +37,13 @@ const theme = createTheme({
 });
 
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <ThemeProvider theme={theme}>
-          <App />
-        </ThemeProvider>
-      </BrowserRouter>
-    </Provider>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <Provider store={store}>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </BrowserRouter>
+  </Provider>,
+  // </React.StrictMode>,
 );

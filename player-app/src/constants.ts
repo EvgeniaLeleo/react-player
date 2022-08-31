@@ -4,7 +4,7 @@ import {
   colorToSecondary,
   extradarkToDark,
   extradarkToHover,
-} from './utils/utils';
+} from './utils/colorUtils';
 
 import { createTheme } from '@mui/material';
 

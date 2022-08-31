@@ -23,7 +23,7 @@ import {
   changeDecorativeColor,
   changeTextColor,
 } from '../../../store/colorThemeSlice';
-import { colorToSecondary } from '../../../utils/utils';
+import { colorToSecondary } from '../../../utils/colorUtils';
 import { changeLanguage } from '../../../store/languageSlice';
 import { TLanguages } from '../../../types';
 

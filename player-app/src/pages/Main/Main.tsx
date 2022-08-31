@@ -12,6 +12,9 @@ import { useAppDispatch, useAppSelector } from '../../hook';
 import { SongType } from '../../types';
 import { fetchTracks } from '../../fetchers/fetchTracks';
 import { uploadAllTracks } from '../../store/trackSlice';
+import { getSortedArtistsArray } from '../../utils/getSortedArtistsArray';
+import { getSortedGenreArray } from '../../utils/getSortedGenreArray';
+import { getSortedYearsArray } from '../../utils/getSortedYearsArray';
 
 const cnMain = cn('Main');
 
@@ -27,19 +30,40 @@ export const Main: FC<MainProps> = ({ header }) => {
   const dispatch = useAppDispatch();
 
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
-  const allTracks = useAppSelector((state) => state.tracks.allTracks);
+  const allTracksStore = useAppSelector((state) => state.tracks.allTracks);
+  const allTracksLocal = JSON.parse(localStorage.getItem('allTracks') || '[]');
+
+  const allTracks = allTracksLocal || allTracksStore;
+
   const [tracks, setTracks] = useState<SongType[]>(allTracks);
 
   const lang = useAppSelector((state) => state.language.lang);
   const bgColor = useAppSelector((state) => state.colorTheme.bgColor);
-  const initTracks = tracks?.length ? tracks : [];
 
   useEffect(() => {
-    fetchTracks().then((data) => {
-      setTracks(data);
-      dispatch(uploadAllTracks(data));
-    });
+    if (allTracksLocal?.length) {
+      dispatch(uploadAllTracks(allTracksLocal));
+    } else {
+      fetchTracks().then((data) => {
+        setTracks(data);
+        localStorage.setItem(
+          'sortedArtistsArray',
+          JSON.stringify(getSortedArtistsArray(data)),
+        );
+        localStorage.setItem(
+          'sortedGenreArray',
+          JSON.stringify(getSortedGenreArray(data)),
+        );
+        localStorage.setItem(
+          'sortedYearsArray',
+          JSON.stringify(getSortedYearsArray(data)),
+        );
+        dispatch(uploadAllTracks(data));
+      });
+    }
   }, [dispatch]);
+
+  console.log(localStorage.sortedArtistsArray);
 
   return (
     <Wrapper style={{ backgroundColor: bgColor }}>
@@ -53,10 +77,7 @@ export const Main: FC<MainProps> = ({ header }) => {
         className={cnMain()}
       >
         <NavMenu />
-        <Centerblock
-          tracks={initTracks as SongType[]}
-          header={header}
-        ></Centerblock>
+        <Centerblock tracks={tracks} header={header}></Centerblock>
         <Sidebar
           isVisible={header === text.header.tracks[lang]}
           isUserVisible={header !== text.menu.profile[lang]}

@@ -24,7 +24,7 @@ import {
   bgColorToBgColorLight,
   extradarkToDark,
   extradarkToHover,
-} from '../../../utils/utils';
+} from '../../../utils/colorUtils';
 import { TLanguages } from '../../../types';
 import { changeLanguage } from '../../../store/languageSlice';
 // import './Animation.css';

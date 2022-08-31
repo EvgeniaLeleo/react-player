@@ -13,7 +13,7 @@ import {
   bgColorToBgColorLight,
   extradarkToDark,
   extradarkToHover,
-} from '../../../utils/utils';
+} from '../../../utils/colorUtils';
 
 import './NavMenu.css';
 
@@ -38,6 +38,9 @@ export const NavMenu: FC<{}> = () => {
   const handleClick = () => {
     setIsVisible(!isVisible);
   };
+
+  // const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
+  // console.log(currentTrack);
 
   return (
     <nav
@@ -106,6 +109,13 @@ export const NavMenu: FC<{}> = () => {
           </li>
         </ul>
       )}
+
+      {/* <audio
+        src={currentTrack.urlPlay}
+        id="player"
+        controls
+        loop
+      ></audio> */}
     </nav>
   );
 };

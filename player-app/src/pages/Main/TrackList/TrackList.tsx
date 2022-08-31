@@ -12,9 +12,11 @@ type ContainerProps = {
 };
 
 export const TrackList: FC<ContainerProps> = ({ allTracks }) => {
+  // console.log('trlist', allTracks);
   // const dispatch = useAppDispatch();
   const [trackItems, setTrackItems] = useState(allTracks);
   // dispatch(uploadAllTracks(trackItems));
+  // console.log('tr', trackItems);
   localStorage.setItem('allTracks', JSON.stringify(trackItems));
 
   const moveTrackItem = useCallback((dragIndex: number, hoverIndex: number) => {

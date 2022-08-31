@@ -5,7 +5,7 @@ import { cn } from '@bem-react/classname';
 import { NumberOfCheckedItems } from '../../constants';
 import { Popup } from '../Popup/Popup';
 import { useAppSelector, useOnClickOutside } from '../../hook';
-import { extradarkToDark, extradarkToHover } from '../../utils/utils';
+import { extradarkToDark, extradarkToHover } from '../../utils/colorUtils';
 
 import './FilterButton.css';
 import { ButtonChangeColor } from '../changeColor/ButtonChangeColor/ButtonChangeColor';
@@ -15,11 +15,13 @@ const cnFilterButton = cn('FilterButton');
 export type FilterButtonProps = {
   buttonText: string;
   checkItems: string[];
+  rows: 1 | 2 | 3;
 };
 
 export const FilterButton: FC<FilterButtonProps> = ({
   buttonText,
   checkItems,
+  rows,
 }) => {
   const textColor = useAppSelector((state) => state.colorTheme.textColor);
   const decorativeColor = useAppSelector(
@@ -64,7 +66,7 @@ export const FilterButton: FC<FilterButtonProps> = ({
         )}
       </ButtonChangeColor>
       <div ref={ref}>
-        {isPopupVisible && <Popup items={checkItems} rows={2}></Popup>}
+        {isPopupVisible && <Popup items={checkItems} rows={rows}></Popup>}
       </div>
     </div>
   );

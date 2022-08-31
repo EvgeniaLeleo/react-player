@@ -15,7 +15,7 @@ import {
   colorToSecondary,
   extradarkToDark,
   extradarkToHover,
-} from '../../../utils/utils';
+} from '../../../utils/colorUtils';
 
 import './TrackItem.css';
 

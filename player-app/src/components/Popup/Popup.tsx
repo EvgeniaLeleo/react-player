@@ -5,13 +5,13 @@ import { cn } from '@bem-react/classname';
 import { useAppSelector } from '../../hook';
 
 import './Popup.css';
-import { bgColorToBgColorLight } from '../../utils/utils';
+import { bgColorToBgColorLight } from '../../utils/colorUtils';
 
 const cnPopup = cn('Popup');
 
 export type PopupProps = {
   items: string[];
-  rows: 1 | 2;
+  rows: 1 | 2 | 3;
 };
 
 export const Popup: FC<PopupProps> = ({ items, rows }) => {
@@ -20,8 +20,17 @@ export const Popup: FC<PopupProps> = ({ items, rows }) => {
 
   let display;
   let height;
-  // isVisible ? (display = 'block') : (display = 'none');
-  rows === 1 ? (height = '92px') : (height = '138px');
+
+  // rows === 1 ? (height = '92px') : (height = '138px');
+  if (rows === 1) {
+    height = '92px';
+  }
+  if (rows === 2) {
+    height = '138px';
+  }
+  if (rows === 3) {
+    height = '184px';
+  }
 
   return (
     <div
@@ -34,7 +43,7 @@ export const Popup: FC<PopupProps> = ({ items, rows }) => {
     >
       <div className={cnPopup('Content-Wrapper')}>
         {items.map((item) => (
-          <span key={crypto.randomUUID()}>
+          <span key={item}>
             <input
               className={cnPopup('Checkbox')}
               type="checkbox"

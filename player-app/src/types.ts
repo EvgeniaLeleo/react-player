@@ -29,6 +29,7 @@ export type SongType = {
   urlPlay?: string;
   year?: string;
   duration?: string;
+  genre?: string;
 };
 
 // export type THeader =
