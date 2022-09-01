@@ -163,7 +163,7 @@ export const Profile: FC = () => {
             color={'primary'}
             variant={'contained'}
             sx={{
-              width: '200px',
+              width: '280px',
               height: '52px',
               padding: '10px 15px',
               mb: 2.5,

@@ -2,23 +2,25 @@ import React, { useRef, useState } from 'react';
 import { FC } from 'react';
 import { cn } from '@bem-react/classname';
 
-import { NumberOfCheckedItems } from '../../constants';
 import { Popup } from '../Popup/Popup';
 import { useAppSelector, useOnClickOutside } from '../../hook';
 import { extradarkToDark, extradarkToHover } from '../../utils/colorUtils';
 
 import './FilterButton.css';
 import { ButtonChangeColor } from '../changeColor/ButtonChangeColor/ButtonChangeColor';
+import { TFilterButtonName } from '../../types';
 
 const cnFilterButton = cn('FilterButton');
 
 export type FilterButtonProps = {
   buttonText: string;
+  buttonName: TFilterButtonName;
   checkItems: string[];
   rows: 1 | 2 | 3;
 };
 
 export const FilterButton: FC<FilterButtonProps> = ({
+  buttonName,
   buttonText,
   checkItems,
   rows,
@@ -30,6 +32,16 @@ export const FilterButton: FC<FilterButtonProps> = ({
 
   const colorHover = extradarkToHover(decorativeColor);
   const colorDark = extradarkToDark(decorativeColor);
+
+  const localCheckedItemsArray: string[] = JSON.parse(
+    localStorage.getItem(`${buttonName}`) || '[]',
+  );
+
+  const storeCheckedItemsArray = useAppSelector(
+    (state) => state.checkedItems[`${buttonName}`],
+  );
+
+  const checkedItems = localCheckedItemsArray || storeCheckedItemsArray;
 
   const ref = useRef(null);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
@@ -61,12 +73,14 @@ export const FilterButton: FC<FilterButtonProps> = ({
             className={cnFilterButton('NumberOfCheckedItems')}
             style={{ backgroundColor: decorativeColor }}
           >
-            {NumberOfCheckedItems}
+            {checkedItems.length}
           </div>
         )}
       </ButtonChangeColor>
       <div ref={ref}>
-        {isPopupVisible && <Popup items={checkItems} rows={rows}></Popup>}
+        {isPopupVisible && (
+          <Popup items={checkItems} rows={rows} buttonName={buttonName}></Popup>
+        )}
       </div>
     </div>
   );

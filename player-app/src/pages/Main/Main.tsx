@@ -30,9 +30,9 @@ export const Main: FC<MainProps> = ({ header }) => {
   const dispatch = useAppDispatch();
 
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
+
   const allTracksStore = useAppSelector((state) => state.tracks.allTracks);
   const allTracksLocal = JSON.parse(localStorage.getItem('allTracks') || '[]');
-
   const allTracks = allTracksLocal || allTracksStore;
 
   const [tracks, setTracks] = useState<SongType[]>(allTracks);
@@ -43,6 +43,7 @@ export const Main: FC<MainProps> = ({ header }) => {
   useEffect(() => {
     if (allTracksLocal?.length) {
       dispatch(uploadAllTracks(allTracksLocal));
+      setTracks(allTracksLocal);
     } else {
       fetchTracks().then((data) => {
         setTracks(data);
@@ -62,8 +63,6 @@ export const Main: FC<MainProps> = ({ header }) => {
       });
     }
   }, [dispatch]);
-
-  console.log(localStorage.sortedArtistsArray);
 
   return (
     <Wrapper style={{ backgroundColor: bgColor }}>

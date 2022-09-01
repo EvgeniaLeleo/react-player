@@ -128,22 +128,9 @@ export const Sidebar: FC<SidebarProps> = ({
       >
         {/* <canvas id="myCanvas" width="1200" height="250"></canvas> */}
         <NavLink to={'/dayplaylist'}>
-          {/* <CardMedia
-            component="img"
-            className={cnSidebar('Button')}
-            image="./playlist/playlist-day.png"
-            alt="Playlist of the day"
-          /> */}
-
           <AlbumCover text={text.albums.dayplaylist[lang]}></AlbumCover>
         </NavLink>
         <NavLink to={'/hits'}>
-          {/* <CardMedia
-            component="img"
-            className={cnSidebar('Button')}
-            image="./playlist/playlist-hits.png"
-            alt="Playlist of hits"
-          /> */}
           <AlbumCover text={text.albums.hits[lang]}></AlbumCover>
         </NavLink>
         {/* <NavLink to={'/indie'}>

@@ -142,7 +142,8 @@ export const Centerblock: FC<PlayerProps> = ({ header, tracks }) => {
                 </div>
               ))
             ) : (
-              <TrackList allTracks={tracks}></TrackList>
+              <TrackList></TrackList>
+              // <TrackList allTracks={tracks}></TrackList>
             )}
           </Box>
         </div>

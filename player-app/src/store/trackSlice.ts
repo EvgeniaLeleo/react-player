@@ -9,7 +9,7 @@ type TTrackState = {
 
 const initialState: TTrackState = {
   currentTrack: JSON.parse(localStorage.getItem('currentTrack')!) || {},
-  allTracks: JSON.parse(localStorage.getItem('allTracks')!) || [],
+  allTracks: JSON.parse(localStorage.getItem('allTracks') || '[]'),
   autoplay: false,
 };
 
