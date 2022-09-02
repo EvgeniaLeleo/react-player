@@ -12,9 +12,13 @@ import { useAppDispatch, useAppSelector } from '../../hook';
 import { SongType } from '../../types';
 import { fetchTracks } from '../../fetchers/fetchTracks';
 import { uploadAllTracks } from '../../store/trackSlice';
-import { getSortedArtistsArray } from '../../utils/getSortedArtistsArray';
-import { getSortedGenreArray } from '../../utils/getSortedGenreArray';
-import { getSortedYearsArray } from '../../utils/getSortedYearsArray';
+import { getSortedByArtistsArray } from '../../utils/getSortedByArtistsArray';
+import { getSortedByGenresArray } from '../../utils/getSortedByGenresArray';
+import { getSortedByYearsArray } from '../../utils/getSortedByYearsArray';
+import { getArtistsArray } from '../../utils/getArtistsArray';
+import { getGenresArray } from '../../utils/getGenresArray';
+import { getYearsArray } from '../../utils/getYearsArray';
+import { updateSortedArtists } from '../../store/sortedArraysSlice';
 
 const cnMain = cn('Main');
 
@@ -30,10 +34,7 @@ export const Main: FC<MainProps> = ({ header }) => {
   const dispatch = useAppDispatch();
 
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
-
-  const allTracksStore = useAppSelector((state) => state.tracks.allTracks);
-  const allTracksLocal = JSON.parse(localStorage.getItem('allTracks') || '[]');
-  const allTracks = allTracksLocal || allTracksStore;
+  const allTracks = useAppSelector((state) => state.tracks.allTracks);
 
   const [tracks, setTracks] = useState<SongType[]>(allTracks);
 
@@ -41,25 +42,17 @@ export const Main: FC<MainProps> = ({ header }) => {
   const bgColor = useAppSelector((state) => state.colorTheme.bgColor);
 
   useEffect(() => {
-    if (allTracksLocal?.length) {
-      dispatch(uploadAllTracks(allTracksLocal));
-      setTracks(allTracksLocal);
+    if (allTracks.length) {
+      setTracks(allTracks);
     } else {
       fetchTracks().then((data) => {
         setTracks(data);
-        localStorage.setItem(
-          'sortedArtistsArray',
-          JSON.stringify(getSortedArtistsArray(data)),
-        );
-        localStorage.setItem(
-          'sortedGenreArray',
-          JSON.stringify(getSortedGenreArray(data)),
-        );
-        localStorage.setItem(
-          'sortedYearsArray',
-          JSON.stringify(getSortedYearsArray(data)),
-        );
         dispatch(uploadAllTracks(data));
+        dispatch(
+          updateSortedArtists(getArtistsArray(getSortedByArtistsArray(data))),
+        );
+        /////////////////// жанры и года
+        // console.log(data);
       });
     }
   }, [dispatch]);

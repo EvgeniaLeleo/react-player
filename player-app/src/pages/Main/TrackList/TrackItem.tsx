@@ -6,7 +6,7 @@ import { FC, useCallback } from 'react';
 import { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 
-import { DivChangeColor } from '../../../components/changeColor/DivChangeColor/DivChangeColor';
+import { DivChangeColor } from '../../../components/changeColor/DivChangeColor';
 import { useAppDispatch, useAppSelector } from '../../../hook';
 import { changeCurrentSong } from '../../../store/trackSlice';
 import { SongType } from '../../../types';

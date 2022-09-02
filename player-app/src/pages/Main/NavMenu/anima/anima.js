@@ -1,8 +1,8 @@
-import React, { Component, createRef } from 'react';
-import songFile from './m.mp3';
+import React, { createRef, useEffect, useRef, useState } from "react";
+import songFile from "./m.mp3";
 
 // Changing Variables
-let ctx, x_end, y_end, bar_height;
+let x_end, y_end, bar_height;
 
 // constants
 const width = window.innerWidth;
@@ -13,25 +13,28 @@ const radius = 0;
 const center_x = width / 2;
 const center_y = height / 2;
 
-class Canvas extends Component {
-  constructor(props) {
-    super(props);
-    this.audio = new Audio(songFile);
-    this.canvas = createRef();
-  }
+const Canvas = (props, ref) => {
+  const audio = useRef(null);
+  const frequency_array = useRef();
+  const context = useRef(null);
+  const source = useRef(null);
+  const analyser = useRef(null);
+  const rafId = useRef(null);
+  const canvas = createRef();
+  const ctx = useRef();
 
-  animationLooper(canvas) {
+  const animationLooper = (canvas) => {
     canvas.width = width;
     canvas.height = height;
 
-    ctx = canvas.getContext('2d');
+    ctx.current = canvas.getContext("2d");
 
     for (var i = 0; i < bars; i++) {
       //divide a circle into equal part
       const rads = (Math.PI * 2) / bars;
 
       // Math is magical
-      bar_height = this.frequency_array[i] * 2;
+      bar_height = frequency_array.current[i] * 2;
 
       const x = center_x + Math.cos(rads * i) * radius;
       const y = center_y + Math.sin(rads * i) * radius;
@@ -39,17 +42,25 @@ class Canvas extends Component {
       y_end = center_y + Math.sin(rads * i) * (radius + bar_height);
 
       //draw a bar
-      this.drawBar(x, y, x_end, y_end, this.frequency_array[i], ctx, canvas);
+      drawBar(
+        x,
+        y,
+        x_end,
+        y_end,
+        frequency_array.current[i],
+        ctx.current,
+        canvas
+      );
     }
-  }
+  };
 
-  drawBar(x1 = 0, y1 = 0, x2 = 0, y2 = 0, frequency, ctx, canvas) {
+  function drawBar(x1 = 0, y1 = 0, x2 = 0, y2 = 0, frequency, ctx, canvas) {
     const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-    gradient.addColorStop(0, 'rgba(35, 7, 77, 1)');
-    gradient.addColorStop(1, 'rgba(204, 83, 51, 1)');
+    gradient.addColorStop(0, "rgba(35, 7, 77, 1)");
+    gradient.addColorStop(1, "rgba(204, 83, 51, 1)");
     ctx.fillStyle = gradient;
 
-    const lineColor = 'rgb(' + frequency + ', ' + frequency + ', ' + 205 + ')';
+    const lineColor = "rgb(" + frequency + ", " + frequency + ", " + 205 + ")";
     ctx.strokeStyle = lineColor;
     ctx.lineWidth = bar_width;
     ctx.beginPath();
@@ -58,54 +69,57 @@ class Canvas extends Component {
     ctx.stroke();
   }
 
-  componentDidMount() {
-    this.context = new (window.AudioContext || window.webkitAudioContext)();
-    this.source = this.context.createMediaElementSource(this.audio);
-    // /////
-    // this.mediaElement = document.getElementById('player');
-    // this.source = this.context.createMediaElementSource(this.mediaElement);
-    // /////
+  useEffect(() => {
+    context.current = new (window.AudioContext || window.webkitAudioContext)();
+    source.current = context.current.createMediaElementSource(audio.current);
+    analyser.current = context.current.createAnalyser();
+    source.current.connect(analyser.current);
+    analyser.current.connect(context.current.destination);
+    frequency_array.current = new Uint8Array(
+      analyser.current.frequencyBinCount
+    );
+  }, []);
 
-    this.analyser = this.context.createAnalyser();
-    this.source.connect(this.analyser);
-    this.analyser.connect(this.context.destination);
-    this.frequency_array = new Uint8Array(this.analyser.frequencyBinCount);
-    this.rafId = requestAnimationFrame(this.tick);
-  }
-
-  togglePlay = () => {
-    const { audio } = this;
-    if (audio.paused) {
-      audio.play();
-      this.rafId = requestAnimationFrame(this.tick);
+  const togglePlay = () => {
+    console.log(rafId.current);
+    if (audio.current.paused) {
+      audio.current.play();
+      rafId.current = requestAnimationFrame(tick);
     } else {
-      audio.pause();
-      cancelAnimationFrame(this.rafId);
+      audio.current.pause();
+      cancelAnimationFrame(rafId.current);
     }
   };
 
-  tick = () => {
-    this.animationLooper(this.canvas.current);
-    this.analyser.getByteTimeDomainData(this.frequency_array);
-    this.rafId = requestAnimationFrame(this.tick);
-  };
-
-  componentWillUnmount() {
-    cancelAnimationFrame(this.rafId);
-    this.analyser.disconnect();
-    this.source.disconnect();
+  function tick() {
+    console.log(width);
+    animationLooper(canvas.current);
+    analyser.current.getByteTimeDomainData(frequency_array.current);
+    rafId.current = requestAnimationFrame(tick);
   }
 
-  render() {
-    return (
-      <>
-        <button onClick={this.togglePlay} style={{ color: 'white' }}>
-          Play/Pause
-        </button>
-        <canvas ref={this.canvas} />
-      </>
-    );
-  }
-}
+  useEffect(() => {
+    return () => {
+      cancelAnimationFrame(rafId.current);
+      analyser.current.disconnect();
+      source.current.disconnect();
+    };
+  }, []);
+
+  return (
+    <>
+      <button onClick={togglePlay} style={{ color: "white" }}>
+        Play/Pause
+      </button>
+      <audio
+        onPlay={() => context.current.resume()}
+        autoPlay={false}
+        ref={audio}
+        src={songFile}
+      ></audio>
+      <canvas ref={canvas} />
+    </>
+  );
+};
 
 export default Canvas;

@@ -7,7 +7,7 @@ import { useAppSelector, useOnClickOutside } from '../../hook';
 import { extradarkToDark, extradarkToHover } from '../../utils/colorUtils';
 
 import './FilterButton.css';
-import { ButtonChangeColor } from '../changeColor/ButtonChangeColor/ButtonChangeColor';
+import { ButtonChangeColor } from '../changeColor/ButtonChangeColor';
 import { TFilterButtonName } from '../../types';
 
 const cnFilterButton = cn('FilterButton');
@@ -33,15 +33,11 @@ export const FilterButton: FC<FilterButtonProps> = ({
   const colorHover = extradarkToHover(decorativeColor);
   const colorDark = extradarkToDark(decorativeColor);
 
-  const localCheckedItemsArray: string[] = JSON.parse(
-    localStorage.getItem(`${buttonName}`) || '[]',
-  );
-
-  const storeCheckedItemsArray = useAppSelector(
+  const checkedItems = useAppSelector(
     (state) => state.checkedItems[`${buttonName}`],
   );
 
-  const checkedItems = localCheckedItemsArray || storeCheckedItemsArray;
+  // console.log('checkedItems', checkedItems);
 
   const ref = useRef(null);
   const [isPopupVisible, setIsPopupVisible] = useState(false);

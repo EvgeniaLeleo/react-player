@@ -40,3 +40,9 @@ export type TFilterButtonName =
   | 'checkedArtists'
   | 'checkedYears'
   | 'checkedGenres';
+
+export type TCheckedItems = {
+  checkedArtists: string[];
+  checkedYears: string[];
+  checkedGenres: string[];
+};

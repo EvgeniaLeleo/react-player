@@ -14,7 +14,7 @@ import {
   Typography,
 } from '@mui/material';
 
-import { SpanChangeColor } from '../../../components/changeColor/SpanChangeColor/SpanChangeColor';
+import { SpanChangeColor } from '../../../components/changeColor/SpanChangeColor';
 import { AlbumCover } from '../../../components/AlbumCover/AlbumCover';
 import { text, USER } from '../../../constants';
 import { useAppDispatch, useAppSelector } from '../../../hook';

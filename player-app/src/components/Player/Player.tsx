@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  createRef,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { FC } from 'react';
 import { cn } from '@bem-react/classname';
 import AudioPlayer, { RHAP_UI } from 'react-h5-audio-player';
@@ -24,7 +30,7 @@ import { extradarkToHover } from '../../utils/colorUtils';
 import {
   PlayerControlsWrapper,
   PlayerWrapper,
-} from '../changeColor/PlayerChangeColor/PlayerChangeColor';
+} from '../changeColor/PlayerChangeColor';
 import Canvas from '../../pages/Main/NavMenu/anima/anima';
 const cnPlayer = cn('Player');
 
@@ -66,13 +72,11 @@ export const Player: FC<PlayerProps> = ({ track }) => {
     setIsActive(!isActive);
   }, [isActive]);
 
-  // console.log('pl', audio);
-  // console.log(JSON.parse(localStorage.currentTrack).url);
+  const audioCtx: any = createRef();
 
   return (
     <PlayerWrapper progressсolor={progressColor} className={cnPlayer()}>
-      <Canvas></Canvas>
-
+      <Canvas ref={audioCtx.current?.audio?.current!}></Canvas>
       <AudioPlayer
         onClickNext={handleClickNext}
         onClickPrevious={handleClickPrevious}
@@ -81,6 +85,7 @@ export const Player: FC<PlayerProps> = ({ track }) => {
         // ref={nameField}
         defaultDuration={false}
         defaultCurrentTime={false}
+        ref={audioCtx}
         customIcons={{
           play: (
             <PlayArrow fontSize="large" className={cnPlayer('ControlsIcon')} />

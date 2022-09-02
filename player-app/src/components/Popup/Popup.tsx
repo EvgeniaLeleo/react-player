@@ -8,10 +8,12 @@ import {
   updateCheckedArtists,
   updateCheckedGenres,
   updateCheckedYears,
+  updateFilteredTracks,
 } from '../../store/checkedItemsSlice';
-import { TFilterButtonName } from '../../types';
+import { TCheckedItems, TFilterButtonName } from '../../types';
 
 import './Popup.css';
+import { getFinalItems } from '../../utils/getFinalItems';
 
 const cnPopup = cn('Popup');
 
@@ -27,42 +29,68 @@ export const Popup: FC<PopupProps> = ({ items, rows, buttonName }) => {
   const bgColor = useAppSelector((state) => state.colorTheme.bgColor);
   const bgColorLight = bgColorToBgColorLight(bgColor);
 
-  const localCheckedItems: {
-    checkedArtists: string[];
-    checkedYears: string[];
-    checkedGenres: string[];
-  } = {
-    checkedArtists: JSON.parse(localStorage.getItem('checkedArtists') || '[]'),
-    checkedYears: JSON.parse(localStorage.getItem('checkedYears') || '[]'),
-    checkedGenres: JSON.parse(localStorage.getItem('checkedGenres') || '[]'),
+  const filteredTracksStore = useAppSelector(
+    (state) => state.checkedItems.filteredTracks,
+  );
+  // console.log(filteredTracksStore);
+  const allTracksStore = useAppSelector((state) => state.tracks.allTracks);
+
+  // const allTracks = filteredTracksStore.length
+  //   ? filteredTracksStore
+  //   : allTracksStore;
+
+  const checkedItems = useAppSelector((state) => state.checkedItems);
+
+  // console.log('checkedItems', checkedItems);
+
+  const newFilter: TCheckedItems = {
+    checkedArtists: [],
+    checkedYears: [],
+    checkedGenres: [],
   };
 
+  newFilter[`${buttonName}`] = [...checkedItems[`${buttonName}`]];
+  // console.log('newFilter', newFilter);
+
   const isChecked = (item: string, buttonName: TFilterButtonName) => {
-    return localCheckedItems[`${buttonName}`].includes(item);
+    return newFilter[`${buttonName}`].includes(item);
   };
 
   const handleChange = (item: string, buttonName: TFilterButtonName) => {
-    localCheckedItems[`${buttonName}`].includes(item)
-      ? localCheckedItems[`${buttonName}`].splice(
-          localCheckedItems[`${buttonName}`].indexOf(item),
+    newFilter[`${buttonName}`] = [...checkedItems[`${buttonName}`]];
+
+    newFilter[`${buttonName}`].includes(item)
+      ? newFilter[`${buttonName}`].splice(
+          newFilter[`${buttonName}`].indexOf(item),
           1,
         )
-      : localCheckedItems[`${buttonName}`].push(item);
-
-    localStorage.setItem(
-      `${buttonName}`,
-      JSON.stringify(localCheckedItems[`${buttonName}`]),
-    );
+      : newFilter[`${buttonName}`].push(item);
 
     if (buttonName === 'checkedArtists') {
-      dispatch(updateCheckedArtists(localCheckedItems['checkedArtists']));
+      dispatch(updateCheckedArtists(newFilter['checkedArtists']));
     }
-    if (buttonName === 'checkedYears') {
-      dispatch(updateCheckedYears(localCheckedItems['checkedYears']));
-    }
-    if (buttonName === 'checkedGenres') {
-      dispatch(updateCheckedGenres(localCheckedItems['checkedGenres']));
-    }
+    // if (buttonName === 'checkedYears') {
+    //   dispatch(updateCheckedYears(newFilter['checkedYears']));
+    // }
+    // if (buttonName === 'checkedGenres') {
+    //   dispatch(updateCheckedGenres(newFilter['checkedGenres']));
+    // }
+
+    // console.log(
+    //   '--> getFinalItems()',
+    //   getFinalItems(checkedItems[`${buttonName}`]),
+    // );
+
+    // console.log('getFinalItems', newFilter[`${buttonName}`]);
+    // console.log(
+    //   'getFinalItems',
+    //   getFinalItems(allTracksStore, newFilter[`${buttonName}`]),
+    // );
+    dispatch(
+      updateFilteredTracks(
+        getFinalItems(allTracksStore, newFilter[`${buttonName}`]),
+      ),
+    );
 
     // console.log(localCheckedItems);
     // console.log(localStorage);

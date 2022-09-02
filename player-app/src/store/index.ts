@@ -3,6 +3,7 @@ import colorThemeReducer from './colorThemeSlice';
 import languageReducer from './languageSlice';
 import trackReducer from './trackSlice';
 import checkedItemsReducer from './checkedItemsSlice';
+import sortedArraysReducer from './sortedArraysSlice';
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     language: languageReducer,
     tracks: trackReducer,
     checkedItems: checkedItemsReducer,
+    sortedArrays: sortedArraysReducer,
   },
 });
 

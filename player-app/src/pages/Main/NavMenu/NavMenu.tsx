@@ -13,7 +13,7 @@ import {
   DEFAULT_LANG,
   text,
 } from '../../../constants';
-import { SpanChangeColor } from '../../../components/changeColor/SpanChangeColor/SpanChangeColor';
+import { SpanChangeColor } from '../../../components/changeColor/SpanChangeColor';
 import { useAppDispatch, useAppSelector } from '../../../hook';
 import {
   bgColorToBgColorLight,
