@@ -150,6 +150,9 @@ export const TrackItem: FC<TrackItemProps> = ({
         ></img>
 
         <span className={cnTrackItem('Name')}>{track.title}</span>
+        {/* <span className={cnTrackItem('Author')}>{track.genre}</span> */}
+        {/* <span className={cnTrackItem('Author')}>{track.year}</span> */}
+        {/*  */}
         <span className={cnTrackItem('Author')}>{track.artist}</span>
         <span
           className={cnTrackItem('Album')}

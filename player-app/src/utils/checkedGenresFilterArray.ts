@@ -4,14 +4,13 @@
 
 import { SongType } from '../types';
 
-export const checkedGenresFilterArray: (data: SongType[]) => SongType[] = (
-  data,
-) => {
+export const checkedGenresFilterArray: (
+  checkedItems: string[],
+  data: SongType[],
+) => SongType[] = (checkedItems, data) => {
   const checkedGenresFilteredData: SongType[] = [];
 
-  const checkedGenresLocal = JSON.parse(localStorage['checkedGenres'] || '[]');
-
-  checkedGenresLocal.forEach((genre: string) =>
+  checkedItems.forEach((genre: string) =>
     data.forEach((item) => {
       if (item.genre === genre) {
         checkedGenresFilteredData.push(item);

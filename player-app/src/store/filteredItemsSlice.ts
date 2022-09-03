@@ -5,6 +5,7 @@ type TCheckedItems = {
   checkedArtists: string[];
   checkedYears: string[];
   checkedGenres: string[];
+  searchedTracks: SongType[];
   filteredTracks: SongType[];
 };
 
@@ -12,11 +13,12 @@ const initialState: TCheckedItems = {
   checkedArtists: [],
   checkedYears: [],
   checkedGenres: [],
+  searchedTracks: [],
   filteredTracks: [],
 };
 
-const checkedItemsSlice = createSlice({
-  name: 'checkedItems',
+const filteredItemsSlice = createSlice({
+  name: 'filteredItems',
   initialState,
   reducers: {
     updateCheckedArtists(state, action: PayloadAction<string[]>) {
@@ -28,6 +30,9 @@ const checkedItemsSlice = createSlice({
     updateCheckedGenres(state, action: PayloadAction<string[]>) {
       state.checkedGenres = action.payload;
     },
+    updateSearchedTracks(state, action: PayloadAction<SongType[]>) {
+      state.searchedTracks = action.payload;
+    },
     updateFilteredTracks(state, action: PayloadAction<SongType[]>) {
       state.filteredTracks = action.payload;
     },
@@ -38,7 +43,8 @@ export const {
   updateCheckedArtists,
   updateCheckedYears,
   updateCheckedGenres,
+  updateSearchedTracks,
   updateFilteredTracks,
-} = checkedItemsSlice.actions;
+} = filteredItemsSlice.actions;
 
-export default checkedItemsSlice.reducer;
+export default filteredItemsSlice.reducer;

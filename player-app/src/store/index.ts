@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import colorThemeReducer from './colorThemeSlice';
 import languageReducer from './languageSlice';
 import trackReducer from './trackSlice';
-import checkedItemsReducer from './checkedItemsSlice';
+import filteredItemsReducer from './filteredItemsSlice';
 import sortedArraysReducer from './sortedArraysSlice';
 
 const store = configureStore({
@@ -10,7 +10,7 @@ const store = configureStore({
     colorTheme: colorThemeReducer,
     language: languageReducer,
     tracks: trackReducer,
-    checkedItems: checkedItemsReducer,
+    filteredItems: filteredItemsReducer,
     sortedArrays: sortedArraysReducer,
   },
 });

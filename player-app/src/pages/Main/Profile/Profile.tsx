@@ -15,7 +15,7 @@ import {
   BGCOLOR,
   COLOR,
   COLOR_EXTRADARK,
-  text,
+  TEXT,
   USER,
 } from '../../../constants';
 import {
@@ -105,7 +105,7 @@ export const Profile: FC = () => {
         marginBottom={6}
         style={{ color: textColor }}
       >
-        {text.menu.profile[lang]}
+        {TEXT.menu.profile[lang]}
       </Typography>
 
       <div className={cnProfile('Data')} style={{ color: textColor }}>
@@ -113,24 +113,24 @@ export const Profile: FC = () => {
           className={cnProfile('Header')}
           style={{ color: textColorSecondary }}
         >
-          {text.profile.userData[lang]}
+          {TEXT.profile.userData[lang]}
         </h4>
         <div className={cnProfile('UserData')}>
-          {text.profile.userName[lang]} {USER.name}
+          {TEXT.profile.userName[lang]} {USER.name}
         </div>
         <div className={cnProfile('UserData')}>
-          {text.profile.login[lang]} {USER.login}
+          {TEXT.profile.login[lang]} {USER.login}
         </div>
 
         <h4
           className={cnProfile('Header')}
           style={{ color: textColorSecondary }}
         >
-          {text.profile.custom[lang]}
+          {TEXT.profile.custom[lang]}
         </h4>
         <div className={cnProfile('Custom')}>
           <div className={cnProfile('CustomBgColor')}>
-            <div>{text.profile.bgcolor[lang]}</div>
+            <div>{TEXT.profile.bgcolor[lang]}</div>
             <input
               className={cnProfile('InputBgColor')}
               type="color"
@@ -139,7 +139,7 @@ export const Profile: FC = () => {
             ></input>
           </div>
           <div className={cnProfile('CustomTextColor')}>
-            <div>{text.profile.textColor[lang]}</div>
+            <div>{TEXT.profile.textColor[lang]}</div>
             <input
               className={cnProfile('InputTextColor')}
               type="color"
@@ -148,7 +148,7 @@ export const Profile: FC = () => {
             ></input>
           </div>
           <div className={cnProfile('CustomDecorativeColor')}>
-            <div>{text.profile.designColor[lang]}</div>
+            <div>{TEXT.profile.designColor[lang]}</div>
             <input
               className={cnProfile('InputDecorativeColor')}
               type="color"
@@ -174,7 +174,7 @@ export const Profile: FC = () => {
             }}
             onClick={handleResetSettings}
           >
-            {text.profile.buttonText[lang]}
+            {TEXT.profile.buttonText[lang]}
           </MUIButton>
           <FormControl
             variant="standard"
@@ -189,7 +189,7 @@ export const Profile: FC = () => {
                 fontFamily: 'inherit',
               }}
             >
-              {text.profile.language[lang]}
+              {TEXT.profile.language[lang]}
             </InputLabel>
             <Select
               labelId="demo-simple-select-standard-label"

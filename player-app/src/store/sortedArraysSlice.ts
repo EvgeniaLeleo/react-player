@@ -19,10 +19,16 @@ const sortedArraysSlice = createSlice({
     updateSortedArtists(state, action: PayloadAction<string[]>) {
       state.artists = action.payload;
     },
-    // еще года и жанры
+    updateSortedYears(state, action: PayloadAction<string[]>) {
+      state.years = action.payload;
+    },
+    updateSortedGenres(state, action: PayloadAction<string[]>) {
+      state.genres = action.payload;
+    },
   },
 });
 
-export const { updateSortedArtists } = sortedArraysSlice.actions;
+export const { updateSortedArtists, updateSortedYears, updateSortedGenres } =
+  sortedArraysSlice.actions;
 
 export default sortedArraysSlice.reducer;

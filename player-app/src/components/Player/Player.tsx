@@ -31,7 +31,7 @@ import {
   PlayerControlsWrapper,
   PlayerWrapper,
 } from '../changeColor/PlayerChangeColor';
-import Canvas from '../../pages/Main/NavMenu/anima/anima';
+// import Canvas from '../../pages/Main/NavMenu/anima/anima';
 const cnPlayer = cn('Player');
 
 export type PlayerProps = {
@@ -76,7 +76,7 @@ export const Player: FC<PlayerProps> = ({ track }) => {
 
   return (
     <PlayerWrapper progressсolor={progressColor} className={cnPlayer()}>
-      <Canvas ref={audioCtx.current?.audio?.current!}></Canvas>
+      {/* <Canvas ref={audioCtx.current?.audio?.current!}></Canvas> */}
       <AudioPlayer
         onClickNext={handleClickNext}
         onClickPrevious={handleClickPrevious}

@@ -16,7 +16,7 @@ import {
 
 import { SpanChangeColor } from '../../../components/changeColor/SpanChangeColor';
 import { AlbumCover } from '../../../components/AlbumCover/AlbumCover';
-import { text, USER } from '../../../constants';
+import { TEXT, USER } from '../../../constants';
 import { useAppDispatch, useAppSelector } from '../../../hook';
 
 import './Sidebar.css';
@@ -128,10 +128,10 @@ export const Sidebar: FC<SidebarProps> = ({
       >
         {/* <canvas id="myCanvas" width="1200" height="250"></canvas> */}
         <NavLink to={'/dayplaylist'}>
-          <AlbumCover text={text.albums.dayplaylist[lang]}></AlbumCover>
+          <AlbumCover text={TEXT.albums.dayplaylist[lang]}></AlbumCover>
         </NavLink>
         <NavLink to={'/hits'}>
-          <AlbumCover text={text.albums.hits[lang]}></AlbumCover>
+          <AlbumCover text={TEXT.albums.hits[lang]}></AlbumCover>
         </NavLink>
         {/* <NavLink to={'/indie'}>
           <CardMedia

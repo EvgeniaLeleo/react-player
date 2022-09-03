@@ -10,7 +10,6 @@ type TTrackState = {
 
 const initialState: TTrackState = {
   currentTrack: JSON.parse(localStorage.getItem('currentTrack')!) || {},
-  // allTracks: JSON.parse(localStorage.getItem('allTracks') || '[]'),
   allTracks: [],
   movedTracks: [],
   autoplay: false,
@@ -27,11 +26,9 @@ const trackSlice = createSlice({
     },
     uploadAllTracks(state, action: PayloadAction<SongType[]>) {
       state.allTracks = action.payload;
-      // localStorage.setItem('allTracks', JSON.stringify(action.payload));
     },
     uploadMovedTracks(state, action: PayloadAction<SongType[]>) {
       state.movedTracks = action.payload;
-      // localStorage.setItem('allTracks', JSON.stringify(action.payload));
     },
     switchToNextTrack(state, action: PayloadAction<SongType[]>) {
       state.autoplay = true;

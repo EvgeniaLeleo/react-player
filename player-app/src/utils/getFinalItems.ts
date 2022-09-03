@@ -2,44 +2,45 @@
  * Генерация окончательного массива, соответствующего всем и фильтрам
  */
 
-import { SongType } from '../types';
+import { EMPTY_RESULTS } from '../constants';
+import { SongType, TCheckedItems } from '../types';
 import { checkedArtistsFilterArray } from './checkedArtistsFilterArray';
 import { checkedGenresFilterArray } from './checkedGenresFilterArray';
 import { checkedYearsFilterArray } from './checkedYearsFilterArray';
 import { commonItems } from './commonItems';
 
-// ///////поправить года и жанры
-
 export const getFinalItems: (
   allTracks: SongType[],
-  checkedItems: string[],
-) => SongType[] = (allTracks, checkedItems) => {
-  // const allTracks = JSON.parse(localStorage.getItem('allTracks') || '[]');
-  // console.log('--> checkedItems', checkedItems);
+  checkedItemsObj: TCheckedItems,
+  searchedItems: SongType[],
+) => SongType[] = (allTracks, checkedItemsObj, searchedItems) => {
+  // console.log('--> checkedItems', checkedItemsObj);
   // console.log('--> allTracks', allTracks);
 
-  const checkedArtistsArray = checkedArtistsFilterArray(checkedItems, allTracks)
-    .length
-    ? checkedArtistsFilterArray(checkedItems, allTracks)
+  const checkedArtistsArray = checkedItemsObj.checkedArtists.length
+    ? checkedArtistsFilterArray(checkedItemsObj.checkedArtists, allTracks)
     : allTracks;
   // console.log('--> checkedArtistsArray', checkedArtistsArray);
-  const checkedYearsArray = checkedYearsFilterArray(allTracks).length
-    ? checkedYearsFilterArray(allTracks)
+
+  const checkedYearsArray = checkedItemsObj.checkedYears.length
+    ? checkedYearsFilterArray(checkedItemsObj.checkedYears, allTracks)
     : allTracks;
   // console.log('--> checkedYearsArray', checkedYearsArray);
-  const checkedGenresArray = checkedGenresFilterArray(allTracks).length
-    ? checkedGenresFilterArray(allTracks)
+
+  const checkedGenresArray = checkedItemsObj.checkedGenres.length
+    ? checkedGenresFilterArray(checkedItemsObj.checkedGenres, allTracks)
     : allTracks;
   // console.log('--> checkedGenresArray', checkedGenresArray);
 
   const commonArtistsYearsGenres = commonItems(
-    commonItems(
-      commonItems(checkedArtistsArray, checkedYearsArray),
-      checkedGenresArray,
-    ),
-    allTracks,
+    commonItems(checkedArtistsArray, checkedYearsArray),
+    checkedGenresArray,
   );
   // console.log('--> commonArtistsYearsGenres', commonArtistsYearsGenres);
+  // console.log('--> searchedItems', searchedItems);
 
-  return commonArtistsYearsGenres;
+  const finalItems = commonItems(commonArtistsYearsGenres, searchedItems);
+  // console.log('--> finalItems', finalItems);
+
+  return finalItems.length ? finalItems : EMPTY_RESULTS;
 };

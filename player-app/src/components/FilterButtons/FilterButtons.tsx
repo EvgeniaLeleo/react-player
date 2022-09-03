@@ -1,50 +1,44 @@
 import { cn } from '@bem-react/classname';
 import { Box } from '@mui/material';
 import { FC } from 'react';
-import { FilterButton } from '../../../components/FilterButton/FilterButton';
-import { text } from '../../../constants';
-import { useAppSelector } from '../../../hook';
-import { TLanguages } from '../../../types';
+import { FilterButton } from '../FilterButton/FilterButton';
+import { TEXT } from '../../constants';
+import { useAppSelector } from '../../hook';
+import { TLanguages } from '../../types';
 
 import './FilterButtons.css';
 
 const cnFilterButtons = cn('FilterButtons');
 
-////// исправить года и жанры
-
 type FilterButtonsProps = { lang: TLanguages; textColor: string };
 
 export const FilterButtons: FC<FilterButtonsProps> = ({ lang, textColor }) => {
   const checkedArtists = useAppSelector((state) => state.sortedArrays.artists);
+  const checkedYears = useAppSelector((state) => state.sortedArrays.years);
+  const checkedGenres = useAppSelector((state) => state.sortedArrays.genres);
 
   return (
     <Box className={cnFilterButtons('Filters')} style={{ color: textColor }}>
       <span className={cnFilterButtons('Filters-Text')}>
-        {text.search.searchBy[lang]}
+        {TEXT.search.searchBy[lang]}
       </span>
       <FilterButton
         buttonName="checkedArtists"
-        buttonText={text.search.artist[lang]}
+        buttonText={TEXT.search.artist[lang]}
         rows={3}
         checkItems={checkedArtists}
       ></FilterButton>
       <FilterButton
         buttonName="checkedYears"
-        buttonText={text.search.release[lang]}
-        rows={2}
-        // checkItems={JSON.parse(
-        //   localStorage.getItem('sortedYearsArray') || '[]',
-        // )}
-        checkItems={[]}
+        buttonText={TEXT.search.release[lang]}
+        rows={3}
+        checkItems={checkedYears}
       ></FilterButton>
       <FilterButton
         buttonName="checkedGenres"
-        buttonText={text.search.genre[lang]}
-        rows={1}
-        // checkItems={JSON.parse(
-        //   localStorage.getItem('sortedGenreArray') || '[]',
-        // )}
-        checkItems={[]}
+        buttonText={TEXT.search.genre[lang]}
+        rows={2}
+        checkItems={checkedGenres}
       ></FilterButton>
     </Box>
   );

@@ -31,7 +31,7 @@ export const theme = createTheme({
 
 export const DEFAULT_LANG = 'ru';
 
-export const text = {
+export const TEXT = {
   menu: {
     homepage: { ru: 'Главная', en: 'Homepage', bel: 'Галоўны' },
     mytracks: { ru: 'Мои треки', en: 'My tracks', bel: 'Мае трэкі' },
@@ -42,7 +42,11 @@ export const text = {
     }, //Асабісты кабінет
     logout: { ru: 'Выйти', en: 'Logout', bel: 'Выйсці' },
   },
-  searchInput: { ru: 'Поиск', en: 'Search', bel: 'Пошук' },
+  searchInput: {
+    ru: 'Поиск по исполнителю / названию песни',
+    en: 'Search by artist or song title',
+    bel: 'Пошук па артысту або назве песні',
+  },
   header: { tracks: { ru: 'Треки', en: 'Tracks', bel: 'Трэк' } },
   albums: {
     dayplaylist: {
@@ -57,7 +61,8 @@ export const text = {
     },
   },
   search: {
-    searchBy: { ru: 'Искать по:', en: 'Search by', bel: 'Шукаць па:' },
+    // searchBy: { ru: 'Искать по:', en: 'Search by', bel: 'Шукаць па:' },
+    searchBy: { ru: 'Фильтр по:', en: 'Filter by:', bel: 'Фільтр па:' },
     artist: { ru: 'исполнителю', en: 'artist', bel: 'выканаўца' },
     release: { ru: 'году выпуска', en: 'release date', bel: 'годзе выпуску' },
     genre: { ru: 'жанру', en: 'genre', bel: 'жанр' },
@@ -94,78 +99,92 @@ export const text = {
     },
     language: { ru: 'Язык', en: 'Language', bel: 'Мова' },
   },
+  empty_results: {
+    ru: 'Извините, Ваш запрос не дал результатов',
+    en: 'Sorry, nothing was found',
+    bel: 'Выбачайце, нічога не знайшлося',
+  },
 };
+
+export const EMPTY_ARTIST = 'sorry_empty_artist';
+
+export const EMPTY_RESULTS = [
+  {
+    _id: 'empty_results',
+    artist: EMPTY_ARTIST,
+  },
+];
 
 ////////////////////////// TEMP ///////////////////
 
-export const tempList = [
-  {
-    _id: '630b66201fbf6ac07322c952',
-    album: 'Highway 61 Revisited',
-    artist: 'Bob Dylan',
-    img: 'https://i.scdn.co/image/ab67616d0000b27341720ef0ae31e10d39e43ca2',
-    rank: 1,
-    title: 'Like a Rolling Stone',
-    url: 'https://drive.google.com/uc?id=1JBVMklPFvwJldKEA8O8SipDuVX6wxIWO\u0026export=download',
-    urlPlay:
-      'https://docs.google.com/uc?export=open\u0026id=1JBVMklPFvwJldKEA8O8SipDuVX6wxIWO',
-    year: '1965',
-    duration: '6:10',
-  },
-  {
-    _id: '630b66871fbf6ac07323f99e',
-    album: 'Out of Our Heads',
-    artist: 'The Rolling Stones',
-    img: 'https://i.scdn.co/image/ab67616d0000b27305c5be85b64eaff732f7cb0b',
-    rank: 2,
-    title: "(I Can't Get No) Satisfaction",
-    url: 'https://drive.google.com/uc?id=1M5QfxXmrf29-uLR590PpLJrfwxy5dxmN\u0026export=download',
-    urlPlay:
-      'https://docs.google.com/uc?export=open\u0026id=1M5QfxXmrf29-uLR590PpLJrfwxy5dxmN',
-    year: '1965',
-    duration: '3:44',
-  },
-  {
-    _id: '630b66b31fbf6ac0732484c5',
-    album: 'Imagine',
-    artist: 'John Lennon',
-    img: 'https://i.scdn.co/image/ab67616d0000b27399581550ef9746ca582bb3cc',
-    rank: 3,
-    title: 'Imagine',
-    url: 'https://drive.google.com/uc?id=1KGRAk5rV5-fwz2xJo6LTanRIfnh3oeSl\u0026export=download',
-    urlPlay:
-      'https://docs.google.com/uc?export=open\u0026id=1KGRAk5rV5-fwz2xJo6LTanRIfnh3oeSl',
-    year: '1971',
-    duration: '3:03',
-    genre: 'indie',
-  },
-  {
-    _id: '630b66de1fbf6ac07324fae8',
-    album: "What's Going On",
-    artist: 'Marvin Gaye',
-    img: 'https://i.scdn.co/image/ab67616d0000b273b36949bee43217351961ffbc',
-    rank: 4,
-    title: "What's Going On",
-    url: 'https://drive.google.com/uc?id=1ubmf-JxEZcKmMUtAj5dUtY75RXBM27J6\u0026export=download',
-    urlPlay:
-      'https://docs.google.com/uc?export=open\u0026id=1ubmf-JxEZcKmMUtAj5dUtY75RXBM27J6',
-    year: '1971',
-    duration: '3:58',
-  },
-  {
-    _id: '630b66f21fbf6ac073253d0d',
-    album: 'I Never Loved a Man the Way I Love You',
-    artist: 'Aretha Franklin',
-    img: 'https://i.scdn.co/image/ab67616d0000b2736aa9314b7ddfbd8f036ba3ac',
-    rank: 5,
-    title: 'Respect',
-    url: 'https://drive.google.com/uc?id=1w4Z0bUFP7xp7lAgCKMjUc0KODscQprq5\u0026export=download',
-    urlPlay:
-      'https://docs.google.com/uc?export=open\u0026id=1w4Z0bUFP7xp7lAgCKMjUc0KODscQprq5',
-    year: '1967',
-    duration: '2:29',
-  },
-];
+// export const tempList = [
+//   {
+//     _id: '630b66201fbf6ac07322c952',
+//     album: 'Highway 61 Revisited',
+//     artist: 'Bob Dylan',
+//     img: 'https://i.scdn.co/image/ab67616d0000b27341720ef0ae31e10d39e43ca2',
+//     rank: 1,
+//     title: 'Like a Rolling Stone',
+//     url: 'https://drive.google.com/uc?id=1JBVMklPFvwJldKEA8O8SipDuVX6wxIWO\u0026export=download',
+//     urlPlay:
+//       'https://docs.google.com/uc?export=open\u0026id=1JBVMklPFvwJldKEA8O8SipDuVX6wxIWO',
+//     year: '1965',
+//     duration: '6:10',
+//   },
+//   {
+//     _id: '630b66871fbf6ac07323f99e',
+//     album: 'Out of Our Heads',
+//     artist: 'The Rolling Stones',
+//     img: 'https://i.scdn.co/image/ab67616d0000b27305c5be85b64eaff732f7cb0b',
+//     rank: 2,
+//     title: "(I Can't Get No) Satisfaction",
+//     url: 'https://drive.google.com/uc?id=1M5QfxXmrf29-uLR590PpLJrfwxy5dxmN\u0026export=download',
+//     urlPlay:
+//       'https://docs.google.com/uc?export=open\u0026id=1M5QfxXmrf29-uLR590PpLJrfwxy5dxmN',
+//     year: '1965',
+//     duration: '3:44',
+//   },
+//   {
+//     _id: '630b66b31fbf6ac0732484c5',
+//     album: 'Imagine',
+//     artist: 'John Lennon',
+//     img: 'https://i.scdn.co/image/ab67616d0000b27399581550ef9746ca582bb3cc',
+//     rank: 3,
+//     title: 'Imagine',
+//     url: 'https://drive.google.com/uc?id=1KGRAk5rV5-fwz2xJo6LTanRIfnh3oeSl\u0026export=download',
+//     urlPlay:
+//       'https://docs.google.com/uc?export=open\u0026id=1KGRAk5rV5-fwz2xJo6LTanRIfnh3oeSl',
+//     year: '1971',
+//     duration: '3:03',
+//     genre: 'indie',
+//   },
+//   {
+//     _id: '630b66de1fbf6ac07324fae8',
+//     album: "What's Going On",
+//     artist: 'Marvin Gaye',
+//     img: 'https://i.scdn.co/image/ab67616d0000b273b36949bee43217351961ffbc',
+//     rank: 4,
+//     title: "What's Going On",
+//     url: 'https://drive.google.com/uc?id=1ubmf-JxEZcKmMUtAj5dUtY75RXBM27J6\u0026export=download',
+//     urlPlay:
+//       'https://docs.google.com/uc?export=open\u0026id=1ubmf-JxEZcKmMUtAj5dUtY75RXBM27J6',
+//     year: '1971',
+//     duration: '3:58',
+//   },
+//   {
+//     _id: '630b66f21fbf6ac073253d0d',
+//     album: 'I Never Loved a Man the Way I Love You',
+//     artist: 'Aretha Franklin',
+//     img: 'https://i.scdn.co/image/ab67616d0000b2736aa9314b7ddfbd8f036ba3ac',
+//     rank: 5,
+//     title: 'Respect',
+//     url: 'https://drive.google.com/uc?id=1w4Z0bUFP7xp7lAgCKMjUc0KODscQprq5\u0026export=download',
+//     urlPlay:
+//       'https://docs.google.com/uc?export=open\u0026id=1w4Z0bUFP7xp7lAgCKMjUc0KODscQprq5',
+//     year: '1967',
+//     duration: '2:29',
+//   },
+// ];
 
 export const USER = { name: 'Evgenia Leleo', login: 'Leleo', avatar: '' };
 

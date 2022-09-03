@@ -7,7 +7,7 @@ import { SongType } from '../types';
 export const checkedArtistsFilterArray: (
   checkedItems: string[],
   data: SongType[],
-) => any = (checkedItems, data) => {
+) => SongType[] = (checkedItems, data) => {
   const checkedArtistsFilteredData: SongType[] = [];
 
   checkedItems.forEach((artist: string) =>

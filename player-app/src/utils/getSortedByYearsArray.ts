@@ -10,6 +10,5 @@ export const getSortedByYearsArray: (tracks: SongType[]) => SongType[] = (
   let sortedArray = [...tracks];
 
   sortedArray.sort((a, b) => Number(a.year) - Number(b.year));
-  console.log(sortedArray);
   return sortedArray;
 };

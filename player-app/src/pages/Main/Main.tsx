@@ -7,7 +7,7 @@ import { NavMenu } from './NavMenu/NavMenu';
 import { Sidebar } from './SIdebar/Sidebar';
 import { Centerblock } from './Centerblock/Centerblock';
 import { Player } from '../../components/Player/Player';
-import { text } from '../../constants';
+import { TEXT } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../hook';
 import { SongType } from '../../types';
 import { fetchTracks } from '../../fetchers/fetchTracks';
@@ -18,7 +18,11 @@ import { getSortedByYearsArray } from '../../utils/getSortedByYearsArray';
 import { getArtistsArray } from '../../utils/getArtistsArray';
 import { getGenresArray } from '../../utils/getGenresArray';
 import { getYearsArray } from '../../utils/getYearsArray';
-import { updateSortedArtists } from '../../store/sortedArraysSlice';
+import {
+  updateSortedArtists,
+  updateSortedGenres,
+  updateSortedYears,
+} from '../../store/sortedArraysSlice';
 
 const cnMain = cn('Main');
 
@@ -51,11 +55,13 @@ export const Main: FC<MainProps> = ({ header }) => {
         dispatch(
           updateSortedArtists(getArtistsArray(getSortedByArtistsArray(data))),
         );
-        /////////////////// жанры и года
-        // console.log(data);
+        dispatch(updateSortedYears(getYearsArray(getSortedByYearsArray(data))));
+        dispatch(
+          updateSortedGenres(getGenresArray(getSortedByGenresArray(data))),
+        );
       });
     }
-  }, [dispatch]);
+  }, [allTracks, dispatch]);
 
   return (
     <Wrapper style={{ backgroundColor: bgColor }}>
@@ -71,8 +77,8 @@ export const Main: FC<MainProps> = ({ header }) => {
         <NavMenu />
         <Centerblock tracks={tracks} header={header}></Centerblock>
         <Sidebar
-          isVisible={header === text.header.tracks[lang]}
-          isUserVisible={header !== text.menu.profile[lang]}
+          isVisible={header === TEXT.header.tracks[lang]}
+          isUserVisible={header !== TEXT.menu.profile[lang]}
         ></Sidebar>
       </Box>
       <Player track={currentTrack}></Player>

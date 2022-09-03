@@ -11,7 +11,7 @@ import {
   COLOR,
   COLOR_EXTRADARK,
   DEFAULT_LANG,
-  text,
+  TEXT,
 } from '../../../constants';
 import { SpanChangeColor } from '../../../components/changeColor/SpanChangeColor';
 import { useAppDispatch, useAppSelector } from '../../../hook';
@@ -28,6 +28,12 @@ import {
   changeTextColor,
 } from '../../../store/colorThemeSlice';
 import { changeLanguage } from '../../../store/languageSlice';
+import {
+  updateCheckedArtists,
+  updateCheckedYears,
+  updateCheckedGenres,
+  updateFilteredTracks,
+} from '../../../store/filteredItemsSlice';
 
 const cnNavMenu = cn('NavMenu');
 
@@ -62,6 +68,11 @@ export const NavMenu: FC<{}> = () => {
     dispatch(changeBgColor(BGCOLOR));
     dispatch(changeDecorativeColor(COLOR_EXTRADARK));
     dispatch(changeLanguage(DEFAULT_LANG));
+
+    dispatch(updateCheckedArtists([]));
+    dispatch(updateCheckedYears([]));
+    dispatch(updateCheckedGenres([]));
+    dispatch(updateFilteredTracks([]));
   };
 
   return (
@@ -92,7 +103,7 @@ export const NavMenu: FC<{}> = () => {
               to="/main"
             >
               <SpanChangeColor colorHover={colorHover} colorActive={colorDark}>
-                {text.menu.homepage[lang]}
+                {TEXT.menu.homepage[lang]}
               </SpanChangeColor>
             </NavLink>
           </li>
@@ -103,7 +114,7 @@ export const NavMenu: FC<{}> = () => {
               to="/mytracks"
             >
               <SpanChangeColor colorHover={colorHover} colorActive={colorDark}>
-                {text.menu.mytracks[lang]}
+                {TEXT.menu.mytracks[lang]}
               </SpanChangeColor>
             </NavLink>
           </li>
@@ -114,7 +125,7 @@ export const NavMenu: FC<{}> = () => {
               to={'/profile'}
             >
               <SpanChangeColor colorHover={colorHover} colorActive={colorDark}>
-                {text.menu.profile[lang]}
+                {TEXT.menu.profile[lang]}
               </SpanChangeColor>
             </NavLink>
           </li>
@@ -129,7 +140,7 @@ export const NavMenu: FC<{}> = () => {
                 colorActive={colorDark}
                 onClick={handleLogOut}
               >
-                {text.menu.logout[lang]}
+                {TEXT.menu.logout[lang]}
               </SpanChangeColor>
             </NavLink>
           </li>
