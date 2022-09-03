@@ -22,7 +22,7 @@ import {
   updateSortedArtists,
   updateSortedGenres,
   updateSortedYears,
-} from '../../store/sortedArraysSlice';
+} from '../../store/sortingSettingsSlice';
 
 const cnMain = cn('Main');
 

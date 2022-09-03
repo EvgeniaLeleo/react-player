@@ -31,8 +31,8 @@ import {
   updateFilteredTracks,
   updateSearchedTracks,
 } from '../../../store/filteredItemsSlice';
-import { commonItems } from '../../../utils/commonItems';
 import { getFinalItems } from '../../../utils/getFinalItems';
+import { updateSearchQuery } from '../../../store/sortingSettingsSlice';
 
 const cnCenterblock = cn('Centerblock');
 const cnContent = cn('Content');
@@ -49,34 +49,32 @@ export const Centerblock: FC<PlayerProps> = ({ header, tracks }) => {
   const textColor = useAppSelector((state) => state.colorTheme.textColor);
   const skeletonColor = lightenDarkenColor(textColor, -10);
   const textColorSecondary = colorToSecondary(textColor);
-
-  const array = new Array(10).fill(0);
-
-  const filteredTracksStore = useAppSelector(
-    (state) => state.filteredItems.filteredTracks,
-  );
+  const order = useAppSelector((state) => state.sortingSettings.order);
 
   const allTracksStore = useAppSelector((state) => state.tracks.allTracks);
   const checkedItems = useAppSelector((state) => state.filteredItems);
 
-  const allTracks = filteredTracksStore.length
-    ? filteredTracksStore
-    : allTracksStore;
+  const array = new Array(10).fill(0);
+  // const allTracks = filteredTracksStore.length
+  //   ? filteredTracksStore
+  //   : allTracksStore;
 
   const handleSearch = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    const searchedTracks = getSearchQueryArray(
+    const searchedItems = getSearchQueryArray(
       e.currentTarget.value,
       allTracksStore,
     );
 
-    dispatch(updateSearchedTracks(searchedTracks));
+    dispatch(updateSearchQuery(e.currentTarget.value));
+    dispatch(updateSearchedTracks(searchedItems));
 
     const finalItems = getFinalItems(
       allTracksStore,
       checkedItems,
-      searchedTracks,
+      searchedItems,
+      order,
     );
 
     // console.log('--> searchedTracks', searchedTracks);

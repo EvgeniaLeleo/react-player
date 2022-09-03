@@ -41,8 +41,8 @@ export const Popup: FC<PopupProps> = ({ items, rows, buttonName }) => {
   // console.log('--> filteredTracksStore', filteredTracksStore);
 
   const allTracksStore = useAppSelector((state) => state.tracks.allTracks);
-
   const checkedItems = useAppSelector((state) => state.filteredItems);
+  const order = useAppSelector((state) => state.sortingSettings.order);
 
   // console.log('--> checkedItems', checkedItems);
 
@@ -92,6 +92,7 @@ export const Popup: FC<PopupProps> = ({ items, rows, buttonName }) => {
       allTracksStore,
       newFilter,
       searchedItemsCurrent,
+      order,
     );
 
     dispatch(updateFilteredTracks(finalFilteredTracks));

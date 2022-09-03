@@ -3,7 +3,7 @@ import colorThemeReducer from './colorThemeSlice';
 import languageReducer from './languageSlice';
 import trackReducer from './trackSlice';
 import filteredItemsReducer from './filteredItemsSlice';
-import sortedArraysReducer from './sortedArraysSlice';
+import sortingSettingsReducer from './sortingSettingsSlice';
 
 const store = configureStore({
   reducer: {
@@ -11,7 +11,7 @@ const store = configureStore({
     language: languageReducer,
     tracks: trackReducer,
     filteredItems: filteredItemsReducer,
-    sortedArrays: sortedArraysReducer,
+    sortingSettings: sortingSettingsReducer,
   },
 });
 

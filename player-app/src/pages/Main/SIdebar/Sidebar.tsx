@@ -18,8 +18,6 @@ import { SpanChangeColor } from '../../../components/changeColor/SpanChangeColor
 import { AlbumCover } from '../../../components/AlbumCover/AlbumCover';
 import { TEXT, USER } from '../../../constants';
 import { useAppDispatch, useAppSelector } from '../../../hook';
-
-import './Sidebar.css';
 import {
   bgColorToBgColorLight,
   extradarkToDark,
@@ -28,6 +26,8 @@ import {
 import { TLanguages } from '../../../types';
 import { changeLanguage } from '../../../store/languageSlice';
 // import './Animation.css';
+
+import './Sidebar.css';
 
 const cnSidebar = cn('Sidebar');
 

@@ -31,6 +31,8 @@ export const theme = createTheme({
 
 export const DEFAULT_LANG = 'ru';
 
+export const ORDER = { notSelected: 'notSelected', asc: 'ASC', desc: 'DESC' };
+
 export const TEXT = {
   menu: {
     homepage: { ru: 'Главная', en: 'Homepage', bel: 'Галоўны' },
@@ -66,6 +68,26 @@ export const TEXT = {
     artist: { ru: 'исполнителю', en: 'artist', bel: 'выканаўца' },
     release: { ru: 'году выпуска', en: 'release date', bel: 'годзе выпуску' },
     genre: { ru: 'жанру', en: 'genre', bel: 'жанр' },
+    order: {
+      ru: 'Порядок',
+      en: 'Order',
+      bel: 'Парадак',
+      default: {
+        ru: 'по умолчанию',
+        en: 'by default',
+        bel: 'безумоўна',
+      },
+      oldToNew: {
+        ru: 'от старых к новым',
+        en: 'old to new',
+        bel: 'ад старых да новых',
+      },
+      newToOld: {
+        ru: 'от новых к старым',
+        en: 'new to old',
+        bel: 'ад новых да старых',
+      },
+    },
   },
   listHeader: {
     track: { ru: 'ТРЕК', en: 'TRACK', bel: 'ТРЭК' },

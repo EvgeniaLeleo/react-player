@@ -2,18 +2,20 @@
  * Генерация окончательного массива, соответствующего всем и фильтрам
  */
 
-import { EMPTY_RESULTS } from '../constants';
-import { SongType, TCheckedItems } from '../types';
+import { EMPTY_RESULTS, ORDER } from '../constants';
+import { SongType, TCheckedItems, TOrder } from '../types';
 import { checkedArtistsFilterArray } from './checkedArtistsFilterArray';
 import { checkedGenresFilterArray } from './checkedGenresFilterArray';
 import { checkedYearsFilterArray } from './checkedYearsFilterArray';
 import { commonItems } from './commonItems';
+import { getSortedByOrderArray } from './getSortedByOrderArray';
 
 export const getFinalItems: (
   allTracks: SongType[],
   checkedItemsObj: TCheckedItems,
   searchedItems: SongType[],
-) => SongType[] = (allTracks, checkedItemsObj, searchedItems) => {
+  order: TOrder,
+) => SongType[] = (allTracks, checkedItemsObj, searchedItems, order) => {
   // console.log('--> checkedItems', checkedItemsObj);
   // console.log('--> allTracks', allTracks);
 
@@ -39,7 +41,13 @@ export const getFinalItems: (
   // console.log('--> commonArtistsYearsGenres', commonArtistsYearsGenres);
   // console.log('--> searchedItems', searchedItems);
 
-  const finalItems = commonItems(commonArtistsYearsGenres, searchedItems);
+  let finalItems = commonItems(commonArtistsYearsGenres, searchedItems);
+
+  if (order === ORDER.asc || order === ORDER.desc) {
+    finalItems = getSortedByOrderArray(finalItems, order);
+  }
+
+  // console.log('--> order', order);
   // console.log('--> finalItems', finalItems);
 
   return finalItems.length ? finalItems : EMPTY_RESULTS;
