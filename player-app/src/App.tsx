@@ -8,7 +8,8 @@ import { Main } from './pages/Main/Main';
 
 import './App.css';
 import { TEXT } from './constants';
-import { useAppDispatch, useAppSelector } from './hook';
+import { useAppSelector } from './hook';
+import { WelcomePage } from './pages/WelcomePage/WelcomePage';
 
 function App() {
   const lang = useAppSelector((state) => state.language.lang);
@@ -16,7 +17,8 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Login />}></Route>
+        <Route path="/" element={<WelcomePage />}></Route>
+        <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route
           path="/main"

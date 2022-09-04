@@ -3,6 +3,7 @@ import {
   colorToSecondary,
   extradarkToDark,
   extradarkToHover,
+  lightenDarkenColor,
 } from './utils/colorUtils';
 
 import { createTheme } from '@mui/material';

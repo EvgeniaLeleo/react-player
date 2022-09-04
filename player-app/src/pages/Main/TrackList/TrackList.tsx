@@ -13,71 +13,34 @@ import { SongType } from '../../../types';
 import { TrackItem } from './TrackItem';
 
 export const TrackList: FC<{ header: string }> = ({ header }) => {
-  // console.log('--> album', header);
-
   const dispatch = useAppDispatch();
 
   const lang = useAppSelector((state) => state.language.lang);
 
-  const allTracksStore = useAppSelector((state) => state.tracks.allTracks);
-  const danceTracksStore = useAppSelector((state) => state.tracks.danceTracks);
-  const randomTracksStore = useAppSelector(
-    (state) => state.tracks.randomTracks,
-  );
+  const tracksAll = useAppSelector((state) => state.tracks.allTracks);
+  const tracksDance = useAppSelector((state) => state.tracks.danceTracks);
+  const tracksRandom = useAppSelector((state) => state.tracks.randomTracks);
 
-  const filteredTracksStore = useAppSelector(
+  const filteredTracks = useAppSelector(
     (state) => state.filteredItems.filteredTracks,
   );
-  const filteredDanceTracksStore = useAppSelector(
+  const filteredTracksDance = useAppSelector(
     (state) => state.filteredItems.filteredDanceTracks,
   );
-  const filteredRandomTracksStore = useAppSelector(
+  const filteredTracks_Random = useAppSelector(
     (state) => state.filteredItems.filteredRandomTracks,
   );
-  // console.log('--> filteredDanceTracksStore', filteredDanceTracksStore);
-  // console.log('--> danceTracksStore', danceTracksStore);
 
-  // const checkedItems = useAppSelector((state) => state.filteredItems);
-  // const order = useAppSelector((state) => state.sortingSettings.order);
-  // const searchedItems = useAppSelector(
-  //   (state) => state.filteredItems.searchedTracks,
-  // );
-  // const searchedItemsDance = useAppSelector(
-  //   (state) => state.filteredItems.searchedTracksDance,
-  // );
-
-  // let allTracks = filteredTracksStore.length
-  //   ? filteredTracksStore
-  //   : allTracksStore;
-  let allTracks = filteredTracksStore.length
-    ? filteredTracksStore
-    : allTracksStore;
-
-  // console.log('--> filteredTracksStore', filteredTracksStore);
-  // console.log('--> allTracksStore', allTracksStore);
-
-  // if (!header) {
-  //   allTracks = filteredTracksStore.length
-  //     ? filteredTracksStore
-  //     : allTracksStore;
-  //   console.log('--> dance', allTracks);
-  // }
+  let allTracks = filteredTracks.length ? filteredTracks : tracksAll;
 
   if (header === TEXT.albums[ALBUM_DANCE][lang]) {
-    allTracks = filteredDanceTracksStore.length
-      ? filteredDanceTracksStore
-      : danceTracksStore;
-    // console.log('--> dance', header);
-    // console.log('--> dance searchedItems', searchedItems);
-    // console.log('--> dance danceTracksStore', danceTracksStore);
-    // console.log('--> dance filteredDanceTracksStore', filteredDanceTracksStore);
-    // console.log('--> dance allTracks', allTracks);
+    allTracks = filteredTracksDance.length ? filteredTracksDance : tracksDance;
   }
 
   if (header === TEXT.albums[ALBUM_RANDOM][lang]) {
-    allTracks = filteredRandomTracksStore.length
-      ? filteredRandomTracksStore
-      : randomTracksStore;
+    allTracks = filteredTracks_Random.length
+      ? filteredTracks_Random
+      : tracksRandom;
   }
 
   // console.log('--> allTracks', allTracks);

@@ -44,7 +44,6 @@ import {
   uploadRandomTracks,
 } from '../../../store/trackSlice';
 import { updateSearchQuery } from '../../../store/sortingSettingsSlice';
-// import './Animation.css';
 
 const cnSidebar = cn('Sidebar');
 

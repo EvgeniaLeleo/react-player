@@ -5,9 +5,11 @@ import trackReducer from './trackSlice';
 import filteredItemsReducer from './filteredItemsSlice';
 import sortingSettingsReducer from './sortingSettingsSlice';
 import headerReducer from './headerSlice';
+import vpnReducer from './vpnSlice';
 
 const store = configureStore({
   reducer: {
+    vpn: vpnReducer,
     colorTheme: colorThemeReducer,
     language: languageReducer,
     tracks: trackReducer,
