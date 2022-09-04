@@ -4,6 +4,8 @@ import { SongType } from '../types';
 type TTrackState = {
   currentTrack: SongType;
   allTracks: SongType[];
+  danceTracks: SongType[];
+  randomTracks: SongType[];
   movedTracks: SongType[];
   autoplay: boolean;
 };
@@ -11,6 +13,8 @@ type TTrackState = {
 const initialState: TTrackState = {
   currentTrack: JSON.parse(localStorage.getItem('currentTrack')!) || {},
   allTracks: [],
+  randomTracks: [],
+  danceTracks: [],
   movedTracks: [],
   autoplay: false,
 };
@@ -26,6 +30,12 @@ const trackSlice = createSlice({
     },
     uploadAllTracks(state, action: PayloadAction<SongType[]>) {
       state.allTracks = action.payload;
+    },
+    uploadDanceTracks(state, action: PayloadAction<SongType[]>) {
+      state.danceTracks = action.payload;
+    },
+    uploadRandomTracks(state, action: PayloadAction<SongType[]>) {
+      state.randomTracks = action.payload;
     },
     uploadMovedTracks(state, action: PayloadAction<SongType[]>) {
       state.movedTracks = action.payload;
@@ -69,6 +79,8 @@ const trackSlice = createSlice({
 export const {
   changeCurrentSong,
   uploadAllTracks,
+  uploadDanceTracks,
+  uploadRandomTracks,
   uploadMovedTracks,
   switchToNextTrack,
   switchToPreviousTrack,

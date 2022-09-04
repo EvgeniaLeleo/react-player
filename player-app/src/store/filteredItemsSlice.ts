@@ -6,7 +6,11 @@ type TCheckedItems = {
   checkedYears: string[];
   checkedGenres: string[];
   searchedTracks: SongType[];
+  searchedTracksDance: SongType[];
+  searchedTracksRandom: SongType[];
   filteredTracks: SongType[];
+  filteredDanceTracks: SongType[];
+  filteredRandomTracks: SongType[];
 };
 
 const initialState: TCheckedItems = {
@@ -14,7 +18,11 @@ const initialState: TCheckedItems = {
   checkedYears: [],
   checkedGenres: [],
   searchedTracks: [],
+  searchedTracksDance: [],
+  searchedTracksRandom: [],
   filteredTracks: [],
+  filteredDanceTracks: [],
+  filteredRandomTracks: [],
 };
 
 const filteredItemsSlice = createSlice({
@@ -30,11 +38,25 @@ const filteredItemsSlice = createSlice({
     updateCheckedGenres(state, action: PayloadAction<string[]>) {
       state.checkedGenres = action.payload;
     },
+
     updateSearchedTracks(state, action: PayloadAction<SongType[]>) {
       state.searchedTracks = action.payload;
     },
+    updateSearchedTracksDance(state, action: PayloadAction<SongType[]>) {
+      state.searchedTracksDance = action.payload;
+    },
+    updateSearchedTracksRandom(state, action: PayloadAction<SongType[]>) {
+      state.searchedTracksRandom = action.payload;
+    },
+
     updateFilteredTracks(state, action: PayloadAction<SongType[]>) {
       state.filteredTracks = action.payload;
+    },
+    updateFilteredDanceTracks(state, action: PayloadAction<SongType[]>) {
+      state.filteredDanceTracks = action.payload;
+    },
+    updateFilteredRandomTracks(state, action: PayloadAction<SongType[]>) {
+      state.filteredRandomTracks = action.payload;
     },
   },
 });
@@ -44,7 +66,11 @@ export const {
   updateCheckedYears,
   updateCheckedGenres,
   updateSearchedTracks,
+  updateSearchedTracksDance,
+  updateSearchedTracksRandom,
   updateFilteredTracks,
+  updateFilteredDanceTracks,
+  updateFilteredRandomTracks,
 } = filteredItemsSlice.actions;
 
 export default filteredItemsSlice.reducer;

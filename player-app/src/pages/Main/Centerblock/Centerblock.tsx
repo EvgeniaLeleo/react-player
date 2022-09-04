@@ -1,86 +1,132 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FC } from 'react';
 import { cn } from '@bem-react/classname';
-import {
-  Box,
-  InputAdornment,
-  SvgIcon,
-  TextField,
-  Typography,
-} from '@mui/material';
-import { Search, AccessTime } from '@mui/icons-material';
+import { Box, InputAdornment, TextField, Typography } from '@mui/material';
+import { Search } from '@mui/icons-material';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-
-import {
-  colorToSecondary,
-  lightenDarkenColor,
-} from '../../../utils/colorUtils';
 import { SongType } from '../../../types';
-import { TEXT } from '../../../constants';
+import { ALBUM_DANCE, ALBUM_RANDOM, TEXT } from '../../../constants';
 import { Profile } from '../Profile/Profile';
 import { useAppDispatch, useAppSelector } from '../../../hook';
-
-import './Centerblock.css';
-
 import { TrackList } from '../TrackList/TrackList';
-import { SkeletonRect } from '../../../components/Skeleton/Skeleton';
 import { FilterButtons } from '../../../components/FilterButtons/FilterButtons';
 import { getSearchQueryArray } from '../../../utils/getSearchQueryArray';
 import {
+  updateFilteredDanceTracks,
+  updateFilteredRandomTracks,
   updateFilteredTracks,
   updateSearchedTracks,
+  updateSearchedTracksDance,
+  updateSearchedTracksRandom,
 } from '../../../store/filteredItemsSlice';
 import { getFinalItems } from '../../../utils/getFinalItems';
 import { updateSearchQuery } from '../../../store/sortingSettingsSlice';
+import { SkeletonTrack } from '../../../components/SkeletonTrack/SkeletonTrack';
+import { ListHeaders } from '../../../components/ListHeaders/ListHeaders';
+
+import './Centerblock.css';
 
 const cnCenterblock = cn('Centerblock');
-const cnContent = cn('Content');
 
 type PlayerProps = {
   tracks: SongType[];
   header: string;
+  // query: string;
 };
 
 export const Centerblock: FC<PlayerProps> = ({ header, tracks }) => {
+  // console.log('--> center', header);
   const dispatch = useAppDispatch();
 
   const lang = useAppSelector((state) => state.language.lang);
   const textColor = useAppSelector((state) => state.colorTheme.textColor);
-  const skeletonColor = lightenDarkenColor(textColor, -10);
-  const textColorSecondary = colorToSecondary(textColor);
   const order = useAppSelector((state) => state.sortingSettings.order);
 
   const allTracksStore = useAppSelector((state) => state.tracks.allTracks);
+  const allTracksDance: SongType[] = useAppSelector(
+    (state) => state.tracks.danceTracks,
+  );
+  const allTracksRandom: SongType[] = useAppSelector(
+    (state) => state.tracks.randomTracks,
+  );
+
   const checkedItems = useAppSelector((state) => state.filteredItems);
 
   const array = new Array(10).fill(0);
-  // const allTracks = filteredTracksStore.length
-  //   ? filteredTracksStore
-  //   : allTracksStore;
+
+  const query = useAppSelector((state) => state.sortingSettings.searchQuery);
+  console.log('--> query center', query);
+
+  const [value, setValue] = useState('');
+  console.log('--> query value', value);
+
+  useEffect(() => {
+    setValue(value);
+  }, [value, setValue]);
+  // useEffect(() => {
+  //   setValue('');
+  // }, []);
 
   const handleSearch = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    const searchedItems = getSearchQueryArray(
-      e.currentTarget.value,
-      allTracksStore,
-    );
+    setValue(e.target.value);
+
+    let allTracks = allTracksStore;
+
+    const searchedItems = getSearchQueryArray(e.currentTarget.value, allTracks);
 
     dispatch(updateSearchQuery(e.currentTarget.value));
     dispatch(updateSearchedTracks(searchedItems));
 
     const finalItems = getFinalItems(
-      allTracksStore,
+      allTracks,
       checkedItems,
       searchedItems,
       order,
     );
-
-    // console.log('--> searchedTracks', searchedTracks);
-    // console.log('--> finalItems', finalItems);
-
     dispatch(updateFilteredTracks(finalItems));
+
+    if (header === TEXT.albums[ALBUM_DANCE][lang]) {
+      const searchedItemsDance = getSearchQueryArray(
+        e.currentTarget.value,
+        allTracksDance,
+      );
+
+      dispatch(updateSearchQuery(e.currentTarget.value));
+      dispatch(updateSearchedTracksDance(searchedItemsDance));
+
+      const finalItems = getFinalItems(
+        allTracksDance,
+        checkedItems,
+        searchedItemsDance,
+        order,
+      );
+
+      dispatch(updateFilteredDanceTracks(finalItems));
+    }
+
+    /////
+
+    if (header === TEXT.albums[ALBUM_RANDOM][lang]) {
+      const searchedItemsRandom = getSearchQueryArray(
+        e.currentTarget.value,
+        allTracksRandom,
+      );
+
+      dispatch(updateSearchQuery(e.currentTarget.value));
+      dispatch(updateSearchedTracksRandom(searchedItemsRandom));
+
+      const finalItems = getFinalItems(
+        allTracksRandom,
+        checkedItems,
+        searchedItemsRandom,
+        order,
+      );
+
+      dispatch(updateFilteredRandomTracks(finalItems));
+    }
   };
 
   if (header === TEXT.menu.profile[lang]) {
@@ -91,6 +137,7 @@ export const Centerblock: FC<PlayerProps> = ({ header, tracks }) => {
         <div className={cnCenterblock()}>
           <form className={cnCenterblock('Input-Wrapper')}>
             <TextField
+              value={value}
               onChange={(e) => handleSearch(e)}
               InputLabelProps={{}}
               placeholder={TEXT.searchInput[lang]}
@@ -122,69 +169,16 @@ export const Centerblock: FC<PlayerProps> = ({ header, tracks }) => {
           {header === TEXT.header.tracks[lang] && (
             <FilterButtons lang={lang} textColor={textColor}></FilterButtons>
           )}
+
           <Box className={cnCenterblock('Content')}>
-            <div className={cnContent('Header')}>
-              <span
-                className={cnContent('Track')}
-                style={{ color: textColorSecondary }}
-              >
-                {TEXT.listHeader.track[lang]}
-              </span>
-              <span
-                className={cnContent('Singer')}
-                style={{ color: textColorSecondary }}
-              >
-                {TEXT.listHeader.artist[lang]}
-              </span>
-              <span
-                className={cnContent('Album')}
-                style={{ color: textColorSecondary }}
-              >
-                {TEXT.listHeader.album[lang]}
-              </span>
-              <SvgIcon fontSize="small" sx={{ my: 'auto', ml: 'auto' }}>
-                <AccessTime />
-              </SvgIcon>
-            </div>
+            <ListHeaders></ListHeaders>
 
             {!tracks.length ? (
               array.map((_, i) => (
-                <div className={cnContent('Skeleton')} key={i.toString()}>
-                  <SkeletonRect
-                    width="4%"
-                    margin="2%"
-                    height="45px"
-                    color={skeletonColor}
-                  ></SkeletonRect>
-
-                  <SkeletonRect
-                    width="24%"
-                    margin="5%"
-                    color={skeletonColor}
-                  ></SkeletonRect>
-
-                  <SkeletonRect
-                    width="20%"
-                    margin="5%"
-                    color={skeletonColor}
-                  ></SkeletonRect>
-
-                  <SkeletonRect
-                    width="25%"
-                    margin="6%"
-                    color={skeletonColor}
-                  ></SkeletonRect>
-
-                  <SkeletonRect
-                    width="9%"
-                    margin="0"
-                    color={skeletonColor}
-                  ></SkeletonRect>
-                </div>
+                <SkeletonTrack key={i.toString()}></SkeletonTrack>
               ))
             ) : (
-              <TrackList></TrackList>
-              // <TrackList allTracks={tracks}></TrackList>
+              <TrackList header={header}></TrackList>
             )}
           </Box>
         </div>
@@ -192,3 +186,9 @@ export const Centerblock: FC<PlayerProps> = ({ header, tracks }) => {
     );
   }
 };
+
+// console.log('-->', value);
+
+// const allTracks = filteredTracksStore.length
+//   ? filteredTracksStore
+//   : allTracksStore;

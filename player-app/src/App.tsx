@@ -8,7 +8,7 @@ import { Main } from './pages/Main/Main';
 
 import './App.css';
 import { TEXT } from './constants';
-import { useAppSelector } from './hook';
+import { useAppDispatch, useAppSelector } from './hook';
 
 function App() {
   const lang = useAppSelector((state) => state.language.lang);
@@ -23,8 +23,8 @@ function App() {
           element={<Main header={TEXT.header.tracks[lang]} />}
         ></Route>
         <Route
-          path="/hits"
-          element={<Main header={TEXT.albums.hits[lang]} />}
+          path="/dance"
+          element={<Main header={TEXT.albums.dance[lang]} />}
         ></Route>
         <Route
           path="/mytracks"
@@ -35,7 +35,7 @@ function App() {
           element={<Main header={TEXT.menu.profile[lang]} />}
         ></Route>
         <Route
-          path="/dayplaylist"
+          path="/random"
           element={<Main header={TEXT.albums.dayplaylist[lang]} />}
         ></Route>
       </Routes>

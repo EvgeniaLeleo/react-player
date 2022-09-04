@@ -16,22 +16,39 @@ import {
 
 import { SpanChangeColor } from '../../../components/changeColor/SpanChangeColor';
 import { AlbumCover } from '../../../components/AlbumCover/AlbumCover';
-import { TEXT, USER } from '../../../constants';
+import { ALBUM_DANCE, TEXT, USER } from '../../../constants';
 import { useAppDispatch, useAppSelector } from '../../../hook';
 import {
   bgColorToBgColorLight,
   extradarkToDark,
   extradarkToHover,
 } from '../../../utils/colorUtils';
-import { TLanguages } from '../../../types';
+import { SongType, TCheckedItems, TLanguages } from '../../../types';
 import { changeLanguage } from '../../../store/languageSlice';
-// import './Animation.css';
 
 import './Sidebar.css';
+import {
+  updateCheckedArtists,
+  updateCheckedGenres,
+  updateCheckedYears,
+  updateFilteredDanceTracks,
+  updateFilteredRandomTracks,
+  updateFilteredTracks,
+  updateSearchedTracks,
+  updateSearchedTracksDance,
+  updateSearchedTracksRandom,
+} from '../../../store/filteredItemsSlice';
+import { getFinalItems } from '../../../utils/getFinalItems';
+import {
+  uploadDanceTracks,
+  uploadRandomTracks,
+} from '../../../store/trackSlice';
+import { updateSearchQuery } from '../../../store/sortingSettingsSlice';
+// import './Animation.css';
 
 const cnSidebar = cn('Sidebar');
 
-export type SidebarProps = {
+type SidebarProps = {
   isVisible: boolean;
   isUserVisible?: boolean;
 };
@@ -68,6 +85,82 @@ export const Sidebar: FC<SidebarProps> = ({
       },
     },
   });
+
+  const allTracks: SongType[] = useAppSelector(
+    (state) => state.tracks.allTracks,
+  );
+  const allTracksDance: SongType[] = useAppSelector(
+    (state) => state.tracks.danceTracks,
+  );
+  const allTracksRandom: SongType[] = useAppSelector(
+    (state) => state.tracks.randomTracks,
+  );
+
+  const order = useAppSelector((state) => state.sortingSettings.order);
+
+  const handleClickDance = () => {
+    const newFilter: TCheckedItems = {
+      checkedArtists: [],
+      checkedYears: [],
+      checkedGenres: [],
+    };
+    const searchedItemsCurrent = allTracksDance;
+
+    newFilter.checkedGenres = [ALBUM_DANCE];
+
+    dispatch(updateCheckedGenres([ALBUM_DANCE]));
+    dispatch(updateCheckedArtists([]));
+    dispatch(updateCheckedYears([]));
+
+    dispatch(updateFilteredTracks([]));
+    dispatch(updateFilteredDanceTracks([]));
+    dispatch(updateFilteredRandomTracks([]));
+
+    dispatch(updateSearchQuery(''));
+    dispatch(updateSearchedTracks(allTracks));
+    dispatch(updateSearchedTracksDance(allTracksDance));
+    dispatch(updateSearchedTracksRandom(allTracksRandom));
+
+    const finalFilteredTracks = getFinalItems(
+      allTracksDance,
+      newFilter,
+      searchedItemsCurrent,
+      order,
+    );
+
+    dispatch(uploadDanceTracks(finalFilteredTracks));
+  };
+
+  const handleClickRandom = () => {
+    const searchedItemsCurrent = allTracksRandom;
+    const newFilter: TCheckedItems = {
+      checkedArtists: [],
+      checkedYears: [],
+      checkedGenres: [],
+    };
+
+    dispatch(updateCheckedGenres([]));
+    dispatch(updateCheckedArtists([]));
+    dispatch(updateCheckedYears([]));
+
+    dispatch(updateFilteredTracks([]));
+    dispatch(updateFilteredDanceTracks([]));
+    dispatch(updateFilteredRandomTracks([]));
+
+    dispatch(updateSearchQuery(''));
+    dispatch(updateSearchedTracks(allTracks));
+    dispatch(updateSearchedTracksDance(allTracksDance));
+    dispatch(updateSearchedTracksRandom(allTracksRandom));
+
+    const finalFilteredTracks = getFinalItems(
+      allTracksRandom,
+      newFilter,
+      searchedItemsCurrent,
+      order,
+    );
+
+    dispatch(uploadRandomTracks(finalFilteredTracks));
+  };
 
   return (
     <Box className={cnSidebar()}>
@@ -127,12 +220,18 @@ export const Sidebar: FC<SidebarProps> = ({
         style={{ border: 'none', boxShadow: 'none' }}
       >
         {/* <canvas id="myCanvas" width="1200" height="250"></canvas> */}
-        <NavLink to={'/dayplaylist'}>
-          <AlbumCover text={TEXT.albums.dayplaylist[lang]}></AlbumCover>
-        </NavLink>
-        <NavLink to={'/hits'}>
-          <AlbumCover text={TEXT.albums.hits[lang]}></AlbumCover>
-        </NavLink>
+
+        <div onClick={handleClickRandom}>
+          <NavLink to={'/random'}>
+            <AlbumCover text={TEXT.albums.dayplaylist[lang]}></AlbumCover>
+          </NavLink>
+        </div>
+
+        <div onClick={handleClickDance}>
+          <NavLink to={'/dance'}>
+            <AlbumCover text={TEXT.albums.dance[lang]}></AlbumCover>
+          </NavLink>
+        </div>
         {/* <NavLink to={'/indie'}>
           <CardMedia
             component="img"

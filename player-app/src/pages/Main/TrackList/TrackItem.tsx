@@ -153,7 +153,7 @@ export const TrackItem: FC<TrackItemProps> = ({
 
         {/* <span style={{ margin: '10px' }}>{track.genre}</span> */}
         {/* <span style={{ margin: '10px' }}>{track.year}</span> */}
-        {/*  */}
+
         <span className={cnTrackItem('Author')}>{track.artist}</span>
         <span
           className={cnTrackItem('Album')}

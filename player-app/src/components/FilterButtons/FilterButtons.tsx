@@ -16,11 +16,11 @@ import { useAppDispatch, useAppSelector } from '../../hook';
 import { SongType, TLanguages, TOrder } from '../../types';
 import { colorToSecondary } from '../../utils/colorUtils';
 import React from 'react';
-
-import './FilterButtons.css';
 import { updateOrder } from '../../store/sortingSettingsSlice';
 import { getFinalItems } from '../../utils/getFinalItems';
 import { updateFilteredTracks } from '../../store/filteredItemsSlice';
+
+import './FilterButtons.css';
 
 const cnFilterButtons = cn('FilterButtons');
 

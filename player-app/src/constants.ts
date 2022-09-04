@@ -31,7 +31,25 @@ export const theme = createTheme({
 
 export const DEFAULT_LANG = 'ru';
 
+export const NUMBER_OF_RANDOM_ITEMS = 10;
+
 export const ORDER = { notSelected: 'notSelected', asc: 'ASC', desc: 'DESC' };
+
+export const ALBUM_RANDOM = 'dayplaylist';
+export const ALBUM_DANCE = 'dance';
+
+export const ALBUMS = {
+  [ALBUM_RANDOM]: {
+    ru: 'Плейлист дня',
+    en: 'Playlist of the day',
+    bel: 'Плэйліст дня',
+  },
+  [ALBUM_DANCE]: {
+    ru: 'Танцевальные хиты',
+    en: 'Dance hits',
+    bel: 'Танцавальныя хіты',
+  },
+};
 
 export const TEXT = {
   menu: {
@@ -50,18 +68,7 @@ export const TEXT = {
     bel: 'Пошук па артысту або назве песні',
   },
   header: { tracks: { ru: 'Треки', en: 'Tracks', bel: 'Трэк' } },
-  albums: {
-    dayplaylist: {
-      ru: 'Плейлист дня',
-      en: 'Playlist of the day',
-      bel: 'Плэйліст дня',
-    },
-    hits: {
-      ru: '100 танцевальных хитов',
-      en: '100 dance hits',
-      bel: '100 танцавальных хітоў',
-    },
-  },
+  albums: ALBUMS,
   search: {
     // searchBy: { ru: 'Искать по:', en: 'Search by', bel: 'Шукаць па:' },
     searchBy: { ru: 'Фильтр по:', en: 'Filter by:', bel: 'Фільтр па:' },

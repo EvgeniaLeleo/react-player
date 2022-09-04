@@ -1,0 +1,24 @@
+.ListHeaders-Header {
+  display: flex;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 2px;
+  color: #696969;
+
+  margin-bottom: 24px;
+}
+
+.ListHeaders-Track {
+  width: 35%;
+}
+
+.ListHeaders-Singer {
+  width: 25%;
+}
+
+.ListHeaders-Album {
+  width: 30%;
+}

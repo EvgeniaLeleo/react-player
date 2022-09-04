@@ -4,6 +4,7 @@ import languageReducer from './languageSlice';
 import trackReducer from './trackSlice';
 import filteredItemsReducer from './filteredItemsSlice';
 import sortingSettingsReducer from './sortingSettingsSlice';
+import headerReducer from './headerSlice';
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     tracks: trackReducer,
     filteredItems: filteredItemsReducer,
     sortingSettings: sortingSettingsReducer,
+    header: headerReducer,
   },
 });
 

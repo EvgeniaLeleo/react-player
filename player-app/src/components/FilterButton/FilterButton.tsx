@@ -37,8 +37,6 @@ export const FilterButton: FC<FilterButtonProps> = ({
     (state) => state.filteredItems[`${buttonName}`],
   );
 
-  // console.log('checkedItems', checkedItems);
-
   const ref = useRef(null);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [color, setColor] = useState(textColor);
