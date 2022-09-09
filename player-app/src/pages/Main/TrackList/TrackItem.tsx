@@ -192,7 +192,7 @@ export const TrackItem: FC<TrackItemProps> = ({
             className={cnTrackItem('Album')}
             style={{ color: textColorSecondary }}
           >
-            {track.album}, {track.release_date}
+            {track.album}, {track.release_date?.slice(0, 4)}
           </span>
         </span>
         <IconButton

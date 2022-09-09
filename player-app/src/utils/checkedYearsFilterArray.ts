@@ -12,7 +12,7 @@ export const checkedYearsFilterArray: (
 
   checkedItems.forEach((release_date: string) =>
     data.forEach((item) => {
-      if (item.release_date === release_date) {
+      if (item.release_date?.slice(0, 4) === release_date?.slice(0, 4)) {
         checkedYearsFilteredData.push(item);
       }
     }),

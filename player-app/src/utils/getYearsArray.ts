@@ -9,9 +9,9 @@ export const getYearsArray: (tracks: TSong[]) => string[] = (tracks) => {
   tracks.forEach((track) => {
     if (
       track.release_date &&
-      !release_datesArray.includes(track.release_date)
+      !release_datesArray.includes(track.release_date?.slice(0, 4))
     ) {
-      release_datesArray.push(track.release_date);
+      release_datesArray.push(track.release_date?.slice(0, 4));
     }
   });
   return release_datesArray;
