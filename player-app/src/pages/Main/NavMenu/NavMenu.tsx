@@ -168,20 +168,6 @@ export const NavMenu: FC<{}> = () => {
                 </NavLink>
 
                 <NavLink
-                  onClick={handleClickToMain}
-                  className={cnNavMenu('List-Button')}
-                  style={{ color: textColor }}
-                  to={'/karaoke'}
-                >
-                  <SpanChangeColor
-                    colorHover={colorHover}
-                    colorActive={colorDark}
-                  >
-                    {TEXT.menu.karaoke[lang]}
-                  </SpanChangeColor>
-                </NavLink>
-
-                <NavLink
                   className={cnNavMenu('List-Button')}
                   style={{ color: textColor }}
                   to={'/profile'}
@@ -265,19 +251,6 @@ export const NavMenu: FC<{}> = () => {
                     colorActive={colorDark}
                   >
                     {TEXT.menu.mytracks[lang]}
-                  </SpanChangeColor>
-                </NavLink>
-
-                <NavLink
-                  className={cnNavMenu('List-Button')}
-                  style={{ color: textColor }}
-                  to={'/karaoke'}
-                >
-                  <SpanChangeColor
-                    colorHover={colorHover}
-                    colorActive={colorDark}
-                  >
-                    {TEXT.menu.karaoke[lang]}
                   </SpanChangeColor>
                 </NavLink>
 

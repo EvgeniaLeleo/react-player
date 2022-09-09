@@ -53,7 +53,13 @@ export const LoginWindow: FC<{}> = () => {
 
   return (
     <Box className={cnLoginWindow()}>
-      <Logo textColor="default" />
+      {/* <Logo textColor="default" /> */}
+      <img
+        className={cnLoginWindow('Img')}
+        src="./skypro-logo.svg"
+        alt="skypro-logo"
+        height="21px"
+      ></img>
       <form onSubmit={handleSubmit(onSubmit)}>
         <TextField
           sx={{ height: '70px' }}

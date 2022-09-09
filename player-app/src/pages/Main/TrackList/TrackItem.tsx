@@ -19,6 +19,7 @@ import {
   extradarkToDark,
   extradarkToHover,
 } from '../../../utils/colorUtils';
+import { secondsToHms } from '../../../utils/secondsToHms';
 
 import './TrackItem.css';
 
@@ -213,7 +214,9 @@ export const TrackItem: FC<TrackItemProps> = ({
           className={cnTrackItem('Duration')}
           style={{ color: textColorSecondary }}
         >
-          {track?.duration_in_seconds}
+          {track?.duration_in_seconds
+            ? secondsToHms(track.duration_in_seconds)
+            : ''}
         </span>
       </DivChangeColor>
     </div>

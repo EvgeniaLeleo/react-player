@@ -52,7 +52,13 @@ export const RegisterWindow: FC<{}> = () => {
 
   return (
     <Box className={cnRegisterWindow()}>
-      <Logo textColor="default" />
+      {/* <Logo textColor="default" /> */}
+      <img
+        className={cnRegisterWindow('Img')}
+        src="./skypro-logo.svg"
+        alt="skypro-logo"
+        height="21px"
+      ></img>
       <form onSubmit={handleSubmit(onSubmit)}>
         <TextField
           sx={{ height: '70px' }}

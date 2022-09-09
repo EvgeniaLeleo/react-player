@@ -48,7 +48,7 @@ const Logo: FC<typeLogoProps> = ({ textColor }) => {
         >
           ▶
         </span>{' '}
-        LePLAYER
+        skypro
       </Typography>
     );
   } else {
@@ -78,7 +78,7 @@ const Logo: FC<typeLogoProps> = ({ textColor }) => {
           ▶
         </span>{' '}
         <SpanChangeColor colorHover={colorHover} colorActive={colorDark}>
-          LePLAYER
+          skypro
         </SpanChangeColor>
       </div>
     );
