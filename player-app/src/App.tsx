@@ -5,20 +5,19 @@ import { Route } from 'react-router-dom';
 import { Login } from './pages/Login/Login';
 import { Register } from './pages/Register/Register';
 import { Main } from './pages/Main/Main';
-
-import './App.css';
 import { TEXT } from './constants';
 import { useAppSelector } from './hook';
-import { WelcomePage } from './pages/WelcomePage/WelcomePage';
+import { AlertDialog } from './components/AlertDialog/AlertDialog';
 
 function App() {
   const lang = useAppSelector((state) => state.language.lang);
+  const { isOpen } = useAppSelector((state) => state.modal);
 
   return (
     <>
+      {isOpen && <AlertDialog />}
       <Routes>
-        <Route path="/" element={<WelcomePage />}></Route>
-        <Route path="/login" element={<Login />}></Route>
+        <Route path="/" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route
           path="/main"

@@ -1,17 +1,23 @@
-import { SongType } from '../types';
+import { TSong } from '../types';
 
 export const getRandomTracks = (
   arrayLength: number,
-  data: SongType[],
-): SongType[] => {
-  const itemsArray = [];
-  for (let i = 0; i < arrayLength; i += 1) {
-    itemsArray.push(getRandomTrack(data));
+  data: TSong[],
+): TSong[] => {
+  const itemsArray: TSong[] = [];
+
+  while (itemsArray.length < arrayLength) {
+    const randomTrack = getRandomTrack(data);
+
+    if (!itemsArray.includes(randomTrack)) {
+      itemsArray.push(randomTrack);
+    }
   }
+
   return itemsArray;
 };
 
-const getRandomTrack = (data: SongType[]): SongType => {
+const getRandomTrack = (data: TSong[]): TSong => {
   const item = data[Math.floor(Math.random() * data.length)];
   return item;
 };

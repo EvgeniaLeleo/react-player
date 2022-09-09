@@ -9,7 +9,7 @@ import { Centerblock } from './Centerblock/Centerblock';
 import { Player } from '../../components/Player/Player';
 import { ALBUM_DANCE, NUMBER_OF_RANDOM_ITEMS, TEXT } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../hook';
-import { SongType } from '../../types';
+import { TSong } from '../../types';
 import { fetchTracks } from '../../fetchers/fetchTracks';
 import {
   uploadDanceTracks,
@@ -30,7 +30,8 @@ import {
 } from '../../store/sortingSettingsSlice';
 import { checkedGenresFilterArray } from '../../utils/checkedGenresFilterArray';
 import getRandomTracks from '../../utils/getRandomTracks';
-import dataTracks from './data.json';
+
+import './Main.css';
 
 const cnMain = cn('Main');
 
@@ -48,16 +49,15 @@ export const Main: FC<MainProps> = ({ header }) => {
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
   const allTracks = useAppSelector((state) => state.tracks.allTracks);
 
-  const [tracks, setTracks] = useState<SongType[]>(allTracks);
+  const [tracks, setTracks] = useState<TSong[]>(allTracks);
 
   const lang = useAppSelector((state) => state.language.lang);
   const bgColor = useAppSelector((state) => state.colorTheme.bgColor);
-  const isVpnEnabled = useAppSelector((state) => state.vpn.isEnabled);
 
   useEffect(() => {
     if (allTracks.length) {
       setTracks(allTracks);
-    } else if (isVpnEnabled) {
+    } else {
       fetchTracks().then((data) => {
         setTracks(data);
         dispatch(uploadAllTracks(data));
@@ -74,32 +74,10 @@ export const Main: FC<MainProps> = ({ header }) => {
         dispatch(
           uploadRandomTracks(getRandomTracks(NUMBER_OF_RANDOM_ITEMS, data)),
         );
-        // console.log(getRandomTracks(NUMBER_OF_RANDOM_ITEMS, data));
         dispatch(updateSearchQuery(''));
       });
-    } else {
-      setTracks(dataTracks);
-      dispatch(uploadAllTracks(dataTracks));
-      dispatch(
-        updateSortedArtists(
-          getArtistsArray(getSortedByArtistsArray(dataTracks)),
-        ),
-      );
-      dispatch(
-        updateSortedYears(getYearsArray(getSortedByYearsArray(dataTracks))),
-      );
-      dispatch(
-        updateSortedGenres(getGenresArray(getSortedByGenresArray(dataTracks))),
-      );
-      dispatch(
-        uploadDanceTracks(checkedGenresFilterArray([ALBUM_DANCE], dataTracks)),
-      );
-      dispatch(
-        uploadRandomTracks(getRandomTracks(NUMBER_OF_RANDOM_ITEMS, dataTracks)),
-      );
-      // console.log(getRandomTracks(NUMBER_OF_RANDOM_ITEMS, dataTracks));
-      dispatch(updateSearchQuery(''));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allTracks]);
 
   return (
@@ -114,11 +92,7 @@ export const Main: FC<MainProps> = ({ header }) => {
         className={cnMain()}
       >
         <NavMenu />
-        <Centerblock
-          tracks={tracks}
-          header={header}
-          // query={query}
-        ></Centerblock>
+        <Centerblock tracks={tracks} header={header}></Centerblock>
         <Sidebar
           isVisible={header === TEXT.header.tracks[lang]}
           isUserVisible={header !== TEXT.menu.profile[lang]}

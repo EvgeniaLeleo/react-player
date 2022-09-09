@@ -1,18 +1,18 @@
 /**
- * Находит общие треки (по ключу '_id') в двух массивах SongType[]
+ * Находит общие треки (по ключу 'id') в двух массивах TSong[]
  */
 
-import { SongType } from '../types';
+import { TSong } from '../types';
 
-export const commonItems: (
-  array1: SongType[],
-  array2: SongType[],
-) => SongType[] = (array1, array2) => {
-  const commonItemsArray: SongType[] = [];
+export const commonItems: (array1: TSong[], array2: TSong[]) => TSong[] = (
+  array1,
+  array2,
+) => {
+  const commonItemsArray: TSong[] = [];
 
   array1.forEach((item) => {
     array2.forEach((item2) => {
-      if (item._id === item2._id) {
+      if (item.id === item2.id) {
         commonItemsArray.push(item);
       }
     });

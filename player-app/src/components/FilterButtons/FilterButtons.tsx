@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { cn } from '@bem-react/classname';
 import {
   Box,
@@ -13,7 +14,7 @@ import { FC } from 'react';
 import { FilterButton } from '../FilterButton/FilterButton';
 import { ORDER, TEXT } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../hook';
-import { SongType, TLanguages, TOrder } from '../../types';
+import { TSong, TLanguages, TOrder } from '../../types';
 import { colorToSecondary } from '../../utils/colorUtils';
 import React from 'react';
 import { updateOrder } from '../../store/sortingSettingsSlice';
@@ -34,7 +35,7 @@ export const FilterButtons: FC<FilterButtonsProps> = ({ lang, textColor }) => {
   const searchQuery = useAppSelector(
     (state) => state.sortingSettings.searchQuery,
   );
-  const searchedItemsStore: SongType[] = useAppSelector(
+  const searchedItemsStore: TSong[] = useAppSelector(
     (state) => state.filteredItems.searchedTracks,
   );
 
@@ -73,46 +74,39 @@ export const FilterButtons: FC<FilterButtonsProps> = ({ lang, textColor }) => {
       newOrder,
     );
 
-    // console.log('--> searchedItems', searchedItems);
-    // console.log('--> searchQuery', searchQuery);
-    // console.log('--> allTracksStore', allTracksStore);
-    // console.log('--> checkedItems', checkedItems);
-    // console.log('--> searchedItems', searchedItems);
-    // console.log('--> newOrder', newOrder);
-    // console.log('--> finalItems', finalItems);
-
     dispatch(updateFilteredTracks(finalItems));
   };
 
   return (
     <Box className={cnFilterButtons('Filters')} style={{ color: textColor }}>
-      <span className={cnFilterButtons('Filters-Text')}>
-        {TEXT.search.searchBy[lang]}
-      </span>
-      <FilterButton
-        buttonName="checkedArtists"
-        buttonText={TEXT.search.artist[lang]}
-        rows={3}
-        checkItems={checkedArtists}
-      ></FilterButton>
-      <FilterButton
-        buttonName="checkedYears"
-        buttonText={TEXT.search.release[lang]}
-        rows={3}
-        checkItems={checkedYears}
-      ></FilterButton>
-      <FilterButton
-        buttonName="checkedGenres"
-        buttonText={TEXT.search.genre[lang]}
-        rows={2}
-        checkItems={checkedGenres}
-      ></FilterButton>
+      <div className={cnFilterButtons('Buttons-Wrapper')}>
+        <span className={cnFilterButtons('Filters-Text')}>
+          {TEXT.search.searchBy[lang]}
+        </span>
+        <FilterButton
+          buttonName="checkedArtists"
+          buttonText={TEXT.search.artist[lang]}
+          rows={3}
+          checkItems={checkedArtists}
+        ></FilterButton>
+        <FilterButton
+          buttonName="checkedGenres"
+          buttonText={TEXT.search.genre[lang]}
+          rows={2}
+          checkItems={checkedGenres}
+        ></FilterButton>
+        <FilterButton
+          buttonName="checkedYears"
+          buttonText={TEXT.search.release[lang]}
+          rows={3}
+          checkItems={checkedYears}
+        ></FilterButton>
+      </div>
 
       <ThemeProvider theme={buttonTheme}>
         <FormControl
           variant="standard"
           sx={{
-            marginLeft: '25px',
             width: '175px',
           }}
         >
@@ -124,6 +118,7 @@ export const FilterButtons: FC<FilterButtonsProps> = ({ lang, textColor }) => {
               fontSize: '20px',
               fontFamily: 'inherit',
             }}
+            className={cnFilterButtons('Filters-Text')}
           >
             {TEXT.search.order[lang]}
           </InputLabel>

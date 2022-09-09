@@ -32,22 +32,15 @@ const newFilter: TCheckedItems = {
 export const Popup: FC<PopupProps> = ({ items, rows, buttonName }) => {
   const dispatch = useAppDispatch();
 
+  const textColor = useAppSelector((state) => state.colorTheme.textColor);
   const bgColor = useAppSelector((state) => state.colorTheme.bgColor);
   const bgColorLight = bgColorToBgColorLight(bgColor);
-
-  // const filteredTracksStore = useAppSelector(
-  //   (state) => state.checkedItems.filteredTracks,
-  // );
-  // console.log('--> filteredTracksStore', filteredTracksStore);
 
   const allTracksStore = useAppSelector((state) => state.tracks.allTracks);
   const checkedItems = useAppSelector((state) => state.filteredItems);
   const order = useAppSelector((state) => state.sortingSettings.order);
 
-  // console.log('--> checkedItems', checkedItems);
-
   newFilter[`${buttonName}`] = [...checkedItems[`${buttonName}`]];
-  // console.log('--> newFilter', newFilter);
 
   const searchedItems = useAppSelector(
     (state) => state.filteredItems.searchedTracks,
@@ -77,17 +70,6 @@ export const Popup: FC<PopupProps> = ({ items, rows, buttonName }) => {
       dispatch(updateCheckedGenres(newFilter['checkedGenres']));
     }
 
-    // console.log(
-    //   '--> getFinalItems()',
-    //   getFinalItems(checkedItems[`${buttonName}`]),
-    // );
-
-    // console.log('--> getFinalItems', newFilter[`${buttonName}`]);
-    // console.log(
-    //   '--> getFinalItems',
-    //   getFinalItems(allTracksStore, newFilter[`${buttonName}`]),
-    // );
-
     const finalFilteredTracks = getFinalItems(
       allTracksStore,
       newFilter,
@@ -96,9 +78,6 @@ export const Popup: FC<PopupProps> = ({ items, rows, buttonName }) => {
     );
 
     dispatch(updateFilteredTracks(finalFilteredTracks));
-
-    // console.log(localCheckedItems);
-    // console.log(localStorage);
   };
 
   let display;
@@ -124,6 +103,7 @@ export const Popup: FC<PopupProps> = ({ items, rows, buttonName }) => {
       style={{
         height: height,
         display: display,
+        color: textColor,
         backgroundColor: bgColorLight,
       }}
     >

@@ -8,7 +8,6 @@ type TTrackState = {
   years: string[];
   order: TOrder;
   searchQuery: string;
-  // album: string;
 };
 
 const initialState: TTrackState = {
@@ -17,7 +16,6 @@ const initialState: TTrackState = {
   years: [],
   order: ORDER.notSelected as TOrder,
   searchQuery: '',
-  // album: '',
 };
 
 const sortingSettingsSlice = createSlice({
@@ -39,9 +37,6 @@ const sortingSettingsSlice = createSlice({
     updateSearchQuery(state, action: PayloadAction<string>) {
       state.searchQuery = action.payload;
     },
-    // updateSelectedAlbum(state, action: PayloadAction<string>) {
-    //   state.album = action.payload;
-    // },
   },
 });
 
@@ -51,7 +46,6 @@ export const {
   updateSortedGenres,
   updateOrder,
   updateSearchQuery,
-  // updateSelectedAlbum,
 } = sortingSettingsSlice.actions;
 
 export default sortingSettingsSlice.reducer;

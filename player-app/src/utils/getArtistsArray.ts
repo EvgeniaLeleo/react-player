@@ -2,14 +2,14 @@
  * Формирует массив артистов выпуска из исходного массива объектов-треков
  */
 
-import { SongType } from '../types';
+import { TSong } from '../types';
 
-export const getArtistsArray: (tracks: SongType[]) => string[] = (tracks) => {
-  let artistsArray: string[] = [];
+export const getArtistsArray: (tracks: TSong[]) => string[] = (tracks) => {
+  let authorsArray: string[] = [];
   tracks.forEach((track) => {
-    if (track.artist && !artistsArray.includes(track.artist)) {
-      artistsArray.push(track.artist);
+    if (track.author && !authorsArray.includes(track.author)) {
+      authorsArray.push(track.author);
     }
   });
-  return artistsArray;
+  return authorsArray;
 };

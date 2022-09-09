@@ -1,5 +1,4 @@
 .Animation {
-  margin-top: 170px;
   text-align: left;
   background: transparent;
   width: 95%;
@@ -21,7 +20,6 @@
   border-top-right-radius: 2px;
 
   transition: 0.5s;
-  animation: equalize 5s 0s infinite;
   animation-timing-function: linear;
 }
 

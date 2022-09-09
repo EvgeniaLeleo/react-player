@@ -1,10 +1,8 @@
-import axios from "axios";
-import { SongType } from "../types";
+import axios from 'axios';
+import { TSong } from '../types';
 
 export const fetchTracks = () => {
   return axios
-    .get<SongType[]>(
-      "https://eu-central-1.aws.data.mongodb-api.com/app/sounds-oemdx/endpoint/sounds"
-    )
+    .get<TSong[]>('http://51.250.72.80:8090/catalog/track/all/')
     .then((res) => res.data);
 };

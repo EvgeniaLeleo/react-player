@@ -13,8 +13,12 @@ const cnAnimation = cn('Animation');
 
 export const AnimationBar = styled('p')<{
   bgcolor: string;
+  animation: string;
+  animationDelay: string;
 }>`
   background-color: ${(p) => p.bgcolor};
+  animation: ${(p) => p.animation};
+  animation-delay: ${(p) => p.animationDelay};
 `;
 
 export const Animation = () => {
@@ -24,27 +28,41 @@ export const Animation = () => {
   const colorHover = extradarkToHover(decorativeColor);
   const colorDark = extradarkToDark(decorativeColor);
 
+  const isPlaying = useAppSelector((state) => state.tracks.autoplay);
+  const animationProp = 'equalize 6s 0s infinite;';
+  const animation = isPlaying ? animationProp : 'none';
+
   return (
     <div className={cnAnimation()}>
       <AnimationBar
-        className={cnAnimation('Bar1')}
         bgcolor={colorHover}
+        animation={animation}
+        animationDelay="-1.9s"
+        className={cnAnimation('Bar1')}
       ></AnimationBar>
       <AnimationBar
-        className={cnAnimation('Bar2')}
         bgcolor={lightenDarkenColor(colorDark, 25)}
+        animation={animation}
+        animationDelay="-2.9s"
+        className={cnAnimation('Bar2')}
       ></AnimationBar>
       <AnimationBar
-        className={cnAnimation('Bar3')}
         bgcolor={colorDark}
+        animation={animation}
+        animationDelay="-3.9s"
+        className={cnAnimation('Bar3')}
       ></AnimationBar>
       <AnimationBar
-        className={cnAnimation('Bar4')}
         bgcolor={lightenDarkenColor(decorativeColor, 25)}
+        animation={animation}
+        animationDelay="-4.9s"
+        className={cnAnimation('Bar4')}
       ></AnimationBar>
       <AnimationBar
-        className={cnAnimation('Bar5')}
         bgcolor={decorativeColor}
+        animation={animation}
+        animationDelay="-5.9s"
+        className={cnAnimation('Bar5')}
       ></AnimationBar>
     </div>
   );

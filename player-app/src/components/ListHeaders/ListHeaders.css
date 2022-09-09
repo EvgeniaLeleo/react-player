@@ -1,4 +1,4 @@
-.ListHeaders-Header {
+.ListHeaders {
   display: flex;
 
   font-style: normal;
@@ -21,4 +21,16 @@
 
 .ListHeaders-Album {
   width: 30%;
+}
+
+@media (max-width: 1439px) {
+  .ListHeaders {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 549px) {
+  .ListHeaders {
+    display: none;
+  }
 }

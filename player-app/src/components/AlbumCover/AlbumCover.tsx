@@ -3,9 +3,9 @@ import { FC } from 'react';
 import { cn } from '@bem-react/classname';
 
 import { useAppSelector } from '../../hook';
+import { extradarkToDark } from '../../utils/colorUtils';
 
 import './AlbumCover.css';
-import { extradarkToDark } from '../../utils/colorUtils';
 
 const cnAlbumCover = cn('AlbumCover');
 

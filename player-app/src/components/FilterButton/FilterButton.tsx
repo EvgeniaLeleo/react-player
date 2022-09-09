@@ -5,10 +5,10 @@ import { cn } from '@bem-react/classname';
 import { Popup } from '../Popup/Popup';
 import { useAppSelector, useOnClickOutside } from '../../hook';
 import { extradarkToDark, extradarkToHover } from '../../utils/colorUtils';
-
-import './FilterButton.css';
 import { ButtonChangeColor } from '../changeColor/ButtonChangeColor';
 import { TFilterButtonName } from '../../types';
+
+import './FilterButton.css';
 
 const cnFilterButton = cn('FilterButton');
 

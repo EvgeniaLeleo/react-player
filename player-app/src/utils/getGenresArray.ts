@@ -2,9 +2,9 @@
  * Формирует массив жанров из исходного массива объектов-треков
  */
 
-import { SongType } from '../types';
+import { TSong } from '../types';
 
-export const getGenresArray: (tracks: SongType[]) => string[] = (tracks) => {
+export const getGenresArray: (tracks: TSong[]) => string[] = (tracks) => {
   let genresArray: string[] = [];
   tracks.forEach((track) => {
     if (track.genre && !genresArray.includes(track.genre)) {

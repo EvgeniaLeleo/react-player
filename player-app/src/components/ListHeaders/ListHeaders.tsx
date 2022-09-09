@@ -15,7 +15,7 @@ export const ListHeaders = () => {
   const textColorSecondary = colorToSecondary(textColor);
 
   return (
-    <div className={cnListHeaders('Header')}>
+    <div className={cnListHeaders()}>
       <span
         className={cnListHeaders('Track')}
         style={{ color: textColorSecondary }}

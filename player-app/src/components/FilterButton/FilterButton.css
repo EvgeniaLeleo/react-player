@@ -16,6 +16,7 @@
 
   height: 39px;
   padding: 0 20px;
+  margin-right: 10px;
 
   background-color: transparent;
   border-width: 1px;
@@ -53,4 +54,10 @@
 
   background: #ad61ff;
   border-radius: 50%;
+}
+
+@media (max-width: 1439px) {
+  .FilterButton {
+    font-size: 12px;
+  }
 }

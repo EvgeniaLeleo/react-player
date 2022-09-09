@@ -4,5 +4,10 @@
   transition: all 0.2s ease;
 }
 
-.Icon:hover {
+.Icon:hover,
+.css-78trlr-MuiButtonBase-root-MuiIconButton-root,
+.css-78trlr-MuiButtonBase-root-MuiIconButton-root:hover,
+.css-78trlr-MuiButtonBase-root-MuiIconButton-root:active,
+.css-1orn2xn-MuiSvgIcon-root:hover {
+  background: transparent;
 }

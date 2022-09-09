@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import { FC } from 'react';
 import { cn } from '@bem-react/classname';
@@ -7,17 +8,8 @@ import MenuItem from '@mui/material/MenuItem';
 import { Button as MUIButton, createTheme, ThemeProvider } from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
-import './Profile.css';
-
 import { useAppDispatch, useAppSelector } from '../../../hook';
-import { Typography } from '@mui/material';
-import {
-  BGCOLOR,
-  COLOR,
-  COLOR_EXTRADARK,
-  TEXT,
-  USER,
-} from '../../../constants';
+import { BGCOLOR, COLOR, COLOR_EXTRADARK, TEXT } from '../../../constants';
 import {
   changeBgColor,
   changeDecorativeColor,
@@ -27,18 +19,19 @@ import { colorToSecondary } from '../../../utils/colorUtils';
 import { changeLanguage } from '../../../store/languageSlice';
 import { TLanguages } from '../../../types';
 
+import './Profile.css';
+
 const cnProfile = cn('Profile');
 
 export const Profile: FC = () => {
   const dispatch = useAppDispatch();
-
+  const dataUser = useAppSelector((state) => state.auth.data);
   const lang = useAppSelector((state) => state.language.lang);
   const textColor = useAppSelector((state) => state.colorTheme.textColor);
   const bgColor = useAppSelector((state) => state.colorTheme.bgColor);
   const decorativeColor = useAppSelector(
     (state) => state.colorTheme.decorativeColor,
   );
-
   const textColorSecondary = colorToSecondary(textColor);
 
   const [_, setLanguage] = React.useState(lang);
@@ -99,15 +92,9 @@ export const Profile: FC = () => {
 
   return (
     <div className={cnProfile()}>
-      <Typography
-        variant="h2"
-        marginTop={11}
-        marginBottom={6}
-        style={{ color: textColor }}
-      >
+      <h2 style={{ color: textColor }} className={cnProfile('Header-Main')}>
         {TEXT.menu.profile[lang]}
-      </Typography>
-
+      </h2>
       <div className={cnProfile('Data')} style={{ color: textColor }}>
         <h4
           className={cnProfile('Header')}
@@ -116,10 +103,10 @@ export const Profile: FC = () => {
           {TEXT.profile.userData[lang]}
         </h4>
         <div className={cnProfile('UserData')}>
-          {TEXT.profile.userName[lang]} {USER.name}
+          {TEXT.profile.userName[lang]} {dataUser?.fullName}
         </div>
         <div className={cnProfile('UserData')}>
-          {TEXT.profile.login[lang]} {USER.login}
+          {TEXT.profile.login[lang]} {dataUser?.email}
         </div>
 
         <h4

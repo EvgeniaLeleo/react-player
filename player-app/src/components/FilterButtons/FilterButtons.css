@@ -1,12 +1,39 @@
 .FilterButtons-Filters {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
+  align-items: top;
 
   margin-bottom: 51px;
 }
 
+.FilterButtons-Buttons-Wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  align-items: center;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
 .FilterButtons-Filters-Text {
   margin-right: 15px;
+}
+
+@media (max-width: 1439px) {
+  .FilterButtons-Filters {
+    font-size: 12px;
+  }
+
+  .css-ts3zvq-MuiFormLabel-root-MuiInputLabel-root {
+    font-size: 12px !important;
+  }
+  .css-1rxz5jq-MuiSelect-select-MuiInputBase-input-MuiInput-input {
+    font-size: 12px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .FilterButtons-Filters {
+    margin-bottom: 30px;
+  }
 }

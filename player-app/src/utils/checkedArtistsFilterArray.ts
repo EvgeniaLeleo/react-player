@@ -2,17 +2,17 @@
  * Формирует массив треков, фильтруя исходные данные по фильтру checkedArtists
  */
 
-import { SongType } from '../types';
+import { TSong } from '../types';
 
 export const checkedArtistsFilterArray: (
   checkedItems: string[],
-  data: SongType[],
-) => SongType[] = (checkedItems, data) => {
-  const checkedArtistsFilteredData: SongType[] = [];
+  data: TSong[],
+) => TSong[] = (checkedItems, data) => {
+  const checkedArtistsFilteredData: TSong[] = [];
 
-  checkedItems.forEach((artist: string) =>
+  checkedItems.forEach((author: string) =>
     data.forEach((item) => {
-      if (item.artist === artist) {
+      if (item.author === author) {
         checkedArtistsFilteredData.push(item);
       }
     }),

@@ -43,7 +43,6 @@
   width: 0;
 }
 
-
 .rhap_progress-container {
   height: 5px;
   margin: 0;
@@ -116,4 +115,31 @@
 .Player-ControlsIcon:hover {
   color: #acacac;
   transition: all 0.2s;
+}
+
+@media (max-width: 767px) {
+  .Player-TrackInfo {
+    display: none;
+  }
+}
+
+@media (max-width: 549px) {
+  .Player {
+    height: 50px;
+  }
+
+  .rhap_stacked .rhap_controls-section {
+    height: 45px;
+    padding: 0 15px 10px 5px;
+    gap: 10px;
+  }
+
+  .rhap_main-controls {
+    gap: 0;
+  }
+
+  .rhap_additional-controls,
+  .rhap_stacked .rhap_controls-section {
+    gap: 0;
+  }
 }

@@ -3,23 +3,26 @@ import { FC, useEffect } from 'react';
 import { useCallback, useState } from 'react';
 import {
   ALBUM_DANCE,
+  ALBUM_FAVOURITES,
   ALBUM_RANDOM,
   EMPTY_ARTIST,
   TEXT,
 } from '../../../constants';
 import { useAppDispatch, useAppSelector } from '../../../hook';
-import { uploadMovedTracks } from '../../../store/trackSlice';
-import { SongType } from '../../../types';
+import { setMovedStatus, uploadMovedTracks } from '../../../store/trackSlice';
+import { TSong } from '../../../types';
 import { TrackItem } from './TrackItem';
 
 export const TrackList: FC<{ header: string }> = ({ header }) => {
   const dispatch = useAppDispatch();
 
   const lang = useAppSelector((state) => state.language.lang);
+  const textColor = useAppSelector((state) => state.colorTheme.textColor);
 
   const tracksAll = useAppSelector((state) => state.tracks.allTracks);
   const tracksDance = useAppSelector((state) => state.tracks.danceTracks);
   const tracksRandom = useAppSelector((state) => state.tracks.randomTracks);
+  const tracksFavourites = useAppSelector((state) => state.tracks.favourites);
 
   const filteredTracks = useAppSelector(
     (state) => state.filteredItems.filteredTracks,
@@ -29,6 +32,9 @@ export const TrackList: FC<{ header: string }> = ({ header }) => {
   );
   const filteredTracks_Random = useAppSelector(
     (state) => state.filteredItems.filteredRandomTracks,
+  );
+  const filteredTracks_Favourites = useAppSelector(
+    (state) => state.filteredItems.filteredFavouritesTracks,
   );
 
   let allTracks = filteredTracks.length ? filteredTracks : tracksAll;
@@ -43,7 +49,11 @@ export const TrackList: FC<{ header: string }> = ({ header }) => {
       : tracksRandom;
   }
 
-  // console.log('--> allTracks', allTracks);
+  if (header === TEXT.albums[ALBUM_FAVOURITES][lang]) {
+    allTracks = filteredTracks_Favourites.length
+      ? filteredTracks_Favourites
+      : tracksFavourites;
+  }
 
   const [trackItems, setTrackItems] = useState(allTracks);
 
@@ -53,41 +63,48 @@ export const TrackList: FC<{ header: string }> = ({ header }) => {
 
   useEffect(() => {
     dispatch(uploadMovedTracks(trackItems));
+    dispatch(setMovedStatus(true));
   }, [dispatch, trackItems]);
 
-  // console.log('--> trackItems', trackItems);
-
   const moveTrackItem = useCallback((dragIndex: number, hoverIndex: number) => {
-    setTrackItems((prevTrackItems: SongType[]) =>
+    setTrackItems((prevTrackItems: TSong[]) =>
       update(prevTrackItems, {
         $splice: [
           [dragIndex, 1],
-          [hoverIndex, 0, prevTrackItems[dragIndex] as SongType],
+          [hoverIndex, 0, prevTrackItems[dragIndex] as TSong],
         ],
       }),
     );
   }, []);
 
-  const renderTrackItem = useCallback((track: SongType, index: number) => {
+  const renderTrackItem = useCallback((track: TSong, index: number) => {
     return (
       <TrackItem
-        key={track._id}
+        key={track.id}
         index={index}
-        id={track._id}
+        id={track.id}
         moveTrackItem={moveTrackItem}
         track={track}
       />
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  if (
+    header === TEXT.albums[ALBUM_FAVOURITES][lang] &&
+    trackItems.length === 0
+  ) {
+    return <div style={{ color: textColor }}>{TEXT.no_favourites[lang]}</div>;
+  }
 
   return (
     <>
-      {trackItems[0].artist === EMPTY_ARTIST && (
-        <div>{TEXT.empty_results[lang]}</div>
+      {trackItems[0]?.author === EMPTY_ARTIST && (
+        <div style={{ color: textColor }}>{TEXT.empty_results[lang]}</div>
       )}
-      {trackItems[0].artist !== EMPTY_ARTIST && (
+      {trackItems[0]?.author !== EMPTY_ARTIST && (
         <div>
-          {trackItems.map((track: SongType, i: number) =>
+          {trackItems.map((track: TSong, i: number) =>
             renderTrackItem(track, i),
           )}
         </div>

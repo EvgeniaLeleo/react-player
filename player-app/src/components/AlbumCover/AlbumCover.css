@@ -4,7 +4,7 @@
   align-items: center;
 
   width: 250px;
-  height: 150px;
+  min-height: 150px;
   margin-bottom: 25px;
   padding: 15px;
 
@@ -22,4 +22,27 @@
 
 .AlbumCover:active {
   filter: brightness(1.7);
+}
+
+@media (max-width: 1439px) {
+  .AlbumCover {
+    font-size: 18px;
+
+    width: 190px;
+    min-height: 125px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .AlbumCover {
+    font-size: 16px;
+
+    width: 190px;
+    min-height: 60px;
+
+    margin-bottom: 18px;
+    padding: 10px;
+
+    border-radius: 4px;
+  }
 }

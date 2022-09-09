@@ -1,10 +1,27 @@
+.NavMenu-Wrapper-Desktop {
+  display: block;
+  min-height: 100vh;
+}
+
+.NavMenu-Wrapper-Mobile {
+  display: none;
+  min-height: 100vh;
+}
+
+.NavMenu-Burger-Mobile {
+  display: none;
+}
+
 .NavMenu {
   display: flex;
   flex-direction: column;
 
-  /* width: 244px; */
+  min-width: 150px;
   width: 12%;
+  min-height: 100%;
   padding: 30px 0 20px 36px;
+  padding-left: 20px;
+  padding-right: 5px;
 
   background-color: #181818;
 
@@ -42,7 +59,7 @@
   flex-direction: column;
 }
 
-.List-Button {
+.NavMenu-List-Button {
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -51,19 +68,110 @@
   text-decoration: none;
 
   width: 100%;
-  height: 24px;
   padding: 0;
-  margin-bottom: 26px;
+  margin-bottom: 20px;
 
   background-color: transparent;
 
   transition: all 0.2s ease;
 }
 
-.List-Button:hover {
+.NavMenu-List-Button:hover {
   color: #acacac;
 }
 
-.List-Button:active {
+.NavMenu-List-Button:active {
   color: #696969;
+}
+
+.Logout-Button {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  font-size: 16px;
+  text-align: left;
+}
+
+.NavMenu-Footer-Top {
+  height: 50vh;
+}
+
+.NavMenu-Animation-Top {
+  height: 40vh;
+}
+
+@media (max-width: 1919px) {
+  .NavMenu-Footer-Top {
+    height: 40vh;
+  }
+
+  .NavMenu-Animation-Top {
+    height: 35vh;
+  }
+}
+
+@media (max-width: 1439px) {
+  .NavMenu-Logo {
+    margin-bottom: 30px;
+  }
+
+  .NavMenu-List-Button {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+
+  .NavMenu,
+  .Logout-Button {
+    font-size: 12px;
+  }
+
+  .NavMenu-Footer-Top {
+    height: 35vh;
+  }
+
+  .NavMenu-Animation-Top {
+    height: 25vh;
+  }
+}
+
+@media (max-width: 1199px) {
+  .NavMenu-List-Button {
+    margin-bottom: 10px;
+    margin-left: 0;
+    padding-left: 0;
+  }
+
+  .NavMenu-Footer-Top {
+    height: 35vh;
+  }
+
+  .NavMenu {
+    width: 150px;
+  }
+}
+
+@media (max-width: 767px) {
+  .NavMenu-Wrapper-Desktop {
+    display: none;
+  }
+
+  .NavMenu-Wrapper-Mobile {
+    display: block;
+  }
+
+  .NavMenu {
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    min-height: 100vh;
+  }
+
+  .NavMenu-Burger-Mobile {
+    display: block;
+    position: absolute;
+    z-index: 200;
+    top: 22px;
+    left: 3px;
+  }
 }
