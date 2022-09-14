@@ -47,9 +47,9 @@ export const ALBUMS = {
     bel: 'Плэйліст дня',
   },
   [ALBUM_DANCE]: {
-    ru: 'Танцевальные хиты',
-    en: 'Dance hits',
-    bel: 'Танцавальныя хіты',
+    ru: '100 танцевальных хитов',
+    en: '100 dance hits',
+    bel: '100 танцавальных хітоў',
   },
   [ALBUM_INDIE]: {
     ru: 'Инди-заряд',

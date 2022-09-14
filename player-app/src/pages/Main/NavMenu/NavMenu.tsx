@@ -37,6 +37,7 @@ import { Animation } from '../../../components/Animation/Animation';
 
 import './NavMenu.css';
 import { Footer } from '../../../components/Footer/Footer';
+import { LogoMenu } from '../../../components/Logo/LogoMenu';
 
 const cnNavMenu = cn('NavMenu');
 
@@ -124,11 +125,11 @@ export const NavMenu: FC<{}> = () => {
           }
         >
           <NavLink to={'/main'} onClick={handleClickToMain}>
-            <Logo textColor={textColor} />
+            <LogoMenu textColor={textColor} />
           </NavLink>
 
           <IconButton
-            sx={{ mb: 3.5 }}
+            sx={{ marginBottom: '20px' }}
             className={cnNavMenu('Burger')}
             onClick={handleClick}
           >
