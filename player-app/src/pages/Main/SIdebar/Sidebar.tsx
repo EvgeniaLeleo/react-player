@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { FC } from 'react';
 import { cn } from '@bem-react/classname';
@@ -16,7 +15,12 @@ import {
 
 import { SpanChangeColor } from '../../../components/changeColor/SpanChangeColor';
 import { AlbumCover } from '../../../components/AlbumCover/AlbumCover';
-import { ALBUM_DANCE, TEXT } from '../../../constants';
+import {
+  ALBUM_DANCE,
+  ALBUM_DAYPLAYLIST,
+  ALBUM_INDIE,
+  TEXT,
+} from '../../../constants';
 import { useAppDispatch, useAppSelector } from '../../../hook';
 import {
   bgColorToBgColorLight,
@@ -232,11 +236,17 @@ export const Sidebar: FC<SidebarProps> = ({
         <div style={{ backgroundColor: 'transparent' }}>
           <div className={cnSidebar('List')}>
             <NavLink to={'/random'} onClick={handleClickRandom}>
-              <AlbumCover text={TEXT.albums.dayplaylist[lang]}></AlbumCover>
+              <AlbumCover
+                text={TEXT.albums[ALBUM_DAYPLAYLIST][lang]}
+              ></AlbumCover>
             </NavLink>
 
             <NavLink to={'/dance'} onClick={handleClickDance}>
-              <AlbumCover text={TEXT.albums.dance[lang]}></AlbumCover>
+              <AlbumCover text={TEXT.albums[ALBUM_DANCE][lang]}></AlbumCover>
+            </NavLink>
+
+            <NavLink to={'/dance'} onClick={handleClickDance}>
+              <AlbumCover text={TEXT.albums[ALBUM_INDIE][lang]}></AlbumCover>
             </NavLink>
           </div>
 
@@ -266,11 +276,21 @@ export const Sidebar: FC<SidebarProps> = ({
             <div className={cnSidebar('Mobile-List')}>
               <div>
                 <NavLink to={'/random'} onClick={handleClickRandom}>
-                  <AlbumCover text={TEXT.albums.dayplaylist[lang]}></AlbumCover>
+                  <AlbumCover
+                    text={TEXT.albums[ALBUM_DAYPLAYLIST][lang]}
+                  ></AlbumCover>
                 </NavLink>
 
                 <NavLink to={'/dance'} onClick={handleClickDance}>
-                  <AlbumCover text={TEXT.albums.dance[lang]}></AlbumCover>
+                  <AlbumCover
+                    text={TEXT.albums[ALBUM_DANCE][lang]}
+                  ></AlbumCover>
+                </NavLink>
+
+                <NavLink to={'/dance'} onClick={handleClickDance}>
+                  <AlbumCover
+                    text={TEXT.albums[ALBUM_INDIE][lang]}
+                  ></AlbumCover>
                 </NavLink>
               </div>
             </div>

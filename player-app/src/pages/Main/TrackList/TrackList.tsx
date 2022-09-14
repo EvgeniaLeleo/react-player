@@ -4,7 +4,7 @@ import { useCallback, useState } from 'react';
 import {
   ALBUM_DANCE,
   ALBUM_FAVOURITES,
-  ALBUM_RANDOM,
+  ALBUM_DAYPLAYLIST,
   EMPTY_ARTIST,
   TEXT,
 } from '../../../constants';
@@ -43,7 +43,7 @@ export const TrackList: FC<{ header: string }> = ({ header }) => {
     allTracks = filteredTracksDance.length ? filteredTracksDance : tracksDance;
   }
 
-  if (header === TEXT.albums[ALBUM_RANDOM][lang]) {
+  if (header === TEXT.albums[ALBUM_DAYPLAYLIST][lang]) {
     allTracks = filteredTracks_Random.length
       ? filteredTracks_Random
       : tracksRandom;

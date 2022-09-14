@@ -9,7 +9,7 @@ import { TSong } from '../../../types';
 import {
   ALBUM_DANCE,
   ALBUM_FAVOURITES,
-  ALBUM_RANDOM,
+  ALBUM_DAYPLAYLIST,
   TEXT,
 } from '../../../constants';
 import { Profile } from '../Profile/Profile';
@@ -114,7 +114,7 @@ export const Centerblock: FC<PlayerProps> = ({ header, tracks }) => {
       dispatch(updateFilteredDanceTracks(finalItems));
     }
 
-    if (header === TEXT.albums[ALBUM_RANDOM][lang]) {
+    if (header === TEXT.albums[ALBUM_DAYPLAYLIST][lang]) {
       const searchedItemsRandom = getSearchQueryArray(
         e.currentTarget.value,
         allTracksRandom,

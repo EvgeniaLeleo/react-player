@@ -35,12 +35,13 @@ export const NUMBER_OF_RANDOM_ITEMS = 10;
 
 export const ORDER = { notSelected: 'notSelected', asc: 'ASC', desc: 'DESC' };
 
-export const ALBUM_RANDOM = 'dayplaylist';
+export const ALBUM_DAYPLAYLIST = 'dayplaylist';
 export const ALBUM_DANCE = 'dance';
+export const ALBUM_INDIE = 'indie';
 export const ALBUM_FAVOURITES = 'favourites';
 
 export const ALBUMS = {
-  [ALBUM_RANDOM]: {
+  [ALBUM_DAYPLAYLIST]: {
     ru: 'Плейлист дня',
     en: 'Playlist of the day',
     bel: 'Плэйліст дня',
@@ -49,6 +50,11 @@ export const ALBUMS = {
     ru: 'Танцевальные хиты',
     en: 'Dance hits',
     bel: 'Танцавальныя хіты',
+  },
+  [ALBUM_INDIE]: {
+    ru: 'Инди-заряд',
+    en: 'Indie charge',
+    bel: 'Індзі-зарад',
   },
   [ALBUM_FAVOURITES]: {
     ru: 'Мои треки',
@@ -66,7 +72,7 @@ export const TEXT = {
       ru: 'Личный кабинет',
       en: 'Profile',
       bel: 'Профіль карыстальніка',
-    }, //Асабісты кабінет
+    },
     logout: { ru: 'Выйти', en: 'Logout', bel: 'Выйсці' },
   },
   searchInput: {
