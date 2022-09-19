@@ -9,7 +9,6 @@ import { useAppDispatch, useAppSelector } from '../../hook';
 import { fetchLogin, selectIsAuth } from '../../store/auth/auth';
 import { Navigate } from 'react-router-dom';
 import { Button } from '../Button/Button';
-import Logo from '../Logo/Logo';
 import { Login } from '../../store/auth/types';
 
 import './LoginWindow.css';
@@ -53,7 +52,6 @@ export const LoginWindow: FC<{}> = () => {
 
   return (
     <Box className={cnLoginWindow()}>
-      {/* <Logo textColor="default" /> */}
       <img
         className={cnLoginWindow('Img')}
         src="./skypro-logo.svg"

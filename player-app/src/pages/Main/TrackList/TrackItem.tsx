@@ -185,7 +185,6 @@ export const TrackItem: FC<TrackItemProps> = ({
             src={'./icons/note.svg'}
             alt="Album_image"
           ></img>
-
           <span className={cnTrackItem('Name')}>{track.name}</span>
           <span className={cnTrackItem('Author')}>{track.author}</span>
           <span
@@ -193,30 +192,30 @@ export const TrackItem: FC<TrackItemProps> = ({
             style={{ color: textColorSecondary }}
           >
             {track.album}, {track.release_date?.slice(0, 4)}
+          </span>{' '}
+          <IconButton
+            onClick={() => handleAddToFavourites(track)}
+            sx={{ width: '5%' }}
+            style={{
+              color: checkFavouriteTrack(track)
+                ? 'rgb(223 82 82)'
+                : textColorSecondary,
+            }}
+          >
+            {checkFavouriteTrack(track) ? (
+              <Favorite fontSize="small" />
+            ) : (
+              <FavoriteBorder fontSize="small" />
+            )}
+          </IconButton>
+          <span
+            className={cnTrackItem('Duration')}
+            style={{ color: textColorSecondary }}
+          >
+            {track?.duration_in_seconds
+              ? secondsToHms(track.duration_in_seconds)
+              : ''}
           </span>
-        </span>
-        <IconButton
-          onClick={() => handleAddToFavourites(track)}
-          sx={{ width: '5%' }}
-          style={{
-            color: checkFavouriteTrack(track)
-              ? 'rgb(223 82 82)'
-              : textColorSecondary,
-          }}
-        >
-          {checkFavouriteTrack(track) ? (
-            <Favorite fontSize="small" />
-          ) : (
-            <FavoriteBorder fontSize="small" />
-          )}
-        </IconButton>
-        <span
-          className={cnTrackItem('Duration')}
-          style={{ color: textColorSecondary }}
-        >
-          {track?.duration_in_seconds
-            ? secondsToHms(track.duration_in_seconds)
-            : ''}
         </span>
       </DivChangeColor>
     </div>

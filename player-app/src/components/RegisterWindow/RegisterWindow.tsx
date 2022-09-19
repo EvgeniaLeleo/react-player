@@ -4,7 +4,6 @@ import { cn } from '@bem-react/classname';
 import { Box, TextField } from '@mui/material';
 
 import { Button } from '../Button/Button';
-import Logo from '../Logo/Logo';
 
 import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '../../hook';
@@ -52,7 +51,6 @@ export const RegisterWindow: FC<{}> = () => {
 
   return (
     <Box className={cnRegisterWindow()}>
-      {/* <Logo textColor="default" /> */}
       <img
         className={cnRegisterWindow('Img')}
         src="./skypro-logo.svg"

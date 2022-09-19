@@ -34,10 +34,10 @@ import { getFinalItems } from '../../../utils/getFinalItems';
 import { TSong, TCheckedItems } from '../../../types';
 import { updateSearchQuery } from '../../../store/sortingSettingsSlice';
 import { Animation } from '../../../components/Animation/Animation';
-
-import './NavMenu.css';
 import { Footer } from '../../../components/Footer/Footer';
 import { LogoMenu } from '../../../components/Logo/LogoMenu';
+
+import './NavMenu.css';
 
 const cnNavMenu = cn('NavMenu');
 

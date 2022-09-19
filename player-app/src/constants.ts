@@ -71,7 +71,7 @@ export const TEXT = {
     profile: {
       ru: 'Личный кабинет',
       en: 'Profile',
-      bel: 'Профіль карыстальніка',
+      bel: 'Профіль', // карыстальніка',
     },
     logout: { ru: 'Выйти', en: 'Logout', bel: 'Выйсці' },
   },
