@@ -2,8 +2,7 @@ import { cn } from '@bem-react/classname';
 import { FavoriteBorder, Favorite } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import type { Identifier, XYCoord } from 'dnd-core';
-import { FC, useCallback } from 'react';
-import { useRef } from 'react';
+import { FC, useRef, useCallback } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 
 import { DivChangeColor } from '../../../components/changeColor/DivChangeColor';

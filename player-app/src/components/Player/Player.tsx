@@ -1,9 +1,8 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { FC } from 'react';
+import { FC, useCallback, useEffect, useRef, useState } from 'react';
 import { cn } from '@bem-react/classname';
 import AudioPlayer, { RHAP_UI } from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
-import { TSong } from '../../types';
+import { IconButton } from '@mui/material';
 import {
   PlayArrow,
   Pause,
@@ -13,7 +12,8 @@ import {
   Shuffle,
   Favorite,
 } from '@mui/icons-material';
-import { IconButton } from '@mui/material';
+
+import { TSong } from '../../types';
 import { useAppDispatch, useAppSelector } from '../../hook';
 import {
   addTrackToFavourites,

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -8,7 +8,6 @@ import { useAppSelector, useAppDispatch } from '../../hook';
 import { closeModal } from '../../store/modalSlice';
 import { logout } from '../../store/auth/auth';
 import { useNavigate } from 'react-router-dom';
-import { FC } from 'react';
 import { COLOR, BGCOLOR, COLOR_EXTRADARK, DEFAULT_LANG } from '../../constants';
 import {
   changeTextColor,

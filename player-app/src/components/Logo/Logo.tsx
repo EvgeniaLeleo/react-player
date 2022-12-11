@@ -1,6 +1,7 @@
 import { cn } from '@bem-react/classname';
 import { Typography } from '@mui/material';
-import React, { FC } from 'react';
+import { FC } from 'react';
+
 import { COLOR_DARK_DEFAULT } from '../../constants';
 import { useAppSelector } from '../../hook';
 import { extradarkToDark, extradarkToHover } from '../../utils/colorUtils';

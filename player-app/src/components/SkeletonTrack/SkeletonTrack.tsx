@@ -1,4 +1,5 @@
 import { cn } from '@bem-react/classname';
+
 import { useAppSelector } from '../../hook';
 import { lightenDarkenColor } from '../../utils/colorUtils';
 import { SkeletonRect } from '../Skeleton/Skeleton';

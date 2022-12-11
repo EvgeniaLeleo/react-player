@@ -1,16 +1,14 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-
-import './index.css';
-
-import App from './App';
-
 import { BrowserRouter } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material';
+
+import App from './App';
 import { COLOR_DARK, COLOR_EXTRADARK } from './constants';
 import store from './store';
 import { extradarkToDark } from './utils/colorUtils';
+
+import './index.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -37,7 +35,6 @@ const theme = createTheme({
 });
 
 root.render(
-  // <React.StrictMode>
   <Provider store={store}>
     <BrowserRouter>
       <ThemeProvider theme={theme}>
@@ -45,5 +42,4 @@ root.render(
       </ThemeProvider>
     </BrowserRouter>
   </Provider>,
-  // </React.StrictMode>,
 );

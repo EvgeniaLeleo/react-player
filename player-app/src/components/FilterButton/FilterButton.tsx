@@ -1,5 +1,4 @@
-import React, { useRef, useState } from 'react';
-import { FC } from 'react';
+import { useRef, useState, FC } from 'react';
 import { cn } from '@bem-react/classname';
 
 import { Popup } from '../Popup/Popup';

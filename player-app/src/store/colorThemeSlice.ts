@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { BGCOLOR, COLOR, COLOR_EXTRADARK } from '../constants';
 
 type TColorState = {

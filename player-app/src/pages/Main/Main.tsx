@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { cn } from '@bem-react/classname';
 import { Box, styled } from '@mui/material';
 
@@ -10,7 +9,6 @@ import { Player } from '../../components/Player/Player';
 import { ALBUM_DANCE, NUMBER_OF_RANDOM_ITEMS, TEXT } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../hook';
 import { TSong } from '../../types';
-import { fetchTracks } from '../../fetchers/fetchTracks';
 import {
   uploadDanceTracks,
   uploadRandomTracks,
@@ -30,6 +28,7 @@ import {
 } from '../../store/sortingSettingsSlice';
 import { checkedGenresFilterArray } from '../../utils/checkedGenresFilterArray';
 import getRandomTracks from '../../utils/getRandomTracks';
+import { useGetTracksQuery } from '../../services/tracksDataApi';
 
 import './Main.css';
 
@@ -44,41 +43,63 @@ const Wrapper = styled(Box)`
 `;
 
 export const Main: FC<MainProps> = ({ header }) => {
+  // const { data, error, isLoading } = useGetTracksQuery();
+  const { data } = useGetTracksQuery();
+
+  console.log(data);
+
   const dispatch = useAppDispatch();
 
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
-  const allTracks = useAppSelector((state) => state.tracks.allTracks);
+  // const allTracks = useAppSelector((state) => state.tracks.allTracks);
 
-  const [tracks, setTracks] = useState<TSong[]>(allTracks);
+  const [tracks, setTracks] = useState<TSong[]>(data || []);
 
   const lang = useAppSelector((state) => state.language.lang);
   const bgColor = useAppSelector((state) => state.colorTheme.bgColor);
 
   useEffect(() => {
-    if (allTracks.length) {
-      setTracks(allTracks);
-    } else {
-      fetchTracks().then((data) => {
-        setTracks(data);
-        dispatch(uploadAllTracks(data));
-        dispatch(
-          updateSortedArtists(getArtistsArray(getSortedByArtistsArray(data))),
-        );
-        dispatch(updateSortedYears(getYearsArray(getSortedByYearsArray(data))));
-        dispatch(
-          updateSortedGenres(getGenresArray(getSortedByGenresArray(data))),
-        );
-        dispatch(
-          uploadDanceTracks(checkedGenresFilterArray([ALBUM_DANCE], data)),
-        );
-        dispatch(
-          uploadRandomTracks(getRandomTracks(NUMBER_OF_RANDOM_ITEMS, data)),
-        );
-        dispatch(updateSearchQuery(''));
-      });
+    if (data?.length) {
+      setTracks(data);
+
+      dispatch(uploadAllTracks(data));
+
+      dispatch(
+        updateSortedArtists(getArtistsArray(getSortedByArtistsArray(data))),
+      );
+      dispatch(updateSortedYears(getYearsArray(getSortedByYearsArray(data))));
+      dispatch(
+        updateSortedGenres(getGenresArray(getSortedByGenresArray(data))),
+      );
+      dispatch(
+        uploadDanceTracks(checkedGenresFilterArray([ALBUM_DANCE], data)),
+      );
+      dispatch(
+        uploadRandomTracks(getRandomTracks(NUMBER_OF_RANDOM_ITEMS, data)),
+      );
+      dispatch(updateSearchQuery(''));
+
+      return;
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [allTracks]);
+
+    // if (!initRequestState || !data) {
+    //   setItems([]);
+    //   return;
+    // }
+
+    // dispatch(setInitRequest(false));
+  }, [data, dispatch]);
+
+  // console.log(allTracks);
+
+  // useEffect(() => {
+  //   if (allTracks.length) {
+  //     setTracks(allTracks);
+  //   } else if (tracks) {
+  //     console.log('d', tracks);
+
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [allTracks]);
 
   return (
     <Wrapper style={{ backgroundColor: bgColor }}>
@@ -92,7 +113,8 @@ export const Main: FC<MainProps> = ({ header }) => {
         className={cnMain()}
       >
         <NavMenu />
-        <Centerblock tracks={tracks} header={header}></Centerblock>
+        <Centerblock tracks={tracks} header={header} />
+        {/* <Centerblock tracks={tracks} header={header}></Centerblock> */}
         <Sidebar
           isVisible={header === TEXT.header.tracks[lang]}
           isUserVisible={header !== TEXT.menu.profile[lang]}

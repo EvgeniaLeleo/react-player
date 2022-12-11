@@ -1,6 +1,6 @@
 import update from 'immutability-helper';
-import { FC, useEffect } from 'react';
-import { useCallback, useState } from 'react';
+import { FC, useEffect, useCallback, useState } from 'react';
+
 import {
   ALBUM_DANCE,
   ALBUM_FAVOURITES,

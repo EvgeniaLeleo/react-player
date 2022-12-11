@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+
 import colorThemeReducer from './colorThemeSlice';
 import languageReducer from './languageSlice';
 import trackReducer from './trackSlice';
@@ -7,6 +8,7 @@ import modalReducer from './modalSlice';
 import filteredItemsReducer from './filteredItemsSlice';
 import sortingSettingsReducer from './sortingSettingsSlice';
 import headerReducer from './headerSlice';
+import { tracksDataApi } from '../services/tracksDataApi';
 
 const store = configureStore({
   reducer: {
@@ -18,7 +20,10 @@ const store = configureStore({
     filteredItems: filteredItemsReducer,
     sortingSettings: sortingSettingsReducer,
     header: headerReducer,
+    [tracksDataApi.reducerPath]: tracksDataApi.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(tracksDataApi.middleware),
 });
 
 export default store;

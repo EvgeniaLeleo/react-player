@@ -1,4 +1,3 @@
-import React from 'react';
 import { FC } from 'react';
 import { Button as MUIButton } from '@mui/material';
 
@@ -37,7 +36,8 @@ export const Button: FC<ButtonProps> = ({
         mb: 2.5,
         fontSize: '18px',
         textTransform: 'capitalize',
-      }}>
+      }}
+    >
       {buttonText}
     </MUIButton>
   );

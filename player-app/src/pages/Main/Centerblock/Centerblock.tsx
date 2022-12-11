@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { cn } from '@bem-react/classname';
 import { Box, InputAdornment, TextField } from '@mui/material';
 import { Search } from '@mui/icons-material';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+
 import { TSong } from '../../../types';
 import {
   ALBUM_DANCE,

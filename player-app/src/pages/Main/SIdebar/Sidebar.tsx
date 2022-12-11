@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { cn } from '@bem-react/classname';
 import { NavLink } from 'react-router-dom';
 import {

@@ -1,6 +1,7 @@
 import { cn } from '@bem-react/classname';
 import { AccessTime } from '@mui/icons-material';
 import { SvgIcon } from '@mui/material';
+
 import { TEXT } from '../../constants';
 import { useAppSelector } from '../../hook';
 import { colorToSecondary } from '../../utils/colorUtils';

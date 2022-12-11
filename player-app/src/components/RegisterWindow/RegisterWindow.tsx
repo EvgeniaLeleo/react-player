@@ -1,14 +1,12 @@
-import React from 'react';
 import { FC } from 'react';
 import { cn } from '@bem-react/classname';
 import { Box, TextField } from '@mui/material';
+import { useForm } from 'react-hook-form';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 import { Button } from '../Button/Button';
-
-import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '../../hook';
 import { fetchRegister, selectIsAuth } from '../../store/auth/auth';
-import { Navigate, useNavigate } from 'react-router-dom';
 import { Login } from '../../store/auth/types';
 
 import './RegisterWindow.css';

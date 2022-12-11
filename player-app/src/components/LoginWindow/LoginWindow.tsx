@@ -1,13 +1,11 @@
-import React from 'react';
 import { FC } from 'react';
 import { cn } from '@bem-react/classname';
-import { NavLink } from 'react-router-dom';
+import { Navigate, NavLink } from 'react-router-dom';
 import { Box, TextField } from '@mui/material';
-
 import { useForm } from 'react-hook-form';
+
 import { useAppDispatch, useAppSelector } from '../../hook';
 import { fetchLogin, selectIsAuth } from '../../store/auth/auth';
-import { Navigate } from 'react-router-dom';
 import { Button } from '../Button/Button';
 import { Login } from '../../store/auth/types';
 

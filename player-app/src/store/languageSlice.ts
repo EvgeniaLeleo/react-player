@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { DEFAULT_LANG } from '../constants';
 import { TLanguages } from '../types';
 

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { FC } from 'react';
 import { cn } from '@bem-react/classname';
 import {
   Box,
@@ -10,13 +10,11 @@ import {
   SelectChangeEvent,
   ThemeProvider,
 } from '@mui/material';
-import { FC } from 'react';
 import { FilterButton } from '../FilterButton/FilterButton';
 import { ORDER, TEXT } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../hook';
 import { TSong, TLanguages, TOrder } from '../../types';
 import { colorToSecondary } from '../../utils/colorUtils';
-import React from 'react';
 import { updateOrder } from '../../store/sortingSettingsSlice';
 import { getFinalItems } from '../../utils/getFinalItems';
 import { updateFilteredTracks } from '../../store/filteredItemsSlice';
@@ -58,13 +56,13 @@ export const FilterButtons: FC<FilterButtonsProps> = ({ lang, textColor }) => {
     },
   });
 
-  const [_, setOrder] = React.useState(ORDER.notSelected);
+  // const [_, setOrder] = useState(ORDER.notSelected);
 
   const handleChange = (event: SelectChangeEvent) => {
     const newOrder = event.target.value as TOrder;
     const searchedItems =
       searchQuery === '' ? allTracksStore : searchedItemsStore;
-    setOrder(newOrder);
+    // setOrder(newOrder);
     dispatch(updateOrder(newOrder));
 
     const finalItems = getFinalItems(

@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import { FC } from 'react';
+import { useState, FC } from 'react';
 import { cn } from '@bem-react/classname';
-
 import { NavLink } from 'react-router-dom';
 import { IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+
 import Logo from '../../../components/Logo/Logo';
 import { TEXT } from '../../../constants';
 import { SpanChangeColor } from '../../../components/changeColor/SpanChangeColor';
