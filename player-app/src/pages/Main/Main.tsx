@@ -4,7 +4,7 @@ import { cn } from '@bem-react/classname';
 import { Box, styled } from '@mui/material';
 
 import { NavMenu } from './NavMenu/NavMenu';
-import { Sidebar } from './SIdebar/Sidebar';
+import { Sidebar } from './Sidebar/Sidebar';
 import { Centerblock } from './Centerblock/Centerblock';
 import { Player } from '../../components/Player/Player';
 import { ALBUM_DANCE, NUMBER_OF_RANDOM_ITEMS, TEXT } from '../../constants';

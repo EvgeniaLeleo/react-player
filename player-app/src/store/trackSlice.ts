@@ -48,7 +48,7 @@ const trackSlice = createSlice({
     },
     addTrackToFavourites(state, action) {
       state.favourites = [...state.favourites, action.payload];
-      localStorage.setItem('favourites', JSON.stringify(state.favourites));
+      // localStorage.setItem('favourites', JSON.stringify(state.favourites));
     },
     removeTrackFromFavourites(state, action) {
       state.favourites = state.favourites.filter(

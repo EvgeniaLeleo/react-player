@@ -77,11 +77,8 @@ export const Sidebar: FC<SidebarProps> = ({
   const colorHover = extradarkToHover(decorativeColor);
   const colorDark = extradarkToDark(decorativeColor);
 
-  const [_, setLanguage] = React.useState(lang);
-
   const handleChange = (event: SelectChangeEvent) => {
     const newLanguage = event.target.value as TLanguages;
-    setLanguage(newLanguage);
     dispatch(changeLanguage(newLanguage));
     localStorage.setItem('language', newLanguage);
   };

@@ -34,7 +34,7 @@ import { getFinalItems } from '../../../utils/getFinalItems';
 import { TSong, TCheckedItems } from '../../../types';
 import { updateSearchQuery } from '../../../store/sortingSettingsSlice';
 import { Animation } from '../../../components/Animation/Animation';
-import { Footer } from '../../../components/Footer/Footer';
+// import { Footer } from '../../../components/Footer/Footer';
 import { LogoMenu } from '../../../components/Logo/LogoMenu';
 
 import './NavMenu.css';
@@ -202,7 +202,7 @@ export const NavMenu: FC<{}> = () => {
           {!isVisible && (
             <>
               <div className={cnNavMenu('Footer-Top')}></div>
-              <Footer></Footer>
+              {/* <Footer></Footer> */}
             </>
           )}
         </nav>
@@ -282,7 +282,7 @@ export const NavMenu: FC<{}> = () => {
                 </button>
               </div>
               <div className={cnNavMenu('Animation-Top')}></div>
-              <Footer></Footer>
+              {/* <Footer></Footer> */}
             </>
           </nav>
         )}

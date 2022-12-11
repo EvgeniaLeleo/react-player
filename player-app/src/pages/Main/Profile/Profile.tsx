@@ -34,14 +34,8 @@ export const Profile: FC = () => {
   );
   const textColorSecondary = colorToSecondary(textColor);
 
-  const [_, setLanguage] = React.useState(lang);
-  const [__, setBgColorInput] = React.useState(bgColor);
-  const [___, setTextColorInput] = React.useState(textColor);
-  const [____, setDecorativeColorInput] = React.useState(decorativeColor);
-
   const handleChange = (event: SelectChangeEvent) => {
     const newLanguage = event.target.value as TLanguages;
-    setLanguage(newLanguage);
     dispatch(changeLanguage(newLanguage));
     localStorage.setItem('language', newLanguage);
   };
@@ -50,7 +44,6 @@ export const Profile: FC = () => {
     target: { value: React.SetStateAction<string> };
   }) => {
     const newBgColor = event.target.value.toString();
-    setBgColorInput(newBgColor);
     dispatch(changeBgColor(newBgColor));
     localStorage.setItem('bgColor', newBgColor);
   };
@@ -59,7 +52,6 @@ export const Profile: FC = () => {
     target: { value: React.SetStateAction<string> };
   }) => {
     const newTextColor = event.target.value.toString();
-    setTextColorInput(newTextColor);
     dispatch(changeTextColor(newTextColor));
     localStorage.setItem('textColor', newTextColor);
   };
@@ -68,7 +60,6 @@ export const Profile: FC = () => {
     target: { value: React.SetStateAction<string> };
   }) => {
     const newDecorativeColor = event.target.value.toString();
-    setDecorativeColorInput(newDecorativeColor);
     dispatch(changeDecorativeColor(newDecorativeColor));
     localStorage.setItem('decorativeColor', newDecorativeColor);
   };

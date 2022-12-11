@@ -7,6 +7,8 @@ import {
 
 import { createTheme } from '@mui/material';
 
+export const URL_API = 'http://51.250.72.80:8090';
+
 export const COLOR_DARK_DEFAULT = '#ad61ff';
 
 export const BGCOLOR = '#181818';
