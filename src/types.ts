@@ -51,3 +51,10 @@ export type TCheckedItems = {
   checkedYears: string[];
   checkedGenres: string[];
 };
+
+export type TCollection = {
+  id: number;
+  items: TSong[];
+  owner: string;
+  name: string;
+};

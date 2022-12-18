@@ -114,13 +114,12 @@ export const Main: FC<MainProps> = ({ header }) => {
       >
         <NavMenu />
         <Centerblock tracks={tracks} header={header} />
-        {/* <Centerblock tracks={tracks} header={header}></Centerblock> */}
         <Sidebar
           isVisible={header === TEXT.header.tracks[lang]}
           isUserVisible={header !== TEXT.menu.profile[lang]}
-        ></Sidebar>
+        />
       </Box>
-      <Player track={currentTrack}></Player>
+      <Player track={currentTrack} />
     </Wrapper>
   );
 };

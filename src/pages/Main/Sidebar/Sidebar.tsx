@@ -109,6 +109,7 @@ export const Sidebar: FC<SidebarProps> = ({
       checkedYears: [],
       checkedGenres: [],
     };
+
     const searchedItemsCurrent = allTracksDance;
 
     newFilter.checkedGenres = [ALBUM_DANCE];

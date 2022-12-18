@@ -186,22 +186,22 @@ export const Centerblock: FC<PlayerProps> = ({ header, tracks }) => {
               }}
             />
           </form>
+
           <h2 style={{ color: textColor }} className={cnCenterblock('Header')}>
             {header}
           </h2>
+
           {header === TEXT.header.tracks[lang] && (
-            <FilterButtons lang={lang} textColor={textColor}></FilterButtons>
+            <FilterButtons lang={lang} textColor={textColor} />
           )}
 
           <Box className={cnCenterblock('Content')}>
-            <ListHeaders></ListHeaders>
+            <ListHeaders />
 
             {!tracks.length ? (
-              array.map((_, i) => (
-                <SkeletonTrack key={i.toString()}></SkeletonTrack>
-              ))
+              array.map((_, i) => <SkeletonTrack key={i.toString()} />)
             ) : (
-              <TrackList header={header}></TrackList>
+              <TrackList header={header} />
             )}
           </Box>
         </div>
