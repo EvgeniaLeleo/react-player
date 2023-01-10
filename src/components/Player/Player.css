@@ -8,20 +8,20 @@
   background-color: #18181881;
 }
 
-.Player-TrackInfo {
+.TrackInfo {
   display: flex;
   align-items: center;
   gap: 25px;
 }
 
-.Player-TrackInfo p {
+.TrackInfo p {
   font-style: normal;
   font-weight: 400;
   font-size: 13px;
   line-height: 24px;
 }
 
-.Player-Volume-Range {
+.VolumeRange {
   cursor: pointer;
 }
 
@@ -108,17 +108,17 @@
   height: 25px;
 }
 
-.Player-ControlsIcon {
+.ControlsIcon {
   color: #fff;
 }
 
-.Player-ControlsIcon:hover {
+.ControlsIcon:hover {
   color: #acacac;
   transition: all 0.2s;
 }
 
 @media (max-width: 767px) {
-  .Player-TrackInfo {
+  .TrackInfo {
     display: none;
   }
 }
