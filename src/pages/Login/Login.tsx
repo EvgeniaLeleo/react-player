@@ -1,15 +1,12 @@
 import { FC } from 'react';
-import { cn } from '@bem-react/classname';
 
 import { LoginWindow } from '../../components/LoginWindow/LoginWindow';
 
-import './Login.css';
-
-const cnLogin = cn('Login');
+import style from './style.module.css';
 
 export const Login: FC<{}> = () => {
   return (
-    <div className={cnLogin()}>
+    <div className={style.Login}>
       <LoginWindow></LoginWindow>
     </div>
   );

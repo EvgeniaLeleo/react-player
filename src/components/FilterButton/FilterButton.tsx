@@ -1,19 +1,16 @@
 import { useRef, useState, FC } from 'react';
-import { cn } from '@bem-react/classname';
 
 import { Popup } from '../Popup/Popup';
 import { useAppSelector, useOnClickOutside } from '../../hook';
 import { extradarkToDark, extradarkToHover } from '../../utils/colorUtils';
 import { ButtonChangeColor } from '../changeColor/ButtonChangeColor';
-import { TFilterButtonName } from '../../types';
+import { FilterButtonName } from '../../types';
 
-import './FilterButton.css';
-
-const cnFilterButton = cn('FilterButton');
+import style from './style.module.css';
 
 export type FilterButtonProps = {
   buttonText: string;
-  buttonName: TFilterButtonName;
+  buttonName: FilterButtonName;
   checkItems: string[];
   rows: 1 | 2 | 3;
 };
@@ -51,9 +48,9 @@ export const FilterButton: FC<FilterButtonProps> = ({
   };
 
   return (
-    <div className={cnFilterButton('Wrapper')}>
+    <div className={style.Wrapper}>
       <ButtonChangeColor
-        className={cnFilterButton()}
+        className={style.FilterButton}
         color={color}
         colorHover={colorHover}
         colorActive={colorDark}
@@ -63,7 +60,7 @@ export const FilterButton: FC<FilterButtonProps> = ({
         {buttonText.toLowerCase()}
         {isPopupVisible && (
           <div
-            className={cnFilterButton('NumberOfCheckedItems')}
+            className={style.NumberOfCheckedItems}
             style={{ backgroundColor: decorativeColor }}
           >
             {checkedItems.length}

@@ -4,13 +4,13 @@
   width: 95%;
 }
 
-.Animation-Bar1,
-.Animation-Bar2,
-.Animation-Bar3,
-.Animation-Bar4,
-.Animation-Bar5,
-.Animation-Bar6,
-.Animation-Bar7 {
+.Bar1,
+.Bar2,
+.Bar3,
+.Bar4,
+.Bar5,
+.Bar6,
+.Bar7 {
   height: 10px;
   margin-bottom: 7px;
 
@@ -23,34 +23,34 @@
   animation-timing-function: linear;
 }
 
-.Animation-Bar1 {
+.Bar1 {
   width: 90%;
   transition: 0.5s;
   animation-delay: -1.9s;
 }
 
-.Animation-Bar2,
-.Animation-Bar6 {
+.Bar2,
+.Bar6 {
   width: 96%;
   animation-delay: -2.9s;
 }
 
-.Animation-Bar3 {
+.Bar3 {
   width: 80%;
   animation-delay: -3.9s;
 }
 
-.Animation-Bar4 {
+.Bar4 {
   width: 27%;
   animation-delay: -4.9s;
 }
 
-.Animation-Bar5 {
+.Bar5 {
   width: 60%;
   animation-delay: -5.9s;
 }
 
-.Animation-Bar7 {
+.Bar7 {
   width: 95%;
   transition: 0.5s;
   animation-delay: -6.1s;

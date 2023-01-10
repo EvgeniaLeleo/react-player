@@ -1,28 +1,26 @@
-import { cn } from '@bem-react/classname';
 import { FavoriteBorder, Favorite } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import type { Identifier, XYCoord } from 'dnd-core';
 import { FC, useRef, useCallback } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 
-import { DivChangeColor } from '../../../components/changeColor/DivChangeColor';
-import { useAppDispatch, useAppSelector } from '../../../hook';
+import { DivChangeColor } from '../../components/changeColor/DivChangeColor';
+import { useAppDispatch, useAppSelector } from '../../hook';
 import {
   addTrackToFavourites,
-  changeCurrentSong,
+  changeCurrenTrack,
   removeTrackFromFavourites,
-} from '../../../store/trackSlice';
-import { TSong } from '../../../types';
+} from '../../store/trackSlice';
+import { Track } from '../../types';
 import {
   colorToSecondary,
   extradarkToDark,
   extradarkToHover,
-} from '../../../utils/colorUtils';
-import { secondsToHms } from '../../../utils/secondsToHms';
+} from '../../utils/colorUtils';
+import { secondsToHms } from '../../utils/secondsToHms';
 
-import './TrackItem.css';
-
-const cnTrackItem = cn('TrackItem');
+import note from './assets/note.svg';
+import style from './style.module.css';
 
 export const ItemTypes = {
   TRACK: 'track',
@@ -31,7 +29,7 @@ export const ItemTypes = {
 export interface TrackItemProps {
   id: any;
   index: number;
-  track: TSong;
+  track: Track;
   moveTrackItem: (dragIndex: number, hoverIndex: number) => void;
 }
 
@@ -120,24 +118,24 @@ export const TrackItem: FC<TrackItemProps> = ({
   const colorDark = extradarkToDark(decorativeColor);
 
   const defineCurrentTrack = useCallback(
-    (track: TSong) => {
+    (track: Track) => {
       return currentTrack.id === track.id;
     },
     [currentTrack.id],
   );
 
   const handleChooseSong = useCallback(
-    (track: TSong) => {
-      dispatch(changeCurrentSong(track));
+    (track: Track) => {
+      dispatch(changeCurrenTrack(track));
     },
     [dispatch],
   );
 
   const handleAddToFavourites = useCallback(
-    (track: TSong) => {
+    (track: Track) => {
       if (
         favourites.some(
-          (favTrack: TSong) => favTrack.track_file === track.track_file,
+          (favTrack: Track) => favTrack.track_file === track.track_file,
         )
       ) {
         dispatch(removeTrackFromFavourites(track));
@@ -148,10 +146,10 @@ export const TrackItem: FC<TrackItemProps> = ({
     [dispatch, favourites],
   );
 
-  const checkFavouriteTrack = (track: TSong) => {
+  const checkFavouriteTrack = (track: Track) => {
     if (
       favourites.some(
-        (favTrack: TSong) => favTrack.track_file === track.track_file,
+        (favTrack: Track) => favTrack.track_file === track.track_file,
       )
     ) {
       return true;
@@ -163,7 +161,7 @@ export const TrackItem: FC<TrackItemProps> = ({
   return (
     <div
       ref={ref}
-      className={cnTrackItem('Info')}
+      className={style.Info}
       style={{ opacity }}
       data-handler-id={handlerId}
     >
@@ -171,25 +169,19 @@ export const TrackItem: FC<TrackItemProps> = ({
         color={defineCurrentTrack(track) ? colorHover : textColor}
         colorHover={colorHover}
         colorActive={colorDark}
-        className={cnTrackItem('Info')}
+        className={style.Info}
         key={track.id}
       >
-        <span
-          onClick={() => handleChooseSong(track)}
-          className={cnTrackItem('Info')}
-        >
+        <span onClick={() => handleChooseSong(track)} className={style.Info}>
           <img
-            className={cnTrackItem('Icon')}
+            className={style.Icon}
             // src={track.img ? track.img : './icons/note.svg'}
-            src={'./icons/note.svg'}
+            src={note}
             alt="Album_image"
           ></img>
-          <span className={cnTrackItem('Name')}>{track.name}</span>
-          <span className={cnTrackItem('Author')}>{track.author}</span>
-          <span
-            className={cnTrackItem('Album')}
-            style={{ color: textColorSecondary }}
-          >
+          <span className={style.Name}>{track.name}</span>
+          <span className={style.Author}>{track.author}</span>
+          <span className={style.Album} style={{ color: textColorSecondary }}>
             {track.album}, {track.release_date?.slice(0, 4)}
           </span>{' '}
           <IconButton
@@ -208,7 +200,7 @@ export const TrackItem: FC<TrackItemProps> = ({
             )}
           </IconButton>
           <span
-            className={cnTrackItem('Duration')}
+            className={style.Duration}
             style={{ color: textColorSecondary }}
           >
             {track?.duration_in_seconds

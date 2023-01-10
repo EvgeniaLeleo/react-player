@@ -1,22 +1,22 @@
 import React, { FC, useEffect, useState } from 'react';
-import { cn } from '@bem-react/classname';
+
 import { Box, InputAdornment, TextField } from '@mui/material';
 import { Search } from '@mui/icons-material';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
-import { TSong } from '../../../types';
+import { Track } from '../../types';
 import {
   ALBUM_DANCE,
   ALBUM_FAVOURITES,
   ALBUM_DAYPLAYLIST,
   TEXT,
-} from '../../../constants';
+} from '../../constants';
 import { Profile } from '../Profile/Profile';
-import { useAppDispatch, useAppSelector } from '../../../hook';
+import { useAppDispatch, useAppSelector } from '../../hook';
 import { TrackList } from '../TrackList/TrackList';
-import { FilterButtons } from '../../../components/FilterButtons/FilterButtons';
-import { getSearchQueryArray } from '../../../utils/getSearchQueryArray';
+import { FilterButtons } from '../FilterButtons/FilterButtons';
+import { getSearchQueryArray } from '../../utils/getSearchQueryArray';
 import {
   updateFilteredDanceTracks,
   updateFilteredFavouritesTracks,
@@ -26,18 +26,16 @@ import {
   updateSearchedTracksDance,
   updateSearchedTracksFavourites,
   updateSearchedTracksRandom,
-} from '../../../store/filteredItemsSlice';
-import { getFinalItems } from '../../../utils/getFinalItems';
-import { updateSearchQuery } from '../../../store/sortingSettingsSlice';
-import { SkeletonTrack } from '../../../components/SkeletonTrack/SkeletonTrack';
-import { ListHeaders } from '../../../components/ListHeaders/ListHeaders';
+} from '../../store/filteredItemsSlice';
+import { getFinalItems } from '../../utils/getFinalItems';
+import { updateSearchQuery } from '../../store/sortingSettingsSlice';
+import { SkeletonTrack } from '../SkeletonTrack/SkeletonTrack';
+import { ListHeaders } from '../ListHeaders/ListHeaders';
 
-import './Centerblock.css';
-
-const cnCenterblock = cn('Centerblock');
+import style from './style.module.css';
 
 type PlayerProps = {
-  tracks: TSong[];
+  tracks: Track[];
   header: string;
 };
 
@@ -49,10 +47,10 @@ export const Centerblock: FC<PlayerProps> = ({ header, tracks }) => {
   const order = useAppSelector((state) => state.sortingSettings.order);
 
   const allTracksStore = useAppSelector((state) => state.tracks.allTracks);
-  const allTracksDance: TSong[] = useAppSelector(
+  const allTracksDance: Track[] = useAppSelector(
     (state) => state.tracks.danceTracks,
   );
-  const allTracksRandom: TSong[] = useAppSelector(
+  const allTracksRandom: Track[] = useAppSelector(
     (state) => state.tracks.randomTracks,
   );
 
@@ -158,8 +156,8 @@ export const Centerblock: FC<PlayerProps> = ({ header, tracks }) => {
   } else {
     return (
       <DndProvider backend={HTML5Backend}>
-        <div className={cnCenterblock()}>
-          <form className={cnCenterblock('Input-Wrapper')}>
+        <div className={style.Centerblock}>
+          <form className={style.InputWrapper}>
             <TextField
               value={value}
               onChange={(e) => handleSearch(e)}
@@ -179,7 +177,7 @@ export const Centerblock: FC<PlayerProps> = ({ header, tracks }) => {
                   <InputAdornment sx={{ color: textColor }} position="start">
                     <Search
                       style={{ color: textColor }}
-                      className={cnCenterblock('Input')}
+                      className={style.Input}
                     />
                   </InputAdornment>
                 ),
@@ -187,7 +185,7 @@ export const Centerblock: FC<PlayerProps> = ({ header, tracks }) => {
             />
           </form>
 
-          <h2 style={{ color: textColor }} className={cnCenterblock('Header')}>
+          <h2 style={{ color: textColor }} className={style.Header}>
             {header}
           </h2>
 
@@ -195,7 +193,7 @@ export const Centerblock: FC<PlayerProps> = ({ header, tracks }) => {
             <FilterButtons lang={lang} textColor={textColor} />
           )}
 
-          <Box className={cnCenterblock('Content')}>
+          <Box className={style.Content}>
             <ListHeaders />
 
             {!tracks.length ? (

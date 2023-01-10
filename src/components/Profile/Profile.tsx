@@ -1,25 +1,22 @@
 import { FC } from 'react';
-import { cn } from '@bem-react/classname';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import { Button as MUIButton, createTheme, ThemeProvider } from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
-import { useAppDispatch, useAppSelector } from '../../../hook';
-import { BGCOLOR, COLOR, COLOR_EXTRADARK, TEXT } from '../../../constants';
+import { useAppDispatch, useAppSelector } from '../../hook';
+import { BGCOLOR, COLOR, COLOR_EXTRADARK, TEXT } from '../../constants';
 import {
   changeBgColor,
   changeDecorativeColor,
   changeTextColor,
-} from '../../../store/colorThemeSlice';
-import { colorToSecondary } from '../../../utils/colorUtils';
-import { changeLanguage } from '../../../store/languageSlice';
-import { TLanguages } from '../../../types';
+} from '../../store/colorThemeSlice';
+import { colorToSecondary } from '../../utils/colorUtils';
+import { changeLanguage } from '../../store/languageSlice';
+import { Languages } from '../../types';
 
-import './Profile.css';
-
-const cnProfile = cn('Profile');
+import style from './style.module.css';
 
 export const Profile: FC = () => {
   const dispatch = useAppDispatch();
@@ -33,7 +30,7 @@ export const Profile: FC = () => {
   const textColorSecondary = colorToSecondary(textColor);
 
   const handleChange = (event: SelectChangeEvent) => {
-    const newLanguage = event.target.value as TLanguages;
+    const newLanguage = event.target.value as Languages;
     dispatch(changeLanguage(newLanguage));
     localStorage.setItem('language', newLanguage);
   };
@@ -80,53 +77,47 @@ export const Profile: FC = () => {
   });
 
   return (
-    <div className={cnProfile()}>
-      <h2 style={{ color: textColor }} className={cnProfile('Header-Main')}>
+    <div className={style.Profile}>
+      <h2 style={{ color: textColor }} className={style.HeaderMain}>
         {TEXT.menu.profile[lang]}
       </h2>
-      <div className={cnProfile('Data')} style={{ color: textColor }}>
-        <h4
-          className={cnProfile('Header')}
-          style={{ color: textColorSecondary }}
-        >
+      <div className={style.Data} style={{ color: textColor }}>
+        <h4 className={style.Header} style={{ color: textColorSecondary }}>
           {TEXT.profile.userData[lang]}
         </h4>
-        <div className={cnProfile('UserData')}>
+        <div className={style.UserData}>
           {TEXT.profile.userName[lang]} {dataUser?.fullName}
         </div>
-        <div className={cnProfile('UserData')}>
+        <div className={style.UserData}>
           {TEXT.profile.login[lang]} {dataUser?.email}
         </div>
 
-        <h4
-          className={cnProfile('Header')}
-          style={{ color: textColorSecondary }}
-        >
+        <h4 className={style.Header} style={{ color: textColorSecondary }}>
           {TEXT.profile.custom[lang]}
         </h4>
-        <div className={cnProfile('Custom')}>
-          <div className={cnProfile('CustomBgColor')}>
+        <div className={style.Custom}>
+          <div className={style.CustomBgColor}>
             <div>{TEXT.profile.bgcolor[lang]}</div>
             <input
-              className={cnProfile('InputBgColor')}
+              className={style.InputBgColor}
               type="color"
               value={bgColor}
               onChange={handleChangeBgColor}
             ></input>
           </div>
-          <div className={cnProfile('CustomTextColor')}>
+          <div className={style.CustomTextColor}>
             <div>{TEXT.profile.textColor[lang]}</div>
             <input
-              className={cnProfile('InputTextColor')}
+              className={style.InputTextColor}
               type="color"
               value={textColor}
               onChange={handleChangeTextColor}
             ></input>
           </div>
-          <div className={cnProfile('CustomDecorativeColor')}>
+          <div className={style.CustomDecorativeColor}>
             <div>{TEXT.profile.designColor[lang]}</div>
             <input
-              className={cnProfile('InputDecorativeColor')}
+              className={style.InputDecorativeColor}
               type="color"
               value={decorativeColor}
               onChange={handleChangeDecorativeColor}

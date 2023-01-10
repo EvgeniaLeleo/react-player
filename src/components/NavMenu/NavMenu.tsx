@@ -1,19 +1,19 @@
 import { useState, FC } from 'react';
-import { cn } from '@bem-react/classname';
+import cn from 'classnames';
 import { NavLink } from 'react-router-dom';
 import { IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
-import Logo from '../../../components/Logo/Logo';
-import { TEXT } from '../../../constants';
-import { SpanChangeColor } from '../../../components/changeColor/SpanChangeColor';
-import { useAppDispatch, useAppSelector } from '../../../hook';
+import Logo from '../Logo/Logo';
+import { TEXT } from '../../constants';
+import { SpanChangeColor } from '../changeColor/SpanChangeColor';
+import { useAppDispatch, useAppSelector } from '../../hook';
 import {
   bgColorToBgColorLight,
   extradarkToDark,
   extradarkToHover,
-} from '../../../utils/colorUtils';
-import { openModal } from '../../../store/modalSlice';
+} from '../../utils/colorUtils';
+import { openModal } from '../../store/modalSlice';
 
 import {
   updateCheckedArtists,
@@ -27,20 +27,18 @@ import {
   updateSearchedTracksRandom,
   updateFilteredFavouritesTracks,
   updateSearchedTracksFavourites,
-} from '../../../store/filteredItemsSlice';
-import { uploadAllTracks } from '../../../store/trackSlice';
-import { getFinalItems } from '../../../utils/getFinalItems';
-import { TSong, TCheckedItems } from '../../../types';
-import { updateSearchQuery } from '../../../store/sortingSettingsSlice';
-import { Animation } from '../../../components/Animation/Animation';
+} from '../../store/filteredItemsSlice';
+import { uploadAllTracks } from '../../store/trackSlice';
+import { getFinalItems } from '../../utils/getFinalItems';
+import { Track, CheckedItems } from '../../types';
+import { updateSearchQuery } from '../../store/sortingSettingsSlice';
+import { Animation } from '../Animation/Animation';
 // import { Footer } from '../../../components/Footer/Footer';
-import { LogoMenu } from '../../../components/Logo/LogoMenu';
+import { LogoMenu } from '../Logo/LogoMenu';
 
-import './NavMenu.css';
+import style from './style.module.css';
 
-const cnNavMenu = cn('NavMenu');
-
-const newFilter: TCheckedItems = {
+const newFilter: CheckedItems = {
   checkedArtists: [],
   checkedYears: [],
   checkedGenres: [],
@@ -60,8 +58,8 @@ export const NavMenu: FC<{}> = () => {
   const colorHover = extradarkToHover(decorativeColor);
   const colorDark = extradarkToDark(decorativeColor);
 
-  const allTracks: TSong[] = useAppSelector((state) => state.tracks.allTracks);
-  const allTracksDance: TSong[] = useAppSelector(
+  const allTracks: Track[] = useAppSelector((state) => state.tracks.allTracks);
+  const allTracksDance: Track[] = useAppSelector(
     (state) => state.tracks.danceTracks,
   );
   const allTracksRandom = useAppSelector((state) => state.tracks.randomTracks);
@@ -114,9 +112,9 @@ export const NavMenu: FC<{}> = () => {
 
   return (
     <>
-      <div className={cnNavMenu('Wrapper-Desktop')}>
+      <div className={style.WrapperDesktop}>
         <nav
-          className={cnNavMenu()}
+          className={style.NavMenu}
           style={
             isVisible
               ? { backgroundColor: bgColorLight }
@@ -129,19 +127,19 @@ export const NavMenu: FC<{}> = () => {
 
           <IconButton
             sx={{ marginBottom: '20px' }}
-            className={cnNavMenu('Burger')}
+            className={style.Burger}
             onClick={handleClick}
           >
             <MenuIcon
-              className={cnNavMenu('Burger-Icon')}
+              className={style.BurgerIcon}
               style={{ color: textColor }}
             />
           </IconButton>
           {isVisible && (
             <>
-              <div className={cnNavMenu('List')}>
+              <div className={style.List}>
                 <NavLink
-                  className={cnNavMenu('List-Button')}
+                  className={style.ListButton}
                   style={{ color: textColor }}
                   to="/main"
                 >
@@ -155,7 +153,7 @@ export const NavMenu: FC<{}> = () => {
 
                 <NavLink
                   onClick={handleClickToMain}
-                  className={cnNavMenu('List-Button')}
+                  className={style.ListButton}
                   style={{ color: textColor }}
                   to="/mytracks"
                 >
@@ -168,7 +166,7 @@ export const NavMenu: FC<{}> = () => {
                 </NavLink>
 
                 <NavLink
-                  className={cnNavMenu('List-Button')}
+                  className={style.ListButton}
                   style={{ color: textColor }}
                   to={'/profile'}
                 >
@@ -183,7 +181,7 @@ export const NavMenu: FC<{}> = () => {
                 <button
                   onClick={() => dispatch(openModal())}
                   style={{ color: textColor }}
-                  className={'Logout-Button'}
+                  className={style.LogoutButton}
                 >
                   <SpanChangeColor
                     colorHover={colorHover}
@@ -193,32 +191,29 @@ export const NavMenu: FC<{}> = () => {
                   </SpanChangeColor>
                 </button>
               </div>
-              <div className={cnNavMenu('Animation-Top')}></div>
+              <div className={style.AnimationTop}></div>
               <Animation></Animation>
             </>
           )}
 
           {!isVisible && (
             <>
-              <div className={cnNavMenu('Footer-Top')}></div>
+              <div className={style.FooterTop}></div>
               {/* <Footer></Footer> */}
             </>
           )}
         </nav>
       </div>
 
-      <div className={cnNavMenu('Burger-Mobile')}>
+      <div className={style.BurgerMobile}>
         <IconButton sx={{ mb: 3.5 }} onClick={handleClickMobile}>
-          <MenuIcon
-            className={cnNavMenu('Burger-Icon')}
-            style={{ color: textColor }}
-          />
+          <MenuIcon className={style.BurgerIcon} style={{ color: textColor }} />
         </IconButton>
       </div>
-      <div className={cnNavMenu('Wrapper-Mobile')}>
+      <div className={style.WrapperMobile}>
         {isVisibleMobile && (
           <nav
-            className={cnNavMenu()}
+            className={style.NavMenu}
             style={{ backgroundColor: bgColorLight, paddingTop: '70px' }}
           >
             <NavLink to={'/main'} onClick={handleClickToMain}>
@@ -226,9 +221,9 @@ export const NavMenu: FC<{}> = () => {
             </NavLink>
 
             <>
-              <div className={cnNavMenu('List')}>
+              <div className={style.List}>
                 <NavLink
-                  className={cnNavMenu('List-Button')}
+                  className={style.ListButton}
                   style={{ color: textColor }}
                   to="/main"
                 >
@@ -242,7 +237,7 @@ export const NavMenu: FC<{}> = () => {
 
                 <NavLink
                   onClick={handleClickToMain}
-                  className={cnNavMenu('List-Button')}
+                  className={style.ListButton}
                   style={{ color: textColor }}
                   to="/mytracks"
                 >
@@ -255,7 +250,7 @@ export const NavMenu: FC<{}> = () => {
                 </NavLink>
 
                 <NavLink
-                  className={cnNavMenu('List-Button')}
+                  className={style.ListButton}
                   style={{ color: textColor }}
                   to={'/profile'}
                 >
@@ -270,7 +265,7 @@ export const NavMenu: FC<{}> = () => {
                 <button
                   onClick={() => dispatch(openModal())}
                   style={{ color: textColor }}
-                  className={'Logout-Button'}
+                  className={style.LogoutButton}
                 >
                   <SpanChangeColor
                     colorHover={colorHover}
@@ -280,7 +275,7 @@ export const NavMenu: FC<{}> = () => {
                   </SpanChangeColor>
                 </button>
               </div>
-              <div className={cnNavMenu('Animation-Top')}></div>
+              <div className={style.AnimationTop}></div>
               {/* <Footer></Footer> */}
             </>
           </nav>

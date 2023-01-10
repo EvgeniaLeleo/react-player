@@ -2,13 +2,13 @@
  * Сортирует массив треков по году выпуска в возрастающем или убывающем порядке порядке
  */
 
-import { TSong, TOrder } from '../types';
+import { Track, Order } from '../types';
 import { getSortedByYearsArray } from './getSortedByYearsArray';
 
 export const getSortedByOrderArray: (
-  tracks: TSong[],
-  order: TOrder,
-) => TSong[] = (tracks, order) => {
+  tracks: Track[],
+  order: Order,
+) => Track[] = (tracks, order) => {
   let sortedArray = [...tracks];
 
   if (order === 'ASC') {

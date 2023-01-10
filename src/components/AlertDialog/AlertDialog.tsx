@@ -30,14 +30,14 @@ import {
 import { changeLanguage } from '../../store/languageSlice';
 import { updateSearchQuery } from '../../store/sortingSettingsSlice';
 import { uploadAllTracks } from '../../store/trackSlice';
-import { TSong } from '../../types';
+import { Track } from '../../types';
 
 export const AlertDialog: FC<{}> = () => {
   const dispatch = useAppDispatch();
   const { isOpen } = useAppSelector((state) => state.modal);
   const navigate = useNavigate();
-  const allTracks: TSong[] = useAppSelector((state) => state.tracks.allTracks);
-  const allTracksDance: TSong[] = useAppSelector(
+  const allTracks: Track[] = useAppSelector((state) => state.tracks.allTracks);
+  const allTracksDance: Track[] = useAppSelector(
     (state) => state.tracks.danceTracks,
   );
   const allTracksRandom = useAppSelector((state) => state.tracks.randomTracks);

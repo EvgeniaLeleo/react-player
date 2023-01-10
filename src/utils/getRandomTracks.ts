@@ -1,10 +1,10 @@
-import { TSong } from '../types';
+import { Track } from '../types';
 
 export const getRandomTracks = (
   arrayLength: number,
-  data: TSong[],
-): TSong[] => {
-  const itemsArray: TSong[] = [];
+  data: Track[],
+): Track[] => {
+  const itemsArray: Track[] = [];
 
   while (itemsArray.length < arrayLength) {
     const randomTrack = getRandomTrack(data);
@@ -17,7 +17,7 @@ export const getRandomTracks = (
   return itemsArray;
 };
 
-const getRandomTrack = (data: TSong[]): TSong => {
+const getRandomTrack = (data: Track[]): Track => {
   const item = data[Math.floor(Math.random() * data.length)];
   return item;
 };

@@ -1,4 +1,4 @@
-.TrackItem-Info {
+.Info {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
@@ -13,26 +13,26 @@
   margin-bottom: 6px;
 }
 
-.TrackItem-Icon {
+.Icon {
   width: 5%;
 
   cursor: pointer;
 }
 
-.TrackItem-Name {
+.Name {
   width: 30%;
   padding-left: 2%;
 
   cursor: pointer;
 }
 
-.TrackItem-Author {
+.Author {
   width: 25%;
 
   cursor: pointer;
 }
 
-.TrackItem-Album {
+.Album {
   color: #696969;
 
   width: 30%;
@@ -40,34 +40,34 @@
   cursor: pointer;
 }
 
-.TrackItem-Like {
+.Like {
   width: 5%;
 }
 
-.TrackItem-Like-Icon {
+.Like-Icon {
   color: #696969;
 }
 
-.TrackItem-Duration {
+.Duration {
   color: #696969;
   width: 5%;
   text-align: right;
 }
 
 @media (max-width: 1439px) {
-  .TrackItem-Info {
+  .Info {
     font-size: 12px;
   }
 }
 
 @media (max-width: 767px) {
-  .TrackItem-Info {
+  .Info {
     min-height: 42px;
   }
 }
 
 @media (max-width: 767px) {
-  .TrackItem-Info {
+  .Info {
     align-items: flex-start;
     font-size: 10px;
   }

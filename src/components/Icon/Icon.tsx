@@ -1,9 +1,6 @@
 import { FC } from 'react';
-import { cn } from '@bem-react/classname';
 
-import './Icon.css';
-
-const cnIcon = cn('Icon');
+import style from './style.module.css';
 
 export type IconProps = {
   type:
@@ -23,6 +20,6 @@ export type IconProps = {
 
 export const Icon: FC<IconProps> = ({ type }) => {
   return (
-    <img src={`./icons/${type}.svg`} className={cnIcon()} alt={type}></img>
+    <img src={`./icons/${type}.svg`} className={style.Icon} alt={type}></img>
   );
 };

@@ -2,10 +2,10 @@
 
 ## Установка
 
-Склонируйте репозиторий и установите зависимости (dependencies, devDependencies).
+Склонируйте репозиторий и установите зависимости
 
 ```sh
-cd rs-clone
+cd react-player
 npm install
 ```
 

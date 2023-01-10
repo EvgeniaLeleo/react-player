@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { TSong } from '../types';
+import { Track } from '../types';
 
 type TTrackState = {
-  currentTrack: TSong;
-  allTracks: TSong[];
-  danceTracks: TSong[];
-  randomTracks: TSong[];
-  movedTracks: TSong[];
-  favourites: TSong[];
+  currentTrack: Track;
+  allTracks: Track[];
+  danceTracks: Track[];
+  randomTracks: Track[];
+  movedTracks: Track[];
+  favourites: Track[];
   autoplay: boolean;
   isMoved: boolean;
   isShuffleActive: boolean;
@@ -30,21 +30,21 @@ const trackSlice = createSlice({
   name: 'tracks',
   initialState,
   reducers: {
-    changeCurrentSong(state, action: PayloadAction<TSong>) {
+    changeCurrenTrack(state, action: PayloadAction<Track>) {
       state.autoplay = true;
       state.currentTrack = action.payload;
       localStorage.setItem('currentTrack', JSON.stringify(state.currentTrack));
     },
-    uploadAllTracks(state, action: PayloadAction<TSong[]>) {
+    uploadAllTracks(state, action: PayloadAction<Track[]>) {
       state.allTracks = action.payload;
     },
-    uploadDanceTracks(state, action: PayloadAction<TSong[]>) {
+    uploadDanceTracks(state, action: PayloadAction<Track[]>) {
       state.danceTracks = action.payload;
     },
-    uploadRandomTracks(state, action: PayloadAction<TSong[]>) {
+    uploadRandomTracks(state, action: PayloadAction<Track[]>) {
       state.randomTracks = action.payload;
     },
-    uploadMovedTracks(state, action: PayloadAction<TSong[]>) {
+    uploadMovedTracks(state, action: PayloadAction<Track[]>) {
       state.movedTracks = action.payload;
     },
     addTrackToFavourites(state, action) {
@@ -57,10 +57,10 @@ const trackSlice = createSlice({
       );
       localStorage.setItem('favourites', JSON.stringify(state.favourites));
     },
-    switchToNextTrack(state, action: PayloadAction<TSong[]>) {
+    switchToNextTrack(state, action: PayloadAction<Track[]>) {
       state.autoplay = true;
-      let nextTrack: TSong;
-      let allTracks: TSong[];
+      let nextTrack: Track;
+      let allTracks: Track[];
 
       if (state.isMoved) {
         allTracks = JSON.parse(JSON.stringify(state.movedTracks));
@@ -84,11 +84,11 @@ const trackSlice = createSlice({
         state.currentTrack = nextTrack;
       }
     },
-    switchToPreviousTrack(state, action: PayloadAction<TSong[]>) {
+    switchToPreviousTrack(state, action: PayloadAction<Track[]>) {
       state.autoplay = true;
       let previousTrack;
 
-      let allTracks: TSong[];
+      let allTracks: Track[];
 
       if (state.isMoved) {
         allTracks = JSON.parse(JSON.stringify(state.movedTracks));
@@ -126,7 +126,7 @@ const trackSlice = createSlice({
 });
 
 export const {
-  changeCurrentSong,
+  changeCurrenTrack,
   uploadAllTracks,
   uploadDanceTracks,
   uploadRandomTracks,

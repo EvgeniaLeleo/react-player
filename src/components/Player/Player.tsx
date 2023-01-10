@@ -13,7 +13,7 @@ import {
   Favorite,
 } from '@mui/icons-material';
 
-import { TSong } from '../../types';
+import { Track } from '../../types';
 import { useAppDispatch, useAppSelector } from '../../hook';
 import {
   addTrackToFavourites,
@@ -31,11 +31,12 @@ import {
 } from '../changeColor/PlayerChangeColor';
 
 import './Player.css';
+import note from './assets/note.svg';
 
 const cnPlayer = cn('Player');
 
 export type PlayerProps = {
-  track: TSong;
+  track: Track;
 };
 
 export const Player: FC<PlayerProps> = ({ track }) => {
@@ -85,10 +86,10 @@ export const Player: FC<PlayerProps> = ({ track }) => {
   }, [dispatch]);
 
   const handleAddToFavourites = useCallback(
-    (song: TSong) => {
+    (song: Track) => {
       if (
         favourites.some(
-          (favTrack: TSong) => favTrack.track_file === song.track_file,
+          (favTrack: Track) => favTrack.track_file === song.track_file,
         )
       ) {
         dispatch(removeTrackFromFavourites(song));
@@ -99,10 +100,10 @@ export const Player: FC<PlayerProps> = ({ track }) => {
     [dispatch, favourites],
   );
 
-  const checkFavouriteTrack = (song: TSong) => {
+  const checkFavouriteTrack = (song: Track) => {
     if (
       favourites.some(
-        (favTrack: TSong) => favTrack.track_file === song.track_file,
+        (favTrack: Track) => favTrack.track_file === song.track_file,
       )
     ) {
       return true;
@@ -141,7 +142,7 @@ export const Player: FC<PlayerProps> = ({ track }) => {
             <div className={cnPlayer('TrackInfo')}>
               <img
                 // src={track.img ? track.img : './icons/note.svg'}
-                src={'./icons/note.svg'}
+                src={note}
                 alt="note"
                 width={'52px'}
               ></img>

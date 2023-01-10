@@ -3,7 +3,7 @@
  */
 
 import { EMPTY_RESULTS, ORDER } from '../constants';
-import { TSong, TCheckedItems, TOrder } from '../types';
+import { Track, CheckedItems, Order } from '../types';
 import { checkedArtistsFilterArray } from './checkedArtistsFilterArray';
 import { checkedGenresFilterArray } from './checkedGenresFilterArray';
 import { checkedYearsFilterArray } from './checkedYearsFilterArray';
@@ -11,11 +11,11 @@ import { commonItems } from './commonItems';
 import { getSortedByOrderArray } from './getSortedByOrderArray';
 
 export const getFinalItems: (
-  allTracks: TSong[],
-  checkedItemsObj: TCheckedItems,
-  searchedItems: TSong[],
-  order: TOrder,
-) => TSong[] = (allTracks, checkedItemsObj, searchedItems, order) => {
+  allTracks: Track[],
+  checkedItemsObj: CheckedItems,
+  searchedItems: Track[],
+  order: Order,
+) => Track[] = (allTracks, checkedItemsObj, searchedItems, order) => {
   const checkedArtistsArray = checkedItemsObj.checkedArtists.length
     ? checkedArtistsFilterArray(checkedItemsObj.checkedArtists, allTracks)
     : allTracks;

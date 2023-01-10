@@ -1,14 +1,13 @@
 import { FC, useEffect, useState } from 'react';
-import { cn } from '@bem-react/classname';
 import { Box, styled } from '@mui/material';
 
-import { NavMenu } from './NavMenu/NavMenu';
-import { Sidebar } from './Sidebar/Sidebar';
-import { Centerblock } from './Centerblock/Centerblock';
+import { NavMenu } from '../../components/NavMenu/NavMenu';
+import { Sidebar } from '../../components/Sidebar/Sidebar';
+import { Centerblock } from '../../components/Centerblock/Centerblock';
 import { Player } from '../../components/Player/Player';
 import { ALBUM_DANCE, NUMBER_OF_RANDOM_ITEMS, TEXT } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../hook';
-import { TSong } from '../../types';
+import { Track } from '../../types';
 import {
   uploadDanceTracks,
   uploadRandomTracks,
@@ -30,9 +29,7 @@ import { checkedGenresFilterArray } from '../../utils/checkedGenresFilterArray';
 import getRandomTracks from '../../utils/getRandomTracks';
 import { useGetTracksQuery } from '../../services/tracksDataApi';
 
-import './Main.css';
-
-const cnMain = cn('Main');
+// import style from './style.module.css';
 
 export type MainProps = {
   header: string;
@@ -53,7 +50,7 @@ export const Main: FC<MainProps> = ({ header }) => {
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
   // const allTracks = useAppSelector((state) => state.tracks.allTracks);
 
-  const [tracks, setTracks] = useState<TSong[]>(data || []);
+  const [tracks, setTracks] = useState<Track[]>(data || []);
 
   const lang = useAppSelector((state) => state.language.lang);
   const bgColor = useAppSelector((state) => state.colorTheme.bgColor);
@@ -110,7 +107,7 @@ export const Main: FC<MainProps> = ({ header }) => {
           minHeight: '100vh',
           margin: '0 auto',
         }}
-        className={cnMain()}
+        // className={cnMain()}
       >
         <NavMenu />
         <Centerblock tracks={tracks} header={header} />

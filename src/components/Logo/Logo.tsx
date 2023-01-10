@@ -1,4 +1,3 @@
-import { cn } from '@bem-react/classname';
 import { Typography } from '@mui/material';
 import { FC } from 'react';
 
@@ -7,9 +6,7 @@ import { useAppSelector } from '../../hook';
 import { extradarkToDark, extradarkToHover } from '../../utils/colorUtils';
 import { SpanChangeColor } from '../changeColor/SpanChangeColor';
 
-import './Logo.css';
-
-const cnLogo = cn('Logo');
+import style from './style.module.css';
 
 type typeLogoProps = {
   textColor: string;
@@ -55,7 +52,7 @@ const Logo: FC<typeLogoProps> = ({ textColor }) => {
   } else {
     return (
       <div
-        className={cnLogo()}
+        className={style.Logo}
         style={{
           color: textColor,
         }}

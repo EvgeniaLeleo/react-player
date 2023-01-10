@@ -1,4 +1,4 @@
-.FilterButton-Wrapper {
+.Wrapper {
   position: relative;
 
   display: flex;
@@ -38,7 +38,7 @@
   border-color: #ad61ff;
 }
 
-.FilterButton-NumberOfCheckedItems {
+.NumberOfCheckedItems {
   position: absolute;
   top: -7px;
   left: -7px;

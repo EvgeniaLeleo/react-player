@@ -23,7 +23,7 @@
   overflow: hidden;
 }
 
-.Popup-Content-Wrapper {
+.ContentWrapper {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -38,34 +38,34 @@
   overflow-y: scroll;
 }
 
-.Popup-Content-Wrapper {
+.ContentWrapper {
   scrollbar-width: 7px;
   scrollbar-color: #b6b6b6fc #eaeaea;
 }
 
 /* для Chrome/Edge/Safari */
-.Popup-Content-Wrapper::-webkit-scrollbar {
+.ContentWrapper::-webkit-scrollbar {
   width: 7px;
 }
 
-.Popup-Content-Wrapper::-webkit-scrollbar-track {
+.ContentWrapper::-webkit-scrollbar-track {
   background: #eaeaea;
 }
 
-.Popup-Content-Wrapper::-webkit-scrollbar-thumb {
+.ContentWrapper::-webkit-scrollbar-thumb {
   background-color: #b6b6b6fc;
   border-radius: 3px;
 }
 
-.Popup-Label {
+.Label {
   cursor: pointer;
 }
 
-.Popup-Checkbox {
+.Checkbox {
   display: none;
 }
 
-.Popup-Checkbox:checked + .Popup-Label {
+.Checkbox:checked + .Label {
   text-decoration-line: underline;
   color: #b672ff;
 }

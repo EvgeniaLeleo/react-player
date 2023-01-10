@@ -1,4 +1,3 @@
-import { cn } from '@bem-react/classname';
 import { styled } from '@mui/material';
 
 import { useAppSelector } from '../../hook';
@@ -8,9 +7,7 @@ import {
   lightenDarkenColor,
 } from '../../utils/colorUtils';
 
-import './Animation.css';
-
-const cnAnimation = cn('Animation');
+import style from './style.module.css';
 
 export const AnimationBar = styled('p')<{
   bgcolor: string;
@@ -34,36 +31,36 @@ export const Animation = () => {
   const animation = isPlaying ? animationProp : 'none';
 
   return (
-    <div className={cnAnimation()}>
+    <div className={style.Animation}>
       <AnimationBar
         bgcolor={colorHover}
         animation={animation}
         animationDelay="-1.9s"
-        className={cnAnimation('Bar1')}
+        className={style.Bar1}
       ></AnimationBar>
       <AnimationBar
         bgcolor={lightenDarkenColor(colorDark, 25)}
         animation={animation}
         animationDelay="-2.9s"
-        className={cnAnimation('Bar2')}
+        className={style.Bar2}
       ></AnimationBar>
       <AnimationBar
         bgcolor={colorDark}
         animation={animation}
         animationDelay="-3.9s"
-        className={cnAnimation('Bar3')}
+        className={style.Bar3}
       ></AnimationBar>
       <AnimationBar
         bgcolor={lightenDarkenColor(decorativeColor, 25)}
         animation={animation}
         animationDelay="-4.9s"
-        className={cnAnimation('Bar4')}
+        className={style.Bar4}
       ></AnimationBar>
       <AnimationBar
         bgcolor={decorativeColor}
         animation={animation}
         animationDelay="-5.9s"
-        className={cnAnimation('Bar5')}
+        className={style.Bar5}
       ></AnimationBar>
     </div>
   );

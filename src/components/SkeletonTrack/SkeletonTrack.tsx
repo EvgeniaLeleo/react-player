@@ -1,18 +1,14 @@
-import { cn } from '@bem-react/classname';
-
 import { useAppSelector } from '../../hook';
 import { lightenDarkenColor } from '../../utils/colorUtils';
 import { SkeletonRect } from '../Skeleton/Skeleton';
 
-import './SkeletonTrack.css';
-
-const cnSkeletonTrack = cn('SkeletonTrack');
+import style from './style.module.css';
 
 export const SkeletonTrack = () => {
   const textColor = useAppSelector((state) => state.colorTheme.textColor);
   const skeletonColor = lightenDarkenColor(textColor, -10);
   return (
-    <div className={cnSkeletonTrack()}>
+    <div className={style.SkeletonTrack}>
       <SkeletonRect
         width="4%"
         margin="2%"

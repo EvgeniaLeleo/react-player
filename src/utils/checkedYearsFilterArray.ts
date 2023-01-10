@@ -2,13 +2,13 @@
  * Формирует массив треков, фильтруя исходные данные по фильтру checkedYears
  */
 
-import { TSong } from '../types';
+import { Track } from '../types';
 
 export const checkedYearsFilterArray: (
   checkedItems: string[],
-  data: TSong[],
-) => TSong[] = (checkedItems, data) => {
-  const checkedYearsFilteredData: TSong[] = [];
+  data: Track[],
+) => Track[] = (checkedItems, data) => {
+  const checkedYearsFilteredData: Track[] = [];
 
   checkedItems.forEach((release_date: string) =>
     data.forEach((item) => {

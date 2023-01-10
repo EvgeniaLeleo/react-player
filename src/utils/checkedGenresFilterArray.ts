@@ -2,13 +2,13 @@
  * Формирует массив треков, фильтруя исходные данные по фильтру checkedGenres
  */
 
-import { TSong } from '../types';
+import { Track } from '../types';
 
 export const checkedGenresFilterArray: (
   checkedItems: string[],
-  data: TSong[],
-) => TSong[] = (checkedItems, data) => {
-  const checkedGenresFilteredData: TSong[] = [];
+  data: Track[],
+) => Track[] = (checkedItems, data) => {
+  const checkedGenresFilteredData: Track[] = [];
 
   checkedItems.forEach((genre: string) =>
     data.forEach((item) => {

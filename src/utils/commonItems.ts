@@ -1,14 +1,14 @@
 /**
- * Находит общие треки (по ключу 'id') в двух массивах TSong[]
+ * Находит общие треки (по ключу 'id') в двух массивах Track[]
  */
 
-import { TSong } from '../types';
+import { Track } from '../types';
 
-export const commonItems: (array1: TSong[], array2: TSong[]) => TSong[] = (
+export const commonItems: (array1: Track[], array2: Track[]) => Track[] = (
   array1,
   array2,
 ) => {
-  const commonItemsArray: TSong[] = [];
+  const commonItemsArray: Track[] = [];
 
   array1.forEach((item) => {
     array2.forEach((item2) => {

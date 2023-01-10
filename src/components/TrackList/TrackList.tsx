@@ -7,11 +7,11 @@ import {
   ALBUM_DAYPLAYLIST,
   EMPTY_ARTIST,
   TEXT,
-} from '../../../constants';
-import { useAppDispatch, useAppSelector } from '../../../hook';
-import { setMovedStatus, uploadMovedTracks } from '../../../store/trackSlice';
-import { TSong } from '../../../types';
-import { TrackItem } from './TrackItem';
+} from '../../constants';
+import { useAppDispatch, useAppSelector } from '../../hook';
+import { setMovedStatus, uploadMovedTracks } from '../../store/trackSlice';
+import { Track } from '../../types';
+import { TrackItem } from '../../pages/TrackItem/TrackItem';
 
 export const TrackList: FC<{ header: string }> = ({ header }) => {
   const dispatch = useAppDispatch();
@@ -67,17 +67,17 @@ export const TrackList: FC<{ header: string }> = ({ header }) => {
   }, [dispatch, trackItems]);
 
   const moveTrackItem = useCallback((dragIndex: number, hoverIndex: number) => {
-    setTrackItems((prevTrackItems: TSong[]) =>
+    setTrackItems((prevTrackItems: Track[]) =>
       update(prevTrackItems, {
         $splice: [
           [dragIndex, 1],
-          [hoverIndex, 0, prevTrackItems[dragIndex] as TSong],
+          [hoverIndex, 0, prevTrackItems[dragIndex] as Track],
         ],
       }),
     );
   }, []);
 
-  const renderTrackItem = useCallback((track: TSong, index: number) => {
+  const renderTrackItem = useCallback((track: Track, index: number) => {
     return (
       <TrackItem
         key={track.id}
@@ -104,7 +104,7 @@ export const TrackList: FC<{ header: string }> = ({ header }) => {
       )}
       {trackItems[0]?.author !== EMPTY_ARTIST && (
         <div>
-          {trackItems.map((track: TSong, i: number) =>
+          {trackItems.map((track: Track, i: number) =>
             renderTrackItem(track, i),
           )}
         </div>

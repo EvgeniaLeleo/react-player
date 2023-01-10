@@ -1,5 +1,4 @@
 import { FC, useEffect, useState } from 'react';
-import { cn } from '@bem-react/classname';
 import { NavLink } from 'react-router-dom';
 import {
   Button,
@@ -12,22 +11,22 @@ import {
   Typography,
 } from '@mui/material';
 
-import { SpanChangeColor } from '../../../components/changeColor/SpanChangeColor';
-import { AlbumCover } from '../../../components/AlbumCover/AlbumCover';
+import { SpanChangeColor } from '../changeColor/SpanChangeColor';
+import { AlbumCover } from '../AlbumCover/AlbumCover';
 import {
   ALBUM_DANCE,
   ALBUM_DAYPLAYLIST,
   ALBUM_INDIE,
   TEXT,
-} from '../../../constants';
-import { useAppDispatch, useAppSelector } from '../../../hook';
+} from '../../constants';
+import { useAppDispatch, useAppSelector } from '../../hook';
 import {
   bgColorToBgColorLight,
   extradarkToDark,
   extradarkToHover,
-} from '../../../utils/colorUtils';
-import { TSong, TCheckedItems, TLanguages } from '../../../types';
-import { changeLanguage } from '../../../store/languageSlice';
+} from '../../utils/colorUtils';
+import { Track, CheckedItems, Languages } from '../../types';
+import { changeLanguage } from '../../store/languageSlice';
 import {
   updateCheckedArtists,
   updateCheckedGenres,
@@ -40,17 +39,12 @@ import {
   updateSearchedTracksDance,
   updateSearchedTracksFavourites,
   updateSearchedTracksRandom,
-} from '../../../store/filteredItemsSlice';
-import { getFinalItems } from '../../../utils/getFinalItems';
-import {
-  uploadDanceTracks,
-  uploadRandomTracks,
-} from '../../../store/trackSlice';
-import { updateSearchQuery } from '../../../store/sortingSettingsSlice';
+} from '../../store/filteredItemsSlice';
+import { getFinalItems } from '../../utils/getFinalItems';
+import { uploadDanceTracks, uploadRandomTracks } from '../../store/trackSlice';
+import { updateSearchQuery } from '../../store/sortingSettingsSlice';
 
-import './Sidebar.css';
-
-const cnSidebar = cn('Sidebar');
+import style from './style.module.css';
 
 type SidebarProps = {
   isVisible: boolean;
@@ -77,7 +71,7 @@ export const Sidebar: FC<SidebarProps> = ({
   const colorDark = extradarkToDark(decorativeColor);
 
   const handleChange = (event: SelectChangeEvent) => {
-    const newLanguage = event.target.value as TLanguages;
+    const newLanguage = event.target.value as Languages;
     dispatch(changeLanguage(newLanguage));
     localStorage.setItem('language', newLanguage);
   };
@@ -90,11 +84,11 @@ export const Sidebar: FC<SidebarProps> = ({
     },
   });
 
-  const allTracks: TSong[] = useAppSelector((state) => state.tracks.allTracks);
-  const allTracksDance: TSong[] = useAppSelector(
+  const allTracks: Track[] = useAppSelector((state) => state.tracks.allTracks);
+  const allTracksDance: Track[] = useAppSelector(
     (state) => state.tracks.danceTracks,
   );
-  const allTracksRandom: TSong[] = useAppSelector(
+  const allTracksRandom: Track[] = useAppSelector(
     (state) => state.tracks.randomTracks,
   );
   const allTracksFavourites = useAppSelector(
@@ -104,7 +98,7 @@ export const Sidebar: FC<SidebarProps> = ({
   const order = useAppSelector((state) => state.sortingSettings.order);
 
   const handleClickDance = () => {
-    const newFilter: TCheckedItems = {
+    const newFilter: CheckedItems = {
       checkedArtists: [],
       checkedYears: [],
       checkedGenres: [],
@@ -141,7 +135,7 @@ export const Sidebar: FC<SidebarProps> = ({
 
   const handleClickRandom = () => {
     const searchedItemsCurrent = allTracksRandom;
-    const newFilter: TCheckedItems = {
+    const newFilter: CheckedItems = {
       checkedArtists: [],
       checkedYears: [],
       checkedGenres: [],
@@ -183,14 +177,11 @@ export const Sidebar: FC<SidebarProps> = ({
   }, []);
 
   return (
-    <div className={cnSidebar()}>
+    <div className={style.Sidebar}>
       {isUserVisible && (
-        <div className={cnSidebar('User')}>
+        <div className={style.User}>
           <NavLink to={'/profile'}>
-            <Typography
-              className={cnSidebar('User-Name')}
-              style={{ color: textColor }}
-            >
+            <Typography className={style.UserName} style={{ color: textColor }}>
               <SpanChangeColor colorHover={colorHover} colorActive={colorDark}>
                 {dataUser?.fullName}
               </SpanChangeColor>
@@ -231,7 +222,7 @@ export const Sidebar: FC<SidebarProps> = ({
 
       {isUserVisible && (
         <div style={{ backgroundColor: 'transparent' }}>
-          <div className={cnSidebar('List')}>
+          <div className={style.List}>
             <NavLink to={'/random'} onClick={handleClickRandom}>
               <AlbumCover
                 text={TEXT.albums[ALBUM_DAYPLAYLIST][lang]}
@@ -248,7 +239,7 @@ export const Sidebar: FC<SidebarProps> = ({
           </div>
 
           <ThemeProvider theme={buttonTheme}>
-            <div className={cnSidebar('Button-Visibility')}>
+            <div className={style.ButtonVisibility}>
               <Button
                 onClick={handleAlbumList}
                 color="primary"
@@ -262,7 +253,7 @@ export const Sidebar: FC<SidebarProps> = ({
                   marginTop: '10px',
                   padding: '10px',
                 }}
-                className={cnSidebar('Button-Mobile-List')}
+                className={style.ButtonMobileList}
               >
                 {TEXT.collections[lang]}
               </Button>
@@ -270,7 +261,7 @@ export const Sidebar: FC<SidebarProps> = ({
           </ThemeProvider>
 
           {isAlbumsVisible && (
-            <div className={cnSidebar('Mobile-List')}>
+            <div className={style.MobileList}>
               <div>
                 <NavLink to={'/random'} onClick={handleClickRandom}>
                   <AlbumCover

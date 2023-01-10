@@ -1,22 +1,22 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { TSong } from '../types';
+import { Track } from '../types';
 
-type TCheckedItems = {
+type CheckedItems = {
   checkedArtists: string[];
   checkedYears: string[];
   checkedGenres: string[];
-  searchedTracks: TSong[];
-  searchedTracksDance: TSong[];
-  searchedTracksRandom: TSong[];
-  searchedTracksFavourites: TSong[];
-  filteredTracks: TSong[];
-  filteredDanceTracks: TSong[];
-  filteredRandomTracks: TSong[];
-  filteredFavouritesTracks: TSong[];
+  searchedTracks: Track[];
+  searchedTracksDance: Track[];
+  searchedTracksRandom: Track[];
+  searchedTracksFavourites: Track[];
+  filteredTracks: Track[];
+  filteredDanceTracks: Track[];
+  filteredRandomTracks: Track[];
+  filteredFavouritesTracks: Track[];
 };
 
-const initialState: TCheckedItems = {
+const initialState: CheckedItems = {
   checkedArtists: [],
   checkedYears: [],
   checkedGenres: [],
@@ -44,29 +44,29 @@ const filteredItemsSlice = createSlice({
       state.checkedGenres = action.payload;
     },
 
-    updateSearchedTracks(state, action: PayloadAction<TSong[]>) {
+    updateSearchedTracks(state, action: PayloadAction<Track[]>) {
       state.searchedTracks = action.payload;
     },
-    updateSearchedTracksDance(state, action: PayloadAction<TSong[]>) {
+    updateSearchedTracksDance(state, action: PayloadAction<Track[]>) {
       state.searchedTracksDance = action.payload;
     },
-    updateSearchedTracksRandom(state, action: PayloadAction<TSong[]>) {
+    updateSearchedTracksRandom(state, action: PayloadAction<Track[]>) {
       state.searchedTracksRandom = action.payload;
     },
-    updateSearchedTracksFavourites(state, action: PayloadAction<TSong[]>) {
+    updateSearchedTracksFavourites(state, action: PayloadAction<Track[]>) {
       state.searchedTracksFavourites = action.payload;
     },
 
-    updateFilteredTracks(state, action: PayloadAction<TSong[]>) {
+    updateFilteredTracks(state, action: PayloadAction<Track[]>) {
       state.filteredTracks = action.payload;
     },
-    updateFilteredDanceTracks(state, action: PayloadAction<TSong[]>) {
+    updateFilteredDanceTracks(state, action: PayloadAction<Track[]>) {
       state.filteredDanceTracks = action.payload;
     },
-    updateFilteredRandomTracks(state, action: PayloadAction<TSong[]>) {
+    updateFilteredRandomTracks(state, action: PayloadAction<Track[]>) {
       state.filteredRandomTracks = action.payload;
     },
-    updateFilteredFavouritesTracks(state, action: PayloadAction<TSong[]>) {
+    updateFilteredFavouritesTracks(state, action: PayloadAction<Track[]>) {
       state.filteredFavouritesTracks = action.payload;
     },
   },

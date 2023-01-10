@@ -2,9 +2,9 @@
  * Формирует массив годов выпуска из исходного массива объектов-треков
  */
 
-import { TSong } from '../types';
+import { Track } from '../types';
 
-export const getYearsArray: (tracks: TSong[]) => string[] = (tracks) => {
+export const getYearsArray: (tracks: Track[]) => string[] = (tracks) => {
   let release_datesArray: string[] = [];
   tracks.forEach((track) => {
     if (

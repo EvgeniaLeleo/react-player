@@ -6,43 +6,43 @@
   padding: 23px 40px 85px 111px;
 }
 
-.Profile-Data {
+.Data {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.Profile-UserData {
+.UserData {
   font-size: 20px;
 }
 
-.Profile-Header {
+.Header {
   margin-top: 30px;
 }
 
-.Profile-Header-Main {
+.HeaderMain {
   font-size: 60px;
   font-weight: 400;
   margin-top: 95px;
   margin-bottom: 45px;
 }
 
-.Profile-Custom {
+.Custom {
   display: flex;
   gap: 30px;
 }
 
-.Profile-CustomBgColor,
-.Profile-CustomTextColor,
-.Profile-CustomDecorativeColor {
+.CustomBgColor,
+.CustomTextColor,
+.CustomDecorativeColor {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.Profile-InputBgColor,
-.Profile-InputTextColor,
-.Profile-InputDecorativeColor {
+.InputBgColor,
+.InputTextColor,
+.InputDecorativeColor {
   width: 50px;
   height: 50px;
 
@@ -51,22 +51,22 @@
   cursor: pointer;
 }
 
-.Profile-Button {
+.Button {
   font-family: inherit;
   text-transform: uppercase;
   padding: 10px 15px;
 }
 
 @media (max-width: 1439px) {
-  .Profile-Header-Main {
+  .HeaderMain {
     font-size: 45px;
   }
 
-  .Profile-Header {
+  .Header {
     font-size: 12px;
   }
 
-  .Profile-UserData {
+  .UserData {
     font-size: 16px;
   }
 }
@@ -84,7 +84,7 @@
     padding-right: 20px;
   }
 
-  .Profile-Header-Main {
+  .HeaderMain {
     font-size: 40px;
     margin-bottom: 20px;
   }

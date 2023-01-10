@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { cn } from '@bem-react/classname';
 import {
   Box,
   createTheme,
@@ -13,17 +12,15 @@ import {
 import { FilterButton } from '../FilterButton/FilterButton';
 import { ORDER, TEXT } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../hook';
-import { TSong, TLanguages, TOrder } from '../../types';
+import { Track, Languages, Order } from '../../types';
 import { colorToSecondary } from '../../utils/colorUtils';
 import { updateOrder } from '../../store/sortingSettingsSlice';
 import { getFinalItems } from '../../utils/getFinalItems';
 import { updateFilteredTracks } from '../../store/filteredItemsSlice';
 
-import './FilterButtons.css';
+import style from './style.module.css';
 
-const cnFilterButtons = cn('FilterButtons');
-
-type FilterButtonsProps = { lang: TLanguages; textColor: string };
+type FilterButtonsProps = { lang: Languages; textColor: string };
 
 export const FilterButtons: FC<FilterButtonsProps> = ({ lang, textColor }) => {
   const dispatch = useAppDispatch();
@@ -33,7 +30,7 @@ export const FilterButtons: FC<FilterButtonsProps> = ({ lang, textColor }) => {
   const searchQuery = useAppSelector(
     (state) => state.sortingSettings.searchQuery,
   );
-  const searchedItemsStore: TSong[] = useAppSelector(
+  const searchedItemsStore: Track[] = useAppSelector(
     (state) => state.filteredItems.searchedTracks,
   );
 
@@ -59,7 +56,7 @@ export const FilterButtons: FC<FilterButtonsProps> = ({ lang, textColor }) => {
   // const [_, setOrder] = useState(ORDER.notSelected);
 
   const handleChange = (event: SelectChangeEvent) => {
-    const newOrder = event.target.value as TOrder;
+    const newOrder = event.target.value as Order;
     const searchedItems =
       searchQuery === '' ? allTracksStore : searchedItemsStore;
     // setOrder(newOrder);
@@ -76,11 +73,9 @@ export const FilterButtons: FC<FilterButtonsProps> = ({ lang, textColor }) => {
   };
 
   return (
-    <Box className={cnFilterButtons('Filters')} style={{ color: textColor }}>
-      <div className={cnFilterButtons('Buttons-Wrapper')}>
-        <span className={cnFilterButtons('Filters-Text')}>
-          {TEXT.search.searchBy[lang]}
-        </span>
+    <Box className={style.Filters} style={{ color: textColor }}>
+      <div className={style.ButtonsWrapper}>
+        <span className={style.FiltersText}>{TEXT.search.searchBy[lang]}</span>
         <FilterButton
           buttonName="checkedArtists"
           buttonText={TEXT.search.artist[lang]}
@@ -116,7 +111,7 @@ export const FilterButtons: FC<FilterButtonsProps> = ({ lang, textColor }) => {
               fontSize: '20px',
               fontFamily: 'inherit',
             }}
-            className={cnFilterButtons('Filters-Text')}
+            className={style.FiltersText}
           >
             {TEXT.search.order[lang]}
           </InputLabel>

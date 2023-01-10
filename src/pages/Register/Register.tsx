@@ -1,16 +1,13 @@
 import { FC } from 'react';
-import { cn } from '@bem-react/classname';
 
 import { RegisterWindow } from '../../components/RegisterWindow/RegisterWindow';
 
-import './Register.css';
-
-const cnRegister = cn('Register');
+import style from './style.module.css';
 
 export const Register: FC<{}> = () => {
   return (
-    <div className={cnRegister()}>
-      <RegisterWindow></RegisterWindow>
+    <div className={style.Register}>
+      <RegisterWindow />
     </div>
   );
 };

@@ -2,9 +2,9 @@
  * Сортирует массив треков по исполнителям в возрастающем порядке
  */
 
-import { TSong } from '../types';
+import { Track } from '../types';
 
-export const getSortedByArtistsArray: (tracks: TSong[]) => TSong[] = (
+export const getSortedByArtistsArray: (tracks: Track[]) => Track[] = (
   tracks,
 ) => {
   let sortedArray = [...tracks];

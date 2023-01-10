@@ -1,9 +1,8 @@
 import { FC } from 'react';
-import { cn } from '@bem-react/classname';
 
 import { useAppDispatch, useAppSelector } from '../../hook';
 import { bgColorToBgColorLight } from '../../utils/colorUtils';
-import { TCheckedItems, TFilterButtonName } from '../../types';
+import { CheckedItems, FilterButtonName } from '../../types';
 import { getFinalItems } from '../../utils/getFinalItems';
 import {
   updateCheckedArtists,
@@ -12,17 +11,15 @@ import {
   updateFilteredTracks,
 } from '../../store/filteredItemsSlice';
 
-import './Popup.css';
-
-const cnPopup = cn('Popup');
+import style from './style.module.css';
 
 export type PopupProps = {
   items: string[];
-  buttonName: TFilterButtonName;
+  buttonName: FilterButtonName;
   rows: 1 | 2 | 3;
 };
 
-const newFilter: TCheckedItems = {
+const newFilter: CheckedItems = {
   checkedArtists: [],
   checkedYears: [],
   checkedGenres: [],
@@ -49,7 +46,7 @@ export const Popup: FC<PopupProps> = ({ items, rows, buttonName }) => {
     ? searchedItems
     : allTracksStore;
 
-  const handleChange = (item: string, buttonName: TFilterButtonName) => {
+  const handleChange = (item: string, buttonName: FilterButtonName) => {
     newFilter[`${buttonName}`] = [...checkedItems[`${buttonName}`]];
 
     newFilter[`${buttonName}`].includes(item)
@@ -92,13 +89,13 @@ export const Popup: FC<PopupProps> = ({ items, rows, buttonName }) => {
     height = '184px';
   }
 
-  const isChecked = (item: string, buttonName: TFilterButtonName) => {
+  const isChecked = (item: string, buttonName: FilterButtonName) => {
     return newFilter[`${buttonName}`].includes(item);
   };
 
   return (
     <div
-      className={cnPopup()}
+      className={style.Popup}
       style={{
         height: height,
         display: display,
@@ -106,17 +103,17 @@ export const Popup: FC<PopupProps> = ({ items, rows, buttonName }) => {
         backgroundColor: bgColorLight,
       }}
     >
-      <div className={cnPopup('Content-Wrapper')}>
+      <div className={style.ContentWrapper}>
         {items.map((item) => (
           <span key={item}>
             <input
-              className={cnPopup('Checkbox')}
+              className={style.Checkbox}
               type="checkbox"
               id={item}
               checked={isChecked(item, buttonName)}
               onChange={() => handleChange(item, buttonName)}
             ></input>
-            <label htmlFor={item} className={cnPopup('Label')} key={item}>
+            <label htmlFor={item} className={style.Label} key={item}>
               {item}
             </label>
           </span>

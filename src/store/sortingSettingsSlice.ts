@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { ORDER } from '../constants';
-import { TOrder } from '../types';
+import { Order } from '../types';
 
 type TTrackState = {
   artists: string[];
   genres: string[];
   years: string[];
-  order: TOrder;
+  order: Order;
   searchQuery: string;
 };
 
@@ -15,7 +15,7 @@ const initialState: TTrackState = {
   artists: [],
   genres: [],
   years: [],
-  order: ORDER.notSelected as TOrder,
+  order: ORDER.notSelected as Order,
   searchQuery: '',
 };
 
@@ -32,7 +32,7 @@ const sortingSettingsSlice = createSlice({
     updateSortedGenres(state, action: PayloadAction<string[]>) {
       state.genres = action.payload;
     },
-    updateOrder(state, action: PayloadAction<TOrder>) {
+    updateOrder(state, action: PayloadAction<Order>) {
       state.order = action.payload;
     },
     updateSearchQuery(state, action: PayloadAction<string>) {

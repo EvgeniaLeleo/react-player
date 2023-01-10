@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { cn } from '@bem-react/classname';
 import { Box, TextField } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { Navigate, useNavigate } from 'react-router-dom';
@@ -9,9 +8,7 @@ import { useAppDispatch, useAppSelector } from '../../hook';
 import { fetchRegister, selectIsAuth } from '../../store/auth/auth';
 import { Login } from '../../store/auth/types';
 
-import './RegisterWindow.css';
-
-const cnRegisterWindow = cn('RegisterWindow');
+import style from './style.module.css';
 
 export const RegisterWindow: FC<{}> = () => {
   const navigate = useNavigate();
@@ -48,9 +45,9 @@ export const RegisterWindow: FC<{}> = () => {
   }
 
   return (
-    <Box className={cnRegisterWindow()}>
+    <Box className={style.RegisterWindow}>
       <img
-        className={cnRegisterWindow('Img')}
+        className={style.Img}
         src="./skypro-logo.svg"
         alt="skypro-logo"
         height="21px"

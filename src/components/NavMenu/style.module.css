@@ -1,14 +1,14 @@
-.NavMenu-Wrapper-Desktop {
+.WrapperDesktop {
   display: block;
   min-height: 100vh;
 }
 
-.NavMenu-Wrapper-Mobile {
+.WrapperMobile {
   display: none;
   min-height: 100vh;
 }
 
-.NavMenu-Burger-Mobile {
+.BurgerMobile {
   display: none;
 }
 
@@ -28,38 +28,38 @@
   transition: all 0.1s ease;
 }
 
-.NavMenu-Logo {
+.Logo {
   margin-top: 8px;
   margin-bottom: 40px;
 
   width: 113px;
 }
 
-.NavMenu-Burger {
+.Burger {
   font-size: 16px;
   line-height: 24px;
   width: 20px;
 }
 
-.NavMenu-Burger-Icon {
+.BurgerIcon {
   color: #d3d3d3;
   transition: all 0.2s ease;
 }
 
-.NavMenu-Burger-Icon:hover {
+.BurgerIcon:hover {
   color: #acacac;
 }
 
-.NavMenu-Burger-Icon:active {
+.BurgerIcon:active {
   color: #ffffff;
 }
 
-.NavMenu-List {
+.List {
   display: flex;
   flex-direction: column;
 }
 
-.NavMenu-List-Button {
+.ListButton {
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -76,15 +76,15 @@
   transition: all 0.2s ease;
 }
 
-.NavMenu-List-Button:hover {
+.ListButton:hover {
   color: #acacac;
 }
 
-.NavMenu-List-Button:active {
+.ListButton:active {
   color: #696969;
 }
 
-.Logout-Button {
+.LogoutButton {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -92,56 +92,56 @@
   text-align: left;
 }
 
-.NavMenu-Footer-Top {
+.FooterTop {
   height: 50vh;
 }
 
-.NavMenu-Animation-Top {
+.AnimationTop {
   height: 40vh;
 }
 
 @media (max-width: 1919px) {
-  .NavMenu-Footer-Top {
+  .FooterTop {
     height: 40vh;
   }
 
-  .NavMenu-Animation-Top {
+  .AnimationTop {
     height: 35vh;
   }
 }
 
 @media (max-width: 1439px) {
-  .NavMenu-Logo {
+  .Logo {
     margin-bottom: 30px;
   }
 
-  .NavMenu-List-Button {
+  .ListButton {
     font-size: 12px;
     margin-bottom: 10px;
   }
 
   .NavMenu,
-  .Logout-Button {
+  .LogoutButton {
     font-size: 12px;
   }
 
-  .NavMenu-Footer-Top {
+  .FooterTop {
     height: 35vh;
   }
 
-  .NavMenu-Animation-Top {
+  .AnimationTop {
     height: 25vh;
   }
 }
 
 @media (max-width: 1199px) {
-  .NavMenu-List-Button {
+  .ListButton {
     margin-bottom: 10px;
     margin-left: 0;
     padding-left: 0;
   }
 
-  .NavMenu-Footer-Top {
+  .FooterTop {
     height: 35vh;
   }
 
@@ -151,11 +151,11 @@
 }
 
 @media (max-width: 767px) {
-  .NavMenu-Wrapper-Desktop {
+  .WrapperDesktop {
     display: none;
   }
 
-  .NavMenu-Wrapper-Mobile {
+  .WrapperMobile {
     display: block;
   }
 
@@ -167,7 +167,7 @@
     min-height: 100vh;
   }
 
-  .NavMenu-Burger-Mobile {
+  .BurgerMobile {
     display: block;
     position: absolute;
     z-index: 200;

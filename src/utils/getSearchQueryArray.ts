@@ -2,17 +2,17 @@
  * Формирует массив треков, соответствующих данным из строки поиска
  */
 
-import { TSong } from '../types';
+import { Track } from '../types';
 
 export const getSearchQueryArray: (
   query: string,
-  initialData: TSong[],
-) => TSong[] = (query, initialData) => {
+  initialData: Track[],
+) => Track[] = (query, initialData) => {
   if (query === '' && initialData.length) {
     return initialData;
   }
 
-  const tempArray: TSong[] = [];
+  const tempArray: Track[] = [];
 
   initialData.forEach((item) => {
     if (

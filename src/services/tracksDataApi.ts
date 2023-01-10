@@ -1,31 +1,117 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { Track, UserTokens, Collection, User } from '../types';
 
-import { URL_API } from '../constants';
-import { TCollection, TSong } from '../types';
+export interface ILoginUser {
+  email: string;
+  password: string;
+}
+
+export interface ISignupUser {
+  username: string;
+  email: string;
+  password: string;
+}
 
 export const tracksDataApi = createApi({
-  reducerPath: 'tracksDataApi',
+  reducerPath: 'music-player/api',
+  tagTypes: ['Tracks'],
   baseQuery: fetchBaseQuery({
-    baseUrl: URL_API,
+    baseUrl: 'http://51.250.72.80:8090/',
+    // prepareHeaders: (headers, { getState }) => {
+    //   const token = (getState() as RootState).token.access;
+    //   if (token && checkJWTExpTime(token))
+    //     headers.set('authorization', `Bearer ${token}`);
+    //   return headers;
+    // },
   }),
-  endpoints: (builder) => ({
-    getTracks: builder.query<TSong[], void>({
+  endpoints: (build) => ({
+    getTracks: build.query<Track[], void>({
       query: () => 'catalog/track/all/',
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map(({ id }) => ({ type: 'Tracks' as const, id })),
+              { type: 'Tracks', id: 'LIST' },
+            ]
+          : [{ type: 'Tracks', id: 'LIST' }],
     }),
-    getCollection: builder.query<TCollection, number>({
+    getTrack: build.query<Track, number>({
+      query: (trackId: number) => `catalog/track/${trackId}/`,
+    }),
+    loginUser: build.mutation({
+      query: (body: ILoginUser) => ({
+        url: 'user/login/',
+        method: 'POST',
+        body,
+      }),
+    }),
+    userSignup: build.mutation({
+      query: (body: ISignupUser) => ({
+        url: 'user/signup/',
+        method: 'POST',
+        body,
+      }),
+    }),
+    userToken: build.mutation({
+      query: (body: ILoginUser) => ({
+        url: 'user/token/',
+        method: 'POST',
+        body,
+      }),
+    }),
+    refreshUserToken: build.mutation<UserTokens, string>({
+      query: (body: string) => ({
+        url: 'user/token/refresh/',
+        method: 'POST',
+        body: { refresh: body },
+      }),
+    }),
+    addTrackToFavorite: build.mutation<void, number>({
+      query: (trackId: number) => ({
+        url: `catalog/track/${trackId}/favorite/`,
+        method: 'POST',
+      }),
+      invalidatesTags: [{ type: 'Tracks', id: 'LIST' }],
+    }),
+    removeTrackFromFavorite: build.mutation({
+      query: (trackId: number) => ({
+        url: `catalog/track/${trackId}/favorite/`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: [{ type: 'Tracks', id: 'LIST' }],
+    }),
+    getCollection: build.query<Collection, number>({
       query: (collectionId) => `catalog/selection/${collectionId}/`,
-      //   providesTags: (result) =>
-      //     result?.items
-      //       ? [
-      //           ...result.items.map(({ id }) => ({
-      //             type: 'Tracks' as const,
-      //             id,
-      //           })),
-      //           { type: 'Tracks', id: 'LIST' },
-      //         ]
-      //       : [{ type: 'Tracks', id: 'LIST' }],
+      providesTags: (result) =>
+        result?.items
+          ? [
+              ...result.items.map(({ id }) => ({
+                type: 'Tracks' as const,
+                id,
+              })),
+              { type: 'Tracks', id: 'LIST' },
+            ]
+          : [{ type: 'Tracks', id: 'LIST' }],
+    }),
+    getCurrentUser: build.query<User, number>({
+      query: (sessionId: number) => `user/me/`,
+    }),
+    getCurrentUserCached: build.query<User, void>({
+      query: () => `user/me/`,
     }),
   }),
 });
 
-export const { useGetTracksQuery, useGetCollectionQuery } = tracksDataApi;
+export const {
+  useGetTracksQuery,
+  useGetTrackQuery,
+  useLoginUserMutation,
+  useUserSignupMutation,
+  useUserTokenMutation,
+  useRefreshUserTokenMutation,
+  useAddTrackToFavoriteMutation,
+  useRemoveTrackFromFavoriteMutation,
+  useGetCollectionQuery,
+  useGetCurrentUserQuery,
+  useGetCurrentUserCachedQuery,
+} = tracksDataApi;

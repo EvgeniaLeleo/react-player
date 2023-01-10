@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { cn } from '@bem-react/classname';
 import { Navigate, NavLink } from 'react-router-dom';
 import { Box, TextField } from '@mui/material';
 import { useForm } from 'react-hook-form';
@@ -9,9 +8,7 @@ import { fetchLogin, selectIsAuth } from '../../store/auth/auth';
 import { Button } from '../Button/Button';
 import { Login } from '../../store/auth/types';
 
-import './LoginWindow.css';
-
-const cnLoginWindow = cn('LoginWindow');
+import style from './style.module.css';
 
 export const LoginWindow: FC<{}> = () => {
   const isAuth = useAppSelector(selectIsAuth);
@@ -49,9 +46,9 @@ export const LoginWindow: FC<{}> = () => {
   }
 
   return (
-    <Box className={cnLoginWindow()}>
+    <Box className={style.LoginWindow}>
       <img
-        className={cnLoginWindow('Img')}
+        className={style.Img}
         src="./skypro-logo.svg"
         alt="skypro-logo"
         height="21px"

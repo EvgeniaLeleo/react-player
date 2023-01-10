@@ -1,12 +1,10 @@
 import { FC } from 'react';
-import { cn } from '@bem-react/classname';
+import cn from 'classnames';
 
 import { useAppSelector } from '../../hook';
 import { extradarkToDark } from '../../utils/colorUtils';
 
-import './AlbumCover.css';
-
-const cnAlbumCover = cn('AlbumCover');
+import style from './style.module.css';
 
 export type AlbumCoverProps = {
   text: string;
@@ -22,7 +20,7 @@ export const AlbumCover: FC<AlbumCoverProps> = ({ text }) => {
 
   return (
     <div
-      className={cnAlbumCover()}
+      className={style.AlbumCover}
       style={{
         color: textColor,
         background: `linear-gradient(${decorativeColor}, ${decorativeColorDark})`,
