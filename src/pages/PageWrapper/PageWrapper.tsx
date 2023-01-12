@@ -41,6 +41,7 @@ export const PageWrapper: FC<Props> = ({
     // isError,
     data: tracks,
   } = tracksHook ? tracksHook(searchString, collectionId) : { data: [] }
+
   const activeTrackId = useAppSelector(selectActiveTrackId)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -132,7 +133,6 @@ export const PageWrapper: FC<Props> = ({
           minHeight: '100vh',
           margin: '0 auto',
         }}
-        // className={cnMain()}
       >
         <NavMenu />
 

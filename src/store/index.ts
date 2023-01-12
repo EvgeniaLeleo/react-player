@@ -13,6 +13,7 @@ import tokenReducer from './tokenSlice'
 // import userReducer from './userSlice'
 import playerReducer from './playerSlice'
 import filterReducer from './FilterSlice'
+import navMenuReducer from './navMenuSlice'
 
 // const store = configureStore({
 //   reducer: {
@@ -42,6 +43,7 @@ export const store = configureStore({
     colorTheme: colorThemeReducer,
     track: trackReducer,
     // user: userReducer,
+    navMenu: navMenuReducer,
     tracks: trackReducer,
     sortingSettings: sortingSettingsReducer,
     player: playerReducer,

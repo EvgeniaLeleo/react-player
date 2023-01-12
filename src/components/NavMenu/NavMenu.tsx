@@ -32,17 +32,17 @@ import {
 import { Track, CheckedItems } from '../../types'
 import { updateSearchQuery } from '../../store/sortingSettingsSlice'
 import { Animation } from '../Animation/Animation'
-// import { Footer } from '../../../components/Footer/Footer';
 import { LogoMenu } from '../Logo/LogoMenu'
-
-import style from './style.module.css'
 import { ROUTES } from '../../routes'
 
-const newFilter: CheckedItems = {
-  checkedArtists: [],
-  checkedYears: [],
-  checkedGenres: [],
-}
+import style from './style.module.css'
+import { setIsNavMenuOpened } from '../../store/navMenuSlice'
+
+// const newFilter: CheckedItems = {
+//   checkedArtists: [],
+//   checkedYears: [],
+//   checkedGenres: [],
+// }
 
 export const NavMenu: FC<{}> = () => {
   const dispatch = useAppDispatch()
@@ -50,6 +50,7 @@ export const NavMenu: FC<{}> = () => {
 
   const textColor = useAppSelector((state) => state.colorTheme.textColor)
   const bgColor = useAppSelector((state) => state.colorTheme.bgColor)
+  const isNavMenuOpened = useAppSelector((state) => state.navMenu.isOpen)
   const bgColorLight = bgColorToBgColorLight(bgColor)
 
   const decorativeColor = useAppSelector(
@@ -58,18 +59,11 @@ export const NavMenu: FC<{}> = () => {
   const colorHover = extradarkToHover(decorativeColor)
   const colorDark = extradarkToDark(decorativeColor)
 
-  // const allTracks: Track[] = useAppSelector((state) => state.tracks.allTracks)
-  // const allTracksDance: Track[] = useAppSelector(
-  //   (state) => state.tracks.danceTracks
-  // )
-  // const allTracksRandom = useAppSelector((state) => state.tracks.randomTracks)
-
-  // const allTracksFavourites = useAppSelector((state) => state.tracks.favourites)
-
-  const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(isNavMenuOpened)
 
   const handleClick = () => {
     setIsVisible(!isVisible)
+    dispatch(setIsNavMenuOpened(!isVisible))
   }
 
   const [isVisibleMobile, setIsVisibleMobile] = useState(false)
@@ -82,29 +76,24 @@ export const NavMenu: FC<{}> = () => {
 
   const handleClickToMain = () => {
     // const searchedItemsCurrent = allTracks
-
-    dispatch(updateCheckedGenres([]))
-    dispatch(updateCheckedArtists([]))
-    dispatch(updateCheckedYears([]))
-
-    dispatch(updateFilteredTracks([]))
-    dispatch(updateFilteredDanceTracks([]))
-    dispatch(updateFilteredRandomTracks([]))
-    dispatch(updateFilteredFavouritesTracks([]))
-
-    dispatch(updateSearchQuery(''))
+    // dispatch(updateCheckedGenres([]))
+    // dispatch(updateCheckedArtists([]))
+    // dispatch(updateCheckedYears([]))
+    // dispatch(updateFilteredTracks([]))
+    // dispatch(updateFilteredDanceTracks([]))
+    // dispatch(updateFilteredRandomTracks([]))
+    // dispatch(updateFilteredFavouritesTracks([]))
+    // dispatch(updateSearchQuery(''))
     // dispatch(updateSearchedTracks(allTracks))
     // dispatch(updateSearchedTracksDance(allTracksDance))
     // dispatch(updateSearchedTracksRandom(allTracksRandom))
     // dispatch(updateSearchedTracksFavourites(allTracksFavourites))
-
     // const finalFilteredTracks = getFinalItems(
     //   allTracks,
     //   newFilter,
     //   searchedItemsCurrent,
     //   order
     // )
-
     // dispatch(uploadAllTracks(finalFilteredTracks))
   }
 
@@ -270,7 +259,6 @@ export const NavMenu: FC<{}> = () => {
                 </button>
               </div>
               <div className={style.AnimationTop}></div>
-              {/* <Footer></Footer> */}
             </>
           </nav>
         )}
@@ -278,3 +266,11 @@ export const NavMenu: FC<{}> = () => {
     </>
   )
 }
+
+// const allTracks: Track[] = useAppSelector((state) => state.tracks.allTracks)
+// const allTracksDance: Track[] = useAppSelector(
+//   (state) => state.tracks.danceTracks
+// )
+// const allTracksRandom = useAppSelector((state) => state.tracks.randomTracks)
+
+// const allTracksFavourites = useAppSelector((state) => state.tracks.favourites)

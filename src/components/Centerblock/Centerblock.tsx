@@ -66,34 +66,6 @@ export const Centerblock: FC<PlayerProps> = ({
     return (
       <DndProvider backend={HTML5Backend}>
         <div className={style.Centerblock}>
-          {/* <form className={style.InputWrapper}>
-            <TextField
-              value={value}
-              onChange={(e) => handleSearch(e)}
-              InputLabelProps={{}}
-              placeholder={TEXT.searchInput[lang]}
-              fullWidth
-              autoComplete="off"
-              variant="standard"
-              type={'search'}
-              sx={{
-                mt: '5px',
-                input: { color: textColor },
-                label: { color: textColor, pl: '30px' },
-              }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment sx={{ color: textColor }} position="start">
-                    <Search
-                      style={{ color: textColor }}
-                      className={style.Input}
-                    />
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </form> */}
-
           <h2 style={{ color: textColor }} className={style.Header}>
             {header}
           </h2>
