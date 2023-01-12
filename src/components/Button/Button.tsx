@@ -1,11 +1,12 @@
-import { FC } from 'react';
-import { Button as MUIButton } from '@mui/material';
+import { FC, MouseEventHandler } from 'react'
+import { Button as MUIButton } from '@mui/material'
 
 export type ButtonProps = {
-  buttonVariant: 'contained' | 'outlined';
-  buttonText: string;
-  buttonType?: 'button' | 'submit' | 'reset';
-  buttonDisabled?: boolean;
+  buttonVariant: 'contained' | 'outlined'
+  buttonText: string
+  buttonType?: 'button' | 'submit' | 'reset'
+  disabled?: boolean
+  onClick?: any
   buttonColor?:
     | 'inherit'
     | 'error'
@@ -14,22 +15,24 @@ export type ButtonProps = {
     | 'info'
     | 'success'
     | 'warning'
-    | undefined;
-};
+    | undefined
+}
 
 export const Button: FC<ButtonProps> = ({
   buttonText,
   buttonVariant,
   buttonColor = 'secondary',
   buttonType,
-  buttonDisabled,
+  disabled,
+  onClick,
 }) => {
   return (
     <MUIButton
-      disabled={buttonDisabled}
+      disabled={disabled}
       type={buttonType}
       color={buttonColor}
       variant={buttonVariant}
+      onClick={onClick}
       sx={{
         width: '278px',
         height: '52px',
@@ -40,5 +43,5 @@ export const Button: FC<ButtonProps> = ({
     >
       {buttonText}
     </MUIButton>
-  );
-};
+  )
+}

@@ -1,17 +1,17 @@
-import cn from 'classnames';
-import { AccessTime } from '@mui/icons-material';
-import { SvgIcon } from '@mui/material';
+import cn from 'classnames'
+import { AccessTime } from '@mui/icons-material'
+import { SvgIcon } from '@mui/material'
 
-import { TEXT } from '../../constants';
-import { useAppSelector } from '../../hook';
-import { colorToSecondary } from '../../utils/colorUtils';
+import { TEXT } from '../../constants'
+import { useAppSelector } from '../../hooks/hook'
+import { colorToSecondary } from '../../utils/colorUtils'
 
-import style from './style.module.css';
+import style from './style.module.css'
 
 export const ListHeaders = () => {
-  const lang = useAppSelector((state) => state.language.lang);
-  const textColor = useAppSelector((state) => state.colorTheme.textColor);
-  const textColorSecondary = colorToSecondary(textColor);
+  const lang = useAppSelector((state) => state.language.lang)
+  const textColor = useAppSelector((state) => state.colorTheme.textColor)
+  const textColorSecondary = colorToSecondary(textColor)
 
   return (
     <div className={style.ListHeaders}>
@@ -28,5 +28,5 @@ export const ListHeaders = () => {
         <AccessTime />
       </SvgIcon>
     </div>
-  );
-};
+  )
+}

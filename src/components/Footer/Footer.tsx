@@ -1,11 +1,11 @@
-import { useAppSelector } from '../../hook';
-import { colorToSecondary } from '../../utils/colorUtils';
+import { useAppSelector } from '../../hooks/hook'
+import { colorToSecondary } from '../../utils/colorUtils'
 
-import style from './style.module.css';
+import style from './style.module.css'
 
 export const Footer = () => {
-  const textColor = useAppSelector((state) => state.colorTheme.textColor);
-  const textColorSecondary = colorToSecondary(textColor);
+  const textColor = useAppSelector((state) => state.colorTheme.textColor)
+  const textColorSecondary = colorToSecondary(textColor)
 
   return (
     <footer className={style.footer}>
@@ -24,5 +24,5 @@ export const Footer = () => {
         </p>
       </div>
     </footer>
-  );
-};
+  )
+}

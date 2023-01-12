@@ -1,19 +1,18 @@
-import { useState, FC } from 'react';
-import cn from 'classnames';
-import { NavLink } from 'react-router-dom';
-import { IconButton } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+import { useState, FC } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { IconButton } from '@mui/material'
+import MenuIcon from '@mui/icons-material/Menu'
 
-import Logo from '../Logo/Logo';
-import { TEXT } from '../../constants';
-import { SpanChangeColor } from '../changeColor/SpanChangeColor';
-import { useAppDispatch, useAppSelector } from '../../hook';
+import Logo from '../Logo/Logo'
+import { TEXT } from '../../constants'
+import { SpanChangeColor } from '../changeColor/SpanChangeColor'
+import { useAppDispatch, useAppSelector } from '../../hooks/hook'
 import {
   bgColorToBgColorLight,
   extradarkToDark,
   extradarkToHover,
-} from '../../utils/colorUtils';
-import { openModal } from '../../store/modalSlice';
+} from '../../utils/colorUtils'
+import { openModal } from '../../store/modalSlice'
 
 import {
   updateCheckedArtists,
@@ -27,88 +26,89 @@ import {
   updateSearchedTracksRandom,
   updateFilteredFavouritesTracks,
   updateSearchedTracksFavourites,
-} from '../../store/filteredItemsSlice';
-import { uploadAllTracks } from '../../store/trackSlice';
-import { getFinalItems } from '../../utils/getFinalItems';
-import { Track, CheckedItems } from '../../types';
-import { updateSearchQuery } from '../../store/sortingSettingsSlice';
-import { Animation } from '../Animation/Animation';
+} from '../../store/filteredItemsSlice'
+// import { uploadAllTracks } from '../../store/trackSlice'
+// import { getFinalItems } from '../../utils/getFinalItems'
+import { Track, CheckedItems } from '../../types'
+import { updateSearchQuery } from '../../store/sortingSettingsSlice'
+import { Animation } from '../Animation/Animation'
 // import { Footer } from '../../../components/Footer/Footer';
-import { LogoMenu } from '../Logo/LogoMenu';
+import { LogoMenu } from '../Logo/LogoMenu'
 
-import style from './style.module.css';
+import style from './style.module.css'
+import { ROUTES } from '../../routes'
 
 const newFilter: CheckedItems = {
   checkedArtists: [],
   checkedYears: [],
   checkedGenres: [],
-};
+}
 
 export const NavMenu: FC<{}> = () => {
-  const dispatch = useAppDispatch();
-  const lang = useAppSelector((state) => state.language.lang);
+  const dispatch = useAppDispatch()
+  const lang = useAppSelector((state) => state.language.lang)
 
-  const textColor = useAppSelector((state) => state.colorTheme.textColor);
-  const bgColor = useAppSelector((state) => state.colorTheme.bgColor);
-  const bgColorLight = bgColorToBgColorLight(bgColor);
+  const textColor = useAppSelector((state) => state.colorTheme.textColor)
+  const bgColor = useAppSelector((state) => state.colorTheme.bgColor)
+  const bgColorLight = bgColorToBgColorLight(bgColor)
 
   const decorativeColor = useAppSelector(
-    (state) => state.colorTheme.decorativeColor,
-  );
-  const colorHover = extradarkToHover(decorativeColor);
-  const colorDark = extradarkToDark(decorativeColor);
+    (state) => state.colorTheme.decorativeColor
+  )
+  const colorHover = extradarkToHover(decorativeColor)
+  const colorDark = extradarkToDark(decorativeColor)
 
-  const allTracks: Track[] = useAppSelector((state) => state.tracks.allTracks);
-  const allTracksDance: Track[] = useAppSelector(
-    (state) => state.tracks.danceTracks,
-  );
-  const allTracksRandom = useAppSelector((state) => state.tracks.randomTracks);
+  // const allTracks: Track[] = useAppSelector((state) => state.tracks.allTracks)
+  // const allTracksDance: Track[] = useAppSelector(
+  //   (state) => state.tracks.danceTracks
+  // )
+  // const allTracksRandom = useAppSelector((state) => state.tracks.randomTracks)
 
-  const allTracksFavourites = useAppSelector(
-    (state) => state.tracks.favourites,
-  );
+  // const allTracksFavourites = useAppSelector((state) => state.tracks.favourites)
 
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false)
 
   const handleClick = () => {
-    setIsVisible(!isVisible);
-  };
+    setIsVisible(!isVisible)
+  }
 
-  const [isVisibleMobile, setIsVisibleMobile] = useState(false);
+  const [isVisibleMobile, setIsVisibleMobile] = useState(false)
 
   const handleClickMobile = () => {
-    setIsVisibleMobile(!isVisibleMobile);
-  };
+    setIsVisibleMobile(!isVisibleMobile)
+  }
 
-  const order = useAppSelector((state) => state.sortingSettings.order);
+  const order = useAppSelector((state) => state.sortingSettings.order)
 
   const handleClickToMain = () => {
-    const searchedItemsCurrent = allTracks;
+    // const searchedItemsCurrent = allTracks
 
-    dispatch(updateCheckedGenres([]));
-    dispatch(updateCheckedArtists([]));
-    dispatch(updateCheckedYears([]));
+    dispatch(updateCheckedGenres([]))
+    dispatch(updateCheckedArtists([]))
+    dispatch(updateCheckedYears([]))
 
-    dispatch(updateFilteredTracks([]));
-    dispatch(updateFilteredDanceTracks([]));
-    dispatch(updateFilteredRandomTracks([]));
-    dispatch(updateFilteredFavouritesTracks([]));
+    dispatch(updateFilteredTracks([]))
+    dispatch(updateFilteredDanceTracks([]))
+    dispatch(updateFilteredRandomTracks([]))
+    dispatch(updateFilteredFavouritesTracks([]))
 
-    dispatch(updateSearchQuery(''));
-    dispatch(updateSearchedTracks(allTracks));
-    dispatch(updateSearchedTracksDance(allTracksDance));
-    dispatch(updateSearchedTracksRandom(allTracksRandom));
-    dispatch(updateSearchedTracksFavourites(allTracksFavourites));
+    dispatch(updateSearchQuery(''))
+    // dispatch(updateSearchedTracks(allTracks))
+    // dispatch(updateSearchedTracksDance(allTracksDance))
+    // dispatch(updateSearchedTracksRandom(allTracksRandom))
+    // dispatch(updateSearchedTracksFavourites(allTracksFavourites))
 
-    const finalFilteredTracks = getFinalItems(
-      allTracks,
-      newFilter,
-      searchedItemsCurrent,
-      order,
-    );
+    // const finalFilteredTracks = getFinalItems(
+    //   allTracks,
+    //   newFilter,
+    //   searchedItemsCurrent,
+    //   order
+    // )
 
-    dispatch(uploadAllTracks(finalFilteredTracks));
-  };
+    // dispatch(uploadAllTracks(finalFilteredTracks))
+  }
+
+  const navigate = useNavigate()
 
   return (
     <>
@@ -179,7 +179,8 @@ export const NavMenu: FC<{}> = () => {
                 </NavLink>
 
                 <button
-                  onClick={() => dispatch(openModal())}
+                  // onClick={() => dispatch(openModal())}
+                  onClick={() => navigate(ROUTES.login)}
                   style={{ color: textColor }}
                   className={style.LogoutButton}
                 >
@@ -193,13 +194,6 @@ export const NavMenu: FC<{}> = () => {
               </div>
               <div className={style.AnimationTop}></div>
               <Animation></Animation>
-            </>
-          )}
-
-          {!isVisible && (
-            <>
-              <div className={style.FooterTop}></div>
-              {/* <Footer></Footer> */}
             </>
           )}
         </nav>
@@ -282,5 +276,5 @@ export const NavMenu: FC<{}> = () => {
         )}
       </div>
     </>
-  );
-};
+  )
+}

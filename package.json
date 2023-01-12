@@ -15,11 +15,11 @@
     "@types/node": "^16.18.3",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
-    "axios": "^1.2.2",
     "gh-pages": "^4.0.0",
     "immutability-helper": "^3.1.1",
     "muse-player": "^5.7.5",
     "react": "^18.2.0",
+    "react-cookie": "^4.1.1",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18.2.0",
@@ -64,6 +64,5 @@
     "classnames": "^2.3.2",
     "eslint-config-prettier": "^8.5.0",
     "prettier": "2.7.1"
-  },
-  "homepage": "https://evgenialeleo.github.io/react_player"
+  }
 }

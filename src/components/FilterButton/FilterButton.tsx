@@ -1,19 +1,21 @@
-import { useRef, useState, FC } from 'react';
+import { useRef, useState, FC } from 'react'
 
-import { Popup } from '../Popup/Popup';
-import { useAppSelector, useOnClickOutside } from '../../hook';
-import { extradarkToDark, extradarkToHover } from '../../utils/colorUtils';
-import { ButtonChangeColor } from '../changeColor/ButtonChangeColor';
-import { FilterButtonName } from '../../types';
+import { Popup } from '../Popup/Popup'
+// import { useAppSelector, useOnClickOutside } from '../../hooks/hook'
+import { extradarkToDark, extradarkToHover } from '../../utils/colorUtils'
+import { ButtonChangeColor } from '../changeColor/ButtonChangeColor'
+import { FilterButtonName } from '../../types'
 
-import style from './style.module.css';
+import style from './style.module.css'
+import { useAppSelector } from '../../hooks/hook'
+import { useOnClickOutside } from '../../hooks/useOnClickOutside'
 
 export type FilterButtonProps = {
-  buttonText: string;
-  buttonName: FilterButtonName;
-  checkItems: string[];
-  rows: 1 | 2 | 3;
-};
+  buttonText: string
+  buttonName: FilterButtonName
+  checkItems: string[]
+  rows: 1 | 2 | 3
+}
 
 export const FilterButton: FC<FilterButtonProps> = ({
   buttonName,
@@ -21,31 +23,31 @@ export const FilterButton: FC<FilterButtonProps> = ({
   checkItems,
   rows,
 }) => {
-  const textColor = useAppSelector((state) => state.colorTheme.textColor);
+  const textColor = useAppSelector((state) => state.colorTheme.textColor)
   const decorativeColor = useAppSelector(
-    (state) => state.colorTheme.decorativeColor,
-  );
+    (state) => state.colorTheme.decorativeColor
+  )
 
-  const colorHover = extradarkToHover(decorativeColor);
-  const colorDark = extradarkToDark(decorativeColor);
+  const colorHover = extradarkToHover(decorativeColor)
+  const colorDark = extradarkToDark(decorativeColor)
 
-  const checkedItems = useAppSelector(
-    (state) => state.filteredItems[`${buttonName}`],
-  );
+  // const checkedItems = useAppSelector(
+  //   (state) => state.filteredItems[`${buttonName}`]
+  // )
 
-  const ref = useRef(null);
-  const [isPopupVisible, setIsPopupVisible] = useState(false);
-  const [color, setColor] = useState(textColor);
+  const ref = useRef(null)
+  const [isPopupVisible, setIsPopupVisible] = useState(false)
+  const [color, setColor] = useState(textColor)
 
   useOnClickOutside(ref, () => {
-    setIsPopupVisible(false);
-    setColor(textColor);
-  });
+    setIsPopupVisible(false)
+    setColor(textColor)
+  })
 
   const togglePopup = () => {
-    setIsPopupVisible(!isPopupVisible);
-    setColor(colorDark);
-  };
+    setIsPopupVisible(!isPopupVisible)
+    setColor(colorDark)
+  }
 
   return (
     <div className={style.Wrapper}>
@@ -63,7 +65,7 @@ export const FilterButton: FC<FilterButtonProps> = ({
             className={style.NumberOfCheckedItems}
             style={{ backgroundColor: decorativeColor }}
           >
-            {checkedItems.length}
+            {/* {checkedItems.length} */}
           </div>
         )}
       </ButtonChangeColor>
@@ -73,5 +75,5 @@ export const FilterButton: FC<FilterButtonProps> = ({
         )}
       </div>
     </div>
-  );
-};
+  )
+}

@@ -1,24 +1,24 @@
-import { Typography } from '@mui/material';
-import { FC } from 'react';
+import { Typography } from '@mui/material'
+import { FC } from 'react'
 
-import { COLOR_DARK_DEFAULT } from '../../constants';
-import { useAppSelector } from '../../hook';
-import { extradarkToDark, extradarkToHover } from '../../utils/colorUtils';
-import { SpanChangeColor } from '../changeColor/SpanChangeColor';
+import { COLOR_DARK_DEFAULT } from '../../constants'
+import { useAppSelector } from '../../hooks/hook'
+import { extradarkToDark, extradarkToHover } from '../../utils/colorUtils'
+import { SpanChangeColor } from '../changeColor/SpanChangeColor'
 
-import style from './style.module.css';
+import style from './style.module.css'
 
 type typeLogoProps = {
-  textColor: string;
-};
+  textColor: string
+}
 
 const Logo: FC<typeLogoProps> = ({ textColor }) => {
   const decorativeColor = useAppSelector(
-    (state) => state.colorTheme.decorativeColor,
-  );
+    (state) => state.colorTheme.decorativeColor
+  )
 
-  const colorDark = extradarkToDark(decorativeColor);
-  const colorHover = extradarkToHover(decorativeColor);
+  const colorDark = extradarkToDark(decorativeColor)
+  const colorHover = extradarkToHover(decorativeColor)
 
   if (textColor === 'default') {
     return (
@@ -48,7 +48,7 @@ const Logo: FC<typeLogoProps> = ({ textColor }) => {
         </span>{' '}
         skypro
       </Typography>
-    );
+    )
   } else {
     return (
       <div
@@ -79,8 +79,8 @@ const Logo: FC<typeLogoProps> = ({ textColor }) => {
           skypro
         </SpanChangeColor>
       </div>
-    );
+    )
   }
-};
+}
 
-export default Logo;
+export default Logo

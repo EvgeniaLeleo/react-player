@@ -1,72 +1,81 @@
-import { FC } from 'react';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import { Button as MUIButton, createTheme, ThemeProvider } from '@mui/material';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { FC, useRef } from 'react'
+import FormControl from '@mui/material/FormControl'
+import InputLabel from '@mui/material/InputLabel'
+import MenuItem from '@mui/material/MenuItem'
+import { Button as MUIButton, createTheme, ThemeProvider } from '@mui/material'
+import Select, { SelectChangeEvent } from '@mui/material/Select'
 
-import { useAppDispatch, useAppSelector } from '../../hook';
-import { BGCOLOR, COLOR, COLOR_EXTRADARK, TEXT } from '../../constants';
+import { useAppDispatch, useAppSelector } from '../../hooks/hook'
+import { BGCOLOR, COLOR, COLOR_EXTRADARK, TEXT } from '../../constants'
 import {
   changeBgColor,
   changeDecorativeColor,
   changeTextColor,
-} from '../../store/colorThemeSlice';
-import { colorToSecondary } from '../../utils/colorUtils';
-import { changeLanguage } from '../../store/languageSlice';
-import { Languages } from '../../types';
+} from '../../store/colorThemeSlice'
+import { colorToSecondary } from '../../utils/colorUtils'
+import { changeLanguage } from '../../store/languageSlice'
+import { Languages } from '../../types'
 
-import style from './style.module.css';
+import style from './style.module.css'
+import { useGetCurrentUserQuery } from '../../services/tracksDataApi'
 
 export const Profile: FC = () => {
-  const dispatch = useAppDispatch();
-  const dataUser = useAppSelector((state) => state.auth.data);
-  const lang = useAppSelector((state) => state.language.lang);
-  const textColor = useAppSelector((state) => state.colorTheme.textColor);
-  const bgColor = useAppSelector((state) => state.colorTheme.bgColor);
+  const dispatch = useAppDispatch()
+  // const dataUser = useAppSelector((state) => state.auth.data);
+  const timestampRef = useRef(Date.now()).current
+  const {
+    data: user,
+    isLoading,
+    isError,
+    error,
+    // } = useGetCurrentUserQuery(timestampRef)
+  } = useGetCurrentUserQuery()
+  const lang = useAppSelector((state) => state.language.lang)
+  const textColor = useAppSelector((state) => state.colorTheme.textColor)
+  const bgColor = useAppSelector((state) => state.colorTheme.bgColor)
   const decorativeColor = useAppSelector(
-    (state) => state.colorTheme.decorativeColor,
-  );
-  const textColorSecondary = colorToSecondary(textColor);
+    (state) => state.colorTheme.decorativeColor
+  )
+  const textColorSecondary = colorToSecondary(textColor)
 
   const handleChange = (event: SelectChangeEvent) => {
-    const newLanguage = event.target.value as Languages;
-    dispatch(changeLanguage(newLanguage));
-    localStorage.setItem('language', newLanguage);
-  };
+    const newLanguage = event.target.value as Languages
+    dispatch(changeLanguage(newLanguage))
+    localStorage.setItem('language', newLanguage)
+  }
 
   const handleChangeBgColor = (event: {
-    target: { value: React.SetStateAction<string> };
+    target: { value: React.SetStateAction<string> }
   }) => {
-    const newBgColor = event.target.value.toString();
-    dispatch(changeBgColor(newBgColor));
-    localStorage.setItem('bgColor', newBgColor);
-  };
+    const newBgColor = event.target.value.toString()
+    dispatch(changeBgColor(newBgColor))
+    localStorage.setItem('bgColor', newBgColor)
+  }
 
   const handleChangeTextColor = (event: {
-    target: { value: React.SetStateAction<string> };
+    target: { value: React.SetStateAction<string> }
   }) => {
-    const newTextColor = event.target.value.toString();
-    dispatch(changeTextColor(newTextColor));
-    localStorage.setItem('textColor', newTextColor);
-  };
+    const newTextColor = event.target.value.toString()
+    dispatch(changeTextColor(newTextColor))
+    localStorage.setItem('textColor', newTextColor)
+  }
 
   const handleChangeDecorativeColor = (event: {
-    target: { value: React.SetStateAction<string> };
+    target: { value: React.SetStateAction<string> }
   }) => {
-    const newDecorativeColor = event.target.value.toString();
-    dispatch(changeDecorativeColor(newDecorativeColor));
-    localStorage.setItem('decorativeColor', newDecorativeColor);
-  };
+    const newDecorativeColor = event.target.value.toString()
+    dispatch(changeDecorativeColor(newDecorativeColor))
+    localStorage.setItem('decorativeColor', newDecorativeColor)
+  }
 
   const handleResetSettings = () => {
-    dispatch(changeTextColor(COLOR));
-    localStorage.setItem('textColor', COLOR);
-    dispatch(changeBgColor(BGCOLOR));
-    localStorage.setItem('bgColor', BGCOLOR);
-    dispatch(changeDecorativeColor(COLOR_EXTRADARK));
-    localStorage.setItem('decorativeColor', COLOR_EXTRADARK);
-  };
+    dispatch(changeTextColor(COLOR))
+    localStorage.setItem('textColor', COLOR)
+    dispatch(changeBgColor(BGCOLOR))
+    localStorage.setItem('bgColor', BGCOLOR)
+    dispatch(changeDecorativeColor(COLOR_EXTRADARK))
+    localStorage.setItem('decorativeColor', COLOR_EXTRADARK)
+  }
 
   const buttonTheme = createTheme({
     palette: {
@@ -74,7 +83,7 @@ export const Profile: FC = () => {
         main: decorativeColor,
       },
     },
-  });
+  })
 
   return (
     <div className={style.Profile}>
@@ -86,10 +95,10 @@ export const Profile: FC = () => {
           {TEXT.profile.userData[lang]}
         </h4>
         <div className={style.UserData}>
-          {TEXT.profile.userName[lang]} {dataUser?.fullName}
+          {TEXT.profile.userName[lang]} {user?.username}
         </div>
         <div className={style.UserData}>
-          {TEXT.profile.login[lang]} {dataUser?.email}
+          {TEXT.profile.login[lang]} {user?.email}
         </div>
 
         <h4 className={style.Header} style={{ color: textColorSecondary }}>
@@ -174,5 +183,5 @@ export const Profile: FC = () => {
         </ThemeProvider>
       </div>
     </div>
-  );
-};
+  )
+}

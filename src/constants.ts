@@ -1,27 +1,27 @@
-import { createTheme } from '@mui/material';
+import { createTheme } from '@mui/material'
 
 import {
   bgColorToBgColorLight,
   colorToSecondary,
   extradarkToDark,
   extradarkToHover,
-} from './utils/colorUtils';
+} from './utils/colorUtils'
 
-export const URL_API = 'http://51.250.72.80:8090';
+export const URL_API = 'http://51.250.72.80:8090/'
 
-export const COLOR_DARK_DEFAULT = '#ad61ff';
+export const COLOR_DARK_DEFAULT = '#ad61ff'
 
-export const BGCOLOR = '#181818';
-export const COLOR = '#ffffff';
-export const COLOR_EXTRADARK = '#580ea2';
+export const BGCOLOR = '#181818'
+export const COLOR = '#ffffff'
+export const COLOR_EXTRADARK = '#580ea2'
 
-export const BGCOLOR_LIGHT = bgColorToBgColorLight(BGCOLOR); //'#1c1c1c';
+export const BGCOLOR_LIGHT = bgColorToBgColorLight(BGCOLOR) //'#1c1c1c';
 
-export const COLOR_DARK = extradarkToDark(COLOR_EXTRADARK); //'#ad61ff';
+export const COLOR_DARK = extradarkToDark(COLOR_EXTRADARK) //'#ad61ff';
 
-export const COLOR_HOVER = extradarkToHover(COLOR_EXTRADARK); //`#D9B6FF`;
+export const COLOR_HOVER = extradarkToHover(COLOR_EXTRADARK) //`#D9B6FF`;
 
-export const COLOR_SECONDARY = colorToSecondary(COLOR); //'#696969';
+export const COLOR_SECONDARY = colorToSecondary(COLOR) //'#696969';
 
 export const theme = createTheme({
   palette: {
@@ -29,47 +29,74 @@ export const theme = createTheme({
       main: COLOR_EXTRADARK,
     },
   },
-});
+})
 
-export const DEFAULT_LANG = 'ru';
+export const DEFAULT_LANG = 'ru'
 
-export const NUMBER_OF_RANDOM_ITEMS = 10;
+export const NUMBER_OF_RANDOM_ITEMS = 10
 
-export const ORDER = { notSelected: 'notSelected', asc: 'ASC', desc: 'DESC' };
+export const ORDER = { notSelected: 'notSelected', asc: 'ASC', desc: 'DESC' }
 
-export const ALBUM_DAYPLAYLIST = 'dayplaylist';
-export const ALBUM_DANCE = 'dance';
-export const ALBUM_INDIE = 'indie';
-export const ALBUM_FAVOURITES = 'favourites';
+export const COLLECTION = {
+  dayplaylist: 'dayplaylist',
+  dance: 'dance',
+  indie: 'indie',
+  favorites: 'favourites',
+  tracks: 'tracks',
+  profile: 'profile',
+  classics: 'classics',
+  electro: 'electro',
+  rocks: 'rocks',
+}
 
-export const ALBUMS = {
-  [ALBUM_DAYPLAYLIST]: {
+export const COLLECTIONS = {
+  [COLLECTION.tracks]: { ru: 'Треки', en: 'Tracks', bel: 'Трэк' },
+  [COLLECTION.dayplaylist]: {
     ru: 'Плейлист дня',
     en: 'Playlist of the day',
     bel: 'Плэйліст дня',
   },
-  [ALBUM_DANCE]: {
+  [COLLECTION.dance]: {
     ru: '100 танцевальных хитов',
     en: '100 dance hits',
     bel: '100 танцавальных хітоў',
   },
-  [ALBUM_INDIE]: {
+  [COLLECTION.indie]: {
     ru: 'Инди-заряд',
     en: 'Indie charge',
     bel: 'Індзі-зарад',
   },
-  [ALBUM_FAVOURITES]: {
+  [COLLECTION.classics]: {
+    ru: 'Классическая музыка',
+    en: 'Classic music',
+    bel: 'Класічная музыка',
+  },
+  [COLLECTION.rocks]: {
+    ru: 'Рок музыка',
+    en: 'Rock music',
+    bel: 'Рок-музыка',
+  },
+  [COLLECTION.favorites]: {
     ru: 'Мои треки',
     en: 'My tracks',
     bel: 'Мае трэкі',
   },
-};
+  [COLLECTION.electro]: {
+    ru: 'Электронная музыка',
+    en: 'Electro music',
+    bel: 'Электронная музыка', // карыстальніка',
+  },
+  [COLLECTION.profile]: {
+    ru: 'Личный кабинет',
+    en: 'Profile',
+    bel: 'Профіль', // карыстальніка',
+  },
+}
 
 export const TEXT = {
   menu: {
     homepage: { ru: 'Главная', en: 'Homepage', bel: 'Галоўны' },
     mytracks: { ru: 'Мои треки', en: 'My tracks', bel: 'Мае трэкі' },
-    karaoke: { ru: 'Караоке', en: 'Karaoke', bel: 'Караоке' },
     profile: {
       ru: 'Личный кабинет',
       en: 'Profile',
@@ -82,9 +109,8 @@ export const TEXT = {
     en: 'Search by artist or song title',
     bel: 'Пошук па артысту або назве песні',
   },
-  header: { tracks: { ru: 'Треки', en: 'Tracks', bel: 'Трэк' } },
+  header: COLLECTIONS,
   collections: { ru: 'Подборки', en: 'Collections', bel: 'Падборка' },
-  albums: ALBUMS,
   search: {
     // searchBy: { ru: 'Искать по:', en: 'Search by', bel: 'Шукаць па:' },
     searchBy: { ru: 'Фильтр по:', en: 'Filter by:', bel: 'Фільтр па:' },
@@ -154,9 +180,9 @@ export const TEXT = {
     en: 'There are no favorite tracks yet',
     bel: 'Абраных трэкаў пакуль няма',
   },
-};
+}
 
-export const EMPTY_ARTIST = 'sorry_empty_artist';
+export const EMPTY_ARTIST = 'sorry_empty_artist'
 
 export const EMPTY_RESULTS = [
   {
@@ -164,6 +190,6 @@ export const EMPTY_RESULTS = [
     author: EMPTY_ARTIST,
     name: 'empty',
   },
-];
+]
 
-export const USER = { name: 'Evgenia Leleo', login: 'Leleo', avatar: '' };
+export const USER = { name: 'Evgenia Leleo', login: 'Leleo', avatar: '' }

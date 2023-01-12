@@ -1,18 +1,19 @@
-import { Skeleton } from '@mui/material';
-import { FC } from 'react';
+import { Skeleton } from '@mui/material'
+import { FC } from 'react'
 
 type SkeletonRectProps = {
-  color: string;
-  width: string;
-  margin: string;
-  height?: string | undefined;
-};
+  color: string
+  width?: string
+  margin: string
+  height?: string | undefined
+}
 
 export const SkeletonRect: FC<SkeletonRectProps> = ({
   color,
   width,
   margin,
-  height = '16px',
+  height,
+  // height = '16px',
 }) => (
   <Skeleton
     variant="rectangular"
@@ -23,6 +24,7 @@ export const SkeletonRect: FC<SkeletonRectProps> = ({
       bgcolor: color,
       marginRight: margin,
       filter: 'opacity(0.25)',
+      aspectRatio: '1/1',
     }}
   />
-);
+)

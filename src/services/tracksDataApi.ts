@@ -1,28 +1,28 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { Track, UserTokens, Collection, User } from '../types';
-
-export interface ILoginUser {
-  email: string;
-  password: string;
-}
-
-export interface ISignupUser {
-  username: string;
-  email: string;
-  password: string;
-}
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { RootState } from '../store'
+import {
+  Track,
+  UserTokens,
+  Collection,
+  User,
+  LoginUser,
+  SignupUser,
+} from '../types'
+import { checkJWTExpTime } from '../utils/utilsCookie'
 
 export const tracksDataApi = createApi({
   reducerPath: 'music-player/api',
   tagTypes: ['Tracks'],
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://51.250.72.80:8090/',
-    // prepareHeaders: (headers, { getState }) => {
-    //   const token = (getState() as RootState).token.access;
-    //   if (token && checkJWTExpTime(token))
-    //     headers.set('authorization', `Bearer ${token}`);
-    //   return headers;
-    // },
+    prepareHeaders: (headers, { getState }) => {
+      const token = (getState() as RootState).token.access
+      if (token && checkJWTExpTime(token)) {
+        headers.set('authorization', `Bearer ${token}`)
+        console.log(token)
+      }
+      return headers
+    },
   }),
   endpoints: (build) => ({
     getTracks: build.query<Track[], void>({
@@ -38,22 +38,22 @@ export const tracksDataApi = createApi({
     getTrack: build.query<Track, number>({
       query: (trackId: number) => `catalog/track/${trackId}/`,
     }),
-    loginUser: build.mutation({
-      query: (body: ILoginUser) => ({
+    login: build.mutation<SignupUser, LoginUser>({
+      query: (body: LoginUser) => ({
         url: 'user/login/',
         method: 'POST',
         body,
       }),
     }),
-    userSignup: build.mutation({
-      query: (body: ISignupUser) => ({
+    signup: build.mutation({
+      query: (body: SignupUser) => ({
         url: 'user/signup/',
         method: 'POST',
         body,
       }),
     }),
-    userToken: build.mutation({
-      query: (body: ILoginUser) => ({
+    token: build.mutation<UserTokens, LoginUser>({
+      query: (body: LoginUser) => ({
         url: 'user/token/',
         method: 'POST',
         body,
@@ -93,25 +93,28 @@ export const tracksDataApi = createApi({
             ]
           : [{ type: 'Tracks', id: 'LIST' }],
     }),
-    getCurrentUser: build.query<User, number>({
-      query: (sessionId: number) => `user/me/`,
-    }),
-    getCurrentUserCached: build.query<User, void>({
+    // getCurrentUser: build.query<User, number>({
+    //   query: (sessionId: number) => `user/me/`,
+    // }),
+    getCurrentUser: build.query<User, void>({
       query: () => `user/me/`,
     }),
   }),
-});
+})
 
 export const {
   useGetTracksQuery,
   useGetTrackQuery,
-  useLoginUserMutation,
-  useUserSignupMutation,
-  useUserTokenMutation,
+  useLoginMutation,
+  useSignupMutation,
+  useTokenMutation,
   useRefreshUserTokenMutation,
   useAddTrackToFavoriteMutation,
   useRemoveTrackFromFavoriteMutation,
   useGetCollectionQuery,
   useGetCurrentUserQuery,
-  useGetCurrentUserCachedQuery,
-} = tracksDataApi;
+} = tracksDataApi
+
+// getCurrentUserCached: build.query<User, void>({
+//   query: () => `user/me/`,
+// }),

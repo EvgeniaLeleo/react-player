@@ -1,38 +1,57 @@
-import { Routes, Route } from 'react-router-dom';
+import {
+  Routes as ReactRoutes,
+  Route,
+  Navigate,
+  Outlet,
+} from 'react-router-dom'
+import { FC } from 'react'
+import { useLoadCredentialsFromCookies } from './hooks/useLoadCredentialsFromCookies'
+import { LoginPage } from './pages/LoginPage/LoginPage'
+import { SignupPage } from './pages/SignupPage/SignupPage'
+import { TracksPage } from './pages/TracksPage/TracksPage'
+import { CollectionPage } from './pages/CollectionPage/CollectionPage'
+import { Profile } from './components/Profile/Profile'
+import { ProfilePage } from './pages/ProfilePage/ProfilePage'
 
-import { TEXT } from './constants';
-import { useAppSelector } from './hook';
-import { Login } from './pages/Login/Login';
-import { Main } from './pages/Main/Main';
-import { Register } from './pages/Register/Register';
+export const ROUTES = {
+  main: '/',
+  login: '/login',
+  profile: '/profile',
+  signup: '/signup',
+  tracks: '/tracks',
+  mytracks: '/mytracks',
+  collection: '/collection',
+}
+
+type ProtectedRouteProps = {
+  redirectPath?: string
+  isAllowed: boolean
+}
+
+const ProtectedRoute: FC<ProtectedRouteProps> = ({
+  redirectPath = ROUTES.login,
+  isAllowed,
+}) => {
+  if (!isAllowed) return <Navigate to={redirectPath} replace={true} />
+  return <Outlet />
+}
 
 export const AppRoutes = () => {
-  const lang = useAppSelector((state) => state.language.lang);
+  const isLoggedIn = useLoadCredentialsFromCookies()
 
   return (
-    <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route
-        path="/main"
-        element={<Main header={TEXT.header.tracks[lang]} />}
-      />
-      <Route
-        path="/dance"
-        element={<Main header={TEXT.albums.dance[lang]} />}
-      />
-      <Route
-        path="/mytracks"
-        element={<Main header={TEXT.menu.mytracks[lang]} />}
-      />
-      <Route
-        path="/profile"
-        element={<Main header={TEXT.menu.profile[lang]} />}
-      />
-      <Route
-        path="/random"
-        element={<Main header={TEXT.albums.dayplaylist[lang]} />}
-      />
-    </Routes>
-  );
-};
+    <ReactRoutes>
+      <Route path={ROUTES.login} element={<LoginPage />} />
+      <Route path={ROUTES.signup} element={<SignupPage />} />
+      <Route element={<ProtectedRoute isAllowed={isLoggedIn} />}>
+        <Route path={ROUTES.main} element={<TracksPage />} />
+        <Route path={ROUTES.profile} element={<ProfilePage />} />
+        {/* <Route path={ROUTES.tracks} element={<TracksPage />} /> */}
+        {/* <Route path={ROUTES.playlist} element={<PlaylistPage />} />
+        <Route path={`${ROUTES.collection}/:id`} element={<Collection />} /> */}
+        <Route path={`${ROUTES.collection}/:id`} element={<CollectionPage />} />
+        <Route path="*" element={<Navigate replace to={ROUTES.main} />} />
+      </Route>
+    </ReactRoutes>
+  )
+}

@@ -1,0 +1,106 @@
+.Sidebar {
+  max-width: 418px;
+  width: 35%;
+  padding: 30px 90px 85px 78px;
+}
+
+.User {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.UserName {
+  margin: 0 0 0 auto;
+}
+
+.List {
+  display: flex;
+  flex-direction: column;
+
+  padding-top: 260px;
+}
+
+.ButtonVisibility {
+  display: none;
+}
+
+.ButtonMobileList {
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+
+  width: 100%;
+  min-height: 30px;
+
+  margin-bottom: 13px;
+  margin-top: 5px;
+  padding: 10px;
+
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.5s ease-in;
+}
+
+.MobileList {
+  font-size: 16px;
+
+  width: 100%;
+  margin-top: 5px;
+
+  opacity: 0;
+
+  transition: all 0.2s ease-in;
+}
+
+@media (max-width: 1500px) {
+  .Sidebar {
+    width: 25%;
+    padding: 30px 90px 85px 40px;
+  }
+}
+
+@media (max-width: 1439px) {
+  .Sidebar {
+    width: 20%;
+    padding: 30px 20px 85px 20px;
+  }
+
+  .css-1rxz5jq-MuiSelect-select-MuiInputBase-input-MuiInput-input {
+    font-size: 10px;
+  }
+
+  .css-1tqk9ti {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .Sidebar {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 210px;
+    padding-right: 20px;
+    padding-left: 0;
+    padding-bottom: 10px;
+  }
+
+  .ButtonVisibility {
+    display: block;
+  }
+
+  .ButtonMobileList {
+    display: flex;
+    padding-top: 5px;
+  }
+
+  .MobileList {
+    opacity: 1;
+  }
+
+  .List {
+    display: none;
+  }
+}
