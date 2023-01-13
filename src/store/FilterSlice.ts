@@ -13,8 +13,9 @@ import {
 const getFilterDataByField = (data: Track[], field: FieldNames) => {
   if (field === 'release_date') {
     const yearList = data.map((item: Track) =>
-      item.release_date ? +item.release_date.split('-')[0] : 0
+      item.release_date ? Number(item.release_date.split('-')[0]) : 0
     )
+
     const orderedList = Array.from(new Set(yearList))
       .filter((item) => item !== 0)
       .sort((a, b) => b! - a!)

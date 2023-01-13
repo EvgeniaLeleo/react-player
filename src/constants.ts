@@ -47,10 +47,16 @@ export const COLLECTION = {
   classics: 'classics',
   electro: 'electro',
   rocks: 'rocks',
+  mytracks: 'mytracks',
 }
 
 export const COLLECTIONS = {
   [COLLECTION.tracks]: { ru: 'Треки', en: 'Tracks', bel: 'Трэк' },
+  [COLLECTION.mytracks]: {
+    ru: 'Мои треки',
+    en: 'My tracks',
+    bel: 'Мае трэкі',
+  },
   [COLLECTION.dayplaylist]: {
     ru: 'Плейлист дня',
     en: 'Playlist of the day',
@@ -96,11 +102,15 @@ export const COLLECTIONS = {
 export const TEXT = {
   menu: {
     homepage: { ru: 'Главная', en: 'Homepage', bel: 'Галоўны' },
-    mytracks: { ru: 'Мои треки', en: 'My tracks', bel: 'Мае трэкі' },
     profile: {
       ru: 'Личный кабинет',
       en: 'Profile',
       bel: 'Профіль', // карыстальніка',
+    },
+    mytracks: {
+      ru: 'Мои треки',
+      en: 'My tracks',
+      bel: 'Мае трэкі',
     },
     logout: { ru: 'Выйти', en: 'Logout', bel: 'Выйсці' },
   },

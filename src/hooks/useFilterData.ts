@@ -6,16 +6,22 @@ import { useAppDispatch, useAppSelector } from './hook'
 
 export const useFilterData = () => {
   const { data: tracks } = useGetTracksQuery()
+
   const [filteredData, setFilteredData] = useState<FilterSlice>(initialState)
+
   const dispatch = useAppDispatch()
   const selectedData = useAppSelector(selectFilter)
 
   useEffect(() => {
-    if (tracks) dispatch(updateFilter(tracks))
+    if (tracks) {
+      dispatch(updateFilter(tracks))
+    }
   }, [tracks, dispatch])
 
   useEffect(() => {
-    if (selectedData) setFilteredData(selectedData)
+    if (selectedData) {
+      setFilteredData(selectedData)
+    }
   }, [selectedData])
 
   return filteredData

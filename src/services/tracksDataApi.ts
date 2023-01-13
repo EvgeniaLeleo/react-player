@@ -8,7 +8,7 @@ import {
   LoginUser,
   SignupUser,
 } from '../types'
-import { checkJWTExpTime } from '../utils/utilsCookie'
+import { checkJWTExpTime } from '../utils/checkJWTExpTime'
 
 export const tracksDataApi = createApi({
   reducerPath: 'music-player/api',

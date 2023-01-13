@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { selectAccessToken } from '../store/tokenSlice'
 import { Track } from '../types'
-import { getFavoriteTracksByUserToken } from '../utils/utilsCookie'
+import { getFavoriteTracksByUserToken } from '../utils/getFavoriteTracksByUserToken'
 import { useAppSelector } from './hook'
 import { useTracks } from './useTracks'
 

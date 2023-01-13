@@ -1,5 +1,4 @@
 import { FC } from 'react'
-import cn from 'classnames'
 
 import { useAppSelector } from '../../hooks/hook'
 import { extradarkToDark } from '../../utils/colorUtils'

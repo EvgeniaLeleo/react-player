@@ -29,8 +29,6 @@ export const selectAccessToken = (state: RootState) => state.token.access
 export const selectRefreshToken = (state: RootState) => state.token.refresh
 
 export const selectTokens = (state: RootState) => {
-  // console.log('selectTokens')
-  // console.log(state.token)
   return state.token
 }
 

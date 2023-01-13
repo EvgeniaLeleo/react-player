@@ -141,6 +141,7 @@ type Props = {
   autoplay?: boolean
   isMoved: boolean
   movedTracks: Track[]
+  favoriteTracks: number[]
   isShuffleActive: boolean
 }
 
@@ -150,6 +151,7 @@ const initialState: Props = {
   isMoved: false,
   isShuffleActive: false,
   movedTracks: [],
+  favoriteTracks: [],
 }
 
 export const trackSlice = createSlice({
@@ -159,11 +161,36 @@ export const trackSlice = createSlice({
     setActiveTrackId: (state, action: PayloadAction<number>) => {
       state.id = action.payload
     },
+
     changeCurrentTrack(state, action: PayloadAction<Track>) {
       state.autoplay = true
       state.currentTrack = action.payload
       // localStorage.setItem('currentTrack', JSON.stringify(state.currentTrack))
     },
+
+    addFavoriteTrack: (state, action: PayloadAction<number>) => {
+      state.favoriteTracks = [...state.favoriteTracks, action.payload]
+    },
+
+    removeFavoriteTrack: (state, action: PayloadAction<number>) => {
+      const index = state.favoriteTracks.indexOf(action.payload)
+      state.favoriteTracks = [
+        ...state.favoriteTracks.slice(0, index),
+        ...state.favoriteTracks.slice(index + 1),
+      ]
+    },
+
+    // toggleFavoriteTrack: (state, action: PayloadAction<number>) => {
+    //   if (state.includes(action.payload)) {
+    //     const index = state.indexOf(action.payload)
+    //     state = [
+    //       ...state.slice(0, index),
+    //       ...state.slice(index + 1),
+    //     ]
+    //   }
+    //   state.favoriteTracks = [...state.favoriteTracks, action.payload]
+    // }
+
     switchToNextTrack(state, action: PayloadAction<Track[]>) {
       state.autoplay = true
       let nextTrack: Track
@@ -190,6 +217,7 @@ export const trackSlice = createSlice({
         state.currentTrack = nextTrack
       }
     },
+
     switchToPreviousTrack(state, action: PayloadAction<Track[]>) {
       state.autoplay = true
       let previousTrack
@@ -212,6 +240,7 @@ export const trackSlice = createSlice({
       }
       state.currentTrack = previousTrack
     },
+
     shuffleTracks(state, action) {
       if (action.payload) {
         // let tracks = JSON.parse(JSON.stringify(state.))
@@ -219,18 +248,23 @@ export const trackSlice = createSlice({
         // state.currentTrack = nextTrack
       }
     },
+
     setShuffleStatus(state, action) {
       state.isShuffleActive = !action.payload
     },
+
     setAutoplayStatus(state, action) {
       state.autoplay = action.payload
     },
+
     setMovedStatus(state, action) {
       state.isMoved = action.payload
     },
+
     changeAutoplayStatus(state, action) {
       state.autoplay = !action.payload
     },
+
     uploadMovedTracks(state, action: PayloadAction<Track[]>) {
       state.movedTracks = action.payload
     },
@@ -238,6 +272,10 @@ export const trackSlice = createSlice({
 })
 
 export const {
+  // updateFavoriteTracks,
+  // toggleFavoriteTrack,
+  addFavoriteTrack,
+  removeFavoriteTrack,
   setActiveTrackId,
   changeCurrentTrack,
   switchToNextTrack,

@@ -1,4 +1,4 @@
-import { FC, MouseEventHandler } from 'react'
+import { FC } from 'react'
 import { Button as MUIButton } from '@mui/material'
 
 export type ButtonProps = {

@@ -14,7 +14,9 @@ export const useFilteredTracks = (query = '') => {
     data.filter((el: FilterItem) => el.selected).map((el) => el.value)
 
   useEffect(() => {
-    if (filterSliceData && data) filterData(data, filterSliceData)
+    if (filterSliceData && data) {
+      filterData(data, filterSliceData)
+    }
     // eslint-disable-next-line
   }, [data, filterSliceData, query])
 

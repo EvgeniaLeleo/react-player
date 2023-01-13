@@ -20,13 +20,3 @@ const navMenuSlice = createSlice({
 
 export const { setIsNavMenuOpened } = navMenuSlice.actions
 export default navMenuSlice.reducer
-
-// openNavMenu: (state) => {
-//   state.isOpen = true
-// },
-// closeNavMenu: (state) => {
-//   state.isOpen = false
-// },
-// toggleNavMenu: (state) => {
-//   state.isOpen = !state.isOpen
-// },

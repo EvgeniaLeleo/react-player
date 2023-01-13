@@ -10,8 +10,8 @@ import { LoginPage } from './pages/LoginPage/LoginPage'
 import { SignupPage } from './pages/SignupPage/SignupPage'
 import { TracksPage } from './pages/TracksPage/TracksPage'
 import { CollectionPage } from './pages/CollectionPage/CollectionPage'
-import { Profile } from './components/Profile/Profile'
 import { ProfilePage } from './pages/ProfilePage/ProfilePage'
+import { MyTracksPage } from './pages/MyTracksPage/MyTracksPage'
 
 export const ROUTES = {
   main: '/',
@@ -46,9 +46,7 @@ export const AppRoutes = () => {
       <Route element={<ProtectedRoute isAllowed={isLoggedIn} />}>
         <Route path={ROUTES.main} element={<TracksPage />} />
         <Route path={ROUTES.profile} element={<ProfilePage />} />
-        {/* <Route path={ROUTES.tracks} element={<TracksPage />} /> */}
-        {/* <Route path={ROUTES.playlist} element={<PlaylistPage />} />
-        <Route path={`${ROUTES.collection}/:id`} element={<Collection />} /> */}
+        <Route path={ROUTES.mytracks} element={<MyTracksPage />} />
         <Route path={`${ROUTES.collection}/:id`} element={<CollectionPage />} />
         <Route path="*" element={<Navigate replace to={ROUTES.main} />} />
       </Route>

@@ -6,7 +6,12 @@ import { useDrag, useDrop } from 'react-dnd'
 
 import { DivChangeColor } from '../../components/changeColor/DivChangeColor'
 import { useAppDispatch, useAppSelector } from '../../hooks/hook'
-import { changeCurrentTrack } from '../../store/trackSlice'
+import { useFavoriteTrack } from '../../hooks/useFavoriteTrack'
+import {
+  addFavoriteTrack,
+  changeCurrentTrack,
+  removeFavoriteTrack,
+} from '../../store/trackSlice'
 import { Track } from '../../types'
 import {
   colorToSecondary,
@@ -17,7 +22,7 @@ import { secondsToHms } from '../../utils/secondsToHms'
 
 import style from './style.module.css'
 
-export const ItemTypes = {
+export const Item = {
   TRACK: 'track',
 }
 
@@ -46,7 +51,7 @@ export const TrackItem: FC<TrackItemProps> = ({
     void,
     { handlerId: Identifier | null }
   >({
-    accept: ItemTypes.TRACK,
+    accept: Item.TRACK,
     collect(monitor) {
       return {
         handlerId: monitor.getHandlerId(),
@@ -87,7 +92,7 @@ export const TrackItem: FC<TrackItemProps> = ({
   })
 
   const [{ isDragging }, drag] = useDrag({
-    type: ItemTypes.TRACK,
+    type: Item.TRACK,
     item: () => {
       return { id, index }
     },
@@ -102,7 +107,7 @@ export const TrackItem: FC<TrackItemProps> = ({
   const dispatch = useAppDispatch()
 
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack)
-  // const favourites = useAppSelector((state) => state.tracks.favourites)
+  const { favorite, toggleFavoriteTrack } = useFavoriteTrack(track)
 
   const textColor = useAppSelector((state) => state.colorTheme.textColor)
   const decorativeColor = useAppSelector(
@@ -119,39 +124,16 @@ export const TrackItem: FC<TrackItemProps> = ({
     [currentTrack.id]
   )
 
+  // const { isFavorite } = useAppSelector((state) => state.modal)
+
+  const favoriteTracks = useAppSelector((state) => state.tracks.favoriteTracks)
+
   const handleChooseSong = useCallback(
     (track: Track) => {
       dispatch(changeCurrentTrack(track))
     },
     [dispatch]
   )
-
-  // const handleAddToFavourites = useCallback(
-  //   (track: Track) => {
-  //     if (
-  //       favourites.some(
-  //         (favTrack: Track) => favTrack.track_file === track.track_file
-  //       )
-  //     ) {
-  //       dispatch(removeTrackFromFavourites(track))
-  //     } else {
-  //       dispatch(addTrackToFavourites(track))
-  //     }
-  //   },
-  //   [dispatch, favourites]
-  // )
-
-  // const checkFavouriteTrack = (track: Track) => {
-  //   if (
-  //     favourites.some(
-  //       (favTrack: Track) => favTrack.track_file === track.track_file
-  //     )
-  //   ) {
-  //     return true
-  //   } else {
-  //     return false
-  //   }
-  // }
 
   return (
     <div
@@ -170,29 +152,36 @@ export const TrackItem: FC<TrackItemProps> = ({
         <span onClick={() => handleChooseSong(track)} className={style.Info}>
           <img
             className={style.Icon}
-            // src={track.img ? track.img : './icons/note.svg'}
             src="/assets/icons/note.svg"
             alt="Album_image"
-          ></img>
+          />
           <span className={style.Name}>{track.name}</span>
           <span className={style.Author}>{track.author}</span>
           <span className={style.Album} style={{ color: textColorSecondary }}>
             {track.album}, {track.release_date?.slice(0, 4)}
           </span>{' '}
           <IconButton
-            // onClick={() => handleAddToFavourites(track)}
+            onClick={(e) => {
+              e.stopPropagation()
+              toggleFavoriteTrack(track?.id || 0)
+              // if (favoriteTracks.includes(track?.id)) {
+              //   dispatch(removeFavoriteTrack(track?.id))
+              //   console.log(track?.id)
+              // } else {
+              //   dispatch(addFavoriteTrack(track?.id))
+              //   console.log(track?.id)
+              // }
+            }}
             sx={{ width: '5%' }}
-            // style={{
-            //   color: checkFavouriteTrack(track)
-            //     ? 'rgb(223 82 82)'
-            //     : textColorSecondary,
-            // }}
+            style={{
+              color: favorite ? 'rgb(223 82 82)' : textColorSecondary,
+            }}
           >
-            {/* {checkFavouriteTrack(track) ? (
+            {favorite ? (
               <Favorite fontSize="small" />
             ) : (
               <FavoriteBorder fontSize="small" />
-            )} */}
+            )}
           </IconButton>
           <span
             className={style.Duration}
