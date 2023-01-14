@@ -2,7 +2,7 @@
  * Формирует массив треков, соответствующих данным из строки поиска
  */
 
-import { Track } from '../types'
+import { Track } from '../../types'
 
 export const getSearchQueryArray: (
   query: string,

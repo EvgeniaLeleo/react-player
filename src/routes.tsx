@@ -45,6 +45,7 @@ export const AppRoutes = () => {
     <ReactRoutes>
       <Route path={ROUTES.login} element={<LoginPage />} />
       <Route path={ROUTES.signup} element={<SignupPage />} />
+      <Route path="*" element={<Navigate replace to={ROUTES.login} />} />
       <Route element={<ProtectedRoute isAllowed={isLoggedIn} />}>
         <Route path={'/'} element={<PageWrapper />}>
           <Route path={ROUTES.main} element={<TracksPage />} />

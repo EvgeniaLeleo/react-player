@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+
 import { Centerblock } from '../../components/Centerblock/Centerblock'
 import { TEXT } from '../../constants'
 import { useAppDispatch, useAppSelector } from '../../hooks/hook'
@@ -8,7 +10,9 @@ export const ProfilePage = () => {
   const lang = useAppSelector((state) => state.language.lang)
   const header = TEXT.header.profile[lang]
 
-  dispatch(updateHeader(header))
+  useEffect(() => {
+    dispatch(updateHeader(header))
+  }, [])
 
   return <Centerblock header={header} isProfilePage={true} />
 }

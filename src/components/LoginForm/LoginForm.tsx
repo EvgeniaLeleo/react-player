@@ -54,9 +54,12 @@ export const LoginForm = () => {
   }, [userTokens])
 
   const isLoggedIn = useLoadCredentialsFromCookies()
-  if (isLoggedIn) {
-    navigate(ROUTES.main)
-  }
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate(ROUTES.main)
+    }
+  }, [])
 
   const handleSignup = () => {
     navigate(ROUTES.signup)

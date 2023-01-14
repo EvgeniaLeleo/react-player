@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react'
 
 import { FilterItem, FilterSlice, Track } from '../types'
 import { useFilterData } from './useFilterData'
-import { useTracks } from './useTracks'
+import { useSearchQueryTracks } from './useSearchQueryTracks'
 
 // getting filtered tracks
 export const useFilteredTracks = (query = '') => {
-  const { isLoading, isError, data, error } = useTracks(query)
+  const { isLoading, isError, data, error } = useSearchQueryTracks(query)
 
   const [filteredData, setFilteredData] = useState<Track[]>([])
   const filterSliceData = useFilterData()

@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { Centerblock } from '../../components/Centerblock/Centerblock'
@@ -11,7 +12,10 @@ export const CollectionPage = () => {
   const { collection } = useCollection('', idx)
 
   const dispatch = useAppDispatch()
-  dispatch(updateHeader(''))
+
+  useEffect(() => {
+    dispatch(updateHeader(''))
+  }, [])
 
   return (
     <Centerblock

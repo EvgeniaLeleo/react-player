@@ -2,13 +2,13 @@
  * Генерация окончательного массива, соответствующего всем и фильтрам
  */
 
-import { EMPTY_RESULTS, ORDER } from '../constants'
-import { Track, CheckedItems, Order } from '../types'
+import { EMPTY_RESULTS, ORDER } from '../../constants'
+import { Track, CheckedItems, Order } from '../../types'
 import { checkedArtistsFilterArray } from './checkedArtistsFilterArray'
 import { checkedGenresFilterArray } from './checkedGenresFilterArray'
 import { checkedYearsFilterArray } from './checkedYearsFilterArray'
 import { commonItems } from './commonItems'
-import { getSortedByOrderArray } from './getSortedByOrderArray'
+import { getSortedByOrderArray } from '../getSortedByOrderArray'
 
 export const getFinalItems: (
   allTracks: Track[],

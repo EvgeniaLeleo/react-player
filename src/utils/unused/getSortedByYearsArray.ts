@@ -2,7 +2,7 @@
  * Сортирует массив треков по году выпуска в возрастающем порядке
  */
 
-import { Track } from '../types'
+import { Track } from '../../types'
 
 export const getSortedByYearsArray: (tracks: Track[]) => Track[] = (tracks) => {
   let sortedArray = [...tracks]

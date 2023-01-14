@@ -3,16 +3,13 @@ import { FC } from 'react'
 import { useAppDispatch, useAppSelector } from '../../hooks/hook'
 import { bgColorToBgColorLight } from '../../utils/colorUtils'
 import { CheckedItems, FilterButtonName } from '../../types'
-import { getFinalItems } from '../../utils/getFinalItems'
 import {
   updateCheckedArtists,
   updateCheckedGenres,
   updateCheckedYears,
-  updateFilteredTracks,
 } from '../../store/filteredItemsSlice'
 
 import style from './style.module.css'
-import { useGetTracksQuery } from '../../services/dataApi'
 
 export type PopupProps = {
   items: string[]
@@ -33,9 +30,9 @@ export const Popup: FC<PopupProps> = ({ items, rows, buttonName }) => {
   const bgColor = useAppSelector((state) => state.colorTheme.bgColor)
   const bgColorLight = bgColorToBgColorLight(bgColor)
 
-  const { data: tracks } = useGetTracksQuery()
+  // const { data: tracks } = useGetTracksQuery()
   const checkedItems = useAppSelector((state) => state.filteredItems)
-  const order = useAppSelector((state) => state.sortingSettings.order)
+  // const order = useAppSelector((state) => state.sortingSettings.order)
 
   newFilter[`${buttonName}`] = [...checkedItems[`${buttonName}`]]
 

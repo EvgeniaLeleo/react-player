@@ -2,7 +2,7 @@
  * Формирует массив треков, фильтруя исходные данные по фильтру checkedArtists
  */
 
-import { Track } from '../types'
+import { Track } from '../../types'
 
 export const checkedArtistsFilterArray: (
   checkedItems: string[],

@@ -13,6 +13,7 @@ import { SkeletonTrack } from '../SkeletonTrack/SkeletonTrack'
 import { ListHeaders } from '../ListHeaders/ListHeaders'
 
 import style from './style.module.css'
+import { getSortedByOrderArray } from '../../utils/getSortedByOrderArray'
 
 type PlayerProps = {
   tracksHook?: Function
@@ -33,11 +34,18 @@ export const Centerblock: FC<PlayerProps> = ({
   const [searchString, setSearchString] = useState('')
   const {
     isLoading,
-    // isError,
+    isError,
     data: tracks,
   } = tracksHook
     ? tracksHook(searchString, collectionId)
-    : { data: [], isLoading: true }
+    : { data: [], isLoading: true, isError: false }
+
+  const order = useAppSelector((state) => state.sortingSettings.order)
+
+  const filteredTracks =
+    header === TEXT.header.tracks[lang]
+      ? getSortedByOrderArray(tracks, order)
+      : tracks
 
   const handleSearch = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -89,19 +97,31 @@ export const Centerblock: FC<PlayerProps> = ({
           </h2>
 
           {header === TEXT.header.tracks[lang] && (
-            <FilterButtons lang={lang} textColor={textColor} />
+            <FilterButtons
+              lang={lang}
+              textColor={textColor}
+              // searchString={searchString}
+              tracks={tracks}
+            />
           )}
 
           <div className={style.Content}>
             <ListHeaders />
 
+            {isError && (
+              <div style={{ color: textColor }}>Произошла ошибка</div>
+            )}
+
             {isLoading &&
               array.map((_, i) => <SkeletonTrack key={i.toString()} />)}
 
-            {!isLoading && <TrackList header={header} tracks={tracks} />}
+            {!isLoading && (
+              <TrackList header={header} tracks={filteredTracks} />
+            )}
 
             {/* В зависимости от заголовка страницы - разное предупреждение об отсутствии результатов: */}
-            {tracks.length === 0 &&
+            {!isError &&
+              tracks.length === 0 &&
               (header === TEXT.header.mytracks[lang] ? (
                 <div style={{ color: textColor }}>
                   {TEXT.no_favourites[lang]}

@@ -34,11 +34,7 @@ export const NavList: FC<{}> = () => {
 
   return (
     <div className={style.List}>
-      <NavLink
-        className={style.ListButton}
-        style={{ color: textColor }}
-        to="/main"
-      >
+      <NavLink className={style.ListButton} style={{ color: textColor }} to="/">
         <SpanChangeColor colorHover={colorHover} colorActive={colorDark}>
           {TEXT.menu.homepage[lang]}
         </SpanChangeColor>

@@ -44,7 +44,7 @@ export const NavMenu: FC<{}> = () => {
               : { backgroundColor: bgColor }
           }
         >
-          <NavLink to={'/main'}>
+          <NavLink to={'/'}>
             <LogoMenu textColor={textColor} />
           </NavLink>
 
@@ -61,8 +61,8 @@ export const NavMenu: FC<{}> = () => {
           {isVisible && (
             <>
               <NavList />
-              <div className={style.AnimationTop}></div>
-              <Animation></Animation>
+              <div className={style.AnimationTop} />
+              <Animation />
             </>
           )}
         </nav>
@@ -84,7 +84,7 @@ export const NavMenu: FC<{}> = () => {
             </NavLink>
 
             <NavList />
-            <div className={style.AnimationTop}></div>
+            <div className={style.AnimationTop} />
           </nav>
         )}
       </div>

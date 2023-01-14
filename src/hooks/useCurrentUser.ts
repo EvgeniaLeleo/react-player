@@ -12,8 +12,8 @@ import { ROUTES } from '../routes'
 export const useCurrentUser = () => {
   const timestampRef = useRef(Date.now()).current
   const { data, isLoading, isError, error } =
-    useGetCurrentUserQuery(timestampRef)
-  // useGetCurrentUserQuery()
+    // useGetCurrentUserQuery(timestampRef)
+    useGetCurrentUserQuery()
 
   const doRefreshToken = useRefreshToken()
   const refreshToken = useAppSelector(selectRefreshToken)

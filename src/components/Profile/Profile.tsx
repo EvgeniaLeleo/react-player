@@ -27,8 +27,8 @@ export const Profile: FC = () => {
     isLoading,
     isError,
     error,
-  } = useGetCurrentUserQuery(timestampRef)
-  // } = useGetCurrentUserQuery()
+    // } = useGetCurrentUserQuery(timestampRef)
+  } = useGetCurrentUserQuery()
 
   const lang = useAppSelector((state) => state.language.lang)
   const textColor = useAppSelector((state) => state.colorTheme.textColor)

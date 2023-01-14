@@ -1,7 +1,7 @@
 /**TODO
  * Сортирует массив треков по жанрам возрастающем порядке
  */
-import { Track } from '../types'
+import { Track } from '../../types'
 
 export const getSortedByGenresArray: (tracks: Track[]) => Track[] = (
   tracks

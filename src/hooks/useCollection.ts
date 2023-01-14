@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { useGetCollectionQuery } from '../services/dataApi'
 import { selectRefreshToken } from '../store/tokenSlice'
 import { Collection } from '../types'
-import { getFilteredData } from '../utils/getFilteredData'
+import { getSearchedData } from '../utils/getSearchedData'
 import { useAppSelector } from './hook'
 import { useRefreshToken } from './useRefreshToken'
 
@@ -15,7 +15,7 @@ export const useCollection = (query = '', collectionId = 1) => {
     error,
   } = useGetCollectionQuery(collectionId)
 
-  const [filteredData, setFilteredData] = useState<Collection>()
+  const [searchedData, setSearchedData] = useState<Collection>()
 
   const refreshToken = useAppSelector(selectRefreshToken)
   const handleRefreshTokens = useRefreshToken()
@@ -25,21 +25,23 @@ export const useCollection = (query = '', collectionId = 1) => {
       handleRefreshTokens(refreshToken)
     }
 
-    if (tracks) filterData(tracks)
+    if (tracks) {
+      filterData(tracks)
+    }
     // eslint-disable-next-line
   }, [tracks, isError, query])
 
   const filterData = (tracksCollection: Collection) => {
-    setFilteredData({
+    setSearchedData({
       ...tracksCollection,
-      items: getFilteredData(tracksCollection.items, query),
+      items: getSearchedData(tracksCollection.items, query),
     })
   }
 
-  if (filteredData) {
+  if (searchedData) {
     return {
-      collection: filteredData.name,
-      data: filteredData.items,
+      collection: searchedData.name,
+      data: searchedData.items,
       isLoading,
       isError,
       error,

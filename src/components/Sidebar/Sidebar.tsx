@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import {
   Button,
@@ -21,10 +21,10 @@ import {
 } from '../../utils/colorUtils'
 import { Languages } from '../../types'
 import { changeLanguage } from '../../store/languageSlice'
-import { useGetCurrentUserQuery } from '../../services/dataApi'
 import { AlbumsList } from '../AlbumsList/AlbumsList'
 
 import style from './style.module.css'
+import { useGetCurrentUserQuery } from '../../services/dataApi'
 
 export const Sidebar = () => {
   const dispatch = useAppDispatch()
@@ -35,8 +35,8 @@ export const Sidebar = () => {
     isLoading,
     isError,
     error,
-  } = useGetCurrentUserQuery(timestampRef)
-  // } = useGetCurrentUserQuery()
+    // } = useGetCurrentUserQuery(timestampRef)
+  } = useGetCurrentUserQuery()
 
   const header = useAppSelector((state) => state.header.header)
   const lang = useAppSelector((state) => state.language.lang)
@@ -45,10 +45,10 @@ export const Sidebar = () => {
   const decorativeColor = useAppSelector(
     (state) => state.colorTheme.decorativeColor
   )
+  const isUserVisible = header !== TEXT.menu.profile[lang]
 
   const [isAlbumsVisible, setIsAlbumsVisible] = useState(false)
 
-  const isUserVisible = header !== TEXT.menu.profile[lang]
   const bgColorLight = bgColorToBgColorLight(bgColor)
   const colorHover = extradarkToHover(decorativeColor)
   const colorDark = extradarkToDark(decorativeColor)
@@ -76,91 +76,83 @@ export const Sidebar = () => {
   }, [])
 
   return (
-    <>
+    <div className={style.Sidebar}>
       {isUserVisible && (
-        <div className={style.Sidebar}>
-          <div className={style.User}>
-            <NavLink to={'/profile'}>
-              <Typography
-                className={style.UserName}
-                style={{ color: textColor }}
-              >
-                <SpanChangeColor
-                  colorHover={colorHover}
-                  colorActive={colorDark}
-                >
-                  {user?.username}
-                </SpanChangeColor>
-              </Typography>
-            </NavLink>
+        <div className={style.User}>
+          <NavLink to={'/profile'}>
+            <Typography className={style.UserName} style={{ color: textColor }}>
+              <SpanChangeColor colorHover={colorHover} colorActive={colorDark}>
+                {user?.username}
+              </SpanChangeColor>
+            </Typography>
+          </NavLink>
 
-            <ThemeProvider theme={buttonTheme}>
-              <FormControl
-                variant="standard"
-                sx={{
-                  marginLeft: '25px',
-                  width: '60px',
-                  backgroundColor: bgColorLight,
-                  borderTopLeftRadius: '5px',
-                  borderTopRightRadius: '5px',
+          <ThemeProvider theme={buttonTheme}>
+            <FormControl
+              variant="standard"
+              sx={{
+                marginLeft: '25px',
+                width: '60px',
+                backgroundColor: bgColorLight,
+                borderTopLeftRadius: '5px',
+                borderTopRightRadius: '5px',
+              }}
+            >
+              <Select
+                labelId="demo-simple-select-standard-label"
+                id="demo-simple-select-standard"
+                value={lang}
+                onChange={handleChange}
+                label="Language"
+                style={{
+                  color: textColor,
+                  fontSize: '15px',
+                  padding: '0 5px',
                 }}
               >
-                <Select
-                  labelId="demo-simple-select-standard-label"
-                  id="demo-simple-select-standard"
-                  value={lang}
-                  onChange={handleChange}
-                  label="Language"
-                  style={{
-                    color: textColor,
-                    fontSize: '15px',
-                    padding: '0 5px',
-                  }}
-                >
-                  <MenuItem value={'ru'}>Ru</MenuItem>
-                  <MenuItem value={'en'}>En</MenuItem>
-                  <MenuItem value={'bel'}>Bel</MenuItem>
-                </Select>
-              </FormControl>
-            </ThemeProvider>
-          </div>
-
-          <div style={{ backgroundColor: 'transparent' }}>
-            <div className={style.List}>
-              <AlbumsList />
-            </div>
-
-            <ThemeProvider theme={buttonTheme}>
-              <div className={style.ButtonVisibility}>
-                <Button
-                  onClick={handleAlbumList}
-                  color="primary"
-                  variant="contained"
-                  sx={{
-                    textTransform: 'none',
-                    color: textColor,
-                    width: '100%',
-                    minHeight: '30px',
-                    marginBottom: '13px',
-                    marginTop: '10px',
-                    padding: '10px',
-                  }}
-                  className={style.ButtonMobileList}
-                >
-                  {TEXT.collections[lang]}
-                </Button>
-              </div>
-            </ThemeProvider>
-
-            {isAlbumsVisible && (
-              <div className={style.MobileList}>
-                <AlbumsList />
-              </div>
-            )}
-          </div>
+                <MenuItem value={'ru'}>Ru</MenuItem>
+                <MenuItem value={'en'}>En</MenuItem>
+                <MenuItem value={'bel'}>Bel</MenuItem>
+              </Select>
+            </FormControl>
+          </ThemeProvider>
         </div>
       )}
-    </>
+
+      <div style={{ backgroundColor: 'transparent' }}>
+        <div className={style.List}>
+          <AlbumsList />
+        </div>
+
+        <ThemeProvider theme={buttonTheme}>
+          <div className={style.ButtonVisibility}>
+            <Button
+              onClick={handleAlbumList}
+              color="primary"
+              variant="contained"
+              sx={{
+                textTransform: 'none',
+                color: textColor,
+                width: '100%',
+                minHeight: '30px',
+                marginBottom: '13px',
+                marginTop: '10px',
+                padding: '10px',
+              }}
+              className={style.ButtonMobileList}
+            >
+              {TEXT.collections[lang]}
+            </Button>
+          </div>
+        </ThemeProvider>
+
+        {isAlbumsVisible && (
+          <div className={style.MobileList}>
+            <AlbumsList />
+          </div>
+        )}
+      </div>
+    </div>
   )
 }
 

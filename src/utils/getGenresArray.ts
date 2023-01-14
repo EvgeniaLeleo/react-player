@@ -11,5 +11,5 @@ export const getGenresArray: (tracks: Track[]) => string[] = (tracks) => {
       genresArray.push(track.genre)
     }
   })
-  return genresArray
+  return genresArray.sort()
 }

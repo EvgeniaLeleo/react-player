@@ -1,6 +1,6 @@
-import { FC } from 'react';
+import { FC } from 'react'
 
-import style from './style.module.css';
+import style from './style.module.css'
 
 export type IconProps = {
   type:
@@ -15,11 +15,9 @@ export type IconProps = {
     | 'shuffle'
     | 'sprite'
     | 'volume'
-    | 'watch';
-};
+    | 'watch'
+}
 
 export const Icon: FC<IconProps> = ({ type }) => {
-  return (
-    <img src={`./icons/${type}.svg`} className={style.Icon} alt={type}></img>
-  );
-};
+  return <img src={`./icons/${type}.svg`} className={style.Icon} alt={type} />
+}

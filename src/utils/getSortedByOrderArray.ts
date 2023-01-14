@@ -2,8 +2,9 @@
  * Сортирует массив треков по году выпуска в возрастающем или убывающем порядке порядке
  */
 
+import { ORDER } from '../constants'
 import { Track, Order } from '../types'
-import { getSortedByYearsArray } from './getSortedByYearsArray'
+import { getSortedByYearsArray } from './unused/getSortedByYearsArray'
 
 export const getSortedByOrderArray: (
   tracks: Track[],
@@ -11,9 +12,13 @@ export const getSortedByOrderArray: (
 ) => Track[] = (tracks, order) => {
   let sortedArray = [...tracks]
 
-  if (order === 'ASC') {
+  if (order === ORDER.asc) {
     return getSortedByYearsArray(sortedArray)
-  } else {
+  }
+
+  if (order === ORDER.desc) {
     return getSortedByYearsArray(sortedArray).reverse()
   }
+
+  return tracks
 }

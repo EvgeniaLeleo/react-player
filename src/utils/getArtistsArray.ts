@@ -11,5 +11,5 @@ export const getArtistsArray: (tracks: Track[]) => string[] = (tracks) => {
       authorsArray.push(track.author)
     }
   })
-  return authorsArray
+  return authorsArray.sort()
 }

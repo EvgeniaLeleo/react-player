@@ -70,7 +70,7 @@ export const FilterButton: FC<FilterButtonProps> = ({
       </ButtonChangeColor>
       <div ref={ref}>
         {isPopupVisible && (
-          <Popup items={checkItems} rows={rows} buttonName={buttonName}></Popup>
+          <Popup items={checkItems} rows={rows} buttonName={buttonName} />
         )}
       </div>
     </div>

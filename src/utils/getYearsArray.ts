@@ -14,5 +14,5 @@ export const getYearsArray: (tracks: Track[]) => string[] = (tracks) => {
       release_datesArray.push(track.release_date?.slice(0, 4))
     }
   })
-  return release_datesArray
+  return release_datesArray.sort()
 }
