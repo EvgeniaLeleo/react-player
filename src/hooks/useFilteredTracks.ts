@@ -7,6 +7,7 @@ import { useTracks } from './useTracks'
 // getting filtered tracks
 export const useFilteredTracks = (query = '') => {
   const { isLoading, isError, data, error } = useTracks(query)
+
   const [filteredData, setFilteredData] = useState<Track[]>([])
   const filterSliceData = useFilterData()
 

@@ -12,6 +12,7 @@ import { TracksPage } from './pages/TracksPage/TracksPage'
 import { CollectionPage } from './pages/CollectionPage/CollectionPage'
 import { ProfilePage } from './pages/ProfilePage/ProfilePage'
 import { MyTracksPage } from './pages/MyTracksPage/MyTracksPage'
+import { PageWrapper } from './pages/PageWrapper/PageWrapper'
 
 export const ROUTES = {
   main: '/',
@@ -44,11 +45,16 @@ export const AppRoutes = () => {
       <Route path={ROUTES.login} element={<LoginPage />} />
       <Route path={ROUTES.signup} element={<SignupPage />} />
       <Route element={<ProtectedRoute isAllowed={isLoggedIn} />}>
-        <Route path={ROUTES.main} element={<TracksPage />} />
-        <Route path={ROUTES.profile} element={<ProfilePage />} />
-        <Route path={ROUTES.mytracks} element={<MyTracksPage />} />
-        <Route path={`${ROUTES.collection}/:id`} element={<CollectionPage />} />
-        <Route path="*" element={<Navigate replace to={ROUTES.main} />} />
+        <Route path={'/'} element={<PageWrapper />}>
+          <Route path={ROUTES.main} element={<TracksPage />} />
+          <Route path={ROUTES.profile} element={<ProfilePage />} />
+          <Route path={ROUTES.mytracks} element={<MyTracksPage />} />
+          <Route
+            path={`${ROUTES.collection}/:id`}
+            element={<CollectionPage />}
+          />
+          <Route path="*" element={<Navigate replace to={ROUTES.main} />} />
+        </Route>
       </Route>
     </ReactRoutes>
   )

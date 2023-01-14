@@ -291,3 +291,6 @@ export const {
 export const selectActiveTrackId = (state: RootState) => state.track.id
 
 export default trackSlice.reducer
+
+// TODO сердечко в плеере
+// Анимация двигается только на той странице, где включили

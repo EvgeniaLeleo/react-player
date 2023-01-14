@@ -164,6 +164,7 @@ export const TrackItem: FC<TrackItemProps> = ({
             onClick={(e) => {
               e.stopPropagation()
               toggleFavoriteTrack(track?.id || 0)
+              // console.log(track)
               // if (favoriteTracks.includes(track?.id)) {
               //   dispatch(removeFavoriteTrack(track?.id))
               //   console.log(track?.id)

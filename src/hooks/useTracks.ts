@@ -7,6 +7,7 @@ import { useCurrentUser } from './useCurrentUser'
 // getting tracks, searching by track name available
 export const useTracks = (query = '') => {
   useCurrentUser()
+
   const { isLoading, isError, data, error } = useGetTracksQuery()
   const [filteredData, setFilteredData] = useState<Track[]>([])
 

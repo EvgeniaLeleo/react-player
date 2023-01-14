@@ -1,54 +1,44 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { FC } from 'react'
 import AudioPlayer, { RHAP_UI } from 'react-h5-audio-player'
-
-import { Track } from '../../types'
-import 'react-h5-audio-player/lib/styles.css'
 import {
   PlayArrow,
   Pause,
   VolumeUp,
   VolumeOff,
-  FavoriteBorder,
   Shuffle,
-  Favorite,
 } from '@mui/icons-material'
 import { IconButton } from '@mui/material'
+
 import {
-  addFavoriteTrack,
-  removeFavoriteTrack,
-  // addTrackToFavourites,
-  // removeTrackFromFavourites,
   setAutoplayStatus,
   setShuffleStatus,
   shuffleTracks,
   switchToNextTrack,
   switchToPreviousTrack,
 } from '../../store/trackSlice'
-import { colorToSecondary, extradarkToHover } from '../../utils/colorUtils'
+import { extradarkToHover } from '../../utils/colorUtils'
 import {
   PlayerControlsWrapper,
   PlayerWrapper,
 } from '../changeColor/PlayerChangeColor'
-
-import './Player.css'
+import { Track } from '../../types'
 import { useAppDispatch, useAppSelector } from '../../hooks/hook'
-import { useFavoriteTrack } from '../../hooks/useFavoriteTrack'
+
+import 'react-h5-audio-player/lib/styles.css'
+import './Player.css'
 
 export type Props = {
   currentTrack?: Track
-  tracks?: Track[]
 }
 
-export type PlayerProps = {
-  currentTrack: Track
-}
-
-export const Player: FC<Props> = ({ currentTrack, tracks }) => {
+export const Player: FC<Props> = ({ currentTrack }) => {
   const dispatch = useAppDispatch()
   const [audio, setAudio] = useState(
     JSON.parse(localStorage.getItem('currentTrack')!)?.url || ''
   )
+
+  const tracks = useAppSelector((state) => state.tracks.movedTracks)
 
   const isActive = useAppSelector((state) => state.tracks.isShuffleActive)
   // const currentTrack = useAppSelector((state) => state.tracks.currentTrack)
@@ -95,13 +85,6 @@ export const Player: FC<Props> = ({ currentTrack, tracks }) => {
     dispatch(setAutoplayStatus(true))
   }, [dispatch])
 
-  const { favorite, toggleFavoriteTrack } = useFavoriteTrack(currentTrack)
-  const textColor = useAppSelector((state) => state.colorTheme.textColor)
-  const textColorSecondary = colorToSecondary(textColor)
-
-  // useEffect(() => {}, [favorite])
-  const favoriteTracks = useAppSelector((state) => state.tracks.favoriteTracks)
-
   return (
     <PlayerWrapper progressсolor={progressColor} className="Player">
       <AudioPlayer
@@ -141,49 +124,6 @@ export const Player: FC<Props> = ({ currentTrack, tracks }) => {
                 <p>{currentTrack?.author}</p>
               </div>
             </div>
-            <IconButton
-              onClick={
-                () => {
-                  // if (currentTrack) {
-                  // toggleFavoriteTrack(currentTrack.id)
-                  // }
-                  toggleFavoriteTrack(currentTrack?.id || 0)
-                }
-                // (e) => {
-                // if (currentTrack && favoriteTracks.includes(currentTrack.id)) {
-                //   dispatch(removeFavoriteTrack(currentTrack.id))
-                //   console.log(currentTrack.id)
-                // } else if (currentTrack) {
-                //   dispatch(addFavoriteTrack(currentTrack.id))
-                //   console.log(currentTrack.id)
-                // }}
-              }
-              sx={{ width: '5%' }}
-              style={{
-                color: favorite ? 'rgb(223 82 82)' : textColorSecondary,
-              }}
-            >
-              {favorite ? (
-                <Favorite fontSize="small" />
-              ) : (
-                <FavoriteBorder fontSize="small" />
-              )}
-            </IconButton>
-            {/* <IconButton
-              onClick={(e) => {
-                e.stopPropagation()
-                toggleFavoriteTrack(currentTrack?.id || 0)
-              }}
-              style={{
-                color: favorite ? 'rgb(223 82 82)' : textColorSecondary,
-              }}
-            >
-              {favorite ? (
-                <Favorite className="ControlsIcon" />
-              ) : (
-                <FavoriteBorder className="ControlsIcon" />
-              )}
-            </IconButton> */}
           </PlayerControlsWrapper>,
           RHAP_UI.VOLUME_CONTROLS,
         ]}

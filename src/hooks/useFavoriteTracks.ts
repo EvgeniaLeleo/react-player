@@ -8,7 +8,9 @@ import { useTracks } from './useTracks'
 // getting the favorite tracks
 export const useFavoriteTracks = (query = '') => {
   const { isLoading, isError, data, error } = useTracks(query)
+
   const token = useAppSelector(selectAccessToken)
+
   const [resultData, setResultData] = useState<Track[]>([])
 
   useEffect(() => {

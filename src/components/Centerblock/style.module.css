@@ -27,9 +27,31 @@
   font-feature-settings: 'pnum' on, 'lnum' on;
 }
 
+.centerblockWrapper {
+  width: 53%;
+  -webkit-box-flex: 3;
+  -ms-flex-positive: 3;
+  flex-grow: 3;
+  padding: 23px 40px 85px 111px;
+}
+
+.InputWrapper {
+  position: relative;
+
+  width: 100%;
+  margin-bottom: 55px;
+
+  background-color: transparent;
+}
+
 @media (max-width: 1439px) {
   .css-1k5niar-MuiFormControl-root-MuiTextField-root input {
     font-size: 12px;
+  }
+
+  .centerblockWrapper {
+    padding-left: 45px;
+    width: 68%;
   }
 
   .Header {
@@ -38,9 +60,35 @@
   }
 }
 
+@media (max-width: 1199px) {
+  .InputWrapper {
+    padding-right: 185px;
+  }
+}
+
 @media (max-width: 767px) {
   .Header {
     font-size: 40px;
     margin-bottom: 20px;
+  }
+
+  .centerblockWrapper {
+    width: 100%;
+    padding-right: 20px;
+    padding-left: 15px;
+  }
+
+  .InputWrapper {
+    padding-left: 30px;
+    margin-bottom: 20px;
+    padding-top: 0;
+  }
+}
+
+@media (max-width: 549px) {
+  .InputWrapper {
+    padding-left: 0;
+    padding-top: 110px;
+    padding-right: 0;
   }
 }

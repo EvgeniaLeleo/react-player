@@ -8,9 +8,15 @@ import { useAppSelector } from './hook'
 import { useRefreshToken } from './useRefreshToken'
 
 export const useCollection = (query = '', collectionId = 1) => {
-  const { isLoading, isError, data, error } =
-    useGetCollectionQuery(collectionId)
+  const {
+    data: tracks,
+    isLoading,
+    isError,
+    error,
+  } = useGetCollectionQuery(collectionId)
+
   const [filteredData, setFilteredData] = useState<Collection>()
+
   const refreshToken = useAppSelector(selectRefreshToken)
   const handleRefreshTokens = useRefreshToken()
 
@@ -19,14 +25,14 @@ export const useCollection = (query = '', collectionId = 1) => {
       handleRefreshTokens(refreshToken)
     }
 
-    if (data) filterData(data)
+    if (tracks) filterData(tracks)
     // eslint-disable-next-line
-  }, [data, isError, query])
+  }, [tracks, isError, query])
 
-  const filterData = (data: Collection) => {
+  const filterData = (tracksCollection: Collection) => {
     setFilteredData({
-      ...data,
-      items: getFilteredData(data.items, query),
+      ...tracksCollection,
+      items: getFilteredData(tracksCollection.items, query),
     })
   }
 
@@ -39,5 +45,6 @@ export const useCollection = (query = '', collectionId = 1) => {
       error,
     }
   }
+
   return { collection: '', data: [], isLoading, isError, error }
 }
