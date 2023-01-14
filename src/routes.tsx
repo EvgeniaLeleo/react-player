@@ -5,6 +5,7 @@ import {
   Outlet,
 } from 'react-router-dom'
 import { FC } from 'react'
+
 import { useLoadCredentialsFromCookies } from './hooks/useLoadCredentialsFromCookies'
 import { LoginPage } from './pages/LoginPage/LoginPage'
 import { SignupPage } from './pages/SignupPage/SignupPage'
@@ -24,12 +25,12 @@ export const ROUTES = {
   collection: '/collection',
 }
 
-type ProtectedRouteProps = {
+type Props = {
   redirectPath?: string
   isAllowed: boolean
 }
 
-const ProtectedRoute: FC<ProtectedRouteProps> = ({
+const ProtectedRoute: FC<Props> = ({
   redirectPath = ROUTES.login,
   isAllowed,
 }) => {

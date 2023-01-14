@@ -1,36 +1,31 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { BGCOLOR, COLOR, COLOR_EXTRADARK } from '../constants';
+import { BGCOLOR, COLOR, COLOR_EXTRADARK } from '../constants'
+import { ColorState } from '../types'
 
-type TColorState = {
-  textColor: string;
-  bgColor: string;
-  decorativeColor: string;
-};
-
-const initialState: TColorState = {
+const initialState: ColorState = {
   textColor: localStorage.getItem('textColor') || COLOR,
   bgColor: localStorage.getItem('bgColor') || BGCOLOR,
   decorativeColor: localStorage.getItem('decorativeColor') || COLOR_EXTRADARK,
-};
+}
 
 const colorThemeSlice = createSlice({
   name: 'colorTheme',
   initialState,
   reducers: {
     changeTextColor(state, action: PayloadAction<string>) {
-      state.textColor = action.payload;
+      state.textColor = action.payload
     },
     changeBgColor(state, action: PayloadAction<string>) {
-      state.bgColor = action.payload;
+      state.bgColor = action.payload
     },
     changeDecorativeColor(state, action: PayloadAction<string>) {
-      state.decorativeColor = action.payload;
+      state.decorativeColor = action.payload
     },
   },
-});
+})
 
 export const { changeTextColor, changeBgColor, changeDecorativeColor } =
-  colorThemeSlice.actions;
+  colorThemeSlice.actions
 
-export default colorThemeSlice.reducer;
+export default colorThemeSlice.reducer

@@ -1,20 +1,14 @@
 import { Skeleton } from '@mui/material'
 import { FC } from 'react'
 
-type SkeletonRectProps = {
+type Props = {
   color: string
   width?: string
   margin: string
-  height?: string | undefined
+  height?: string
 }
 
-export const SkeletonRect: FC<SkeletonRectProps> = ({
-  color,
-  width,
-  margin,
-  height,
-  // height = '16px',
-}) => (
+export const SkeletonRect: FC<Props> = ({ color, width, margin, height }) => (
   <Skeleton
     variant="rectangular"
     width={width}

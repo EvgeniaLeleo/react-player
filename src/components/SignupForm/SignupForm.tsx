@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react'
-import { Box, TextField } from '@mui/material'
+import { TextField } from '@mui/material'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
@@ -8,10 +8,7 @@ import { Button } from '../Button/Button'
 import { useAppDispatch } from '../../hooks/hook'
 import { SignupUser } from '../../types'
 import { useLoadCredentialsFromCookies } from '../../hooks/useLoadCredentialsFromCookies'
-import {
-  useSignupMutation,
-  useTokenMutation,
-} from '../../services/tracksDataApi'
+import { useSignupMutation, useTokenMutation } from '../../services/dataApi'
 import { setToken } from '../../store/tokenSlice'
 import { ROUTES } from '../../routes'
 
@@ -89,7 +86,7 @@ export const SignupForm: FC<{}> = () => {
   }
 
   return (
-    <Box className={style.SignupForm}>
+    <div className={style.SignupForm}>
       <img
         className={style.Img}
         src="./assets/images/skypro-logo.svg"
@@ -155,24 +152,6 @@ export const SignupForm: FC<{}> = () => {
           disabled={isDisabled}
         />
       </form>
-    </Box>
+    </div>
   )
 }
-
-// useEffect(() => {
-//   setIsBlocked(isBlocked)
-//   if (!isBlocked) {
-//     setButtonText('Сохранить')
-//   }
-// }, [isBlocked])
-
-// const handleUserSignup = async (payload: SignupUser) => {
-//   try {
-//     await postUserSignup(payload).unwrap()
-//     setForm(initialState)
-//   } catch (err) {
-//     console.log(`user signup error: ${JSON.stringify(err)}`)
-//     setForm((prev) => ({ ...prev, error: Object(err) }))
-//     setLoginError(true)
-//   }
-// }

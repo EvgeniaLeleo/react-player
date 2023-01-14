@@ -4,47 +4,38 @@ import type { Identifier, XYCoord } from 'dnd-core'
 import { FC, useRef, useCallback } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 
-import { DivChangeColor } from '../../components/changeColor/DivChangeColor'
+import { DivChangeColor } from '../ChangeColorComponents/DivChangeColor'
 import { useAppDispatch, useAppSelector } from '../../hooks/hook'
 import { useFavoriteTrack } from '../../hooks/useFavoriteTrack'
-import {
-  addFavoriteTrack,
-  changeCurrentTrack,
-  removeFavoriteTrack,
-} from '../../store/trackSlice'
+import { changeCurrentTrack } from '../../store/trackSlice'
 import { Track } from '../../types'
 import {
   colorToSecondary,
   extradarkToDark,
   extradarkToHover,
 } from '../../utils/colorUtils'
-import { secondsToHms } from '../../utils/secondsToHms'
+import { secondsToMinSec } from '../../utils/secondsToMinSec'
 
 import style from './style.module.css'
 
-export const Item = {
+const Item = {
   TRACK: 'track',
 }
 
-export interface TrackItemProps {
-  id: any
+type Props = {
+  id: number
   index: number
   track: Track
   moveTrackItem: (dragIndex: number, hoverIndex: number) => void
 }
 
-interface DragItem {
+type DragItem = {
   index: number
   id: string
   type: string
 }
 
-export const TrackItem: FC<TrackItemProps> = ({
-  id,
-  index,
-  moveTrackItem,
-  track,
-}) => {
+export const TrackItem: FC<Props> = ({ id, index, moveTrackItem, track }) => {
   const ref = useRef<HTMLDivElement>(null)
   const [{ handlerId }, drop] = useDrop<
     DragItem,
@@ -126,7 +117,7 @@ export const TrackItem: FC<TrackItemProps> = ({
 
   // const { isFavorite } = useAppSelector((state) => state.modal)
 
-  const favoriteTracks = useAppSelector((state) => state.tracks.favoriteTracks)
+  // const favoriteTracks = useAppSelector((state) => state.tracks.favoriteTracks)
 
   const handleChooseSong = useCallback(
     (track: Track) => {
@@ -159,7 +150,7 @@ export const TrackItem: FC<TrackItemProps> = ({
           <span className={style.Author}>{track.author}</span>
           <span className={style.Album} style={{ color: textColorSecondary }}>
             {track.album}, {track.release_date?.slice(0, 4)}
-          </span>{' '}
+          </span>
           <IconButton
             onClick={(e) => {
               e.stopPropagation()
@@ -175,7 +166,7 @@ export const TrackItem: FC<TrackItemProps> = ({
             }}
             sx={{ width: '5%' }}
             style={{
-              color: favorite ? 'rgb(223 82 82)' : textColorSecondary,
+              color: favorite ? decorativeColor : textColorSecondary,
             }}
           >
             {favorite ? (
@@ -188,8 +179,8 @@ export const TrackItem: FC<TrackItemProps> = ({
             className={style.Duration}
             style={{ color: textColorSecondary }}
           >
-            {track?.duration_in_seconds
-              ? secondsToHms(track.duration_in_seconds)
+            {track.duration_in_seconds
+              ? secondsToMinSec(track.duration_in_seconds)
               : ''}
           </span>
         </span>

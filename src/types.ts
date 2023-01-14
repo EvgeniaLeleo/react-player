@@ -133,3 +133,9 @@ export type LoginUser = {
   email: string
   password: string
 }
+
+export type ColorState = {
+  textColor: string
+  bgColor: string
+  decorativeColor: string
+}

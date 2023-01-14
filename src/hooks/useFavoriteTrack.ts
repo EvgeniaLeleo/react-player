@@ -1,9 +1,10 @@
 import { useNavigate } from 'react-router-dom'
+
 import { ROUTES } from '../routes'
 import {
   useAddTrackToFavoriteMutation,
   useRemoveTrackFromFavoriteMutation,
-} from '../services/tracksDataApi'
+} from '../services/dataApi'
 import { selectAccessToken, selectRefreshToken } from '../store/tokenSlice'
 import { Track, StaredUser } from '../types'
 import { getUserIdFromJWT } from '../utils/getUserIdFromJWT'
@@ -23,11 +24,7 @@ export const useFavoriteTrack = (track?: Track) => {
     const user = starredUser.find(
       (el: StaredUser) => el.id === (token ? getUserIdFromJWT(token) : 0)
     )
-    // console.log(token ? getUserIdFromJWT(token) : 'net')
-    if (user) {
-      return true
-    }
-    return false
+    return !!user
   }
 
   const favorite: boolean =

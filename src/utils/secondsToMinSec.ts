@@ -1,9 +1,12 @@
-export const secondsToMinSec = (secondsIn: number) => {
-  const minutes = Math.floor(secondsIn / 60)
-  const seconds = secondsIn % 60
+export const secondsToMinSec = (duration: number) => {
+  duration = Number(duration)
+  const h = Math.floor(duration / 3600)
+  const m = Math.floor((duration % 3600) / 60)
+  const s = Math.floor((duration % 3600) % 60)
 
-  let secondsStr = String(seconds)
-  if (seconds < 10) secondsStr = '0' + secondsStr
+  const hDisplay = h > 0 ? h + ':' : ''
+  const mDisplay = m > 0 ? (m > 10 ? m : (h > 0 ? '0' : '') + m) + ':' : ''
+  const sDisplay = s > 0 ? (s > 10 ? s : '0' + s) : '00'
 
-  return `${minutes}:${secondsStr}`
+  return hDisplay + mDisplay + sDisplay
 }

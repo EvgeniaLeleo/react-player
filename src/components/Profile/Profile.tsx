@@ -5,8 +5,8 @@ import MenuItem from '@mui/material/MenuItem'
 import { Button as MUIButton, createTheme, ThemeProvider } from '@mui/material'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 
-import { useAppDispatch, useAppSelector } from '../../hooks/hook'
 import { BGCOLOR, COLOR, COLOR_EXTRADARK, TEXT } from '../../constants'
+import { useAppDispatch, useAppSelector } from '../../hooks/hook'
 import {
   changeBgColor,
   changeDecorativeColor,
@@ -17,19 +17,19 @@ import { changeLanguage } from '../../store/languageSlice'
 import { Languages } from '../../types'
 
 import style from './style.module.css'
-import { useGetCurrentUserQuery } from '../../services/tracksDataApi'
+import { useGetCurrentUserQuery } from '../../services/dataApi'
 
 export const Profile: FC = () => {
   const dispatch = useAppDispatch()
-  // const dataUser = useAppSelector((state) => state.auth.data);
   const timestampRef = useRef(Date.now()).current
   const {
     data: user,
     isLoading,
     isError,
     error,
-    // } = useGetCurrentUserQuery(timestampRef)
-  } = useGetCurrentUserQuery()
+  } = useGetCurrentUserQuery(timestampRef)
+  // } = useGetCurrentUserQuery()
+
   const lang = useAppSelector((state) => state.language.lang)
   const textColor = useAppSelector((state) => state.colorTheme.textColor)
   const bgColor = useAppSelector((state) => state.colorTheme.bgColor)
@@ -37,6 +37,13 @@ export const Profile: FC = () => {
     (state) => state.colorTheme.decorativeColor
   )
   const textColorSecondary = colorToSecondary(textColor)
+  const buttonTheme = createTheme({
+    palette: {
+      primary: {
+        main: decorativeColor,
+      },
+    },
+  })
 
   const handleChange = (event: SelectChangeEvent) => {
     const newLanguage = event.target.value as Languages
@@ -77,14 +84,6 @@ export const Profile: FC = () => {
     localStorage.setItem('decorativeColor', COLOR_EXTRADARK)
   }
 
-  const buttonTheme = createTheme({
-    palette: {
-      primary: {
-        main: decorativeColor,
-      },
-    },
-  })
-
   return (
     <div className={style.Profile}>
       <h2 style={{ color: textColor }} className={style.HeaderMain}>
@@ -112,7 +111,7 @@ export const Profile: FC = () => {
               type="color"
               value={bgColor}
               onChange={handleChangeBgColor}
-            ></input>
+            />
           </div>
           <div className={style.CustomTextColor}>
             <div>{TEXT.profile.textColor[lang]}</div>
@@ -121,7 +120,7 @@ export const Profile: FC = () => {
               type="color"
               value={textColor}
               onChange={handleChangeTextColor}
-            ></input>
+            />
           </div>
           <div className={style.CustomDecorativeColor}>
             <div>{TEXT.profile.designColor[lang]}</div>
@@ -130,7 +129,7 @@ export const Profile: FC = () => {
               type="color"
               value={decorativeColor}
               onChange={handleChangeDecorativeColor}
-            ></input>
+            />
           </div>
         </div>
 

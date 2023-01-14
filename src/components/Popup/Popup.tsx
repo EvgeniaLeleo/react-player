@@ -12,7 +12,7 @@ import {
 } from '../../store/filteredItemsSlice'
 
 import style from './style.module.css'
-import { useGetTracksQuery } from '../../services/tracksDataApi'
+import { useGetTracksQuery } from '../../services/dataApi'
 
 export type PopupProps = {
   items: string[]
@@ -34,21 +34,19 @@ export const Popup: FC<PopupProps> = ({ items, rows, buttonName }) => {
   const bgColorLight = bgColorToBgColorLight(bgColor)
 
   const { data: tracks } = useGetTracksQuery()
-  // const checkedItems = useAppSelector((state) => state.filteredItems)
+  const checkedItems = useAppSelector((state) => state.filteredItems)
   const order = useAppSelector((state) => state.sortingSettings.order)
 
-  // newFilter[`${buttonName}`] = [...checkedItems[`${buttonName}`]]
+  newFilter[`${buttonName}`] = [...checkedItems[`${buttonName}`]]
 
   // const searchedItems = useAppSelector(
   //   (state) => state.filteredItems.searchedTracks
   // )
 
-  // const searchedItemsCurrent = searchedItems.length
-  //   ? searchedItems
-  //   : allTracksStore
+  // const searchedItemsCurrent = searchedItems.length ? searchedItems : tracks
 
   const handleChange = (item: string, buttonName: FilterButtonName) => {
-    // newFilter[`${buttonName}`] = [...checkedItems[`${buttonName}`]]
+    newFilter[`${buttonName}`] = [...checkedItems[`${buttonName}`]]
 
     newFilter[`${buttonName}`].includes(item)
       ? newFilter[`${buttonName}`].splice(
@@ -93,6 +91,8 @@ export const Popup: FC<PopupProps> = ({ items, rows, buttonName }) => {
   const isChecked = (item: string, buttonName: FilterButtonName) => {
     return newFilter[`${buttonName}`].includes(item)
   }
+
+  // console.log(items)
 
   return (
     <div

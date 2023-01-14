@@ -1,10 +1,10 @@
-import { FC } from 'react';
+import { FC } from 'react'
 
-import style from './style.module.css';
+import style from './style.module.css'
 
 type LogoMenuProps = {
-  textColor: string;
-};
+  textColor: string
+}
 
 export const LogoMenu: FC<LogoMenuProps> = ({ textColor }) => {
   return (
@@ -14,7 +14,7 @@ export const LogoMenu: FC<LogoMenuProps> = ({ textColor }) => {
       viewBox="0 0 140 22"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={style.Menu}
+      className={style.logo}
     >
       <path
         d="M3.87291 20.9307C1.61921 22.2325 0.000244141 21.1477 0.000244141 19.2181C0.000244141 17.164 0.000244141 11.0005 0.000244141 11.0005C0.000244141 11.0005 0.000244141 4.83711 0.000244141 2.78297C0.000244141 0.853385 1.61821 -0.231443 3.87291 1.07035C7.38302 3.09737 17.9123 9.18044 17.9123 9.18044C19.3124 9.98904 19.3124 12.011 17.9123 12.8196C17.9123 12.8206 7.38302 18.9037 3.87291 20.9307Z"
@@ -93,5 +93,5 @@ export const LogoMenu: FC<LogoMenuProps> = ({ textColor }) => {
         </filter>
       </defs>
     </svg>
-  );
-};
+  )
+}

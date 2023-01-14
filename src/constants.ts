@@ -37,62 +37,49 @@ export const NUMBER_OF_RANDOM_ITEMS = 10
 
 export const ORDER = { notSelected: 'notSelected', asc: 'ASC', desc: 'DESC' }
 
-export const COLLECTION = {
-  dayplaylist: 'dayplaylist',
-  dance: 'dance',
-  indie: 'indie',
-  favorites: 'favourites',
-  tracks: 'tracks',
-  profile: 'profile',
-  classics: 'classics',
-  electro: 'electro',
-  rocks: 'rocks',
-  mytracks: 'mytracks',
-}
-
-export const COLLECTIONS = {
-  [COLLECTION.tracks]: { ru: 'Треки', en: 'Tracks', bel: 'Трэк' },
-  [COLLECTION.mytracks]: {
+export const HEADERS = {
+  tracks: { ru: 'Треки', en: 'Tracks', bel: 'Трэк' },
+  mytracks: {
     ru: 'Мои треки',
     en: 'My tracks',
     bel: 'Мае трэкі',
   },
-  [COLLECTION.dayplaylist]: {
+  dayplaylist: {
     ru: 'Плейлист дня',
     en: 'Playlist of the day',
     bel: 'Плэйліст дня',
   },
-  [COLLECTION.dance]: {
+  dance: {
     ru: '100 танцевальных хитов',
     en: '100 dance hits',
     bel: '100 танцавальных хітоў',
   },
-  [COLLECTION.indie]: {
+  indie: {
     ru: 'Инди-заряд',
     en: 'Indie charge',
     bel: 'Індзі-зарад',
   },
-  [COLLECTION.classics]: {
+  classics: {
     ru: 'Классическая музыка',
     en: 'Classic music',
     bel: 'Класічная музыка',
   },
-  [COLLECTION.rocks]: {
+  rocks: {
     ru: 'Рок музыка',
     en: 'Rock music',
     bel: 'Рок-музыка',
   },
-  [COLLECTION.favorites]: {
+  favorites: {
     ru: 'Мои треки',
     en: 'My tracks',
     bel: 'Мае трэкі',
   },
-  [COLLECTION.electro]: {
+  electro: {
     ru: 'Электронная музыка',
     en: 'Electro music',
     bel: 'Электронная музыка', // карыстальніка',
   },
-  [COLLECTION.profile]: {
+  profile: {
     ru: 'Личный кабинет',
     en: 'Profile',
     bel: 'Профіль', // карыстальніка',
@@ -119,7 +106,7 @@ export const TEXT = {
     en: 'Search by artist or song title',
     bel: 'Пошук па артысту або назве песні',
   },
-  header: COLLECTIONS,
+  header: HEADERS,
   collections: { ru: 'Подборки', en: 'Collections', bel: 'Падборка' },
   search: {
     // searchBy: { ru: 'Искать по:', en: 'Search by', bel: 'Шукаць па:' },

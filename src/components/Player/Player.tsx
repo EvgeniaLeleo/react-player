@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { FC } from 'react'
 import AudioPlayer, { RHAP_UI } from 'react-h5-audio-player'
 import {
   PlayArrow,
@@ -21,32 +20,25 @@ import { extradarkToHover } from '../../utils/colorUtils'
 import {
   PlayerControlsWrapper,
   PlayerWrapper,
-} from '../changeColor/PlayerChangeColor'
-import { Track } from '../../types'
+} from '../ChangeColorComponents/PlayerChangeColor'
 import { useAppDispatch, useAppSelector } from '../../hooks/hook'
 
 import 'react-h5-audio-player/lib/styles.css'
 import './Player.css'
 
-export type Props = {
-  currentTrack?: Track
-}
-
-export const Player: FC<Props> = ({ currentTrack }) => {
+export const Player = () => {
   const dispatch = useAppDispatch()
-  const [audio, setAudio] = useState(
-    JSON.parse(localStorage.getItem('currentTrack')!)?.url || ''
-  )
 
+  const currentTrack = useAppSelector((state) => state.tracks.currentTrack)
   const tracks = useAppSelector((state) => state.tracks.movedTracks)
-
   const isActive = useAppSelector((state) => state.tracks.isShuffleActive)
-  // const currentTrack = useAppSelector((state) => state.tracks.currentTrack)
-
   const autoplay = useAppSelector((state) => state.tracks.autoplay)
   const decorativeColor = useAppSelector(
     (state) => state.colorTheme.decorativeColor
   )
+
+  const [audio, setAudio] = useState(currentTrack?.track_file)
+
   const progressColor = extradarkToHover(decorativeColor)
   let audioCtx: any = useRef()
 

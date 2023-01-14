@@ -1,13 +1,13 @@
-import { FC } from 'react';
-import { TextField } from '@mui/material';
+import { FC } from 'react'
+import { TextField } from '@mui/material'
 
-import './Input.css';
+import './Input.css'
 
 export type InputProps = {
-  inputPlaceholder: 'Логин' | 'Пароль' | 'Повторите пароль';
-  marginBottom: string;
-  inputType: string;
-};
+  inputPlaceholder: 'Логин' | 'Пароль' | 'Повторите пароль'
+  marginBottom: string
+  inputType: string
+}
 
 export const Input: FC<InputProps> = ({
   inputPlaceholder,
@@ -20,8 +20,7 @@ export const Input: FC<InputProps> = ({
       label={inputPlaceholder}
       type={inputType}
       variant="standard"
-      // className={cnInput()}
       sx={{ marginBottom: marginBottom }}
     />
-  );
-};
+  )
+}

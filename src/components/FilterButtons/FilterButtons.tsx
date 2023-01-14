@@ -1,6 +1,5 @@
 import { FC } from 'react'
 import {
-  Box,
   createTheme,
   FormControl,
   InputLabel,
@@ -9,14 +8,13 @@ import {
   SelectChangeEvent,
   ThemeProvider,
 } from '@mui/material'
+
 import { FilterButton } from '../FilterButton/FilterButton'
 import { ORDER, TEXT } from '../../constants'
 import { useAppDispatch, useAppSelector } from '../../hooks/hook'
-import { Track, Languages, Order } from '../../types'
+import { Languages, Order } from '../../types'
 import { colorToSecondary } from '../../utils/colorUtils'
 import { updateOrder } from '../../store/sortingSettingsSlice'
-import { getFinalItems } from '../../utils/getFinalItems'
-import { updateFilteredTracks } from '../../store/filteredItemsSlice'
 
 import style from './style.module.css'
 
@@ -26,7 +24,7 @@ export const FilterButtons: FC<FilterButtonsProps> = ({ lang, textColor }) => {
   const dispatch = useAppDispatch()
 
   // const allTracksStore = useAppSelector((state) => state.tracks.allTracks)
-  // const checkedItems = useAppSelector((state) => state.filteredItems)
+  const checkedItems = useAppSelector((state) => state.filteredItems)
   const searchQuery = useAppSelector(
     (state) => state.sortingSettings.searchQuery
   )
@@ -73,7 +71,7 @@ export const FilterButtons: FC<FilterButtonsProps> = ({ lang, textColor }) => {
   }
 
   return (
-    <Box className={style.Filters} style={{ color: textColor }}>
+    <div className={style.Filters} style={{ color: textColor }}>
       <div className={style.ButtonsWrapper}>
         <span className={style.FiltersText}>{TEXT.search.searchBy[lang]}</span>
         <FilterButton
@@ -138,6 +136,6 @@ export const FilterButtons: FC<FilterButtonsProps> = ({ lang, textColor }) => {
           </Select>
         </FormControl>
       </ThemeProvider>
-    </Box>
+    </div>
   )
 }

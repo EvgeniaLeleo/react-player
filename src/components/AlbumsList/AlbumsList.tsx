@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 
-import { TEXT, COLLECTION } from '../../constants'
+import { TEXT } from '../../constants'
 import { useAppSelector } from '../../hooks/hook'
 import { AlbumCover } from '../AlbumCover/AlbumCover'
 
@@ -10,15 +10,15 @@ export const AlbumsList = () => {
   return (
     <div>
       <NavLink to={'/collection/1'}>
-        <AlbumCover text={TEXT.header[COLLECTION.classics][lang]} />
+        <AlbumCover text={TEXT.header.classics[lang]} />
       </NavLink>
 
       <NavLink to={'/collection/2'}>
-        <AlbumCover text={TEXT.header[COLLECTION.electro][lang]} />
+        <AlbumCover text={TEXT.header.electro[lang]} />
       </NavLink>
 
       <NavLink to={'/collection/3'}>
-        <AlbumCover text={TEXT.header[COLLECTION.rocks][lang]} />
+        <AlbumCover text={TEXT.header.rocks[lang]} />
       </NavLink>
     </div>
   )

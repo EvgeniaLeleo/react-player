@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+
 import { RootState } from '../store'
 import {
   Track,
@@ -10,7 +11,7 @@ import {
 } from '../types'
 import { checkJWTExpTime } from '../utils/checkJWTExpTime'
 
-export const tracksDataApi = createApi({
+export const dataApi = createApi({
   reducerPath: 'music-player/api',
   tagTypes: ['Tracks'],
   baseQuery: fetchBaseQuery({
@@ -19,7 +20,6 @@ export const tracksDataApi = createApi({
       const token = (getState() as RootState).token.access
       if (token && checkJWTExpTime(token)) {
         headers.set('authorization', `Bearer ${token}`)
-        console.log(token)
       }
       return headers
     },
@@ -93,12 +93,12 @@ export const tracksDataApi = createApi({
             ]
           : [{ type: 'Tracks', id: 'LIST' }],
     }),
-    // getCurrentUser: build.query<User, number>({
-    //   query: (sessionId: number) => `user/me/`,
-    // }),
-    getCurrentUser: build.query<User, void>({
-      query: () => `user/me/`,
+    getCurrentUser: build.query<User, number>({
+      query: (sessionId: number) => `user/me/`,
     }),
+    // getCurrentUser: build.query<User, void>({
+    //   query: () => `user/me/`,
+    // }),
   }),
 })
 
@@ -113,8 +113,4 @@ export const {
   useRemoveTrackFromFavoriteMutation,
   useGetCollectionQuery,
   useGetCurrentUserQuery,
-} = tracksDataApi
-
-// getCurrentUserCached: build.query<User, void>({
-//   query: () => `user/me/`,
-// }),
+} = dataApi

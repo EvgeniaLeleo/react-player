@@ -1,14 +1,13 @@
 import { useRef, useState, FC } from 'react'
 
 import { Popup } from '../Popup/Popup'
-// import { useAppSelector, useOnClickOutside } from '../../hooks/hook'
+import { useAppSelector } from '../../hooks/hook'
 import { extradarkToDark, extradarkToHover } from '../../utils/colorUtils'
-import { ButtonChangeColor } from '../changeColor/ButtonChangeColor'
+import { ButtonChangeColor } from '../ChangeColorComponents/ButtonChangeColor'
 import { FilterButtonName } from '../../types'
+import { useOnClickOutside } from '../../hooks/useOnClickOutside'
 
 import style from './style.module.css'
-import { useAppSelector } from '../../hooks/hook'
-import { useOnClickOutside } from '../../hooks/useOnClickOutside'
 
 export type FilterButtonProps = {
   buttonText: string
@@ -31,9 +30,9 @@ export const FilterButton: FC<FilterButtonProps> = ({
   const colorHover = extradarkToHover(decorativeColor)
   const colorDark = extradarkToDark(decorativeColor)
 
-  // const checkedItems = useAppSelector(
-  //   (state) => state.filteredItems[`${buttonName}`]
-  // )
+  const checkedItems = useAppSelector(
+    (state) => state.filteredItems[`${buttonName}`]
+  )
 
   const ref = useRef(null)
   const [isPopupVisible, setIsPopupVisible] = useState(false)
@@ -65,7 +64,7 @@ export const FilterButton: FC<FilterButtonProps> = ({
             className={style.NumberOfCheckedItems}
             style={{ backgroundColor: decorativeColor }}
           >
-            {/* {checkedItems.length} */}
+            {checkedItems.length}
           </div>
         )}
       </ButtonChangeColor>

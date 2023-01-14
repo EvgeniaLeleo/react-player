@@ -1,22 +1,22 @@
-/**
+/** TODO
  * Формирует массив треков, фильтруя исходные данные по фильтру checkedArtists
  */
 
-import { Track } from '../types';
+import { Track } from '../types'
 
 export const checkedArtistsFilterArray: (
   checkedItems: string[],
-  data: Track[],
+  data: Track[]
 ) => Track[] = (checkedItems, data) => {
-  const checkedArtistsFilteredData: Track[] = [];
+  const checkedArtistsFilteredData: Track[] = []
 
   checkedItems.forEach((author: string) =>
     data.forEach((item) => {
       if (item.author === author) {
-        checkedArtistsFilteredData.push(item);
+        checkedArtistsFilteredData.push(item)
       }
-    }),
-  );
+    })
+  )
 
-  return checkedArtistsFilteredData;
-};
+  return checkedArtistsFilteredData
+}

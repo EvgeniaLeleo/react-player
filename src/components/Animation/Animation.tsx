@@ -1,4 +1,5 @@
 import { styled } from '@mui/material'
+
 import { useAppSelector } from '../../hooks/hook'
 import {
   extradarkToDark,
@@ -26,7 +27,6 @@ export const Animation = () => {
   const colorDark = extradarkToDark(decorativeColor)
 
   const isPlaying = useAppSelector((state) => state.tracks.autoplay)
-  // console.log('isPlaying', isPlaying)
   const animationProp = 'equalize 6s 0s infinite;'
   const animation = isPlaying ? animationProp : 'none'
 

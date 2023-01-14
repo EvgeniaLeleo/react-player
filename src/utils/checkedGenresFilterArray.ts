@@ -1,22 +1,22 @@
-/**
+/**TODO
  * Формирует массив треков, фильтруя исходные данные по фильтру checkedGenres
  */
 
-import { Track } from '../types';
+import { Track } from '../types'
 
 export const checkedGenresFilterArray: (
   checkedItems: string[],
-  data: Track[],
+  data: Track[]
 ) => Track[] = (checkedItems, data) => {
-  const checkedGenresFilteredData: Track[] = [];
+  const checkedGenresFilteredData: Track[] = []
 
   checkedItems.forEach((genre: string) =>
     data.forEach((item) => {
       if (item.genre === genre) {
-        checkedGenresFilteredData.push(item);
+        checkedGenresFilteredData.push(item)
       }
-    }),
-  );
+    })
+  )
 
-  return checkedGenresFilteredData;
-};
+  return checkedGenresFilteredData
+}

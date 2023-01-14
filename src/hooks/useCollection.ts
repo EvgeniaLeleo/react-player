@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-import { useGetCollectionQuery } from '../services/tracksDataApi'
+import { useGetCollectionQuery } from '../services/dataApi'
 import { selectRefreshToken } from '../store/tokenSlice'
 import { Collection } from '../types'
 import { getFilteredData } from '../utils/getFilteredData'

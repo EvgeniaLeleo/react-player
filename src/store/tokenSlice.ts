@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../store'
 
-export interface TokenState {
-  access: string | undefined
-  refresh: string | undefined
+type TokenState = {
+  access?: string
+  refresh?: string
 }
 
 const initialState: TokenState = {

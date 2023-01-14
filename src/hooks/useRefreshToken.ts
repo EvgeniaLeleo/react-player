@@ -3,16 +3,12 @@
 // монтирует его в cookies и store
 
 import { useAppDispatch } from './hook'
-import {
-  tracksDataApi,
-  useRefreshUserTokenMutation,
-} from '../services/tracksDataApi'
+import { useRefreshUserTokenMutation } from '../services/dataApi'
 import { setToken } from '../store/tokenSlice'
 import { useCookies } from 'react-cookie'
 
 // возвращает новый access token или ошибку
 export const useRefreshToken = () => {
-  // eslint-disable-next-line
   const [, setCookies] = useCookies(['access', 'refresh'])
   const dispatch = useAppDispatch()
   const [doRefreshToken] = useRefreshUserTokenMutation()

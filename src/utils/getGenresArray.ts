@@ -1,15 +1,15 @@
-/**
+/**TODO
  * Формирует массив жанров из исходного массива объектов-треков
  */
 
-import { Track } from '../types';
+import { Track } from '../types'
 
 export const getGenresArray: (tracks: Track[]) => string[] = (tracks) => {
-  let genresArray: string[] = [];
+  let genresArray: string[] = []
   tracks.forEach((track) => {
     if (track.genre && !genresArray.includes(track.genre)) {
-      genresArray.push(track.genre);
+      genresArray.push(track.genre)
     }
-  });
-  return genresArray;
-};
+  })
+  return genresArray
+}

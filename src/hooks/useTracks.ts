@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { useGetTracksQuery } from '../services/tracksDataApi'
+
+import { useGetTracksQuery } from '../services/dataApi'
 import { Track } from '../types'
 import { getFilteredData } from '../utils/getFilteredData'
 import { useCurrentUser } from './useCurrentUser'
@@ -10,8 +11,6 @@ export const useTracks = (query = '') => {
 
   const { isLoading, isError, data, error } = useGetTracksQuery()
   const [filteredData, setFilteredData] = useState<Track[]>([])
-
-  // console.log('data', data)
 
   useEffect(() => {
     if (data) setFilteredData(getFilteredData(data, query))

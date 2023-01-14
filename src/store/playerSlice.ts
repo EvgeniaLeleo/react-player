@@ -1,11 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../store'
 
-export interface PlayerState {
-  volume: number
-}
-
-const initialState: PlayerState = {
+const initialState: { volume: number } = {
   volume: 25,
 }
 

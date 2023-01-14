@@ -1,0 +1,56 @@
+.List {
+  display: flex;
+  flex-direction: column;
+}
+
+.ListButton {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+  text-decoration: none;
+
+  width: 100%;
+  padding: 0;
+  margin-bottom: 25px;
+
+  background-color: transparent;
+
+  transition: all 0.2s ease;
+}
+
+.ListButton:hover {
+  color: #acacac;
+}
+
+.ListButton:active {
+  color: #696969;
+}
+
+.LogoutButton {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  font-size: 16px;
+  text-align: left;
+}
+
+@media (max-width: 1439px) {
+  .ListButton {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+
+  .LogoutButton {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .ListButton {
+    margin-bottom: 10px;
+    margin-left: 0;
+    padding-left: 0;
+  }
+}

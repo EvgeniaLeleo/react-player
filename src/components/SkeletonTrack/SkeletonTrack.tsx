@@ -13,7 +13,6 @@ export const SkeletonTrack = () => {
         width="4%"
         margin="2%"
         height="100%"
-        // height="45px"
         color={skeletonColor}
       />
 

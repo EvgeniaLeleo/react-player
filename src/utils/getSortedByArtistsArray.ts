@@ -1,16 +1,16 @@
-/**
+/**TODO
  * Сортирует массив треков по исполнителям в возрастающем порядке
  */
 
-import { Track } from '../types';
+import { Track } from '../types'
 
 export const getSortedByArtistsArray: (tracks: Track[]) => Track[] = (
-  tracks,
+  tracks
 ) => {
-  let sortedArray = [...tracks];
+  let sortedArray = [...tracks]
 
   sortedArray.sort((a, b) =>
-    a.author && b.author ? (a.author < b.author ? -1 : 1) : 1,
-  );
-  return sortedArray;
-};
+    a.author && b.author ? (a.author < b.author ? -1 : 1) : 1
+  )
+  return sortedArray
+}

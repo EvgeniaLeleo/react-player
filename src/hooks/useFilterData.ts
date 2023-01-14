@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useGetTracksQuery } from '../services/tracksDataApi'
+import { useGetTracksQuery } from '../services/dataApi'
 import { selectFilter, updateFilter } from '../store/FilterSlice'
 import { FilterSlice, initialState } from '../types'
 import { useAppDispatch, useAppSelector } from './hook'

@@ -3,7 +3,7 @@
 import { useRef, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppSelector } from './hook'
-import { useGetCurrentUserQuery } from '../services/tracksDataApi'
+import { useGetCurrentUserQuery } from '../services/dataApi'
 import { selectRefreshToken } from '../store/tokenSlice'
 import { useRefreshToken } from './useRefreshToken'
 import { ROUTES } from '../routes'
@@ -12,8 +12,8 @@ import { ROUTES } from '../routes'
 export const useCurrentUser = () => {
   const timestampRef = useRef(Date.now()).current
   const { data, isLoading, isError, error } =
-    // useGetCurrentUserQuery(timestampRef)
-    useGetCurrentUserQuery()
+    useGetCurrentUserQuery(timestampRef)
+  // useGetCurrentUserQuery()
 
   const doRefreshToken = useRefreshToken()
   const refreshToken = useAppSelector(selectRefreshToken)
@@ -31,7 +31,7 @@ export const useCurrentUser = () => {
   const shouldRefreshTokens = () =>
     error ? 'status' in error && error.status === 401 : false
 
-  console.log('shouldRefreshTokens', shouldRefreshTokens())
+  // console.log('shouldRefreshTokens', shouldRefreshTokens())
 
   useEffect(() => {
     if (isError) {
