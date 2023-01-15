@@ -39,6 +39,16 @@ export const Centerblock: FC<Props> = ({
   const textColor = useAppSelector(textColorSelector)
   const order = useAppSelector(orderSelector)
 
+  if (collectionId === 1) {
+    header = TEXT.header.classics[lang]
+  }
+  if (collectionId === 2) {
+    header = TEXT.header.electro[lang]
+  }
+  if (collectionId === 3) {
+    header = TEXT.header.rocks[lang]
+  }
+
   const [searchString, setSearchString] = useState('')
   const {
     isLoading,
