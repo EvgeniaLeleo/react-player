@@ -33,6 +33,8 @@ export const Player = () => {
   const tracks = useAppSelector((state) => state.tracks.movedTracks)
   const isActive = useAppSelector((state) => state.tracks.isShuffleActive)
   const autoplay = useAppSelector((state) => state.tracks.autoplay)
+  const isVisible = useAppSelector((state) => state.player.isVisible)
+
   const decorativeColor = useAppSelector(
     (state) => state.colorTheme.decorativeColor
   )
@@ -77,8 +79,18 @@ export const Player = () => {
     dispatch(setAutoplayStatus(true))
   }, [dispatch])
 
+  console.log(isVisible)
+
   return (
-    <PlayerWrapper progressсolor={progressColor} className="Player">
+    <PlayerWrapper
+      progressсolor={progressColor}
+      className="Player"
+      style={
+        isVisible
+          ? { transform: 'translateY(0)' }
+          : { transform: 'translateY(100%)' }
+      }
+    >
       <AudioPlayer
         onClickNext={handleClickNext}
         onClickPrevious={handleClickPrevious}

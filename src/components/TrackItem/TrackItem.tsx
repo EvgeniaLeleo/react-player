@@ -1,7 +1,7 @@
 import { FavoriteBorder, Favorite } from '@mui/icons-material'
 import { IconButton } from '@mui/material'
 import type { Identifier, XYCoord } from 'dnd-core'
-import { FC, useRef, useCallback } from 'react'
+import { FC, useRef, useCallback, useState } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 
 import { DivChangeColor } from '../ChangeColorComponents/DivChangeColor'
@@ -17,6 +17,7 @@ import {
 import { secondsToMinSec } from '../../utils/secondsToMinSec'
 
 import style from './style.module.css'
+import { setVisibility } from '../../store/playerSlice'
 
 const Item = {
   TRACK: 'track',
@@ -97,9 +98,9 @@ export const TrackItem: FC<Props> = ({ id, index, moveTrackItem, track }) => {
 
   const dispatch = useAppDispatch()
 
-  const currentTrack = useAppSelector((state) => state.tracks.currentTrack)
   const { favorite, toggleFavoriteTrack } = useFavoriteTrack(track)
 
+  const currentTrack = useAppSelector((state) => state.tracks.currentTrack)
   const textColor = useAppSelector((state) => state.colorTheme.textColor)
   const decorativeColor = useAppSelector(
     (state) => state.colorTheme.decorativeColor
@@ -108,6 +109,8 @@ export const TrackItem: FC<Props> = ({ id, index, moveTrackItem, track }) => {
   const colorHover = extradarkToHover(decorativeColor)
   const colorDark = extradarkToDark(decorativeColor)
 
+  const isVisible = useAppSelector((state) => state.player.isVisible)
+
   const defineCurrentTrack = useCallback(
     (track: Track) => {
       return currentTrack.id === track.id
@@ -115,13 +118,12 @@ export const TrackItem: FC<Props> = ({ id, index, moveTrackItem, track }) => {
     [currentTrack.id]
   )
 
-  // const { isFavorite } = useAppSelector((state) => state.modal)
-
-  // const favoriteTracks = useAppSelector((state) => state.tracks.favoriteTracks)
-
   const handleChooseSong = useCallback(
     (track: Track) => {
       dispatch(changeCurrentTrack(track))
+      if (!isVisible) {
+        dispatch(setVisibility(true))
+      }
     },
     [dispatch]
   )
@@ -155,14 +157,6 @@ export const TrackItem: FC<Props> = ({ id, index, moveTrackItem, track }) => {
             onClick={(e) => {
               e.stopPropagation()
               toggleFavoriteTrack(track?.id || 0)
-              // console.log(track)
-              // if (favoriteTracks.includes(track?.id)) {
-              //   dispatch(removeFavoriteTrack(track?.id))
-              //   console.log(track?.id)
-              // } else {
-              //   dispatch(addFavoriteTrack(track?.id))
-              //   console.log(track?.id)
-              // }
             }}
             sx={{ width: '5%' }}
             style={{

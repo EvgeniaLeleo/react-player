@@ -1,23 +1,23 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-type TTrackState = {
-  header: string;
-};
+type State = {
+  header: string
+}
 
-const initialState: TTrackState = {
+const initialState: State = {
   header: '',
-};
+}
 
 const headerSlice = createSlice({
   name: 'header',
   initialState,
   reducers: {
     updateHeader(state, action: PayloadAction<string>) {
-      state.header = action.payload;
+      state.header = action.payload
     },
   },
-});
+})
 
-export const { updateHeader } = headerSlice.actions;
+export const { updateHeader } = headerSlice.actions
 
-export default headerSlice.reducer;
+export default headerSlice.reducer

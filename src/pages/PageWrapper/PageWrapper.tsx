@@ -4,9 +4,9 @@ import { NavMenu } from '../../components/NavMenu/NavMenu'
 import { Sidebar } from '../../components/Sidebar/Sidebar'
 import { Player } from '../../components/Player/Player'
 import { useAppSelector } from '../../hooks/hook'
+import { TEXT } from '../../constants'
 
 import style from './style.module.css'
-import { TEXT } from '../../constants'
 
 export type Props = {
   tracksHook?: Function

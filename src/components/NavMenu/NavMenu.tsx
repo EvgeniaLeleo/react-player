@@ -79,7 +79,7 @@ export const NavMenu: FC<{}> = () => {
             className={style.NavMenu}
             style={{ backgroundColor: bgColorLight, paddingTop: '70px' }}
           >
-            <NavLink to={'/main'}>
+            <NavLink to={'/'}>
               <LogoMenu textColor={textColor} />
             </NavLink>
 

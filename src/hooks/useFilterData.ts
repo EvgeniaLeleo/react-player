@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useGetTracksQuery } from '../services/dataApi'
-import { selectFilter } from '../store/FilterSlice'
+import { selectFilter } from '../store/filterSlice'
 import { FilterSlice, initialState } from '../types'
 import { useAppDispatch, useAppSelector } from './hook'
 
