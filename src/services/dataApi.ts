@@ -93,9 +93,6 @@ export const dataApi = createApi({
             ]
           : [{ type: 'Tracks', id: 'LIST' }],
     }),
-    // getCurrentUser: build.query<User, number>({
-    //   query: (sessionId: number) => `user/me/`,
-    // }),
     getCurrentUser: build.query<User, void>({
       query: () => `user/me/`,
     }),
