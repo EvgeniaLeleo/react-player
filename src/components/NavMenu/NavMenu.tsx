@@ -2,6 +2,7 @@ import { useState, FC } from 'react'
 import { NavLink } from 'react-router-dom'
 import { IconButton } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
+import cn from 'classnames'
 
 import { useAppDispatch, useAppSelector } from '../../hooks/hook'
 import { bgColorToBgColorLight } from '../../utils/colorUtils'
@@ -9,15 +10,20 @@ import { Animation } from '../Animation/Animation'
 import { LogoMenu } from '../Logo/LogoMenu'
 import { setIsNavMenuOpened } from '../../store/navMenuSlice'
 import { NavList } from '../NavList/NavList'
+import {
+  bgColorSelector,
+  textColorSelector,
+} from '../../store/selectors/colorThemeSelector'
+import { navMenuSelector } from '../../store/selectors/navMenuSelector'
 
 import style from './style.module.css'
 
 export const NavMenu: FC<{}> = () => {
   const dispatch = useAppDispatch()
 
-  const textColor = useAppSelector((state) => state.colorTheme.textColor)
-  const bgColor = useAppSelector((state) => state.colorTheme.bgColor)
-  const isNavMenuOpened = useAppSelector((state) => state.navMenu.isOpen)
+  const textColor = useAppSelector(textColorSelector)
+  const bgColor = useAppSelector(bgColorSelector)
+  const isNavMenuOpened = useAppSelector(navMenuSelector)
 
   const [isVisibleMobile, setIsVisibleMobile] = useState(false)
   const [isVisible, setIsVisible] = useState(isNavMenuOpened)
@@ -35,15 +41,8 @@ export const NavMenu: FC<{}> = () => {
 
   return (
     <>
-      <div className={style.WrapperDesktop}>
-        <nav
-          className={style.NavMenu}
-          style={
-            isVisible
-              ? { backgroundColor: bgColorLight }
-              : { backgroundColor: bgColor }
-          }
-        >
+      <div className={style.navWrapperDesktop}>
+        <div className={style.logoWrapperDesktop}>
           <NavLink to={'/'}>
             <LogoMenu textColor={textColor} />
           </NavLink>
@@ -58,13 +57,23 @@ export const NavMenu: FC<{}> = () => {
               style={{ color: textColor }}
             />
           </IconButton>
-          {isVisible && (
-            <>
-              <NavList />
-              <div className={style.AnimationTop} />
-              <Animation />
-            </>
+        </div>
+
+        <nav
+          className={cn(
+            style.NavMenu,
+            { [style.navMenuVisible]: isVisible },
+            { [style.navMenuHidden]: !isVisible }
           )}
+          style={{
+            backgroundColor: bgColorLight,
+          }}
+        >
+          <div>
+            <NavList />
+            <div className={style.AnimationTop} />
+            <Animation />
+          </div>
         </nav>
       </div>
 

@@ -1,7 +1,8 @@
-// возвращает функцию для обновления access токена
-// запрашивает новый access token с помощью refresh token
-// монтирует его в cookies и store
-// возвращает новый access token или ошибку
+/**
+ * Returns the function for refreshing access token
+ * Requests new access token using refresh token and sets it in cookies and store
+ * Returns new access token or error
+ */
 
 import { useAppDispatch } from './hook'
 import { useRefreshUserTokenMutation } from '../services/dataApi'

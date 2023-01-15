@@ -1,23 +1,26 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+
 import { RootState } from '../store'
 import { Track } from '../types'
 
-type Props = {
+type State = {
   currentTrack: Track
   isMoved: boolean
   movedTracks: Track[]
+  tracks: Track[]
   favoriteTracks: number[]
   isShuffleActive: boolean
   id?: number
   autoplay?: boolean
 }
 
-const initialState: Props = {
+const initialState: State = {
   autoplay: false,
   currentTrack: JSON.parse(localStorage.getItem('currentTrack')!) || {},
   isMoved: false,
   isShuffleActive: false,
   movedTracks: [],
+  tracks: [],
   favoriteTracks: [],
 }
 
@@ -42,7 +45,7 @@ export const trackSlice = createSlice({
       }
 
       let currentIndex = tracks?.findIndex(
-        (track) => track.track_file === state.currentTrack.track_file
+        (track) => track.track_file === state.currentTrack?.track_file
       )
       if (currentIndex! >= tracks?.length! - 1) {
         nextTrack = tracks?.[0]
@@ -70,7 +73,7 @@ export const trackSlice = createSlice({
       }
 
       let currentIndex = tracks?.findIndex(
-        (track) => track.track_file === state.currentTrack.track_file
+        (track) => track.track_file === state.currentTrack?.track_file
       )
       if (currentIndex! <= 0) {
         previousTrack = tracks?.[tracks?.length! - 1]
@@ -82,9 +85,9 @@ export const trackSlice = createSlice({
 
     shuffleTracks(state, action) {
       if (action.payload) {
-        // let tracks = JSON.parse(JSON.stringify(state.))
-        // let nextTrack = tracks?.[Math.floor(Math.random() * tracks.length)]
-        // state.currentTrack = nextTrack
+        let tracks = state.tracks
+        let nextTrack = tracks?.[Math.floor(Math.random() * tracks.length)]
+        state.currentTrack = nextTrack
       }
     },
 

@@ -10,25 +10,34 @@ import { useAppSelector } from '../../hooks/hook'
 import { FilterButtons } from '../FilterButtons/FilterButtons'
 import { ListHeaders } from '../ListHeaders/ListHeaders'
 import { getFinalItems } from '../../utils/getFinalItems'
+import { Tracks } from '../Tracks/Tracks'
+import { textColorSelector } from '../../store/selectors/colorThemeSelector'
+import { languageSelector } from '../../store/selectors/languageSelector'
+import {
+  checkedArtistsSelector,
+  checkedGenresSelector,
+  checkedYearsSelector,
+} from '../../store/selectors/filteredItemsSelector'
+import { orderSelector } from '../../store/selectors/orderSelector'
 
 import style from './style.module.css'
-import { Tracks } from '../Tracks/Tracks'
 
-type PlayerProps = {
+type Props = {
   tracksHook?: Function
   header?: string
   collectionId?: number
   isProfilePage?: boolean
 }
 
-export const Centerblock: FC<PlayerProps> = ({
+export const Centerblock: FC<Props> = ({
   header,
   tracksHook,
   collectionId = 1,
   isProfilePage = false,
 }) => {
-  const lang = useAppSelector((state) => state.language.lang)
-  const textColor = useAppSelector((state) => state.colorTheme.textColor)
+  const lang = useAppSelector(languageSelector)
+  const textColor = useAppSelector(textColorSelector)
+  const order = useAppSelector(orderSelector)
 
   const [searchString, setSearchString] = useState('')
   const {
@@ -39,14 +48,10 @@ export const Centerblock: FC<PlayerProps> = ({
     ? tracksHook(searchString, collectionId)
     : { data: [], isLoading: true, isError: false }
 
-  const order = useAppSelector((state) => state.sortingSettings.order)
-
   const checkedItemsObj = {
-    checkedArtists: useAppSelector(
-      (state) => state.filteredItems.checkedArtists
-    ),
-    checkedYears: useAppSelector((state) => state.filteredItems.checkedYears),
-    checkedGenres: useAppSelector((state) => state.filteredItems.checkedGenres),
+    checkedArtists: useAppSelector(checkedArtistsSelector),
+    checkedYears: useAppSelector(checkedYearsSelector),
+    checkedGenres: useAppSelector(checkedGenresSelector),
   }
 
   const filteredTracks =

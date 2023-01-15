@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import {
   Button,
@@ -22,30 +22,29 @@ import {
 import { Languages } from '../../types'
 import { changeLanguage } from '../../store/languageSlice'
 import { AlbumsList } from '../AlbumsList/AlbumsList'
+import { useGetCurrentUserQuery } from '../../services/dataApi'
+import {
+  bgColorSelector,
+  decorativeColorSelector,
+  textColorSelector,
+} from '../../store/selectors/colorThemeSelector'
+import { languageSelector } from '../../store/selectors/languageSelector'
+import { headerSelector } from '../../store/selectors/headerSelector'
 
 import style from './style.module.css'
-import { useGetCurrentUserQuery } from '../../services/dataApi'
 
 export const Sidebar = () => {
   const dispatch = useAppDispatch()
 
-  const timestampRef = useRef(Date.now()).current
-  const {
-    data: user,
-    isLoading,
-    isError,
-    error,
-    // } = useGetCurrentUserQuery(timestampRef)
-  } = useGetCurrentUserQuery()
+  const { data: user } = useGetCurrentUserQuery()
 
-  const header = useAppSelector((state) => state.header.header)
-  const lang = useAppSelector((state) => state.language.lang)
-  const textColor = useAppSelector((state) => state.colorTheme.textColor)
-  const bgColor = useAppSelector((state) => state.colorTheme.bgColor)
-  const decorativeColor = useAppSelector(
-    (state) => state.colorTheme.decorativeColor
-  )
-  const isUserVisible = header !== TEXT.menu.profile[lang]
+  const header = useAppSelector(headerSelector)
+  const lang = useAppSelector(languageSelector)
+  const textColor = useAppSelector(textColorSelector)
+  const bgColor = useAppSelector(bgColorSelector)
+  const decorativeColor = useAppSelector(decorativeColorSelector)
+
+  const isUserVisible = header !== TEXT.header.profile[lang]
 
   const [isAlbumsVisible, setIsAlbumsVisible] = useState(false)
 

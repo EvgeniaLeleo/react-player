@@ -3,13 +3,13 @@ import { TextField } from '@mui/material'
 
 import './Input.css'
 
-export type InputProps = {
+type Props = {
   inputPlaceholder: 'Логин' | 'Пароль' | 'Повторите пароль'
   marginBottom: string
   inputType: string
 }
 
-export const Input: FC<InputProps> = ({
+export const Input: FC<Props> = ({
   inputPlaceholder,
   inputType,
   marginBottom,

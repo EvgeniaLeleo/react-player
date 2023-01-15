@@ -2,6 +2,8 @@ import { FC } from 'react'
 
 import { EMPTY_ARTIST, TEXT } from '../../constants'
 import { useAppSelector } from '../../hooks/hook'
+import { textColorSelector } from '../../store/selectors/colorThemeSelector'
+import { languageSelector } from '../../store/selectors/languageSelector'
 import { Track } from '../../types'
 import { SkeletonTrack } from '../SkeletonTrack/SkeletonTrack'
 import { TrackList } from '../TrackList/TrackList'
@@ -23,8 +25,8 @@ export const Tracks: FC<Props> = ({
   tracks,
   filteredTracks,
 }) => {
-  const textColor = useAppSelector((state) => state.colorTheme.textColor)
-  const lang = useAppSelector((state) => state.language.lang)
+  const textColor = useAppSelector(textColorSelector)
+  const lang = useAppSelector(languageSelector)
 
   if (isError) {
     return <div style={{ color: textColor }}>Произошла ошибка</div>

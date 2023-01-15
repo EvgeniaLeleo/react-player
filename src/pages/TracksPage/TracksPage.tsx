@@ -3,11 +3,12 @@ import { useEffect } from 'react'
 import { Centerblock } from '../../components/Centerblock/Centerblock'
 import { TEXT } from '../../constants'
 import { useAppDispatch, useAppSelector } from '../../hooks/hook'
-import { useFilteredTracks } from '../../hooks/useFilteredTracks'
+import { useSearchQueryTracks } from '../../hooks/useSearchQueryTracks'
 import { updateHeader } from '../../store/headerSlice'
+import { languageSelector } from '../../store/selectors/languageSelector'
 
 export const TracksPage = () => {
-  const lang = useAppSelector((state) => state.language.lang)
+  const lang = useAppSelector(languageSelector)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -18,7 +19,7 @@ export const TracksPage = () => {
   return (
     <Centerblock
       header={TEXT.header.tracks[lang]}
-      tracksHook={useFilteredTracks}
+      tracksHook={useSearchQueryTracks}
     />
   )
 }

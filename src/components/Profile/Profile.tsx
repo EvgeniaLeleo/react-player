@@ -1,4 +1,4 @@
-import { FC, useRef } from 'react'
+import { FC } from 'react'
 import FormControl from '@mui/material/FormControl'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
@@ -15,27 +15,26 @@ import {
 import { colorToSecondary } from '../../utils/colorUtils'
 import { changeLanguage } from '../../store/languageSlice'
 import { Languages } from '../../types'
+import { useGetCurrentUserQuery } from '../../services/dataApi'
+import { updateHeader } from '../../store/headerSlice'
+import {
+  bgColorSelector,
+  decorativeColorSelector,
+  textColorSelector,
+} from '../../store/selectors/colorThemeSelector'
+import { languageSelector } from '../../store/selectors/languageSelector'
 
 import style from './style.module.css'
-import { useGetCurrentUserQuery } from '../../services/dataApi'
 
 export const Profile: FC = () => {
   const dispatch = useAppDispatch()
-  const timestampRef = useRef(Date.now()).current
-  const {
-    data: user,
-    isLoading,
-    isError,
-    error,
-    // } = useGetCurrentUserQuery(timestampRef)
-  } = useGetCurrentUserQuery()
+  const { data: user } = useGetCurrentUserQuery()
 
-  const lang = useAppSelector((state) => state.language.lang)
-  const textColor = useAppSelector((state) => state.colorTheme.textColor)
-  const bgColor = useAppSelector((state) => state.colorTheme.bgColor)
-  const decorativeColor = useAppSelector(
-    (state) => state.colorTheme.decorativeColor
-  )
+  const lang = useAppSelector(languageSelector)
+  const textColor = useAppSelector(textColorSelector)
+  const bgColor = useAppSelector(bgColorSelector)
+  const decorativeColor = useAppSelector(decorativeColorSelector)
+
   const textColorSecondary = colorToSecondary(textColor)
   const buttonTheme = createTheme({
     palette: {
@@ -48,6 +47,7 @@ export const Profile: FC = () => {
   const handleChange = (event: SelectChangeEvent) => {
     const newLanguage = event.target.value as Languages
     dispatch(changeLanguage(newLanguage))
+    dispatch(updateHeader(TEXT.header.profile[newLanguage]))
     localStorage.setItem('language', newLanguage)
   }
 
@@ -87,7 +87,7 @@ export const Profile: FC = () => {
   return (
     <div className={style.Profile}>
       <h2 style={{ color: textColor }} className={style.HeaderMain}>
-        {TEXT.menu.profile[lang]}
+        {TEXT.header.profile[lang]}
       </h2>
       <div className={style.Data} style={{ color: textColor }}>
         <h4 className={style.Header} style={{ color: textColorSecondary }}>

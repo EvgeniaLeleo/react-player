@@ -19,7 +19,7 @@ import style from './style.module.css'
 export const SignupForm: FC<{}> = () => {
   const isLoggedIn = useLoadCredentialsFromCookies()
 
-  const [signUp] = useSignupMutation()
+  const [signUp, { error }] = useSignupMutation()
 
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -38,7 +38,7 @@ export const SignupForm: FC<{}> = () => {
   })
 
   const [, setCookies] = useCookies(['access', 'refresh'])
-  const [getTokens, { data: userTokens, error }] = useTokenMutation()
+  const [getTokens, { data: userTokens }] = useTokenMutation()
 
   const [isDisabled, setIsDisabled] = useState<boolean>(false)
 
@@ -145,6 +145,7 @@ export const SignupForm: FC<{}> = () => {
           helperText={errors.password?.message}
           error={Boolean(errors.password?.message)}
         />
+
         <Button
           buttonType="submit"
           buttonVariant="contained"

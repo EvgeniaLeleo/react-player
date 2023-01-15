@@ -1,12 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { RootState } from '../store'
 
-type TokenState = {
+type State = {
   access?: string
   refresh?: string
 }
 
-const initialState: TokenState = {
+const initialState: State = {
   access: undefined,
   refresh: undefined,
 }
@@ -15,7 +14,7 @@ export const tokenSlice = createSlice({
   name: 'token',
   initialState,
   reducers: {
-    setToken: (state, action: PayloadAction<TokenState>) => {
+    setToken: (state, action: PayloadAction<State>) => {
       state.access = action.payload.access
       state.refresh = action.payload.refresh
     },
@@ -23,13 +22,5 @@ export const tokenSlice = createSlice({
 })
 
 export const { setToken } = tokenSlice.actions
-
-export const selectAccessToken = (state: RootState) => state.token.access
-
-export const selectRefreshToken = (state: RootState) => state.token.refresh
-
-export const selectTokens = (state: RootState) => {
-  return state.token
-}
 
 export default tokenSlice.reducer

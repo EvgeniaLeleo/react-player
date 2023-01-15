@@ -22,6 +22,14 @@ import {
   PlayerWrapper,
 } from '../ChangeColorComponents/PlayerChangeColor'
 import { useAppDispatch, useAppSelector } from '../../hooks/hook'
+import { decorativeColorSelector } from '../../store/selectors/colorThemeSelector'
+import {
+  autoplaySelector,
+  currentTrackSelector,
+  isShuffleActiveSelector,
+  movedTracksSelector,
+} from '../../store/selectors/tracksSelector'
+import { isVisibleSelector } from '../../store/selectors/playerSelector'
 
 import 'react-h5-audio-player/lib/styles.css'
 import './Player.css'
@@ -29,15 +37,12 @@ import './Player.css'
 export const Player = () => {
   const dispatch = useAppDispatch()
 
-  const currentTrack = useAppSelector((state) => state.tracks.currentTrack)
-  const tracks = useAppSelector((state) => state.tracks.movedTracks)
-  const isActive = useAppSelector((state) => state.tracks.isShuffleActive)
-  const autoplay = useAppSelector((state) => state.tracks.autoplay)
-  const isVisible = useAppSelector((state) => state.player.isVisible)
-
-  const decorativeColor = useAppSelector(
-    (state) => state.colorTheme.decorativeColor
-  )
+  const currentTrack = useAppSelector(currentTrackSelector)
+  const tracks = useAppSelector(movedTracksSelector)
+  const isActive = useAppSelector(isShuffleActiveSelector)
+  const autoplay = useAppSelector(autoplaySelector)
+  const isVisible = useAppSelector(isVisibleSelector)
+  const decorativeColor = useAppSelector(decorativeColorSelector)
 
   const [audio, setAudio] = useState(currentTrack?.track_file)
 
@@ -45,26 +50,20 @@ export const Player = () => {
   let audioCtx: any = useRef()
 
   useEffect(() => {
-    setAudio(currentTrack?.track_file)
-  }, [currentTrack?.track_file])
+    setAudio(currentTrack.track_file)
+  }, [currentTrack.track_file])
 
   const handleClickNext = useCallback(() => {
-    if (tracks) {
-      dispatch(switchToNextTrack(tracks))
-    }
+    dispatch(switchToNextTrack(tracks))
   }, [dispatch, tracks])
 
   const handleClickPrevious = useCallback(() => {
-    if (tracks) {
-      dispatch(switchToPreviousTrack(tracks))
-    }
+    dispatch(switchToPreviousTrack(tracks))
   }, [dispatch, tracks])
 
   const handleAudioEnded = useCallback(() => {
     dispatch(shuffleTracks(isActive))
-    if (tracks) {
-      dispatch(switchToNextTrack(tracks))
-    }
+    dispatch(switchToNextTrack(tracks))
   }, [dispatch, tracks, isActive])
 
   const handleClickShuffle = useCallback(() => {
@@ -78,8 +77,6 @@ export const Player = () => {
   const handleClickOnPlay = useCallback(() => {
     dispatch(setAutoplayStatus(true))
   }, [dispatch])
-
-  console.log(isVisible)
 
   return (
     <PlayerWrapper
@@ -101,7 +98,6 @@ export const Player = () => {
         onPause={handleClickOnPause}
         defaultDuration={false}
         defaultCurrentTime={false}
-        // autoPlayAfterSrcChange={false}
         ref={audioCtx}
         customIcons={{
           play: <PlayArrow fontSize="large" className="ControlsIcon" />,

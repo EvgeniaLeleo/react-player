@@ -5,10 +5,13 @@ import { TEXT } from '../../constants'
 import { SpanChangeColor } from '../ChangeColorComponents/SpanChangeColor'
 import { useAppSelector } from '../../hooks/hook'
 import { extradarkToDark, extradarkToHover } from '../../utils/colorUtils'
-// import { openModal } from '../../store/modalSlice'
-
 import { ROUTES } from '../../routes'
 import { useLogout } from '../../hooks/useLogout'
+import {
+  decorativeColorSelector,
+  textColorSelector,
+} from '../../store/selectors/colorThemeSelector'
+import { languageSelector } from '../../store/selectors/languageSelector'
 
 import style from './style.module.css'
 
@@ -16,12 +19,9 @@ export const NavList: FC<{}> = () => {
   const logout = useLogout()
   const navigate = useNavigate()
 
-  const lang = useAppSelector((state) => state.language.lang)
-  const textColor = useAppSelector((state) => state.colorTheme.textColor)
-
-  const decorativeColor = useAppSelector(
-    (state) => state.colorTheme.decorativeColor
-  )
+  const lang = useAppSelector(languageSelector)
+  const textColor = useAppSelector(textColorSelector)
+  const decorativeColor = useAppSelector(decorativeColorSelector)
 
   const colorHover = extradarkToHover(decorativeColor)
   const colorDark = extradarkToDark(decorativeColor)
@@ -61,7 +61,6 @@ export const NavList: FC<{}> = () => {
       </NavLink>
 
       <button
-        // onClick={() => dispatch(openModal())}
         onClick={handleLogout}
         style={{ color: textColor }}
         className={style.LogoutButton}

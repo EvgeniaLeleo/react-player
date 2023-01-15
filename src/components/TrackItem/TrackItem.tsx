@@ -1,7 +1,7 @@
 import { FavoriteBorder, Favorite } from '@mui/icons-material'
 import { IconButton } from '@mui/material'
 import type { Identifier, XYCoord } from 'dnd-core'
-import { FC, useRef, useCallback, useState } from 'react'
+import { FC, useRef, useCallback } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 
 import { DivChangeColor } from '../ChangeColorComponents/DivChangeColor'
@@ -15,9 +15,15 @@ import {
   extradarkToHover,
 } from '../../utils/colorUtils'
 import { secondsToMinSec } from '../../utils/secondsToMinSec'
+import { setVisibility } from '../../store/playerSlice'
+import {
+  decorativeColorSelector,
+  textColorSelector,
+} from '../../store/selectors/colorThemeSelector'
+import { isVisibleSelector } from '../../store/selectors/playerSelector'
+import { currentTrackSelector } from '../../store/selectors/tracksSelector'
 
 import style from './style.module.css'
-import { setVisibility } from '../../store/playerSlice'
 
 const Item = {
   TRACK: 'track',
@@ -100,16 +106,14 @@ export const TrackItem: FC<Props> = ({ id, index, moveTrackItem, track }) => {
 
   const { favorite, toggleFavoriteTrack } = useFavoriteTrack(track)
 
-  const currentTrack = useAppSelector((state) => state.tracks.currentTrack)
-  const textColor = useAppSelector((state) => state.colorTheme.textColor)
-  const decorativeColor = useAppSelector(
-    (state) => state.colorTheme.decorativeColor
-  )
+  const currentTrack = useAppSelector(currentTrackSelector)
+  const textColor = useAppSelector(textColorSelector)
+  const decorativeColor = useAppSelector(decorativeColorSelector)
+  const isVisible = useAppSelector(isVisibleSelector)
+
   const textColorSecondary = colorToSecondary(textColor)
   const colorHover = extradarkToHover(decorativeColor)
   const colorDark = extradarkToDark(decorativeColor)
-
-  const isVisible = useAppSelector((state) => state.player.isVisible)
 
   const defineCurrentTrack = useCallback(
     (track: Track) => {
@@ -125,6 +129,7 @@ export const TrackItem: FC<Props> = ({ id, index, moveTrackItem, track }) => {
         dispatch(setVisibility(true))
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [dispatch]
   )
 

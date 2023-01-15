@@ -69,7 +69,6 @@ export const LoginForm = () => {
     // setError('')
     setIsDisabled(true)
     try {
-      // if (user)
       await getTokens({
         email: data.email,
         password: data.password,

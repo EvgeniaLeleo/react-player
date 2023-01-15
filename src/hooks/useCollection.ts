@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
 import { useGetCollectionQuery } from '../services/dataApi'
-import { selectRefreshToken } from '../store/tokenSlice'
+import { refreshTokenSelector } from '../store/selectors/tokenSelector'
 import { Collection } from '../types'
 import { getSearchedData } from '../utils/getSearchedData'
 import { useAppSelector } from './hook'
@@ -17,7 +17,7 @@ export const useCollection = (query = '', collectionId = 1) => {
 
   const [searchedData, setSearchedData] = useState<Collection>()
 
-  const refreshToken = useAppSelector(selectRefreshToken)
+  const refreshToken = useAppSelector(refreshTokenSelector)
   const handleRefreshTokens = useRefreshToken()
 
   useEffect(() => {

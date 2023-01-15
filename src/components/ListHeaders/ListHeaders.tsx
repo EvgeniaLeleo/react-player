@@ -3,13 +3,15 @@ import { SvgIcon } from '@mui/material'
 
 import { TEXT } from '../../constants'
 import { useAppSelector } from '../../hooks/hook'
+import { textColorSelector } from '../../store/selectors/colorThemeSelector'
+import { languageSelector } from '../../store/selectors/languageSelector'
 import { colorToSecondary } from '../../utils/colorUtils'
 
 import style from './style.module.css'
 
 export const ListHeaders = () => {
-  const lang = useAppSelector((state) => state.language.lang)
-  const textColor = useAppSelector((state) => state.colorTheme.textColor)
+  const lang = useAppSelector(languageSelector)
+  const textColor = useAppSelector(textColorSelector)
   const textColorSecondary = colorToSecondary(textColor)
 
   return (

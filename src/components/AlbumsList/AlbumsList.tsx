@@ -2,10 +2,11 @@ import { NavLink } from 'react-router-dom'
 
 import { TEXT } from '../../constants'
 import { useAppSelector } from '../../hooks/hook'
+import { languageSelector } from '../../store/selectors/languageSelector'
 import { AlbumCover } from '../AlbumCover/AlbumCover'
 
 export const AlbumsList = () => {
-  const lang = useAppSelector((state) => state.language.lang)
+  const lang = useAppSelector(languageSelector)
 
   return (
     <div>

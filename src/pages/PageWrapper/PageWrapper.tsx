@@ -5,17 +5,17 @@ import { Sidebar } from '../../components/Sidebar/Sidebar'
 import { Player } from '../../components/Player/Player'
 import { useAppSelector } from '../../hooks/hook'
 import { TEXT } from '../../constants'
+import { languageSelector } from '../../store/selectors/languageSelector'
+import { bgColorSelector } from '../../store/selectors/colorThemeSelector'
+import { headerSelector } from '../../store/selectors/headerSelector'
 
 import style from './style.module.css'
 
-export type Props = {
-  tracksHook?: Function
-}
-
 export const PageWrapper = () => {
-  const bgColor = useAppSelector((state) => state.colorTheme.bgColor)
-  const header = useAppSelector((state) => state.header.header)
-  const lang = useAppSelector((state) => state.language.lang)
+  const bgColor = useAppSelector(bgColorSelector)
+  const header = useAppSelector(headerSelector)
+  const lang = useAppSelector(languageSelector)
+
   const isUserVisible = header !== TEXT.menu.profile[lang]
 
   return (

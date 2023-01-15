@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-type CheckedItems = {
+type State = {
   checkedArtists: string[]
   checkedYears: string[]
   checkedGenres: string[]
 }
 
-const initialState: CheckedItems = {
+const initialState: State = {
   checkedArtists: [],
   checkedYears: [],
   checkedGenres: [],

@@ -8,10 +8,15 @@ import {
   updateCheckedGenres,
   updateCheckedYears,
 } from '../../store/filteredItemsSlice'
+import {
+  bgColorSelector,
+  textColorSelector,
+} from '../../store/selectors/colorThemeSelector'
+import { filteredItemsSelector } from '../../store/selectors/filteredItemsSelector'
 
 import style from './style.module.css'
 
-export type Props = {
+type Props = {
   items: string[]
   buttonName: FilterButtonName
   rows: 1 | 2 | 3
@@ -26,9 +31,9 @@ const newFilter: CheckedItems = {
 export const Popup: FC<Props> = ({ items, rows, buttonName }) => {
   const dispatch = useAppDispatch()
 
-  const textColor = useAppSelector((state) => state.colorTheme.textColor)
-  const bgColor = useAppSelector((state) => state.colorTheme.bgColor)
-  const checkedItems = useAppSelector((state) => state.filteredItems)
+  const textColor = useAppSelector(textColorSelector)
+  const bgColor = useAppSelector(bgColorSelector)
+  const checkedItems = useAppSelector(filteredItemsSelector)
 
   const bgColorLight = bgColorToBgColorLight(bgColor)
 

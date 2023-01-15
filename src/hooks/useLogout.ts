@@ -1,6 +1,6 @@
-import { useAppDispatch } from './hook'
 import { useCookies } from 'react-cookie'
 
+import { useAppDispatch } from './hook'
 import { setToken } from '../store/tokenSlice'
 import { setIsNavMenuOpened } from '../store/navMenuSlice'
 import { ORDER } from '../constants'

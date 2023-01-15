@@ -2,11 +2,11 @@ import { FC } from 'react'
 
 import style from './style.module.css'
 
-type LogoMenuProps = {
+type Props = {
   textColor: string
 }
 
-export const LogoMenu: FC<LogoMenuProps> = ({ textColor }) => {
+export const LogoMenu: FC<Props> = ({ textColor }) => {
   return (
     <svg
       width="140"

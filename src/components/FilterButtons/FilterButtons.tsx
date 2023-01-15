@@ -15,11 +15,13 @@ import { useAppDispatch, useAppSelector } from '../../hooks/hook'
 import { Languages, Order, Track } from '../../types'
 import { colorToSecondary } from '../../utils/colorUtils'
 import { updateOrder } from '../../store/sortingSettingsSlice'
-
-import style from './style.module.css'
 import { getArtistsArray } from '../../utils/getArtistsArray'
 import { getGenresArray } from '../../utils/getGenresArray'
 import { getYearsArray } from '../../utils/getYearsArray'
+import { orderSelector } from '../../store/selectors/orderSelector'
+import { decorativeColorSelector } from '../../store/selectors/colorThemeSelector'
+
+import style from './style.module.css'
 
 type FilterButtonsProps = {
   lang: Languages
@@ -38,10 +40,8 @@ export const FilterButtons: FC<FilterButtonsProps> = ({
 
   const dispatch = useAppDispatch()
 
-  const initialOrder = useAppSelector((state) => state.sortingSettings.order)
-  const decorativeColor = useAppSelector(
-    (state) => state.colorTheme.decorativeColor
-  )
+  const initialOrder = useAppSelector(orderSelector)
+  const decorativeColor = useAppSelector(decorativeColorSelector)
 
   const textColorSecondary = colorToSecondary(textColor)
 

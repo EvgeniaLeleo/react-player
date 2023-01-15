@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-type Props = {
+type State = {
   isOpen: boolean
 }
 
-const initialState: Props = {
+const initialState: State = {
   isOpen: false,
 }
 

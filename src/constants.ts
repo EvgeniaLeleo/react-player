@@ -172,9 +172,9 @@ export const TEXT = {
     bel: 'Выбачайце, нічога не знайшлося',
   },
   no_favourites: {
-    ru: 'Избранных треков пока нет',
-    en: 'There are no favorite tracks yet',
-    bel: 'Абраных трэкаў пакуль няма',
+    ru: 'Избранных треков нет',
+    en: 'There are no favorite tracks',
+    bel: 'Выбраных трэкаў няма',
   },
 }
 

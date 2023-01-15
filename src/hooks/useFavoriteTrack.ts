@@ -5,15 +5,18 @@ import {
   useAddTrackToFavoriteMutation,
   useRemoveTrackFromFavoriteMutation,
 } from '../services/dataApi'
-import { selectAccessToken, selectRefreshToken } from '../store/tokenSlice'
+import {
+  accessTokenSelector,
+  refreshTokenSelector,
+} from '../store/selectors/tokenSelector'
 import { Track, StaredUser } from '../types'
 import { getUserIdFromJWT } from '../utils/getUserIdFromJWT'
 import { useAppSelector } from './hook'
 import { useRefreshToken } from './useRefreshToken'
 
 export const useFavoriteTrack = (track?: Track) => {
-  const token = useAppSelector(selectAccessToken)
-  const refreshToken = useAppSelector(selectRefreshToken)
+  const token = useAppSelector(accessTokenSelector)
+  const refreshToken = useAppSelector(refreshTokenSelector)
   const handleRefreshToken = useRefreshToken()
 
   const [addTrackToFavorite] = useAddTrackToFavoriteMutation()

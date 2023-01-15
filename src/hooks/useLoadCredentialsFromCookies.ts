@@ -4,8 +4,8 @@ import { setToken } from '../store/tokenSlice'
 import { useAppDispatch } from './hook'
 
 export const useLoadCredentialsFromCookies = () => {
-  const [cookies] = useCookies(['access', 'refresh'])
   const dispatch = useAppDispatch()
+  const [cookies] = useCookies(['access', 'refresh'])
 
   if (cookies && cookies.access) {
     dispatch(

@@ -1,6 +1,8 @@
 import { styled } from '@mui/material'
 
 import { useAppSelector } from '../../hooks/hook'
+import { decorativeColorSelector } from '../../store/selectors/colorThemeSelector'
+import { autoplaySelector } from '../../store/selectors/tracksSelector'
 import {
   extradarkToDark,
   extradarkToHover,
@@ -20,13 +22,12 @@ export const AnimationBar = styled('p')<{
 `
 
 export const Animation = () => {
-  const decorativeColor = useAppSelector(
-    (state) => state.colorTheme.decorativeColor
-  )
+  const decorativeColor = useAppSelector(decorativeColorSelector)
+  const isPlaying = useAppSelector(autoplaySelector)
+
   const colorHover = extradarkToHover(decorativeColor)
   const colorDark = extradarkToDark(decorativeColor)
 
-  const isPlaying = useAppSelector((state) => state.tracks.autoplay)
   const animationProp = 'equalize 6s 0s infinite;'
   const animation = isPlaying ? animationProp : 'none'
 

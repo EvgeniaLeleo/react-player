@@ -6,33 +6,34 @@ import { extradarkToDark, extradarkToHover } from '../../utils/colorUtils'
 import { ButtonChangeColor } from '../ChangeColorComponents/ButtonChangeColor'
 import { FilterButtonName } from '../../types'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
+import {
+  decorativeColorSelector,
+  textColorSelector,
+} from '../../store/selectors/colorThemeSelector'
 
 import style from './style.module.css'
 
-export type FilterButtonProps = {
+type Props = {
   buttonText: string
   buttonName: FilterButtonName
   checkItems: string[]
   rows: 1 | 2 | 3
 }
 
-export const FilterButton: FC<FilterButtonProps> = ({
+export const FilterButton: FC<Props> = ({
   buttonName,
   buttonText,
   checkItems,
   rows,
 }) => {
-  const textColor = useAppSelector((state) => state.colorTheme.textColor)
-  const decorativeColor = useAppSelector(
-    (state) => state.colorTheme.decorativeColor
+  const textColor = useAppSelector(textColorSelector)
+  const decorativeColor = useAppSelector(decorativeColorSelector)
+  const checkedItems = useAppSelector(
+    (state) => state.filteredItems[`${buttonName}`]
   )
 
   const colorHover = extradarkToHover(decorativeColor)
   const colorDark = extradarkToDark(decorativeColor)
-
-  const checkedItems = useAppSelector(
-    (state) => state.filteredItems[`${buttonName}`]
-  )
 
   const ref = useRef(null)
 

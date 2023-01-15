@@ -1,3 +1,5 @@
+import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
+
 import colorThemeReducer from './colorThemeSlice'
 import languageReducer from './languageSlice'
 import trackReducer from './trackSlice'
@@ -7,15 +9,11 @@ import sortingSettingsReducer from './sortingSettingsSlice'
 import headerReducer from './headerSlice'
 import { dataApi } from '../services/dataApi'
 import tokenReducer from './tokenSlice'
-import filterReducer from './filterSlice'
 import navMenuReducer from './navMenuSlice'
-
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 
 export const store = configureStore({
   reducer: {
     token: tokenReducer,
-    filter: filterReducer,
     language: languageReducer,
     colorTheme: colorThemeReducer,
     track: trackReducer,

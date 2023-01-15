@@ -1,6 +1,17 @@
-.WrapperDesktop {
+.navWrapperDesktop {
+  position: relative;
   display: block;
   min-height: 100vh;
+}
+
+.logoWrapperDesktop {
+  position: absolute;
+  z-index: 1;
+  top: 36px;
+  left: 15px;
+
+  display: flex;
+  flex-direction: column;
 }
 
 .WrapperMobile {
@@ -19,17 +30,26 @@
   min-width: 150px;
   width: 12%;
   min-height: 100%;
-  padding: 30px 0 20px 36px;
+  padding: 150px 0 20px 36px;
   padding-left: 15px;
   padding-right: 5px;
 
   background-color: #181818;
 
-  transition: all 0.1s ease;
+  transition: all 0.15s ease-in;
+}
+
+.navMenuVisible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.navMenuHidden {
+  transform: translateX(-120%);
+  opacity: 0;
 }
 
 .Logo {
-  margin-top: 8px;
   margin-bottom: 40px;
 
   width: 113px;
@@ -107,6 +127,10 @@
 
   .WrapperMobile {
     display: block;
+  }
+
+  .logoWrapperDesktop {
+    visibility: hidden;
   }
 
   .NavMenu {

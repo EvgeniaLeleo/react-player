@@ -1,4 +1,7 @@
-// getting tracks, searching by track name available
+/**
+ * Getting tracks, searching by track name available
+ */
+
 import { useState, useEffect } from 'react'
 
 import { useGetTracksQuery } from '../services/dataApi'

@@ -3,11 +3,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { ORDER } from '../constants'
 import { Order } from '../types'
 
-type TrackState = {
+type State = {
   order: string
 }
 
-const initialState: TrackState = {
+const initialState: State = {
   order: ORDER.notSelected as Order,
 }
 

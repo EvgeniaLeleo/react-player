@@ -1,22 +1,22 @@
-// returns the current user, refreshing his token if necessary
-// if no logged in user or the refresh token is invalid, returns undefined
+/**
+ * Returns the current user, refreshing his token if necessary
+ * If no logged in user or the refresh token is invalid, returns undefined
+ */
 
-import { useRef, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+
 import { useAppSelector } from './hook'
 import { useGetCurrentUserQuery } from '../services/dataApi'
-import { selectRefreshToken } from '../store/tokenSlice'
 import { useRefreshToken } from './useRefreshToken'
 import { ROUTES } from '../routes'
+import { refreshTokenSelector } from '../store/selectors/tokenSelector'
 
 export const useCurrentUser = () => {
-  const timestampRef = useRef(Date.now()).current
-  const { data, isLoading, isError, error } =
-    // useGetCurrentUserQuery(timestampRef)
-    useGetCurrentUserQuery()
+  const { data, isLoading, isError, error } = useGetCurrentUserQuery()
 
   const doRefreshToken = useRefreshToken()
-  const refreshToken = useAppSelector(selectRefreshToken)
+  const refreshToken = useAppSelector(refreshTokenSelector)
   const navigate = useNavigate()
 
   const [resultError, setResultError] = useState(false)
@@ -30,8 +30,6 @@ export const useCurrentUser = () => {
 
   const shouldRefreshTokens = () =>
     error ? 'status' in error && error.status === 401 : false
-
-  // console.log('shouldRefreshTokens', shouldRefreshTokens())
 
   useEffect(() => {
     if (isError) {
