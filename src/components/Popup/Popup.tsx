@@ -11,7 +11,7 @@ import {
 
 import style from './style.module.css'
 
-export type PopupProps = {
+export type Props = {
   items: string[]
   buttonName: FilterButtonName
   rows: 1 | 2 | 3
@@ -23,24 +23,16 @@ const newFilter: CheckedItems = {
   checkedGenres: [],
 }
 
-export const Popup: FC<PopupProps> = ({ items, rows, buttonName }) => {
+export const Popup: FC<Props> = ({ items, rows, buttonName }) => {
   const dispatch = useAppDispatch()
 
   const textColor = useAppSelector((state) => state.colorTheme.textColor)
   const bgColor = useAppSelector((state) => state.colorTheme.bgColor)
+  const checkedItems = useAppSelector((state) => state.filteredItems)
+
   const bgColorLight = bgColorToBgColorLight(bgColor)
 
-  // const { data: tracks } = useGetTracksQuery()
-  const checkedItems = useAppSelector((state) => state.filteredItems)
-  // const order = useAppSelector((state) => state.sortingSettings.order)
-
   newFilter[`${buttonName}`] = [...checkedItems[`${buttonName}`]]
-
-  // const searchedItems = useAppSelector(
-  //   (state) => state.filteredItems.searchedTracks
-  // )
-
-  // const searchedItemsCurrent = searchedItems.length ? searchedItems : tracks
 
   const handleChange = (item: string, buttonName: FilterButtonName) => {
     newFilter[`${buttonName}`] = [...checkedItems[`${buttonName}`]]
@@ -61,15 +53,6 @@ export const Popup: FC<PopupProps> = ({ items, rows, buttonName }) => {
     if (buttonName === 'checkedGenres') {
       dispatch(updateCheckedGenres(newFilter['checkedGenres']))
     }
-
-    // const finalFilteredTracks = getFinalItems(
-    //   allTracksStore,
-    //   newFilter,
-    //   searchedItemsCurrent,
-    //   order
-    // )
-
-    // dispatch(updateFilteredTracks(finalFilteredTracks))
   }
 
   let display
@@ -88,8 +71,6 @@ export const Popup: FC<PopupProps> = ({ items, rows, buttonName }) => {
   const isChecked = (item: string, buttonName: FilterButtonName) => {
     return newFilter[`${buttonName}`].includes(item)
   }
-
-  // console.log(items)
 
   return (
     <div

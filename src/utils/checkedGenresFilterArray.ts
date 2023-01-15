@@ -1,8 +1,8 @@
-/**TODO
+/**
  * Формирует массив треков, фильтруя исходные данные по фильтру checkedGenres
  */
 
-import { Track } from '../../types'
+import { Track } from '../types'
 
 export const checkedGenresFilterArray: (
   checkedItems: string[],

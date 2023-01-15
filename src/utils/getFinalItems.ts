@@ -1,21 +1,20 @@
-/**TODO
+/**
  * Генерация окончательного массива, соответствующего всем и фильтрам
  */
 
-import { EMPTY_RESULTS, ORDER } from '../../constants'
-import { Track, CheckedItems, Order } from '../../types'
+import { EMPTY_RESULTS, ORDER } from '../constants'
+import { Track, CheckedItems } from '../types'
 import { checkedArtistsFilterArray } from './checkedArtistsFilterArray'
 import { checkedGenresFilterArray } from './checkedGenresFilterArray'
 import { checkedYearsFilterArray } from './checkedYearsFilterArray'
 import { commonItems } from './commonItems'
-import { getSortedByOrderArray } from '../getSortedByOrderArray'
+import { getSortedByOrderArray } from './getSortedByOrderArray'
 
 export const getFinalItems: (
   allTracks: Track[],
   checkedItemsObj: CheckedItems,
-  searchedItems: Track[],
-  order: Order
-) => Track[] = (allTracks, checkedItemsObj, searchedItems, order) => {
+  order: string
+) => Track[] = (allTracks, checkedItemsObj, order) => {
   const checkedArtistsArray = checkedItemsObj.checkedArtists.length
     ? checkedArtistsFilterArray(checkedItemsObj.checkedArtists, allTracks)
     : allTracks
@@ -28,12 +27,10 @@ export const getFinalItems: (
     ? checkedGenresFilterArray(checkedItemsObj.checkedGenres, allTracks)
     : allTracks
 
-  const commonArtistsYearsGenres = commonItems(
+  let finalItems = commonItems(
     commonItems(checkedArtistsArray, checkedYearsArray),
     checkedGenresArray
   )
-
-  let finalItems = commonItems(commonArtistsYearsGenres, searchedItems)
 
   if (order === ORDER.asc || order === ORDER.desc) {
     finalItems = getSortedByOrderArray(finalItems, order)

@@ -2,7 +2,7 @@
  * Формирует массив треков, фильтруя исходные данные по фильтру checkedYears
  */
 
-import { Track } from '../../types'
+import { Track } from '../types'
 
 export const checkedYearsFilterArray: (
   checkedItems: string[],

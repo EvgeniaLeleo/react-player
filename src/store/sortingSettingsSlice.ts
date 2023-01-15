@@ -1,54 +1,26 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-// TODO
-
 import { ORDER } from '../constants'
 import { Order } from '../types'
 
 type TrackState = {
-  artists: string[]
-  genres: string[]
-  years: string[]
-  order: Order
-  searchQuery: string
+  order: string
 }
 
 const initialState: TrackState = {
-  artists: [],
-  genres: [],
-  years: [],
   order: ORDER.notSelected as Order,
-  searchQuery: '',
 }
 
 const sortingSettingsSlice = createSlice({
   name: 'sortingSettings',
   initialState,
   reducers: {
-    updateSortedArtists(state, action: PayloadAction<string[]>) {
-      state.artists = action.payload
-    },
-    updateSortedYears(state, action: PayloadAction<string[]>) {
-      state.years = action.payload
-    },
-    updateSortedGenres(state, action: PayloadAction<string[]>) {
-      state.genres = action.payload
-    },
-    updateOrder(state, action: PayloadAction<Order>) {
+    updateOrder(state, action: PayloadAction<string>) {
       state.order = action.payload
-    },
-    updateSearchQuery(state, action: PayloadAction<string>) {
-      state.searchQuery = action.payload
     },
   },
 })
 
-export const {
-  updateSortedArtists,
-  updateSortedYears,
-  updateSortedGenres,
-  updateOrder,
-  updateSearchQuery,
-} = sortingSettingsSlice.actions
+export const { updateOrder } = sortingSettingsSlice.actions
 
 export default sortingSettingsSlice.reducer

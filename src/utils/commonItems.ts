@@ -2,7 +2,7 @@
  * Находит общие треки (по ключу 'id') в двух массивах Track[]
  */
 
-import { Track } from '../../types'
+import { Track } from '../types'
 
 export const commonItems: (array1: Track[], array2: Track[]) => Track[] = (
   array1,

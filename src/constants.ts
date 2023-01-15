@@ -77,12 +77,12 @@ export const HEADERS = {
   electro: {
     ru: 'Электронная музыка',
     en: 'Electro music',
-    bel: 'Электронная музыка', // карыстальніка',
+    bel: 'Электронная музыка',
   },
   profile: {
     ru: 'Личный кабинет',
     en: 'Profile',
-    bel: 'Профіль', // карыстальніка',
+    bel: 'Профіль',
   },
 }
 
@@ -92,7 +92,7 @@ export const TEXT = {
     profile: {
       ru: 'Личный кабинет',
       en: 'Profile',
-      bel: 'Профіль', // карыстальніка',
+      bel: 'Профіль',
     },
     mytracks: {
       ru: 'Мои треки',
@@ -109,7 +109,6 @@ export const TEXT = {
   header: HEADERS,
   collections: { ru: 'Подборки', en: 'Collections', bel: 'Падборка' },
   search: {
-    // searchBy: { ru: 'Искать по:', en: 'Search by', bel: 'Шукаць па:' },
     searchBy: { ru: 'Фильтр по:', en: 'Filter by:', bel: 'Фільтр па:' },
     artist: { ru: 'исполнителю', en: 'artist', bel: 'выканаўца' },
     release: { ru: 'году выпуска', en: 'release date', bel: 'годзе выпуску' },

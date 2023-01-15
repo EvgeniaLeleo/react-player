@@ -1,14 +1,14 @@
-/**TODO
- * Сортирует массив треков по году выпуска в возрастающем или убывающем порядке порядке
+/**
+ * Сортирует массив треков по году выпуска в возрастающем или убывающем порядке
  */
 
 import { ORDER } from '../constants'
-import { Track, Order } from '../types'
-import { getSortedByYearsArray } from './unused/getSortedByYearsArray'
+import { Track } from '../types'
+import { getSortedByYearsArray } from './getSortedByYearsArray'
 
 export const getSortedByOrderArray: (
   tracks: Track[],
-  order: Order
+  order: string
 ) => Track[] = (tracks, order) => {
   let sortedArray = [...tracks]
 

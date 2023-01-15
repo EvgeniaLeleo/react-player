@@ -7,13 +7,12 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 import { TEXT } from '../../constants'
 import { Profile } from '../Profile/Profile'
 import { useAppSelector } from '../../hooks/hook'
-import { TrackList } from '../TrackList/TrackList'
 import { FilterButtons } from '../FilterButtons/FilterButtons'
-import { SkeletonTrack } from '../SkeletonTrack/SkeletonTrack'
 import { ListHeaders } from '../ListHeaders/ListHeaders'
+import { getFinalItems } from '../../utils/getFinalItems'
 
 import style from './style.module.css'
-import { getSortedByOrderArray } from '../../utils/getSortedByOrderArray'
+import { Tracks } from '../Tracks/Tracks'
 
 type PlayerProps = {
   tracksHook?: Function
@@ -42,9 +41,17 @@ export const Centerblock: FC<PlayerProps> = ({
 
   const order = useAppSelector((state) => state.sortingSettings.order)
 
+  const checkedItemsObj = {
+    checkedArtists: useAppSelector(
+      (state) => state.filteredItems.checkedArtists
+    ),
+    checkedYears: useAppSelector((state) => state.filteredItems.checkedYears),
+    checkedGenres: useAppSelector((state) => state.filteredItems.checkedGenres),
+  }
+
   const filteredTracks =
     header === TEXT.header.tracks[lang]
-      ? getSortedByOrderArray(tracks, order)
+      ? getFinalItems(tracks, checkedItemsObj, order)
       : tracks
 
   const handleSearch = (
@@ -56,8 +63,6 @@ export const Centerblock: FC<PlayerProps> = ({
   useEffect(() => {
     return () => setSearchString('')
   }, [header])
-
-  const array = new Array(10).fill(0)
 
   if (isProfilePage) {
     return <Profile />
@@ -97,40 +102,18 @@ export const Centerblock: FC<PlayerProps> = ({
           </h2>
 
           {header === TEXT.header.tracks[lang] && (
-            <FilterButtons
-              lang={lang}
-              textColor={textColor}
-              // searchString={searchString}
-              tracks={tracks}
-            />
+            <FilterButtons lang={lang} textColor={textColor} tracks={tracks} />
           )}
 
           <div className={style.Content}>
             <ListHeaders />
-
-            {isError && (
-              <div style={{ color: textColor }}>Произошла ошибка</div>
-            )}
-
-            {isLoading &&
-              array.map((_, i) => <SkeletonTrack key={i.toString()} />)}
-
-            {!isLoading && (
-              <TrackList header={header} tracks={filteredTracks} />
-            )}
-
-            {/* В зависимости от заголовка страницы - разное предупреждение об отсутствии результатов: */}
-            {!isError &&
-              tracks.length === 0 &&
-              (header === TEXT.header.mytracks[lang] ? (
-                <div style={{ color: textColor }}>
-                  {TEXT.no_favourites[lang]}
-                </div>
-              ) : (
-                <div style={{ color: textColor }}>
-                  {TEXT.empty_results[lang]}
-                </div>
-              ))}
+            <Tracks
+              isError={isError}
+              isLoading={isLoading}
+              header={header}
+              filteredTracks={filteredTracks}
+              tracks={tracks}
+            />
           </div>
         </div>
       </DndProvider>

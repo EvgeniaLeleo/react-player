@@ -17,6 +17,5 @@ export const useLoadCredentialsFromCookies = () => {
     return true
   }
 
-  // console.log('no credentials found in cookies')
   return false
 }

@@ -139,3 +139,12 @@ export type ColorState = {
   bgColor: string
   decorativeColor: string
 }
+
+export const EMPTY_ARTIST = 'sorry_empty_artist'
+
+export const EMPTY_RESULTS = [
+  {
+    _id: 'empty_results',
+    artist: EMPTY_ARTIST,
+  },
+]

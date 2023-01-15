@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useGetTracksQuery } from '../services/dataApi'
-import { selectFilter, updateFilter } from '../store/FilterSlice'
+import { selectFilter } from '../store/FilterSlice'
 import { FilterSlice, initialState } from '../types'
 import { useAppDispatch, useAppSelector } from './hook'
 
@@ -12,11 +12,11 @@ export const useFilterData = () => {
   const dispatch = useAppDispatch()
   const selectedData = useAppSelector(selectFilter)
 
-  useEffect(() => {
-    if (tracks) {
-      dispatch(updateFilter(tracks))
-    }
-  }, [tracks, dispatch])
+  // useEffect(() => {
+  //   if (tracks) {
+  //     dispatch(updateFilter(tracks))
+  //   }
+  // }, [tracks, dispatch])
 
   useEffect(() => {
     if (selectedData) {

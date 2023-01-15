@@ -1,4 +1,5 @@
 // returns the current user, refreshing his token if necessary
+// if no logged in user or the refresh token is invalid, returns undefined
 
 import { useRef, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -8,7 +9,6 @@ import { selectRefreshToken } from '../store/tokenSlice'
 import { useRefreshToken } from './useRefreshToken'
 import { ROUTES } from '../routes'
 
-// if no loggedin user or the refresh token is invalid, returns undefined
 export const useCurrentUser = () => {
   const timestampRef = useRef(Date.now()).current
   const { data, isLoading, isError, error } =

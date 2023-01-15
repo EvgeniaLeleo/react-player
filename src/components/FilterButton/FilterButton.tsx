@@ -35,6 +35,7 @@ export const FilterButton: FC<FilterButtonProps> = ({
   )
 
   const ref = useRef(null)
+
   const [isPopupVisible, setIsPopupVisible] = useState(false)
   const [color, setColor] = useState(textColor)
 
