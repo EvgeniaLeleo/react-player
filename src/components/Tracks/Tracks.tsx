@@ -15,7 +15,7 @@ type Props = {
   isLoading: boolean
   tracks: Track[]
   filteredTracks: Track[]
-  header?: string
+  header: string
 }
 
 export const Tracks: FC<Props> = ({

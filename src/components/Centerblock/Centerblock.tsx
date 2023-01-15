@@ -24,7 +24,7 @@ import style from './style.module.css'
 
 type Props = {
   tracksHook?: Function
-  header?: string
+  header: string
   collectionId?: number
   isProfilePage?: boolean
 }
@@ -39,15 +39,19 @@ export const Centerblock: FC<Props> = ({
   const textColor = useAppSelector(textColorSelector)
   const order = useAppSelector(orderSelector)
 
-  if (collectionId === 1) {
-    header = TEXT.header.classics[lang]
-  }
-  if (collectionId === 2) {
-    header = TEXT.header.electro[lang]
-  }
-  if (collectionId === 3) {
-    header = TEXT.header.rocks[lang]
-  }
+  const [currentHeader, setCurrentHeader] = useState(header)
+
+  useEffect(() => {
+    if (header === TEXT.header.classics['ru']) {
+      setCurrentHeader(TEXT.header.classics[lang])
+    }
+    if (header === TEXT.header.electro['ru']) {
+      setCurrentHeader(TEXT.header.electro[lang])
+    }
+    if (header === TEXT.header.rocks['ru']) {
+      setCurrentHeader(TEXT.header.rocks[lang])
+    }
+  }, [header, currentHeader, lang])
 
   const [searchString, setSearchString] = useState('')
   const {
@@ -113,7 +117,11 @@ export const Centerblock: FC<Props> = ({
       <DndProvider backend={HTML5Backend}>
         <div className={style.Centerblock}>
           <h2 style={{ color: textColor }} className={style.Header}>
-            {header}
+            {currentHeader === TEXT.header.classics[lang] ||
+            currentHeader === TEXT.header.rocks[lang] ||
+            currentHeader === TEXT.header.electro[lang]
+              ? currentHeader
+              : header}
           </h2>
 
           {header === TEXT.header.tracks[lang] && (
