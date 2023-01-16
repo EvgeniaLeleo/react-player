@@ -67,5 +67,4 @@
 
 .Checkbox:checked + .Label {
   text-decoration-line: underline;
-  color: #b672ff;
 }

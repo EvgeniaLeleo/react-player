@@ -10,6 +10,7 @@ import {
 } from '../../store/filteredItemsSlice'
 import {
   bgColorSelector,
+  decorativeColorSelector,
   textColorSelector,
 } from '../../store/selectors/colorThemeSelector'
 import { filteredItemsSelector } from '../../store/selectors/filteredItemsSelector'
@@ -33,6 +34,7 @@ export const Popup: FC<Props> = ({ items, rows, buttonName }) => {
 
   const textColor = useAppSelector(textColorSelector)
   const bgColor = useAppSelector(bgColorSelector)
+  const decorativeColor = useAppSelector(decorativeColorSelector)
   const checkedItems = useAppSelector(filteredItemsSelector)
 
   const bgColorLight = bgColorToBgColorLight(bgColor)
@@ -97,7 +99,18 @@ export const Popup: FC<Props> = ({ items, rows, buttonName }) => {
               checked={isChecked(item, buttonName)}
               onChange={() => handleChange(item, buttonName)}
             />
-            <label htmlFor={item} className={style.Label} key={item}>
+            <label
+              htmlFor={item}
+              className={style.Label}
+              style={
+                isChecked(item, buttonName)
+                  ? {
+                      color: decorativeColor,
+                    }
+                  : {}
+              }
+              key={item}
+            >
               {item}
             </label>
           </span>
