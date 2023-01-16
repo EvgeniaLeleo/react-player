@@ -12,6 +12,7 @@
 
 .UserName {
   margin: 0 0 0 auto;
+  word-break: break-all;
 }
 
 .List {

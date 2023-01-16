@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import {
   Button,
@@ -95,6 +95,7 @@ export const Sidebar = () => {
                 backgroundColor: bgColorLight,
                 borderTopLeftRadius: '5px',
                 borderTopRightRadius: '5px',
+                minWidth: '60px',
               }}
             >
               <Select

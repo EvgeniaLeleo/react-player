@@ -3,26 +3,28 @@ import { TextField } from '@mui/material'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
+import cn from 'classnames'
 
 import { Button } from '../Button/Button'
 import { useAppDispatch } from '../../hooks/hook'
-import { SignupUser } from '../../types'
+import { AuthError, SignupUser } from '../../types'
 import { useLoadCredentialsFromCookies } from '../../hooks/useLoadCredentialsFromCookies'
 import { useSignupMutation, useTokenMutation } from '../../services/dataApi'
 import { setToken } from '../../store/tokenSlice'
 import { ROUTES } from '../../routes'
 
 import style from './style.module.css'
-
-// TODO обработка занятого логина или пароля
+import { getErrorMessage } from '../../utils/getErrorMessage'
 
 export const SignupForm: FC<{}> = () => {
   const isLoggedIn = useLoadCredentialsFromCookies()
 
-  const [signUp, { error }] = useSignupMutation()
+  const [signUp] = useSignupMutation()
 
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
+
+  const [error, setError] = useState('')
 
   const {
     register,
@@ -58,7 +60,7 @@ export const SignupForm: FC<{}> = () => {
   }, [userTokens])
 
   const onSubmit: SubmitHandler<SignupUser> = async (data) => {
-    // setError('')
+    setError('')
     setIsDisabled(true)
     try {
       const user = await signUp({
@@ -77,7 +79,7 @@ export const SignupForm: FC<{}> = () => {
       navigate(ROUTES.main)
     } catch (error) {
       setIsDisabled(false)
-      // setError(getErrorMessage(error as AuthError))
+      setError(getErrorMessage(error as AuthError))
     }
   }
 
@@ -122,13 +124,13 @@ export const SignupForm: FC<{}> = () => {
           {...register('email', {
             required: 'Укажите почту',
             pattern: {
-              value: /^([\w.*-]+@([\w-]+\.)+[\w-]{2,3})?$/,
+              value: /^([\w.*-]+@([0-9a-z]+\.)+[a-z]{2,3})?$/,
               message: 'Не верный формат e-mail',
             },
           })}
         />
         <TextField
-          sx={{ height: '70px', marginBottom: '30px' }}
+          sx={{ height: '70px', marginBottom: '5px' }}
           autoComplete="off"
           fullWidth
           variant="standard"
@@ -145,6 +147,10 @@ export const SignupForm: FC<{}> = () => {
           helperText={errors.password?.message}
           error={Boolean(errors.password?.message)}
         />
+
+        <p className={cn(style.error, style.back)}>
+          {error && <span>{error}</span>}
+        </p>
 
         <Button
           buttonType="submit"

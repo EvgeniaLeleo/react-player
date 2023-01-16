@@ -11,8 +11,6 @@ export const ProfilePage = () => {
   const lang = useAppSelector(languageSelector)
   const header = TEXT.header.profile[lang]
 
-  console.log('header page', header)
-
   useEffect(() => {
     dispatch(updateHeader(header))
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { TextField } from '@mui/material'
 import { SubmitHandler, useForm } from 'react-hook-form'
-
-// TODO обработка неверного email или пароля
+import cn from 'classnames'
 
 import { useAppDispatch } from '../../hooks/hook'
 import { Button } from '../Button/Button'
@@ -11,20 +10,21 @@ import { ROUTES } from '../../routes'
 import { useCookies } from 'react-cookie'
 import { setToken } from '../../store/tokenSlice'
 import { useTokenMutation } from '../../services/dataApi'
-import { LoginUser } from '../../types'
+import { AuthError, LoginUser } from '../../types'
 import { useLoadCredentialsFromCookies } from '../../hooks/useLoadCredentialsFromCookies'
 
 import style from './style.module.css'
+import { getErrorMessage } from '../../utils/getErrorMessage'
 
 export const LoginForm = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const [getTokens, { data: userTokens, error }] = useTokenMutation()
+  const [getTokens, { data: userTokens }] = useTokenMutation()
+  const [error, setError] = useState('')
 
   const {
     register,
     handleSubmit,
-    // setError,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -59,6 +59,7 @@ export const LoginForm = () => {
     if (isLoggedIn) {
       navigate(ROUTES.main)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleSignup = () => {
@@ -66,7 +67,7 @@ export const LoginForm = () => {
   }
 
   const onSubmit: SubmitHandler<LoginUser> = async (data) => {
-    // setError('')
+    setError('')
     setIsDisabled(true)
     try {
       await getTokens({
@@ -78,7 +79,7 @@ export const LoginForm = () => {
     } catch (error) {
       setIsDisabled(false)
       console.log(error)
-      // setError(getErrorMessage(error as AuthError))
+      setError(getErrorMessage(error as AuthError))
     }
   }
 
@@ -108,7 +109,7 @@ export const LoginForm = () => {
           })}
         />
         <TextField
-          sx={{ height: '100px' }}
+          sx={{ height: '70px' }}
           autoComplete="off"
           fullWidth
           type="password"
@@ -125,6 +126,11 @@ export const LoginForm = () => {
           helperText={errors.password?.message}
           error={Boolean(errors.password?.message)}
         />
+
+        <p className={cn(style.error, style.back)}>
+          {error && <span>{error}</span>}
+        </p>
+
         <Button
           buttonType="submit"
           buttonVariant="contained"

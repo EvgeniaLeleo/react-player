@@ -15,7 +15,7 @@ export const dataApi = createApi({
   reducerPath: 'music-player/api',
   tagTypes: ['Tracks'],
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://51.250.72.80:8090/',
+    baseUrl: 'http://158.160.38.162:8090',
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).token.access
       if (token && checkJWTExpTime(token)) {

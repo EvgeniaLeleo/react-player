@@ -20,9 +20,9 @@ export const useRefreshToken = () => {
       setCookies('access', access)
       dispatch(setToken({ access, refresh: refreshTokenIn }))
       return { access }
-    } catch (err) {
-      console.log(err)
-      return { error: err }
+    } catch (error) {
+      console.log(error)
+      return { error }
     }
   }
 

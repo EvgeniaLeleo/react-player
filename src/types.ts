@@ -148,3 +148,16 @@ export const EMPTY_RESULTS = [
     artist: EMPTY_ARTIST,
   },
 ]
+
+export type ErrorTypes = {
+  [index: string]: string
+}
+
+export type AuthError = {
+  status: number
+  data: {
+    username: string[]
+    email: string[]
+    detail: string
+  }
+}

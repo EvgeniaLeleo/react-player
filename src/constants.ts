@@ -1,4 +1,5 @@
 import { createTheme } from '@mui/material'
+import { ErrorTypes } from './types'
 
 import {
   bgColorToBgColorLight,
@@ -189,3 +190,12 @@ export const EMPTY_RESULTS = [
 ]
 
 export const USER = { name: 'Evgenia Leleo', login: 'Leleo', avatar: '' }
+
+export const ERRORS: ErrorTypes = {
+  DEFAULT_ERROR: 'Что-то пошло не так...',
+  'Пользователь с таким именем уже существует.': 'Этот логин занят',
+  'Пользователь с таким адрес электронной почты уже существует.':
+    'Этот e-mail занят',
+  'Не найдено активной учетной записи с указанными данными':
+    'Неверный e-mail или пароль',
+}
