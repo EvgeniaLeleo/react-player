@@ -1,0 +1,36 @@
+.ListHeaders {
+  display: flex;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 2px;
+  color: #696969;
+
+  margin-bottom: 24px;
+}
+
+.Track {
+  width: 35%;
+}
+
+.Singer {
+  width: 25%;
+}
+
+.Album {
+  width: 30%;
+}
+
+@media (max-width: 1439px) {
+  .ListHeaders {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 549px) {
+  .ListHeaders {
+    display: none;
+  }
+}

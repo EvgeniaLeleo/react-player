@@ -1,0 +1,151 @@
+.navWrapperDesktop {
+  position: relative;
+  display: block;
+  min-height: 100vh;
+}
+
+.logoWrapperDesktop {
+  position: absolute;
+  z-index: 1;
+  top: 36px;
+  left: 15px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.WrapperMobile {
+  display: none;
+  min-height: 100vh;
+}
+
+.BurgerMobile {
+  display: none;
+}
+
+.NavMenu {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 150px;
+  width: 12%;
+  min-height: 100%;
+  padding: 150px 0 20px 36px;
+  padding-left: 15px;
+  padding-right: 5px;
+
+  background-color: #181818;
+
+  transition: all 0.15s ease-in;
+}
+
+.navMenuVisible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.navMenuHidden {
+  transform: translateX(-120%);
+  opacity: 0;
+}
+
+.Logo {
+  margin-bottom: 40px;
+
+  width: 113px;
+}
+
+.Burger {
+  font-size: 16px;
+  line-height: 24px;
+  width: 20px;
+}
+
+.BurgerIcon {
+  color: #d3d3d3;
+  transition: all 0.2s ease;
+}
+
+.BurgerIcon:hover {
+  color: #acacac;
+}
+
+.BurgerIcon:active {
+  color: #ffffff;
+}
+
+.FooterTop {
+  height: 50vh;
+}
+
+.AnimationTop {
+  height: 40vh;
+}
+
+@media (max-width: 1919px) {
+  .FooterTop {
+    height: 40vh;
+  }
+
+  .AnimationTop {
+    height: 35vh;
+  }
+}
+
+@media (max-width: 1439px) {
+  .Logo {
+    margin-bottom: 30px;
+  }
+
+  .NavMenu {
+    font-size: 12px;
+  }
+
+  .FooterTop {
+    height: 35vh;
+  }
+
+  .AnimationTop {
+    height: 25vh;
+  }
+}
+
+@media (max-width: 1199px) {
+  .FooterTop {
+    height: 35vh;
+  }
+
+  .NavMenu {
+    width: 150px;
+  }
+}
+
+@media (max-width: 767px) {
+  .WrapperDesktop {
+    display: none;
+  }
+
+  .WrapperMobile {
+    display: block;
+  }
+
+  .logoWrapperDesktop {
+    visibility: hidden;
+  }
+
+  .NavMenu {
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    min-height: 100vh;
+  }
+
+  .BurgerMobile {
+    display: block;
+    position: absolute;
+    z-index: 200;
+    top: 22px;
+    left: 3px;
+  }
+}
